@@ -212,6 +212,66 @@ export type Database = {
         }
         Relationships: []
       }
+      event_subscribers: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      events: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string | null
+          date: string
+          description: string | null
+          id: string
+          location: string | null
+          registration_url: string | null
+          slug: string
+          status: string | null
+          title: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          date: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          registration_url?: string | null
+          slug: string
+          status?: string | null
+          title: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string | null
+          date?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          registration_url?: string | null
+          slug?: string
+          status?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       institution_enquiries: {
         Row: {
           contact_name: string
@@ -287,6 +347,48 @@ export type Database = {
           phone?: string | null
           status?: string | null
           students_per_year?: string | null
+        }
+        Relationships: []
+      }
+      scholarships: {
+        Row: {
+          amount: string | null
+          country: string | null
+          created_at: string | null
+          deadline: string | null
+          description: string | null
+          eligibility: string | null
+          id: string
+          status: string | null
+          study_level: string | null
+          title: string
+          university_name: string
+        }
+        Insert: {
+          amount?: string | null
+          country?: string | null
+          created_at?: string | null
+          deadline?: string | null
+          description?: string | null
+          eligibility?: string | null
+          id?: string
+          status?: string | null
+          study_level?: string | null
+          title: string
+          university_name: string
+        }
+        Update: {
+          amount?: string | null
+          country?: string | null
+          created_at?: string | null
+          deadline?: string | null
+          description?: string | null
+          eligibility?: string | null
+          id?: string
+          status?: string | null
+          study_level?: string | null
+          title?: string
+          university_name?: string
         }
         Relationships: []
       }
