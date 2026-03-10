@@ -52,7 +52,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="relative max-w-2xl mx-auto min-h-[260px]">
+        <div className="relative max-w-[700px] mx-auto min-h-[300px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={current}
@@ -60,14 +60,14 @@ const Testimonials = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.4 }}
-              className="bg-card rounded-2xl shadow-sm p-8 md:p-10 text-center"
+              className="bg-card rounded-2xl shadow-sm p-10 md:p-14 text-center"
             >
-              <Quote className="mx-auto mb-4 text-secondary/40" size={36} />
-              <p className="italic text-foreground leading-relaxed mb-6 text-sm md:text-base">
+              <Quote className="mx-auto mb-5 text-secondary/40" size={48} />
+              <p className="italic text-foreground leading-relaxed mb-8 text-base md:text-lg">
                 "{testimonials[current].quote}"
               </p>
               <div className="flex items-center justify-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-xs font-bold text-primary">
+                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center text-sm font-bold text-primary">
                   {testimonials[current].name.charAt(0)}
                 </div>
                 <div className="text-left">
