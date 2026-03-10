@@ -24,12 +24,17 @@ const pageTitles: Record<string, string> = {
   "/admin/blog": "Blog Posts",
   "/admin/events": "Events",
   "/admin/scholarships": "Scholarships",
+  "/admin/courses/new": "Add New Course",
+  "/admin/blog/new": "Write New Post",
+  "/admin/events/new": "Add New Event",
+  "/admin/scholarships/new": "Add New Scholarship",
 };
 
 const AdminLayout = () => {
   const { user, signOut } = useAuth();
   const location = useLocation();
-  const pageTitle = pageTitles[location.pathname] || "Admin";
+  const path = location.pathname;
+  const pageTitle = pageTitles[path] || (path.includes("/edit/") ? "Edit" : "Admin");
 
   return (
     <div className="min-h-screen flex bg-muted">
