@@ -1,6 +1,7 @@
 import { Search, MessageCircle, FileCheck, Plane } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const steps = [
   {
@@ -58,8 +59,8 @@ const HowItWorks = () => {
         </div>
 
         <div className="flex justify-center mt-12">
-          <Button variant="purple" size="lg" className="rounded-full">
-            Book a Free Consultation
+          <Button variant="purple" size="lg" className="rounded-full" asChild>
+            <Link to="/book-a-consultation">Book a Free Consultation</Link>
           </Button>
         </div>
       </div>

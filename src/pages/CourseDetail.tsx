@@ -377,7 +377,7 @@ const CourseDetail = () => {
                       {course.city}, {course.country}
                     </p>
                     <Link
-                      to="/about"
+                      to={`/find-a-course?university=${encodeURIComponent(course.university_name)}`}
                       className="text-xs text-secondary font-semibold hover:underline mt-1 inline-block"
                     >
                       View University →
