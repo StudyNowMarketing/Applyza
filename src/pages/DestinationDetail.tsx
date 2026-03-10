@@ -147,7 +147,7 @@ const DestinationDetail = () => {
             <BreadcrumbList>
               <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-primary-foreground/60 hover:text-primary-foreground">Home</Link></BreadcrumbLink></BreadcrumbItem>
               <BreadcrumbSeparator className="text-primary-foreground/40" />
-              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/find-a-course" className="text-primary-foreground/60 hover:text-primary-foreground">Study Destinations</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/study-destinations" className="text-primary-foreground/60 hover:text-primary-foreground">Study Destinations</Link></BreadcrumbLink></BreadcrumbItem>
               <BreadcrumbSeparator className="text-primary-foreground/40" />
               <BreadcrumbItem><BreadcrumbPage className="text-primary-foreground">{destination.country}</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>

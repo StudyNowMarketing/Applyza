@@ -22,8 +22,9 @@ const AICourseMatcher = () => {
           <Button
             size="lg"
             className="rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-base font-bold px-8"
+            asChild
           >
-            Find My Perfect Course →
+            <Link to="/find-a-course">Find My Perfect Course →</Link>
           </Button>
         </motion.div>
       </div>

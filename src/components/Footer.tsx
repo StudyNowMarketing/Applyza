@@ -18,21 +18,21 @@ const studentLinks: { label: string; to: string }[] = [
   { label: "Study Destinations", to: "/study-destinations" },
   { label: "Scholarships", to: "/scholarships" },
   { label: "Book a Consultation", to: "/book-a-consultation" },
-  { label: "FAQ", to: "/about" },
+  { label: "FAQ", to: "/faq" },
 ];
 
 const companyLinks: { label: string; to: string }[] = [
   { label: "About", to: "/about" },
-  { label: "Our Offices", to: "/about" },
+  { label: "Our Offices", to: "/contact" },
   { label: "Testimonials", to: "/about" },
   { label: "Blog", to: "/blog" },
   { label: "Events", to: "/events" },
-  { label: "Contact", to: "/book-a-consultation" },
+  { label: "Contact", to: "/contact" },
 ];
 
 const partnerLinks: { label: string; to: string }[] = [
-  { label: "For Institutions", to: "/about" },
-  { label: "For Recruitment Partners", to: "/about" },
+  { label: "For Institutions", to: "/for-institutions" },
+  { label: "For Recruitment Partners", to: "/for-partners" },
   { label: "Partner Universities", to: "/find-a-course" },
 ];
 

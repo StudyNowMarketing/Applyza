@@ -100,7 +100,7 @@ const StudyDestinations = () => {
         </div>
 
         <div className="text-center mt-8">
-          <Link to="/find-a-course" className="text-secondary font-semibold hover:underline">
+          <Link to="/study-destinations" className="text-secondary font-semibold hover:underline">
             See All Destinations →
           </Link>
         </div>
