@@ -55,12 +55,12 @@ const ServicesOverview = () => {
               <s.icon className="text-accent mb-4" size={32} />
               <h3 className="text-lg font-bold text-primary mb-2">{s.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.text}</p>
-              <a
-                href="#"
+              <Link
+                to={s.to}
                 className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
               >
                 Learn More →
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>
