@@ -102,6 +102,7 @@ const Hero = () => {
             {filters.map((f) => (
               <button
                 key={f.label}
+                onClick={() => navigate(f.country ? `/find-a-course?country=${encodeURIComponent(f.country)}` : "/find-a-course")}
                 className="border border-primary-foreground/30 text-primary-foreground/80 hover:bg-primary-foreground/10 text-xs font-medium px-3 py-1.5 rounded-full transition-colors"
               >
                 {f.emoji} {f.label}
