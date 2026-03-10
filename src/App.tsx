@@ -16,6 +16,7 @@ import BookConsultation from "./pages/BookConsultation.tsx";
 import Scholarships from "./pages/Scholarships.tsx";
 import Events from "./pages/Events.tsx";
 import Blog from "./pages/Blog.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
 import AntiSlaveryPolicy from "./pages/AntiSlaveryPolicy.tsx";
