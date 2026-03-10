@@ -66,7 +66,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex bg-primary-foreground rounded-full overflow-hidden shadow-2xl w-full md:w-[70%] lg:w-[75%]"
+            className="flex bg-primary-foreground rounded-full overflow-hidden shadow-2xl w-full md:w-[80%]"
           >
             <input
               type="text"
