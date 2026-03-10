@@ -1,0 +1,135 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import ServiceHero from "@/components/ServiceHero";
+import ServiceCTA from "@/components/ServiceCTA";
+import OtherServices from "@/components/OtherServices";
+import { motion } from "framer-motion";
+import { ClipboardCheck, FileText, Wallet, FileCheck, MessageCircle, HeartHandshake, AlertTriangle } from "lucide-react";
+
+const destinations = [
+  { flag: "🇬🇧", name: "UK" },
+  { flag: "🇩🇪", name: "Germany" },
+  { flag: "🇫🇷", name: "France" },
+  { flag: "🇮🇪", name: "Ireland" },
+  { flag: "🇲🇹", name: "Malta" },
+  { flag: "🇳🇱", name: "Netherlands" },
+  { flag: "🇨🇦", name: "Canada" },
+  { flag: "🇺🇸", name: "USA" },
+];
+
+const steps = [
+  { icon: ClipboardCheck, title: "Eligibility Check", desc: "We assess your profile to confirm you meet the visa requirements for your chosen destination." },
+  { icon: FileText, title: "Document Preparation", desc: "We guide you through gathering and organising every required document — from bank statements to offer letters." },
+  { icon: Wallet, title: "Financial Guidance", desc: "We advise you on the financial requirements and help you present your funding evidence clearly." },
+  { icon: FileCheck, title: "Application Support", desc: "We prepare your visa application with precision, ensuring nothing is missed or incorrectly completed." },
+  { icon: MessageCircle, title: "Interview Prep", desc: "We coach you for your visa interview so you feel confident and prepared to answer any question." },
+  { icon: HeartHandshake, title: "Post-Decision Support", desc: "Whether approved or refused, we're with you — helping with next steps, appeals, or reapplication strategies." },
+];
+
+const refusalReasons = [
+  { title: "Insufficient Financial Evidence", desc: "Failing to demonstrate that you can fund your tuition and living costs is one of the most common reasons for refusal." },
+  { title: "Inconsistent or Incomplete Documents", desc: "Missing documents, incorrect translations, or mismatched information can raise red flags with immigration officers." },
+  { title: "Weak Ties to Home Country", desc: "If the embassy isn't convinced you intend to return home after your studies, your application may be denied." },
+  { title: "Poor Interview Performance", desc: "Vague or inconsistent answers during your visa interview can undermine an otherwise strong application." },
+];
+
+const VisaImmigration = () => (
+  <div className="min-h-screen">
+    <Navbar />
+    <ServiceHero
+      heading="99% Success Rate. Every Application, Every Time."
+      subtext="Visa applications are stressful. They don't have to be. Our compliance experts have the experience and attention to detail to give your application the best possible chance."
+      breadcrumbs={[
+        { label: "Home", to: "/" },
+        { label: "Services", to: "/services" },
+        { label: "Visa & Immigration" },
+      ]}
+    />
+
+    {/* Destinations We Cover */}
+    <section className="bg-background">
+      <div className="container py-12 md:py-20">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">Destinations We Cover</h2>
+        <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+          {destinations.map((d) => (
+            <motion.span
+              key={d.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 bg-card rounded-full px-5 py-2.5 shadow-sm text-sm font-semibold text-primary"
+            >
+              <span className="text-lg">{d.flag}</span> {d.name}
+            </motion.span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Our Process */}
+    <section className="bg-card">
+      <div className="container py-12 md:py-20">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-12">Our Process</h2>
+        <div className="max-w-3xl mx-auto space-y-0">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.title}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="flex gap-5 relative"
+            >
+              <div className="flex flex-col items-center">
+                <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 z-10 border-2 border-secondary/20">
+                  <step.icon className="text-secondary" size={20} />
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="w-0.5 flex-1 bg-secondary/15 mt-1" />
+                )}
+              </div>
+              <div className="pb-10">
+                <span className="text-xs font-bold text-secondary uppercase tracking-wider">Step {i + 1}</span>
+                <h3 className="font-bold text-primary text-base mt-1">{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{step.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Common Reasons for Refusal */}
+    <section className="bg-background">
+      <div className="container py-12 md:py-20">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">Common Reasons for Visa Refusal</h2>
+        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {refusalReasons.map((r, i) => (
+            <motion.div
+              key={r.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="bg-card rounded-2xl p-6 shadow-sm border border-destructive/10"
+            >
+              <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
+                <AlertTriangle className="text-destructive" size={18} />
+              </div>
+              <h3 className="font-bold text-primary text-sm mb-2">{r.title}</h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">{r.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <OtherServices currentPath="/services/visa-immigration" />
+    <ServiceCTA label="Book a Free Visa Consultation →" />
+    <Footer />
+    <WhatsAppButton />
+  </div>
+);
+
+export default VisaImmigration;
