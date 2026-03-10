@@ -26,19 +26,19 @@ const Hero = () => {
       {/* Decorative elements on right side */}
       <div className="absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none hidden md:block">
         {/* Large teal circle */}
-        <div className="absolute top-1/4 right-[10%] w-64 h-64 rounded-full border-2 border-secondary/15" />
-        <div className="absolute top-[30%] right-[15%] w-40 h-40 rounded-full border border-secondary/10" />
+        <div className="absolute top-1/4 right-[10%] w-64 h-64 rounded-full border-2 border-secondary/20" />
+        <div className="absolute top-[30%] right-[15%] w-40 h-40 rounded-full border-2 border-secondary/15" />
         {/* Purple accent */}
-        <div className="absolute bottom-1/4 right-[20%] w-32 h-32 rounded-full bg-accent/8" />
-        <div className="absolute top-[20%] right-[5%] w-20 h-20 rounded-full bg-secondary/10" />
+        <div className="absolute bottom-1/4 right-[20%] w-32 h-32 rounded-full bg-accent/15" />
+        <div className="absolute top-[20%] right-[5%] w-20 h-20 rounded-full bg-secondary/20" />
         {/* Dots grid */}
         <div className="absolute top-[45%] right-[25%] grid grid-cols-4 gap-3">
           {Array.from({ length: 16 }).map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-secondary/20" />
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-secondary/30" />
           ))}
         </div>
         {/* Floating accent ring */}
-        <div className="absolute bottom-[35%] right-[8%] w-48 h-48 rounded-full border border-accent/10" />
+        <div className="absolute bottom-[35%] right-[8%] w-48 h-48 rounded-full border-2 border-accent/15" />
       </div>
 
       <div className="container relative z-10 py-28 md:py-36">
@@ -66,7 +66,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex bg-primary-foreground rounded-full overflow-hidden shadow-2xl w-full md:w-[70%] lg:w-[75%]"
+            className="flex bg-primary-foreground rounded-full overflow-hidden shadow-2xl w-full md:w-[80%]"
           >
             <input
               type="text"

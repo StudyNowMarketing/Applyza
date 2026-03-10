@@ -47,9 +47,8 @@ const FinalCTA = () => {
             Book a Free Consultation
           </Button>
           <Button
-            variant="outline"
             size="lg"
-            className="rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 font-bold px-8"
+            className="rounded-full bg-primary-foreground/15 border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/25 font-bold px-8"
           >
             Search Courses
           </Button>

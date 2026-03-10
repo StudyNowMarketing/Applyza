@@ -1,4 +1,16 @@
-import { Instagram, Facebook, Linkedin, Youtube, Twitter } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+
+const XIcon = ({ size = 14 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const TikTokIcon = ({ size = 14 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z" />
+  </svg>
+);
 
 const studentLinks = [
   "Find a Course",
@@ -25,7 +37,8 @@ const partnerLinks = [
 
 const socials = [
   { icon: Instagram, href: "https://instagram.com/applyzahq" },
-  { icon: Twitter, href: "https://x.com/applyzahq" },
+  { icon: TikTokIcon, href: "https://tiktok.com/@applyzahq", custom: true },
+  { icon: XIcon, href: "https://x.com/applyzahq", custom: true },
   { icon: Facebook, href: "https://facebook.com/applyzahq" },
   { icon: Linkedin, href: "https://linkedin.com/company/applyzahq" },
   { icon: Youtube, href: "https://youtube.com/@applyzahq" },
@@ -45,7 +58,7 @@ const Footer = () => {
               The smartest way to study abroad.
             </p>
             <div className="flex gap-3">
-              {socials.map(({ icon: Icon, href }) => (
+              {socials.map(({ icon: Icon, href, custom }) => (
                 <a
                   key={href}
                   href={href}
@@ -53,7 +66,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/60 hover:bg-secondary hover:text-secondary-foreground transition-colors"
                 >
-                  <Icon size={14} />
+                  {custom ? <Icon size={14} /> : <Icon size={14} />}
                 </a>
               ))}
             </div>
@@ -120,7 +133,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="container py-5 pr-24 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-primary-foreground/40 text-xs">
             © 2026 Applyza. All Rights Reserved.
           </p>

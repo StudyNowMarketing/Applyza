@@ -26,7 +26,7 @@ const posts = [
 const BlogPreview = () => {
   return (
     <section className="bg-background">
-      <div className="container py-16 md:py-24">
+      <div className="container py-12 md:py-20">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
             Guides, Tips & Insights
@@ -44,8 +44,8 @@ const BlogPreview = () => {
               className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* Placeholder image area */}
-              <div className="h-40 bg-gradient-to-br from-muted to-muted/60 flex items-center justify-center">
-                <BookOpen className="text-muted-foreground/30" size={40} />
+              <div className="h-40 bg-gradient-to-br from-accent/10 via-secondary/10 to-muted flex items-center justify-center">
+                <BookOpen className="text-accent/20" size={40} />
               </div>
               <div className="p-5">
                 <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2.5 py-1 rounded-full mb-3">
