@@ -134,6 +134,84 @@ export type Database = {
         }
         Relationships: []
       }
+      institution_enquiries: {
+        Row: {
+          contact_name: string
+          country: string | null
+          created_at: string | null
+          email: string
+          id: string
+          institution_name: string
+          job_title: string | null
+          message: string | null
+          phone: string | null
+          status: string | null
+        }
+        Insert: {
+          contact_name: string
+          country?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          institution_name: string
+          job_title?: string | null
+          message?: string | null
+          phone?: string | null
+          status?: string | null
+        }
+        Update: {
+          contact_name?: string
+          country?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          institution_name?: string
+          job_title?: string | null
+          message?: string | null
+          phone?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      partner_enquiries: {
+        Row: {
+          company_name: string | null
+          country: string | null
+          created_at: string | null
+          email: string
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+          status: string | null
+          students_per_year: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          country?: string | null
+          created_at?: string | null
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          status?: string | null
+          students_per_year?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          country?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          status?: string | null
+          students_per_year?: string | null
+        }
+        Relationships: []
+      }
       study_destinations: {
         Row: {
           cost_city_1: string | null
