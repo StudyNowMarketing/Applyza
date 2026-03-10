@@ -242,6 +242,7 @@ const FindACourse = () => {
   const [searchParams] = useSearchParams();
   const initialSearch = searchParams.get("search") || "";
   const initialCountry = searchParams.get("country");
+  const initialUniversity = searchParams.get("university");
 
   const [search, setSearch] = useState(initialSearch);
   const [selectedCountries, setSelectedCountries] = useState<string[]>(
@@ -250,7 +251,7 @@ const FindACourse = () => {
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [selectedUniversities, setSelectedUniversities] = useState<string[]>(
-    []
+    initialUniversity ? [initialUniversity] : []
   );
   const [selectedIntakes, setSelectedIntakes] = useState<string[]>([]);
   const [selectedDurations, setSelectedDurations] = useState<string[]>([]);
