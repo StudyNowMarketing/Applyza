@@ -12,6 +12,13 @@ import StudentCounselling from "./pages/StudentCounselling.tsx";
 import Accommodation from "./pages/Accommodation.tsx";
 import FindACourse from "./pages/FindACourse.tsx";
 import CourseDetail from "./pages/CourseDetail.tsx";
+import BookConsultation from "./pages/BookConsultation.tsx";
+import Scholarships from "./pages/Scholarships.tsx";
+import Events from "./pages/Events.tsx";
+import Blog from "./pages/Blog.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import TermsConditions from "./pages/TermsConditions.tsx";
+import AntiSlaveryPolicy from "./pages/AntiSlaveryPolicy.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -32,6 +39,13 @@ const App = () => (
           <Route path="/services/accommodation" element={<Accommodation />} />
           <Route path="/find-a-course" element={<FindACourse />} />
           <Route path="/find-a-course/:slug" element={<CourseDetail />} />
+          <Route path="/book-a-consultation" element={<BookConsultation />} />
+          <Route path="/scholarships" element={<Scholarships />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsConditions />} />
+          <Route path="/anti-slavery-policy" element={<AntiSlaveryPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

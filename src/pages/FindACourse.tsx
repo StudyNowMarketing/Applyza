@@ -798,8 +798,8 @@ const CourseCard = ({ course }: { course: Course }) => (
       <Button variant="outline" size="sm" className="flex-1" asChild>
         <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
       </Button>
-      <Button variant="teal" size="sm" className="flex-1">
-        Apply with Applyza
+      <Button variant="teal" size="sm" className="flex-1" asChild>
+        <Link to="/book-a-consultation">Apply with Applyza</Link>
       </Button>
     </div>
   </div>

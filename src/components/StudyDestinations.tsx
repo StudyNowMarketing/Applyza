@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 import ukImg from "@/assets/destinations/uk.jpg";
 import germanyImg from "@/assets/destinations/germany.jpg";
@@ -10,12 +11,12 @@ import maltaImg from "@/assets/destinations/malta.jpg";
 import netherlandsImg from "@/assets/destinations/netherlands.jpg";
 
 const destinations = [
-  { name: "United Kingdom", flag: "🇬🇧", image: ukImg, featured: true },
-  { name: "Germany", flag: "🇩🇪", image: germanyImg },
-  { name: "France", flag: "🇫🇷", image: franceImg },
-  { name: "Ireland", flag: "🇮🇪", image: irelandImg },
-  { name: "Malta", flag: "🇲🇹", image: maltaImg },
-  { name: "Netherlands", flag: "🇳🇱", image: netherlandsImg },
+  { name: "United Kingdom", flag: "🇬🇧", image: ukImg, slug: "united-kingdom", featured: true },
+  { name: "Germany", flag: "🇩🇪", image: germanyImg, slug: "germany" },
+  { name: "France", flag: "🇫🇷", image: franceImg, slug: "france" },
+  { name: "Ireland", flag: "🇮🇪", image: irelandImg, slug: "ireland" },
+  { name: "Malta", flag: "🇲🇹", image: maltaImg, slug: "malta" },
+  { name: "Netherlands", flag: "🇳🇱", image: netherlandsImg, slug: "netherlands" },
 ];
 
 const StudyDestinations = () => {
@@ -42,7 +43,6 @@ const StudyDestinations = () => {
           </h2>
         </motion.div>
 
-        {/* Scroll controls */}
         <div className="relative">
           <button
             onClick={() => scroll("left")}
@@ -65,41 +65,44 @@ const StudyDestinations = () => {
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {destinations.map((d, i) => (
-              <motion.a
+              <motion.div
                 key={d.name}
-                href="#"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`relative rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer ${
-                  d.featured ? "w-72 md:w-80 h-72 md:h-96" : "w-56 md:w-64 h-64 md:h-80"
-                }`}
               >
-                <img
-                  src={d.image}
-                  alt={d.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 via-40% to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <div className="text-lg md:text-xl font-bold text-primary-foreground">
-                    {d.flag} {d.name}
+                <Link
+                  to={`/find-a-course?country=${encodeURIComponent(d.name)}`}
+                  className={`relative rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer block ${
+                    d.featured ? "w-72 md:w-80 h-72 md:h-96" : "w-56 md:w-64 h-64 md:h-80"
+                  }`}
+                >
+                  <img
+                    src={d.image}
+                    alt={d.name}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 via-40% to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="text-lg md:text-xl font-bold text-primary-foreground">
+                      {d.flag} {d.name}
+                    </div>
+                    <span className="text-primary-foreground/70 text-sm font-medium group-hover:text-secondary transition-colors">
+                      Explore courses →
+                    </span>
                   </div>
-                  <span className="text-primary-foreground/70 text-sm font-medium group-hover:text-secondary transition-colors">
-                    Explore courses →
-                  </span>
-                </div>
-              </motion.a>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
 
         <div className="text-center mt-8">
-          <a href="#" className="text-secondary font-semibold hover:underline">
+          <Link to="/find-a-course" className="text-secondary font-semibold hover:underline">
             See All Destinations →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

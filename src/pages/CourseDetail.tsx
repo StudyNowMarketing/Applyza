@@ -288,8 +288,8 @@ const CourseDetail = () => {
                       {course.application_deadline}
                     </p>
                   )}
-                  <Button variant="teal" size="lg" className="mt-4">
-                    Book a Free Consultation
+                  <Button variant="teal" size="lg" className="mt-4" asChild>
+                    <Link to="/book-a-consultation">Book a Free Consultation</Link>
                   </Button>
                 </div>
               </TabsContent>
@@ -352,11 +352,11 @@ const CourseDetail = () => {
                 )}
 
                 <div className="space-y-2.5 pt-2">
-                  <Button variant="teal" size="lg" className="w-full font-bold">
-                    Apply with Applyza — It's Free
+                  <Button variant="teal" size="lg" className="w-full font-bold" asChild>
+                    <Link to="/book-a-consultation">Apply with Applyza — It's Free</Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="w-full">
-                    Book a Consultation
+                  <Button variant="outline" size="lg" className="w-full" asChild>
+                    <Link to="/book-a-consultation">Book a Consultation</Link>
                   </Button>
                 </div>
 
