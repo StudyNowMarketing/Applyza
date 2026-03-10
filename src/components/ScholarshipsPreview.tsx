@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const scholarships = [
   {
@@ -51,16 +52,16 @@ const ScholarshipsPreview = () => {
                 Up to {s.discount} discount
               </span>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.eligibility}</p>
-              <a href="#" className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all">
+              <Link to="/scholarships" className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all">
                 View Details →
-              </a>
+              </Link>
             </motion.div>
           ))}
         </div>
 
         <div className="flex justify-center mt-10">
-          <Button variant="teal" size="lg" className="rounded-full">
-            Explore All Scholarships →
+          <Button variant="teal" size="lg" className="rounded-full" asChild>
+            <Link to="/scholarships">Explore All Scholarships →</Link>
           </Button>
         </div>
       </div>

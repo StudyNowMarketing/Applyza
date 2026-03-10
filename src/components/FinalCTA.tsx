@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const FinalCTA = () => {
   return (
     <section className="relative overflow-hidden">
-      {/* Animated gradient background */}
       <div
         className="absolute inset-0 animate-gradient-shift bg-[length:200%_200%]"
         style={{
@@ -43,14 +43,16 @@ const FinalCTA = () => {
           <Button
             size="lg"
             className="rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-bold px-8"
+            asChild
           >
-            Book a Free Consultation
+            <Link to="/book-a-consultation">Book a Free Consultation</Link>
           </Button>
           <Button
             size="lg"
             className="rounded-full bg-primary-foreground/15 border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/25 font-bold px-8"
+            asChild
           >
-            Search Courses
+            <Link to="/find-a-course">Search Courses</Link>
           </Button>
         </motion.div>
       </div>

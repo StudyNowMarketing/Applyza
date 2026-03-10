@@ -1,4 +1,5 @@
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -12,27 +13,27 @@ const TikTokIcon = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
-const studentLinks = [
-  "Find a Course",
-  "Study Destinations",
-  "Scholarships",
-  "Book a Consultation",
-  "FAQ",
+const studentLinks: { label: string; to: string }[] = [
+  { label: "Find a Course", to: "/find-a-course" },
+  { label: "Study Destinations", to: "/study-destinations" },
+  { label: "Scholarships", to: "/scholarships" },
+  { label: "Book a Consultation", to: "/book-a-consultation" },
+  { label: "FAQ", to: "/about" },
 ];
 
-const companyLinks = [
-  "About",
-  "Our Offices",
-  "Testimonials",
-  "Blog",
-  "Events",
-  "Contact",
+const companyLinks: { label: string; to: string }[] = [
+  { label: "About", to: "/about" },
+  { label: "Our Offices", to: "/about" },
+  { label: "Testimonials", to: "/about" },
+  { label: "Blog", to: "/blog" },
+  { label: "Events", to: "/events" },
+  { label: "Contact", to: "/book-a-consultation" },
 ];
 
-const partnerLinks = [
-  "For Institutions",
-  "For Recruitment Partners",
-  "Partner Universities",
+const partnerLinks: { label: string; to: string }[] = [
+  { label: "For Institutions", to: "/about" },
+  { label: "For Recruitment Partners", to: "/about" },
+  { label: "Partner Universities", to: "/find-a-course" },
 ];
 
 const socials = [
@@ -51,14 +52,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Col 1 */}
           <div>
-            <h3 className="text-primary-foreground text-xl font-extrabold mb-3">
-              Applyza
-            </h3>
-            <p className="text-primary-foreground/50 text-sm mb-5 leading-relaxed">
-              The smartest way to study abroad.
-            </p>
+            <h3 className="text-primary-foreground text-xl font-extrabold mb-3">Applyza</h3>
+            <p className="text-primary-foreground/50 text-sm mb-5 leading-relaxed">The smartest way to study abroad.</p>
             <div className="flex gap-3">
-              {socials.map(({ icon: Icon, href, custom }) => (
+              {socials.map(({ icon: Icon, href }) => (
                 <a
                   key={href}
                   href={href}
@@ -66,7 +63,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/60 hover:bg-secondary hover:text-secondary-foreground transition-colors"
                 >
-                  {custom ? <Icon size={14} /> : <Icon size={14} />}
+                  <Icon size={14} />
                 </a>
               ))}
             </div>
@@ -74,18 +71,13 @@ const Footer = () => {
 
           {/* Col 2 */}
           <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-4">
-              For Students
-            </h4>
+            <h4 className="text-primary-foreground font-bold text-sm mb-4">For Students</h4>
             <ul className="space-y-2.5">
               {studentLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors"
-                  >
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link to={link.to} className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -93,18 +85,13 @@ const Footer = () => {
 
           {/* Col 3 */}
           <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-4">
-              Company
-            </h4>
+            <h4 className="text-primary-foreground font-bold text-sm mb-4">Company</h4>
             <ul className="space-y-2.5">
               {companyLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors"
-                  >
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link to={link.to} className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -112,18 +99,13 @@ const Footer = () => {
 
           {/* Col 4 */}
           <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-4">
-              Partners
-            </h4>
+            <h4 className="text-primary-foreground font-bold text-sm mb-4">Partners</h4>
             <ul className="space-y-2.5">
               {partnerLinks.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors"
-                  >
-                    {link}
-                  </a>
+                <li key={link.label}>
+                  <Link to={link.to} className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -134,19 +116,11 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
         <div className="container py-5 pr-24 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-primary-foreground/40 text-xs">
-            © 2026 Applyza. All Rights Reserved.
-          </p>
+          <p className="text-primary-foreground/40 text-xs">© 2026 Applyza. All Rights Reserved.</p>
           <div className="flex gap-4 text-xs">
-            <a href="#" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">
-              Terms & Conditions
-            </a>
-            <a href="#" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">
-              Anti-Slavery Policy
-            </a>
+            <Link to="/privacy-policy" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Privacy Policy</Link>
+            <Link to="/terms-and-conditions" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Terms & Conditions</Link>
+            <Link to="/anti-slavery-policy" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Anti-Slavery Policy</Link>
           </div>
         </div>
       </div>

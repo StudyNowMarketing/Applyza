@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const ServiceCTA = ({ label = "Book a Free Consultation" }: { label?: string }) => (
   <section className="relative overflow-hidden">
@@ -38,8 +39,9 @@ const ServiceCTA = ({ label = "Book a Free Consultation" }: { label?: string }) 
         <Button
           size="lg"
           className="rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-bold px-8"
+          asChild
         >
-          {label}
+          <Link to="/book-a-consultation">{label}</Link>
         </Button>
       </motion.div>
     </div>

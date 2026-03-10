@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const events = [
   {
@@ -9,8 +10,7 @@ const events = [
     month: "MAR",
     year: "2026",
     location: "Nairobi, Kenya",
-    description:
-      "Meet top UK university representatives, attend expert panels on study abroad options, and get one-on-one guidance from our counsellors.",
+    description: "Meet top UK university representatives, attend expert panels on study abroad options, and get one-on-one guidance from our counsellors.",
   },
   {
     title: "The Applyza Experience — Accra",
@@ -18,8 +18,7 @@ const events = [
     month: "MAR",
     year: "2026",
     location: "Accra, Ghana",
-    description:
-      "Explore scholarships, learn about visa requirements, and discover programmes tailored to your career goals.",
+    description: "Explore scholarships, learn about visa requirements, and discover programmes tailored to your career goals.",
   },
   {
     title: "The Applyza Experience — Lagos",
@@ -27,8 +26,7 @@ const events = [
     month: "APR",
     year: "2026",
     location: "Lagos, Nigeria",
-    description:
-      "Our biggest event of the season. Speak directly with admissions teams and get your application reviewed on the spot.",
+    description: "Our biggest event of the season. Speak directly with admissions teams and get your application reviewed on the spot.",
   },
 ];
 
@@ -41,9 +39,7 @@ const UpcomingEvents = () => {
             The Applyza Experience
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Join us at our events across the globe. Meet university
-            representatives face-to-face, attend expert panels, and get your
-            questions answered.
+            Join us at our events across the globe. Meet university representatives face-to-face, attend expert panels, and get your questions answered.
           </p>
         </div>
 
@@ -57,35 +53,25 @@ const UpcomingEvents = () => {
               transition={{ duration: 0.45, delay: i * 0.1 }}
               className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex"
             >
-              {/* Date badge */}
               <div className="shrink-0 w-24 flex flex-col items-center justify-center gradient-purple text-accent-foreground">
-                <span className="text-3xl font-extrabold leading-none">
-                  {event.day}
-                </span>
-                <span className="text-xs font-semibold tracking-wider mt-1">
-                  {event.month}
-                </span>
+                <span className="text-3xl font-extrabold leading-none">{event.day}</span>
+                <span className="text-xs font-semibold tracking-wider mt-1">{event.month}</span>
               </div>
-
-              {/* Content */}
               <div className="p-5 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="font-bold text-primary text-sm mb-1 leading-snug">
-                    {event.title}
-                  </h3>
+                  <h3 className="font-bold text-primary text-sm mb-1 leading-snug">{event.title}</h3>
                   <p className="text-xs text-muted-foreground flex items-center gap-1 mb-2">
                     <MapPin size={12} /> {event.location}
                   </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-4">
-                    {event.description}
-                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mb-4">{event.description}</p>
                 </div>
                 <Button
                   variant="outline"
                   size="sm"
                   className="rounded-full border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground w-fit text-xs"
+                  asChild
                 >
-                  Register →
+                  <Link to="/events">Register →</Link>
                 </Button>
               </div>
             </motion.div>
@@ -93,12 +79,9 @@ const UpcomingEvents = () => {
         </div>
 
         <div className="flex justify-center mt-10">
-          <a
-            href="#"
-            className="text-secondary font-semibold text-sm hover:underline"
-          >
+          <Link to="/events" className="text-secondary font-semibold text-sm hover:underline">
             See All Events →
-          </a>
+          </Link>
         </div>
       </div>
     </section>

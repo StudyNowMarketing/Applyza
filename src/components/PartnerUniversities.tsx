@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const universities = [
   { name: "York St. John University", location: "York, United Kingdom", region: "UK" },
@@ -32,7 +33,6 @@ const PartnerUniversities = () => {
           </p>
         </div>
 
-        {/* Tabs */}
         <div className="flex justify-center gap-2 mb-10">
           {tabs.map((tab) => (
             <button
@@ -49,7 +49,6 @@ const PartnerUniversities = () => {
           ))}
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {filtered.map((uni, i) => (
             <motion.div
@@ -64,9 +63,12 @@ const PartnerUniversities = () => {
               <div className="p-6">
                 <h3 className="font-bold text-primary text-base mb-1">{uni.name}</h3>
                 <p className="text-xs text-muted-foreground mb-4">{uni.location}</p>
-                <a href="#" className="text-secondary text-xs font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all">
+                <Link
+                  to={`/find-a-course?university=${encodeURIComponent(uni.name)}`}
+                  className="text-secondary text-xs font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
+                >
                   View Courses →
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -77,8 +79,8 @@ const PartnerUniversities = () => {
         )}
 
         <div className="flex justify-center mt-10">
-          <Button variant="outline" size="lg" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            See All 150+ Partners →
+          <Button variant="outline" size="lg" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
+            <Link to="/find-a-course">See All 150+ Partners →</Link>
           </Button>
         </div>
       </div>

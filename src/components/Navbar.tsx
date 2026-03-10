@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const navLinks = [
   { label: "Find a Course", to: "/find-a-course" },
-  { label: "Study Destinations", to: "#" },
+  { label: "Study Destinations", to: "/study-destinations" },
   { label: "Services", to: "/services" },
-  { label: "Scholarships", to: "#" },
-  { label: "Events", to: "#" },
+  { label: "Scholarships", to: "/scholarships" },
+  { label: "Events", to: "/events" },
   { label: "About", to: "/about" },
 ];
 
 const Navbar = ({ solid = false }: { solid?: boolean }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -23,6 +25,14 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
   }, []);
 
   const showSolid = solid || scrolled;
+
+  const handleClientLogin = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toast({
+      title: "Client Portal Coming Soon",
+      description: "Contact us at info@applyza.com for access.",
+    });
+  };
 
   return (
     <nav
@@ -36,37 +46,30 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
         </Link>
 
         <div className="hidden xl:flex items-center gap-6 lg:gap-8">
-          {navLinks.map((link) =>
-            link.to.startsWith("/") ? (
-              <Link
-                key={link.label}
-                to={link.to}
-                className="text-primary-foreground/80 hover:text-primary-foreground text-[13px] font-medium transition-colors whitespace-nowrap"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.label}
-                href={link.to}
-                className="text-primary-foreground/80 hover:text-primary-foreground text-[13px] font-medium transition-colors whitespace-nowrap"
-              >
-                {link.label}
-              </a>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.label}
+              to={link.to}
+              className="text-primary-foreground/80 hover:text-primary-foreground text-[13px] font-medium transition-colors whitespace-nowrap"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
 
         <div className="hidden xl:flex items-center gap-5">
-          <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-xs font-normal transition-colors whitespace-nowrap">
+          <button
+            onClick={handleClientLogin}
+            className="text-primary-foreground/60 hover:text-primary-foreground text-xs font-normal transition-colors whitespace-nowrap"
+          >
             Client Login
-          </a>
+          </button>
           <div className="flex items-center gap-2">
             <span className="bg-secondary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
               100% Free
             </span>
-            <Button variant="teal" size="sm" className="rounded-full">
-              Book a Free Consultation
+            <Button variant="teal" size="sm" className="rounded-full" asChild>
+              <Link to="/book-a-consultation">Book a Free Consultation</Link>
             </Button>
           </div>
         </div>
@@ -83,31 +86,24 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       {mobileOpen && (
         <div className="xl:hidden bg-primary border-t border-primary-foreground/10 pb-6">
           <div className="container flex flex-col gap-3 pt-4">
-            {navLinks.map((link) =>
-              link.to.startsWith("/") ? (
-                <Link
-                  key={link.label}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium py-2 transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.to}
-                  className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium py-2 transition-colors"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
-            <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-sm font-normal py-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.to}
+                onClick={() => setMobileOpen(false)}
+                className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium py-2 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <button
+              onClick={(e) => { handleClientLogin(e); setMobileOpen(false); }}
+              className="text-primary-foreground/60 hover:text-primary-foreground text-sm font-normal py-2 text-left"
+            >
               Client Login
-            </a>
-            <Button variant="teal" className="rounded-full mt-2 w-full">
-              Book a Free Consultation
+            </button>
+            <Button variant="teal" className="rounded-full mt-2 w-full" asChild>
+              <Link to="/book-a-consultation" onClick={() => setMobileOpen(false)}>Book a Free Consultation</Link>
             </Button>
           </div>
         </div>
