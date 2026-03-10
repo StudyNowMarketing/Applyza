@@ -288,8 +288,8 @@ const CourseDetail = () => {
                       {course.application_deadline}
                     </p>
                   )}
-                  <Button variant="teal" size="lg" className="mt-4">
-                    Book a Free Consultation
+                  <Button variant="teal" size="lg" className="mt-4" asChild>
+                    <Link to="/book-a-consultation">Book a Free Consultation</Link>
                   </Button>
                 </div>
               </TabsContent>
