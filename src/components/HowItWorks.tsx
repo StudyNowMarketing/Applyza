@@ -58,8 +58,8 @@ const HowItWorks = () => {
         </div>
 
         <div className="flex justify-center mt-12">
-          <Button variant="purple" size="lg" className="rounded-full">
-            Book a Free Consultation
+          <Button variant="purple" size="lg" className="rounded-full" asChild>
+            <Link to="/book-a-consultation">Book a Free Consultation</Link>
           </Button>
         </div>
       </div>
