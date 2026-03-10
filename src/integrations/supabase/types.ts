@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       courses: {
         Row: {
+          application_deadline: string | null
+          career_prospects: string | null
           city: string
           country: string
           created_at: string | null
@@ -26,8 +28,11 @@ export type Database = {
           featured: boolean | null
           id: string
           intake_dates: string | null
+          modules: string | null
           scholarship_available: boolean | null
+          scholarship_details: string | null
           slug: string
+          source_url: string | null
           status: string | null
           study_level: string
           subject_area: string
@@ -37,6 +42,8 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          application_deadline?: string | null
+          career_prospects?: string | null
           city: string
           country: string
           created_at?: string | null
@@ -47,8 +54,11 @@ export type Database = {
           featured?: boolean | null
           id?: string
           intake_dates?: string | null
+          modules?: string | null
           scholarship_available?: boolean | null
+          scholarship_details?: string | null
           slug: string
+          source_url?: string | null
           status?: string | null
           study_level: string
           subject_area: string
@@ -58,6 +68,8 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          application_deadline?: string | null
+          career_prospects?: string | null
           city?: string
           country?: string
           created_at?: string | null
@@ -68,8 +80,11 @@ export type Database = {
           featured?: boolean | null
           id?: string
           intake_dates?: string | null
+          modules?: string | null
           scholarship_available?: boolean | null
+          scholarship_details?: string | null
           slug?: string
+          source_url?: string | null
           status?: string | null
           study_level?: string
           subject_area?: string
