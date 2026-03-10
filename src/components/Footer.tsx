@@ -115,7 +115,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container py-5 pr-24 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-primary-foreground/40 text-xs">© 2026 Applyza. All Rights Reserved.</p>
           <div className="flex gap-4 text-xs">
             <Link to="/privacy-policy" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Privacy Policy</Link>
