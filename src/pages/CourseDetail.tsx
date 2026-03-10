@@ -122,7 +122,7 @@ const CourseDetail = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar solid />
 
       {/* Breadcrumb */}
       <section className="bg-card border-b border-border pt-20">
