@@ -46,6 +46,7 @@ import AdminEventForm from "./pages/admin/AdminEventForm.tsx";
 import AdminScholarships from "./pages/admin/AdminScholarships.tsx";
 import AdminScholarshipForm from "./pages/admin/AdminScholarshipForm.tsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.tsx";
+import CookieConsent from "./components/CookieConsent.tsx";
 
 const queryClient = new QueryClient();
 
