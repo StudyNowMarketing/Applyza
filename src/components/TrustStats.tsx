@@ -45,14 +45,30 @@ function useCountUp(target: number, duration = 2000) {
   return { count, ref };
 }
 
-const StatItem = ({ value, suffix, label }: { value: number; suffix: string; label: string }) => {
+const StatItem = ({
+  value,
+  suffix,
+  label,
+  isLast,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+  isLast: boolean;
+}) => {
   const { count, ref } = useCountUp(value);
   return (
-    <div ref={ref} className="text-center px-4 py-6">
-      <div className="text-3xl md:text-5xl font-extrabold text-primary">
-        {count.toLocaleString()}{suffix}
+    <div ref={ref} className="flex items-center">
+      <div className="text-center px-4 py-6 flex-1">
+        <div className="text-3xl md:text-5xl font-extrabold text-primary">
+          {count.toLocaleString()}
+          {suffix}
+        </div>
+        <div className="text-sm text-muted-foreground mt-1">{label}</div>
       </div>
-      <div className="text-sm text-muted-foreground mt-1">{label}</div>
+      {!isLast && (
+        <div className="hidden md:block w-px h-12 bg-border shrink-0" />
+      )}
     </div>
   );
 };
@@ -61,9 +77,9 @@ const TrustStats = () => {
   return (
     <section className="bg-card">
       <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {stats.map((s) => (
-            <StatItem key={s.label} {...s} />
+        <div className="grid grid-cols-2 md:grid-cols-4">
+          {stats.map((s, i) => (
+            <StatItem key={s.label} {...s} isLast={i === stats.length - 1} />
           ))}
         </div>
       </div>
