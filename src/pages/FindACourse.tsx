@@ -546,7 +546,7 @@ const FindACourse = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar solid />
 
       {/* Hero */}
       <section className="gradient-navy pt-28 pb-14 md:pt-36 md:pb-20">
@@ -740,7 +740,7 @@ const FindACourse = () => {
                     Clear All Filters
                   </Button>
                   <Button variant="teal" asChild>
-                    <Link to="#consultation">Book a Consultation</Link>
+                    <Link to="/book-a-consultation">Book a Consultation</Link>
                   </Button>
                 </div>
               </div>
