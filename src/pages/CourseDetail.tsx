@@ -100,8 +100,8 @@ const CourseDetail = () => {
   if (!course) {
     return (
       <div className="min-h-screen">
-        <Navbar />
-        <div className="container py-20 text-center">
+        <Navbar solid />
+        <div className="container pt-24 py-20 text-center">
           <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">
             <BookOpen size={32} className="text-muted-foreground" />
           </div>
