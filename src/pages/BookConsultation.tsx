@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ConsentCheckbox from "@/components/ConsentCheckbox";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
