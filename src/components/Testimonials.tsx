@@ -41,7 +41,7 @@ const Testimonials = () => {
 
   return (
     <section style={{ background: "hsl(230 33% 97%)" }}>
-      <div className="container py-16 md:py-24">
+      <div className="container py-12 md:py-20">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
             Real Stories. Real Results.

@@ -12,7 +12,7 @@ const PartnerLogos = () => {
 
   return (
     <section className="bg-background border-t border-border">
-      <div className="container py-12 md:py-16">
+      <div className="container py-12 md:py-20">
         <h2 className="text-lg md:text-xl font-bold text-primary text-center mb-8">
           Recognised & Trusted By
         </h2>
