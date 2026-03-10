@@ -34,12 +34,12 @@ const Navbar = () => {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-4 lg:gap-6">
+        <div className="hidden xl:flex items-center gap-6 lg:gap-8">
           {navLinks.map((link) => (
             <a
               key={link}
               href="#"
-              className="text-primary-foreground/80 hover:text-primary-foreground text-xs lg:text-sm font-medium transition-colors whitespace-nowrap"
+              className="text-primary-foreground/80 hover:text-primary-foreground text-[13px] font-medium transition-colors whitespace-nowrap"
             >
               {link}
             </a>
@@ -47,8 +47,8 @@ const Navbar = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
-          <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium transition-colors whitespace-nowrap">
+        <div className="hidden xl:flex items-center gap-5">
+          <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-xs font-normal transition-colors whitespace-nowrap">
             Client Login
           </a>
           <div className="flex items-center gap-2">
@@ -61,9 +61,9 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile/tablet hamburger */}
         <button
-          className="md:hidden text-primary-foreground"
+          className="xl:hidden text-primary-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -73,7 +73,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-primary border-t border-primary-foreground/10 pb-6">
+        <div className="xl:hidden bg-primary border-t border-primary-foreground/10 pb-6">
           <div className="container flex flex-col gap-3 pt-4">
             {navLinks.map((link) => (
               <a
@@ -84,7 +84,7 @@ const Navbar = () => {
                 {link}
               </a>
             ))}
-            <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium py-2">
+            <a href="#" className="text-primary-foreground/60 hover:text-primary-foreground text-sm font-normal py-2">
               Client Login
             </a>
             <Button variant="teal" className="rounded-full mt-2 w-full">
