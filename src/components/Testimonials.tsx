@@ -40,7 +40,7 @@ const Testimonials = () => {
   }, [next]);
 
   return (
-    <section style={{ background: "hsl(230 33% 97%)" }}>
+    <section className="bg-muted">
       <div className="container py-12 md:py-20">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
