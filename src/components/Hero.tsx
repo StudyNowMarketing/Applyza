@@ -81,10 +81,13 @@ const Hero = () => {
           >
             <input
               type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Search courses, universities, or subjects..."
               className="flex-1 px-5 py-3.5 text-sm text-foreground bg-transparent outline-none placeholder:text-muted-foreground min-w-0"
             />
-            <Button variant="teal" className="rounded-full m-1 px-5 shrink-0">
+            <Button variant="teal" className="rounded-full m-1 px-5 shrink-0" onClick={handleSearch}>
               <Search size={18} />
             </Button>
           </motion.div>
