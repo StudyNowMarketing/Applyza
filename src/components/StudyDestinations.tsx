@@ -73,7 +73,7 @@ const StudyDestinations = () => {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
               >
                 <Link
-                  to={`/find-a-course?country=${encodeURIComponent(d.name)}`}
+                  to={`/study-destinations/${d.slug}`}
                   className={`relative rounded-2xl overflow-hidden shrink-0 snap-start group cursor-pointer block ${
                     d.featured ? "w-72 md:w-80 h-72 md:h-96" : "w-56 md:w-64 h-64 md:h-80"
                   }`}
