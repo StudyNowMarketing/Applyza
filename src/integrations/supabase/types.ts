@@ -14,7 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      courses: {
+        Row: {
+          city: string
+          country: string
+          created_at: string | null
+          description: string | null
+          duration: string | null
+          english_requirements: string | null
+          entry_requirements: string | null
+          featured: boolean | null
+          id: string
+          intake_dates: string | null
+          scholarship_available: boolean | null
+          slug: string
+          status: string | null
+          study_level: string
+          subject_area: string
+          title: string
+          tuition_fee: number | null
+          university_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          city: string
+          country: string
+          created_at?: string | null
+          description?: string | null
+          duration?: string | null
+          english_requirements?: string | null
+          entry_requirements?: string | null
+          featured?: boolean | null
+          id?: string
+          intake_dates?: string | null
+          scholarship_available?: boolean | null
+          slug: string
+          status?: string | null
+          study_level: string
+          subject_area: string
+          title: string
+          tuition_fee?: number | null
+          university_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          city?: string
+          country?: string
+          created_at?: string | null
+          description?: string | null
+          duration?: string | null
+          english_requirements?: string | null
+          entry_requirements?: string | null
+          featured?: boolean | null
+          id?: string
+          intake_dates?: string | null
+          scholarship_available?: boolean | null
+          slug?: string
+          status?: string | null
+          study_level?: string
+          subject_area?: string
+          title?: string
+          tuition_fee?: number | null
+          university_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
