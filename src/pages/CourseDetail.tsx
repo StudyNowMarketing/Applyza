@@ -81,8 +81,8 @@ const CourseDetail = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen">
-        <Navbar />
-        <div className="container py-20">
+        <Navbar solid />
+        <div className="container pt-24 py-20">
           <div className="animate-pulse space-y-6">
             <div className="h-4 bg-muted rounded w-64" />
             <div className="h-10 bg-muted rounded w-96" />
@@ -100,8 +100,8 @@ const CourseDetail = () => {
   if (!course) {
     return (
       <div className="min-h-screen">
-        <Navbar />
-        <div className="container py-20 text-center">
+        <Navbar solid />
+        <div className="container pt-24 py-20 text-center">
           <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">
             <BookOpen size={32} className="text-muted-foreground" />
           </div>
@@ -122,7 +122,7 @@ const CourseDetail = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      <Navbar solid />
 
       {/* Breadcrumb */}
       <section className="bg-card border-b border-border pt-20">
