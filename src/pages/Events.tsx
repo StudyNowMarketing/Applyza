@@ -18,6 +18,7 @@ const Events = () => {
   const { toast } = useToast();
   const [showPast, setShowPast] = useState(false);
   const [subEmail, setSubEmail] = useState("");
+  const [subConsent, setSubConsent] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
 
   const { data: events, isLoading } = useQuery({
