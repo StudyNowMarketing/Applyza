@@ -740,7 +740,7 @@ const FindACourse = () => {
                     Clear All Filters
                   </Button>
                   <Button variant="teal" asChild>
-                    <Link to="#consultation">Book a Consultation</Link>
+                    <Link to="/book-a-consultation">Book a Consultation</Link>
                   </Button>
                 </div>
               </div>

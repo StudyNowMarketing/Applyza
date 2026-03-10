@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 
-const categories = ["All", "Study Abroad Guide", "Visa Guide", "Course Guide", "Application Guide"];
+const categories = ["All", "Study Abroad Guide", "Visa Guide", "Course Guide", "Application Guide", "News"];
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState("All");
