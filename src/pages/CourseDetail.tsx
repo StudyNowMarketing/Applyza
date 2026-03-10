@@ -125,8 +125,14 @@ const CourseDetail = () => {
       <Navbar />
 
       {/* Breadcrumb */}
-      <section className="bg-card border-b border-border">
+      <section className="bg-card border-b border-border pt-20">
         <div className="container py-4">
+          <button
+            onClick={() => window.history.back()}
+            className="text-xs text-secondary font-semibold hover:underline mb-2 flex items-center gap-1"
+          >
+            ← Back to Search Results
+          </button>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -142,8 +148,10 @@ const CourseDetail = () => {
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink className="cursor-default">
-                  {course.university_name}
+                <BreadcrumbLink asChild>
+                  <Link to={`/find-a-course?university=${encodeURIComponent(course.university_name)}`}>
+                    {course.university_name}
+                  </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
