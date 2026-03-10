@@ -11,6 +11,7 @@ import VisaImmigration from "./pages/VisaImmigration.tsx";
 import StudentCounselling from "./pages/StudentCounselling.tsx";
 import Accommodation from "./pages/Accommodation.tsx";
 import FindACourse from "./pages/FindACourse.tsx";
+import CourseDetail from "./pages/CourseDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
