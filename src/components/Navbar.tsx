@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "Find a Course", to: "#" },
+  { label: "Find a Course", to: "/find-a-course" },
   { label: "Study Destinations", to: "#" },
   { label: "Services", to: "/services" },
   { label: "Scholarships", to: "#" },
