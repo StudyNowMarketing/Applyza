@@ -57,8 +57,11 @@ const Services = () => (
           className="max-w-3xl mx-auto text-center"
         >
           <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-4">Why Free?</h2>
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mb-4">
             Our partner universities fund our services because we deliver qualified, well-prepared students who are ready to succeed. That means you get expert guidance, application support, and visa assistance — all at absolutely no cost to you.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+            Our counsellors are trained and certified under the UK Agent Quality Framework. We provide impartial advice based on each student's individual circumstances.
           </p>
         </motion.div>
       </div>

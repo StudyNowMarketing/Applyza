@@ -64,14 +64,9 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
           >
             Client Login
           </button>
-          <div className="flex items-center gap-2">
-            <Link to="/book-a-consultation" className="bg-secondary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full hover:opacity-90 transition-opacity">
-              100% Free
-            </Link>
-            <Button variant="teal" size="sm" className="rounded-full" asChild>
-              <Link to="/book-a-consultation">Book a Free Consultation</Link>
-            </Button>
-          </div>
+          <Button variant="teal" size="sm" className="rounded-full" asChild>
+            <Link to="/book-a-consultation">Book a Free Consultation</Link>
+          </Button>
         </div>
 
         <button

@@ -47,6 +47,25 @@ const VisaImmigration = () => (
       ]}
     />
 
+    {/* Important Information */}
+    <section style={{ backgroundColor: "#FFF8E7" }}>
+      <div className="container py-10 md:py-14">
+        <div className="max-w-3xl mx-auto">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+              <AlertTriangle className="text-amber-600" size={18} />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-primary mb-2">Important Information</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Applyza only supports visa applications for students who have a genuine intention to study and who meet the academic and financial requirements of their chosen programme. We provide guidance based on publicly available information and our professional experience — we are not immigration lawyers and do not provide legal advice. All visa decisions are made solely by UK Visas and Immigration (UKVI) or the relevant immigration authority.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     {/* Destinations We Cover */}
     <section className="bg-background">
       <div className="container py-12 md:py-20">

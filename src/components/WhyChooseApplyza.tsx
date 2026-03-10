@@ -9,8 +9,8 @@ const reasons = [
   },
   {
     icon: CircleDollarSign,
-    title: "100% Free — Always",
-    text: "We never charge students. Not for consultations, not for applications, not for visa support. Our services are funded by our university partners, so you get world-class guidance at zero cost.",
+    title: "Committed to Genuine Students",
+    text: "We carefully assess every student's academic background, career goals, and study intent before recommending programmes. Our goal is not just placement — it's your long-term success.",
   },
   {
     icon: ShieldCheck,
