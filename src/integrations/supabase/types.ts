@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      consultation_requests: {
+        Row: {
+          consultation_type: string
+          created_at: string | null
+          email: string
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          preferred_date: string | null
+          service_interest: string
+          status: string | null
+        }
+        Insert: {
+          consultation_type: string
+          created_at?: string | null
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          preferred_date?: string | null
+          service_interest: string
+          status?: string | null
+        }
+        Update: {
+          consultation_type?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          preferred_date?: string | null
+          service_interest?: string
+          status?: string | null
+        }
+        Relationships: []
+      }
       courses: {
         Row: {
           application_deadline: string | null
