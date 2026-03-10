@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ConsentCheckbox from "@/components/ConsentCheckbox";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
@@ -17,6 +18,7 @@ const Events = () => {
   const { toast } = useToast();
   const [showPast, setShowPast] = useState(false);
   const [subEmail, setSubEmail] = useState("");
+  const [subConsent, setSubConsent] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
 
   const { data: events, isLoading } = useQuery({
@@ -169,11 +171,18 @@ const Events = () => {
         <div className="container max-w-xl text-center">
           <h2 className="text-xl md:text-2xl font-extrabold text-primary mb-3">Want to be notified about future events?</h2>
           <p className="text-muted-foreground text-sm mb-6">Enter your email and we'll let you know when new events are announced.</p>
-          <form onSubmit={handleSubscribe} className="flex gap-3 max-w-md mx-auto">
-            <Input type="email" placeholder="Your email address" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} className="flex-1" />
-            <Button type="submit" variant="teal" className="rounded-full shrink-0" disabled={subscribing}>
-              {subscribing ? "..." : "Subscribe"}
-            </Button>
+          <form onSubmit={handleSubscribe} className="space-y-4 max-w-md mx-auto">
+            <div className="flex gap-3">
+              <Input type="email" placeholder="Your email address" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} className="flex-1" />
+              <Button type="submit" variant="teal" className="rounded-full shrink-0" disabled={subscribing || !subConsent}>
+                {subscribing ? "..." : "Subscribe"}
+              </Button>
+            </div>
+            <ConsentCheckbox
+              checked={subConsent}
+              onCheckedChange={setSubConsent}
+              label="I consent to receiving event updates from Applyza. Privacy Policy."
+            />
           </form>
         </div>
       </section>
