@@ -95,6 +95,93 @@ export type Database = {
         }
         Relationships: []
       }
+      study_destinations: {
+        Row: {
+          cost_city_1: string | null
+          cost_city_2: string | null
+          cost_city_3: string | null
+          country: string
+          created_at: string | null
+          degree_duration: string | null
+          id: string
+          language: string | null
+          overview: string | null
+          partner_count: number | null
+          post_study_visa: string | null
+          slug: string
+          status: string | null
+          top_cities: string | null
+          tuition_range: string | null
+          visa_fee: string | null
+          visa_requirements: string | null
+          visa_work_rights: string | null
+          why_study_here_1_desc: string | null
+          why_study_here_1_title: string | null
+          why_study_here_2_desc: string | null
+          why_study_here_2_title: string | null
+          why_study_here_3_desc: string | null
+          why_study_here_3_title: string | null
+          why_study_here_4_desc: string | null
+          why_study_here_4_title: string | null
+        }
+        Insert: {
+          cost_city_1?: string | null
+          cost_city_2?: string | null
+          cost_city_3?: string | null
+          country: string
+          created_at?: string | null
+          degree_duration?: string | null
+          id?: string
+          language?: string | null
+          overview?: string | null
+          partner_count?: number | null
+          post_study_visa?: string | null
+          slug: string
+          status?: string | null
+          top_cities?: string | null
+          tuition_range?: string | null
+          visa_fee?: string | null
+          visa_requirements?: string | null
+          visa_work_rights?: string | null
+          why_study_here_1_desc?: string | null
+          why_study_here_1_title?: string | null
+          why_study_here_2_desc?: string | null
+          why_study_here_2_title?: string | null
+          why_study_here_3_desc?: string | null
+          why_study_here_3_title?: string | null
+          why_study_here_4_desc?: string | null
+          why_study_here_4_title?: string | null
+        }
+        Update: {
+          cost_city_1?: string | null
+          cost_city_2?: string | null
+          cost_city_3?: string | null
+          country?: string
+          created_at?: string | null
+          degree_duration?: string | null
+          id?: string
+          language?: string | null
+          overview?: string | null
+          partner_count?: number | null
+          post_study_visa?: string | null
+          slug?: string
+          status?: string | null
+          top_cities?: string | null
+          tuition_range?: string | null
+          visa_fee?: string | null
+          visa_requirements?: string | null
+          visa_work_rights?: string | null
+          why_study_here_1_desc?: string | null
+          why_study_here_1_title?: string | null
+          why_study_here_2_desc?: string | null
+          why_study_here_2_title?: string | null
+          why_study_here_3_desc?: string | null
+          why_study_here_3_title?: string | null
+          why_study_here_4_desc?: string | null
+          why_study_here_4_title?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
