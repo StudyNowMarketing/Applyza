@@ -795,7 +795,7 @@ const CourseCard = ({ course }: { course: Course }) => (
 
     <div className="flex gap-2 mt-auto pt-2">
       <Button variant="outline" size="sm" className="flex-1" asChild>
-        <Link to={`/courses/${course.slug}`}>View Details</Link>
+        <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
       </Button>
       <Button variant="teal" size="sm" className="flex-1">
         Apply with Applyza

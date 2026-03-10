@@ -11,6 +11,7 @@ import VisaImmigration from "./pages/VisaImmigration.tsx";
 import StudentCounselling from "./pages/StudentCounselling.tsx";
 import Accommodation from "./pages/Accommodation.tsx";
 import FindACourse from "./pages/FindACourse.tsx";
+import CourseDetail from "./pages/CourseDetail.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/services/student-counselling" element={<StudentCounselling />} />
           <Route path="/services/accommodation" element={<Accommodation />} />
           <Route path="/find-a-course" element={<FindACourse />} />
+          <Route path="/find-a-course/:slug" element={<CourseDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
