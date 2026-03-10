@@ -22,6 +22,8 @@ import AntiSlaveryPolicy from "./pages/AntiSlaveryPolicy.tsx";
 import DestinationDetail from "./pages/DestinationDetail.tsx";
 import ForInstitutions from "./pages/ForInstitutions.tsx";
 import ForPartners from "./pages/ForPartners.tsx";
+import Contact from "./pages/Contact.tsx";
+import FAQ from "./pages/FAQ.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -52,6 +54,8 @@ const App = () => (
           <Route path="/anti-slavery-policy" element={<AntiSlaveryPolicy />} />
           <Route path="/for-institutions" element={<ForInstitutions />} />
           <Route path="/for-partners" element={<ForPartners />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
