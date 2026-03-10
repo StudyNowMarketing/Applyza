@@ -47,7 +47,7 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer style={{ background: "hsl(232 50% 14%)" }}>
+    <footer className="bg-primary" style={{ background: "hsl(232 50% 14%)" }}>
       <div className="container py-14 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Col 1 */}
@@ -115,7 +115,7 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container py-5 pr-24 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-primary-foreground/40 text-xs">© 2026 Applyza. All Rights Reserved.</p>
           <div className="flex gap-4 text-xs">
             <Link to="/privacy-policy" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Privacy Policy</Link>

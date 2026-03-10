@@ -47,7 +47,7 @@ const Services = () => (
     />
 
     {/* Why Free? */}
-    <section style={{ background: "hsl(169 63% 96%)" }}>
+    <section className="bg-secondary/5">
       <div className="container py-12 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
