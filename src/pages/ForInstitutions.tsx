@@ -50,6 +50,7 @@ const ForInstitutions = () => {
     country: "",
     message: "",
   });
+  const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validate = () => {
