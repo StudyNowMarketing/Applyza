@@ -5,6 +5,9 @@ import HowItWorks from "@/components/HowItWorks";
 import ServicesOverview from "@/components/ServicesOverview";
 import AICourseMatcher from "@/components/AICourseMatcher";
 import StudyDestinations from "@/components/StudyDestinations";
+import PartnerUniversities from "@/components/PartnerUniversities";
+import WhyChooseApplyza from "@/components/WhyChooseApplyza";
+import ScholarshipsPreview from "@/components/ScholarshipsPreview";
 
 const Index = () => {
   return (
@@ -16,6 +19,9 @@ const Index = () => {
       <ServicesOverview />
       <AICourseMatcher />
       <StudyDestinations />
+      <PartnerUniversities />
+      <WhyChooseApplyza />
+      <ScholarshipsPreview />
     </div>
   );
 };
