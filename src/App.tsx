@@ -36,6 +36,14 @@ import AdminConsultations from "./pages/admin/AdminConsultations.tsx";
 import AdminContactMessages from "./pages/admin/AdminContactMessages.tsx";
 import AdminInstitutionEnquiries from "./pages/admin/AdminInstitutionEnquiries.tsx";
 import AdminPartnerEnquiries from "./pages/admin/AdminPartnerEnquiries.tsx";
+import AdminCourses from "./pages/admin/AdminCourses.tsx";
+import AdminCourseForm from "./pages/admin/AdminCourseForm.tsx";
+import AdminBlog from "./pages/admin/AdminBlog.tsx";
+import AdminBlogForm from "./pages/admin/AdminBlogForm.tsx";
+import AdminEvents from "./pages/admin/AdminEvents.tsx";
+import AdminEventForm from "./pages/admin/AdminEventForm.tsx";
+import AdminScholarships from "./pages/admin/AdminScholarships.tsx";
+import AdminScholarshipForm from "./pages/admin/AdminScholarshipForm.tsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.tsx";
 
 const queryClient = new QueryClient();
@@ -79,6 +87,18 @@ const App = () => (
               <Route path="contact-messages" element={<AdminContactMessages />} />
               <Route path="institution-enquiries" element={<AdminInstitutionEnquiries />} />
               <Route path="partner-enquiries" element={<AdminPartnerEnquiries />} />
+              <Route path="courses" element={<AdminCourses />} />
+              <Route path="courses/new" element={<AdminCourseForm />} />
+              <Route path="courses/edit/:id" element={<AdminCourseForm />} />
+              <Route path="blog" element={<AdminBlog />} />
+              <Route path="blog/new" element={<AdminBlogForm />} />
+              <Route path="blog/edit/:id" element={<AdminBlogForm />} />
+              <Route path="events" element={<AdminEvents />} />
+              <Route path="events/new" element={<AdminEventForm />} />
+              <Route path="events/edit/:id" element={<AdminEventForm />} />
+              <Route path="scholarships" element={<AdminScholarships />} />
+              <Route path="scholarships/new" element={<AdminScholarshipForm />} />
+              <Route path="scholarships/edit/:id" element={<AdminScholarshipForm />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />
