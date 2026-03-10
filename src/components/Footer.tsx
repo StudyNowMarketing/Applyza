@@ -47,7 +47,7 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer style={{ background: "hsl(232 50% 14%)" }}>
+    <footer className="bg-primary" style={{ background: "hsl(232 50% 14%)" }}>
       <div className="container py-14 md:py-20">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Col 1 */}
