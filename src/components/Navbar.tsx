@@ -29,17 +29,17 @@ const Navbar = () => {
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <a href="/" className="text-primary-foreground text-xl md:text-2xl font-extrabold tracking-tight">
+        <a href="/" className="text-primary-foreground text-xl md:text-2xl font-extrabold tracking-tight shrink-0">
           Applyza
         </a>
 
         {/* Desktop links */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-4 lg:gap-6">
           {navLinks.map((link) => (
             <a
               key={link}
               href="#"
-              className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium transition-colors"
+              className="text-primary-foreground/80 hover:text-primary-foreground text-xs lg:text-sm font-medium transition-colors whitespace-nowrap"
             >
               {link}
             </a>
@@ -47,15 +47,15 @@ const Navbar = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-4">
-          <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium transition-colors">
+        <div className="hidden md:flex items-center gap-4">
+          <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium transition-colors whitespace-nowrap">
             Client Login
           </a>
           <div className="relative">
-            <Button variant="teal" size="default" className="rounded-full">
+            <Button variant="teal" size="sm" className="rounded-full">
               Book a Free Consultation
             </Button>
-            <span className="absolute -top-2 -right-3 bg-accent text-accent-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
+            <span className="absolute -top-2.5 -right-2 bg-secondary/20 text-secondary border border-secondary/40 text-[9px] font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap">
               100% Free
             </span>
           </div>
@@ -63,7 +63,7 @@ const Navbar = () => {
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden text-primary-foreground"
+          className="md:hidden text-primary-foreground"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -73,7 +73,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-primary border-t border-primary-foreground/10 pb-6">
+        <div className="md:hidden bg-primary border-t border-primary-foreground/10 pb-6">
           <div className="container flex flex-col gap-3 pt-4">
             {navLinks.map((link) => (
               <a
