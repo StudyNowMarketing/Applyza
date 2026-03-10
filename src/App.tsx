@@ -54,6 +54,8 @@ const App = () => (
           <Route path="/anti-slavery-policy" element={<AntiSlaveryPolicy />} />
           <Route path="/for-institutions" element={<ForInstitutions />} />
           <Route path="/for-partners" element={<ForPartners />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
