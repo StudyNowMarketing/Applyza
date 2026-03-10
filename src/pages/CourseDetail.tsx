@@ -361,7 +361,7 @@ const CourseDetail = () => {
                 </div>
 
                 <p className="text-[11px] text-center text-muted-foreground">
-                  Our services are 100% free for students
+                  Expert guidance from AQF certified counsellors
                 </p>
               </div>
 

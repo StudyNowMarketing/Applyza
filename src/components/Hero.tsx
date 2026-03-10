@@ -13,7 +13,7 @@ const filters = [
 ];
 
 const badges = [
-  "✓ 100% Free Service",
+  "✓ AQF Certified Agent",
   "✓ AI-Powered Matching",
   "✓ Expert Counsellors",
   "✓ End-to-End Support",

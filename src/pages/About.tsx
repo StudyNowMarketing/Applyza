@@ -182,6 +182,35 @@ const About = () => {
         </div>
       </section>
 
+      {/* ── OUR COMMITMENT TO QUALITY ── */}
+      <section className="bg-background">
+        <div className="container py-12 md:py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl mx-auto"
+          >
+            <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-8">Our Commitment to Quality</h2>
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+              Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents. Our counsellors are trained and certified through the British Council's UK Certified Counsellor programme.
+            </p>
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
+              We are committed to supporting genuine students who are serious about their education. We carefully assess every student's academic background, career goals, and study intent before recommending programmes. We do not guarantee admission or visa outcomes — but we do guarantee honest, professional guidance based on years of experience.
+            </p>
+            <a
+              href="https://www.britishcouncil.org/education/agents-counsellors/uk-quality-agent-framework"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
+            >
+              Read the Student Guide to Choosing an Education Agent →
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── BY THE NUMBERS ── */}
       <section className="bg-card">
         <div className="container py-12 md:py-20">

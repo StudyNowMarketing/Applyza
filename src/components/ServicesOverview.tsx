@@ -35,10 +35,10 @@ const ServicesOverview = () => {
       <div className="container py-16 md:py-24">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
-            Everything You Need. Zero Fees.
+            Honest Guidance for Genuine Students
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            From course selection to visa approval — we handle it all. And we never charge students.
+            From course selection to visa approval — we provide expert, impartial guidance at every stage of your study abroad journey.
           </p>
         </div>
 
