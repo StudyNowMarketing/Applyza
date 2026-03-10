@@ -353,7 +353,7 @@ const CourseDetail = () => {
 
                 <div className="space-y-2.5 pt-2">
                   <Button variant="teal" size="lg" className="w-full font-bold" asChild>
-                    <Link to="/book-a-consultation">Apply with Applyza — It's Free</Link>
+                    <Link to="/book-a-consultation">Apply with Applyza</Link>
                   </Button>
                   <Button variant="outline" size="lg" className="w-full" asChild>
                     <Link to="/book-a-consultation">Book a Consultation</Link>
