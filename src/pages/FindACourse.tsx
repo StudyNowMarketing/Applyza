@@ -59,8 +59,14 @@ const LEVEL_COLORS: Record<string, string> = {
 };
 
 const FindACourse = () => {
-  const [search, setSearch] = useState("");
-  const [selectedCountries, setSelectedCountries] = useState<string[]>(["United Kingdom"]);
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get("search") || "";
+  const initialCountry = searchParams.get("country");
+
+  const [search, setSearch] = useState(initialSearch);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>(
+    initialCountry ? [initialCountry] : ["United Kingdom"]
+  );
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [feeRange, setFeeRange] = useState([0, 30000]);
