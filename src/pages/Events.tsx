@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ConsentCheckbox from "@/components/ConsentCheckbox";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
