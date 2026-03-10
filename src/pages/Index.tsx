@@ -8,6 +8,13 @@ import StudyDestinations from "@/components/StudyDestinations";
 import PartnerUniversities from "@/components/PartnerUniversities";
 import WhyChooseApplyza from "@/components/WhyChooseApplyza";
 import ScholarshipsPreview from "@/components/ScholarshipsPreview";
+import UpcomingEvents from "@/components/UpcomingEvents";
+import Testimonials from "@/components/Testimonials";
+import BlogPreview from "@/components/BlogPreview";
+import PartnerLogos from "@/components/PartnerLogos";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Index = () => {
   return (
@@ -22,6 +29,13 @@ const Index = () => {
       <PartnerUniversities />
       <WhyChooseApplyza />
       <ScholarshipsPreview />
+      <UpcomingEvents />
+      <Testimonials />
+      <BlogPreview />
+      <PartnerLogos />
+      <FinalCTA />
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
