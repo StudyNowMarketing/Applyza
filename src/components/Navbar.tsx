@@ -51,13 +51,13 @@ const Navbar = () => {
           <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium transition-colors whitespace-nowrap">
             Client Login
           </a>
-          <div className="relative">
+          <div className="flex items-center gap-2">
+            <span className="bg-secondary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
+              100% Free
+            </span>
             <Button variant="teal" size="sm" className="rounded-full">
               Book a Free Consultation
             </Button>
-            <span className="absolute -top-2.5 -right-2 bg-secondary/20 text-secondary border border-secondary/40 text-[9px] font-bold px-1.5 py-0.5 rounded-full whitespace-nowrap">
-              100% Free
-            </span>
           </div>
         </div>
 
