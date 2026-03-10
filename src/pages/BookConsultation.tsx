@@ -238,7 +238,13 @@ const BookConsultation = () => {
                 <Textarea id="message" value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Tell us about your goals..." rows={4} />
               </div>
 
-              <Button type="submit" variant="teal" size="lg" className="w-full" disabled={loading}>
+              <ConsentCheckbox
+                checked={consent}
+                onCheckedChange={setConsent}
+                label="I consent to Applyza collecting and processing my personal data for the purpose of providing education consultancy services. I have read the Privacy Policy."
+              />
+
+              <Button type="submit" variant="teal" size="lg" className="w-full" disabled={loading || !consent}>
                 {loading ? "Submitting..." : "Submit Booking Request"}
               </Button>
             </form>

@@ -207,7 +207,12 @@ const ForInstitutions = () => {
                 <Label htmlFor="inst_message">Message</Label>
                 <Textarea id="inst_message" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
               </div>
-              <Button type="submit" variant="teal" size="lg" className="w-full rounded-full" disabled={submitting}>
+              <ConsentCheckbox
+                checked={consent}
+                onCheckedChange={setConsent}
+                label="I consent to Applyza processing this enquiry to discuss a potential partnership. Privacy Policy."
+              />
+              <Button type="submit" variant="teal" size="lg" className="w-full rounded-full" disabled={submitting || !consent}>
                 {submitting ? "Submitting..." : "Submit Enquiry"}
               </Button>
             </form>

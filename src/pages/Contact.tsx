@@ -133,7 +133,12 @@ const Contact = () => {
                   <Textarea id="c_message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
                   {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                 </div>
-                <Button type="submit" variant="teal" size="lg" className="rounded-full w-full sm:w-auto" disabled={submitting}>
+                <ConsentCheckbox
+                  checked={consent}
+                  onCheckedChange={setConsent}
+                  label="I consent to Applyza collecting and processing my personal data to respond to my enquiry. I have read the Privacy Policy."
+                />
+                <Button type="submit" variant="teal" size="lg" className="rounded-full w-full sm:w-auto" disabled={submitting || !consent}>
                   {submitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
