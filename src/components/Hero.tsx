@@ -11,10 +11,10 @@ const filters = [
 ];
 
 const badges = [
-  "✓ 100% Free for Students",
-  "✓ 99% Visa Success Rate",
-  "✓ 3,000+ Students Placed",
-  "✓ 150+ Partner Universities",
+  "✓ 100% Free Service",
+  "✓ AI-Powered Matching",
+  "✓ Expert Counsellors",
+  "✓ End-to-End Support",
 ];
 
 const Hero = () => {
