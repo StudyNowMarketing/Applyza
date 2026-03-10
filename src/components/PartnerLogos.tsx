@@ -23,9 +23,9 @@ const PartnerLogos = () => {
           {doubled.map((name, i) => (
             <div
               key={`${name}-${i}`}
-              className="shrink-0 h-14 px-8 rounded-lg bg-muted flex items-center justify-center"
+              className="shrink-0 h-16 px-10 rounded-xl bg-muted flex items-center justify-center"
             >
-              <span className="text-sm font-semibold text-muted-foreground whitespace-nowrap">
+              <span className="text-base font-bold text-muted-foreground/80 whitespace-nowrap tracking-wide">
                 {name}
               </span>
             </div>
