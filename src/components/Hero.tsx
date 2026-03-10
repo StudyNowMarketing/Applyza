@@ -20,6 +20,15 @@ const badges = [
 ];
 
 const Hero = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (query.trim()) params.set("search", query.trim());
+    navigate(`/find-a-course${params.toString() ? `?${params}` : ""}`);
+  };
+
   return (
     <section className="relative min-h-[80vh] gradient-navy flex items-center overflow-hidden">
       {/* Subtle overlay */}
