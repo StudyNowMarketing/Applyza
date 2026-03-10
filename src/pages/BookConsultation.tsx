@@ -62,6 +62,7 @@ const BookConsultation = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>();
+  const [consent, setConsent] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
