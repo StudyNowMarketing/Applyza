@@ -81,8 +81,8 @@ const CourseDetail = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen">
-        <Navbar />
-        <div className="container py-20">
+        <Navbar solid />
+        <div className="container pt-24 py-20">
           <div className="animate-pulse space-y-6">
             <div className="h-4 bg-muted rounded w-64" />
             <div className="h-10 bg-muted rounded w-96" />
