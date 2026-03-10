@@ -546,7 +546,7 @@ const FindACourse = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar solid />
 
       {/* Hero */}
       <section className="gradient-navy pt-28 pb-14 md:pt-36 md:pb-20">
