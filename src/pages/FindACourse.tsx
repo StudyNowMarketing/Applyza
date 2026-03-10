@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
@@ -59,8 +59,14 @@ const LEVEL_COLORS: Record<string, string> = {
 };
 
 const FindACourse = () => {
-  const [search, setSearch] = useState("");
-  const [selectedCountries, setSelectedCountries] = useState<string[]>(["United Kingdom"]);
+  const [searchParams] = useSearchParams();
+  const initialSearch = searchParams.get("search") || "";
+  const initialCountry = searchParams.get("country");
+
+  const [search, setSearch] = useState(initialSearch);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>(
+    initialCountry ? [initialCountry] : ["United Kingdom"]
+  );
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [feeRange, setFeeRange] = useState([0, 30000]);

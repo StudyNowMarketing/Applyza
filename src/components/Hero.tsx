@@ -1,13 +1,15 @@
+import { useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const filters = [
-  { emoji: "🇬🇧", label: "UK" },
-  { emoji: "🇩🇪", label: "Germany" },
-  { emoji: "🇫🇷", label: "France" },
-  { emoji: "🇮🇪", label: "Ireland" },
-  { emoji: "🌍", label: "All" },
+  { emoji: "🇬🇧", label: "UK", country: "United Kingdom" },
+  { emoji: "🇩🇪", label: "Germany", country: "Germany" },
+  { emoji: "🇫🇷", label: "France", country: "France" },
+  { emoji: "🇮🇪", label: "Ireland", country: "Ireland" },
+  { emoji: "🌍", label: "All", country: "" },
 ];
 
 const badges = [
@@ -18,6 +20,15 @@ const badges = [
 ];
 
 const Hero = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (query.trim()) params.set("search", query.trim());
+    navigate(`/find-a-course${params.toString() ? `?${params}` : ""}`);
+  };
+
   return (
     <section className="relative min-h-[80vh] gradient-navy flex items-center overflow-hidden">
       {/* Subtle overlay */}
@@ -70,10 +81,13 @@ const Hero = () => {
           >
             <input
               type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Search courses, universities, or subjects..."
               className="flex-1 px-5 py-3.5 text-sm text-foreground bg-transparent outline-none placeholder:text-muted-foreground min-w-0"
             />
-            <Button variant="teal" className="rounded-full m-1 px-5 shrink-0">
+            <Button variant="teal" className="rounded-full m-1 px-5 shrink-0" onClick={handleSearch}>
               <Search size={18} />
             </Button>
           </motion.div>
@@ -88,6 +102,7 @@ const Hero = () => {
             {filters.map((f) => (
               <button
                 key={f.label}
+                onClick={() => navigate(f.country ? `/find-a-course?country=${encodeURIComponent(f.country)}` : "/find-a-course")}
                 className="border border-primary-foreground/30 text-primary-foreground/80 hover:bg-primary-foreground/10 text-xs font-medium px-3 py-1.5 rounded-full transition-colors"
               >
                 {f.emoji} {f.label}
