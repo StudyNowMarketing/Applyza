@@ -1,13 +1,15 @@
+import { useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const filters = [
-  { emoji: "🇬🇧", label: "UK" },
-  { emoji: "🇩🇪", label: "Germany" },
-  { emoji: "🇫🇷", label: "France" },
-  { emoji: "🇮🇪", label: "Ireland" },
-  { emoji: "🌍", label: "All" },
+  { emoji: "🇬🇧", label: "UK", country: "United Kingdom" },
+  { emoji: "🇩🇪", label: "Germany", country: "Germany" },
+  { emoji: "🇫🇷", label: "France", country: "France" },
+  { emoji: "🇮🇪", label: "Ireland", country: "Ireland" },
+  { emoji: "🌍", label: "All", country: "" },
 ];
 
 const badges = [
