@@ -97,8 +97,16 @@ const Scholarships = () => {
         <div className="container">
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-card rounded-2xl h-64 animate-pulse" />
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="bg-card rounded-2xl p-6 animate-pulse border">
+                  <div className="h-3 w-32 bg-muted rounded mb-3" />
+                  <div className="h-5 w-3/4 bg-muted rounded mb-4" />
+                  <div className="h-6 w-28 bg-muted rounded-full mb-3" />
+                  <div className="h-3 w-20 bg-muted rounded mb-2" />
+                  <div className="h-4 w-full bg-muted rounded mb-1" />
+                  <div className="h-4 w-2/3 bg-muted rounded mb-3" />
+                  <div className="h-3 w-24 bg-muted rounded" />
+                </div>
               ))}
             </div>
           ) : filtered && filtered.length > 0 ? (
