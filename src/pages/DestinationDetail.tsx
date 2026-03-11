@@ -140,7 +140,7 @@ const DestinationDetail = () => {
 
       {/* Hero */}
       <section className="relative h-[35vh] min-h-[280px] flex items-end">
-        <img src={bgImage} alt={destination.country} className="absolute inset-0 w-full h-full object-cover" />
+        <img src={bgImage} alt={destination.country} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-primary/75" />
         <div className="container relative z-10 pb-8 pt-24">
           <Breadcrumb>

@@ -71,14 +71,18 @@ const Blog = () => {
         <div className="container">
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
+              {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="bg-card rounded-2xl overflow-hidden shadow-sm animate-pulse">
                   <div className="h-44 bg-muted" />
                   <div className="p-5 space-y-3">
-                    <div className="h-4 w-24 bg-muted rounded" />
+                    <div className="h-5 w-24 bg-muted rounded-full" />
                     <div className="h-5 w-3/4 bg-muted rounded" />
                     <div className="h-4 w-full bg-muted rounded" />
-                    <div className="h-3 w-1/3 bg-muted rounded" />
+                    <div className="h-4 w-2/3 bg-muted rounded" />
+                    <div className="flex justify-between">
+                      <div className="h-3 w-20 bg-muted rounded" />
+                      <div className="h-3 w-24 bg-muted rounded" />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -116,7 +120,10 @@ const Blog = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted-foreground py-12">No posts found in this category.</p>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground mb-2">We're working on new content. Check back soon!</p>
+              <Link to="/" className="text-secondary text-sm font-semibold hover:underline">Back to Home →</Link>
+            </div>
           )}
         </div>
       </section>

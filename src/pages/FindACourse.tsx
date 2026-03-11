@@ -716,11 +716,24 @@ const FindACourse = () => {
 
             {isLoading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                {Array.from({ length: 4 }).map((_, i) => (
+                {Array.from({ length: 6 }).map((_, i) => (
                   <div
                     key={i}
-                    className="bg-card rounded-xl border border-border p-6 animate-pulse h-64"
-                  />
+                    className="bg-card rounded-xl border border-border p-5 animate-pulse"
+                  >
+                    <div className="h-3 w-32 bg-muted rounded mb-3" />
+                    <div className="h-5 w-3/4 bg-muted rounded mb-4" />
+                    <div className="flex gap-2 mb-3">
+                      <div className="h-3 w-16 bg-muted rounded" />
+                      <div className="h-3 w-12 bg-muted rounded" />
+                      <div className="h-5 w-20 bg-muted rounded-full" />
+                    </div>
+                    <div className="h-6 w-24 bg-muted rounded mb-4" />
+                    <div className="flex gap-2 pt-2">
+                      <div className="h-9 flex-1 bg-muted rounded" />
+                      <div className="h-9 flex-1 bg-muted rounded" />
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : filtered.length === 0 ? (
@@ -729,15 +742,14 @@ const FindACourse = () => {
                   <BookOpen size={32} className="text-muted-foreground" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  No courses found
+                  No courses match your search
                 </h3>
                 <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                  We couldn't find any courses matching your current filters.
-                  Try adjusting your search criteria or clearing some filters.
+                  Try adjusting your filters or book a consultation for personalised recommendations.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button variant="outline" onClick={clearAll}>
-                    Clear All Filters
+                    Clear Filters
                   </Button>
                   <Button variant="teal" asChild>
                     <Link to="/book-a-consultation">Book a Consultation</Link>
