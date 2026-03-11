@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";

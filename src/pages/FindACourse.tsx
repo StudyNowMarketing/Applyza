@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown } from "lucide-react";
