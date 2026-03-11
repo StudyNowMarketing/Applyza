@@ -742,15 +742,14 @@ const FindACourse = () => {
                   <BookOpen size={32} className="text-muted-foreground" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-2">
-                  No courses found
+                  No courses match your search
                 </h3>
                 <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                  We couldn't find any courses matching your current filters.
-                  Try adjusting your search criteria or clearing some filters.
+                  Try adjusting your filters or book a consultation for personalised recommendations.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button variant="outline" onClick={clearAll}>
-                    Clear All Filters
+                    Clear Filters
                   </Button>
                   <Button variant="teal" asChild>
                     <Link to="/book-a-consultation">Book a Consultation</Link>

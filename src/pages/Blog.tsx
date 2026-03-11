@@ -120,7 +120,10 @@ const Blog = () => {
               ))}
             </div>
           ) : (
-            <p className="text-center text-muted-foreground py-12">No posts found in this category.</p>
+            <div className="text-center py-16">
+              <p className="text-muted-foreground mb-2">We're working on new content. Check back soon!</p>
+              <Link to="/" className="text-secondary text-sm font-semibold hover:underline">Back to Home →</Link>
+            </div>
           )}
         </div>
       </section>

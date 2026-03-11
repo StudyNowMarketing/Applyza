@@ -135,10 +135,15 @@ const Scholarships = () => {
             </>
           ) : (
             <div className="text-center py-16">
-              <p className="text-muted-foreground mb-4">No scholarships match your filters. Try adjusting your criteria or book a consultation for personalised funding advice.</p>
-              <Button variant="teal" className="rounded-full" asChild>
-                <Link to="/book-a-consultation">Book a Free Consultation</Link>
-              </Button>
+              <p className="text-muted-foreground mb-4">No scholarships match your criteria. Try adjusting your filters or ask our counsellors about funding options.</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button variant="outline" onClick={() => { setSelectedLevels([]); setSelectedCountries([]); }}>
+                  Clear Filters
+                </Button>
+                <Button variant="teal" className="rounded-full" asChild>
+                  <Link to="/book-a-consultation">Ask About Funding</Link>
+                </Button>
+              </div>
             </div>
           )}
         </div>
