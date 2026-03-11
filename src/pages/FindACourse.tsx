@@ -547,6 +547,7 @@ const FindACourse = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title="Find a Course | Search Study Abroad Programmes | Applyza" description="Browse courses across the UK, Europe, and beyond. Filter by country, subject, fees, and study level. Expert guidance from AQF certified counsellors." path="/find-a-course" />
       <Navbar solid />
 
       {/* Hero */}

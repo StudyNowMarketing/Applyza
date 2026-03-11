@@ -20,6 +20,7 @@ const included = [
 
 const Accommodation = () => (
   <div className="min-h-screen">
+    <SEO title="Accommodation Support | Find Student Housing | Applyza" description="Find safe, affordable accommodation near your university. Housing guidance and support from Applyza." path="/services/accommodation" />
     <Navbar />
     <ServiceHero
       heading="Find Your Home Away From Home"

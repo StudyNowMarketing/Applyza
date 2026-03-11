@@ -37,6 +37,7 @@ const services = [
 
 const Services = () => (
   <div className="min-h-screen">
+    <SEO title="Our Services | Free University Applications, Visa Support & Counselling | Applyza" description="Applyza offers free university application support, visa assistance with a 99% success rate, student counselling, and accommodation help." path="/services" />
     <Navbar />
     <ServiceHero
       heading="World-Class Support. Zero Cost."

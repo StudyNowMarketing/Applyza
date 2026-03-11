@@ -24,6 +24,7 @@ const destinations = [
 
 const StudyDestinations = () => (
   <div className="min-h-screen flex flex-col bg-background">
+    <SEO title="Study Destinations | Where to Study Abroad | Applyza" description="Explore study destinations across the UK, Germany, France, Ireland, Malta, and the Netherlands. Compare costs, visas, and universities." path="/study-destinations" />
     <Navbar solid />
 
     <section className="bg-primary pt-28 pb-16 md:pt-36 md:pb-20">

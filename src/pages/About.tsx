@@ -74,6 +74,7 @@ const StatCard = ({ value, suffix, label, display }: { value: number; suffix: st
 const About = () => {
   return (
     <div className="min-h-screen">
+      <SEO title="About Applyza | Global Education Platform | AQF Certified" description="Applyza is built by the team behind Study Now. 3,000+ students placed, 99% visa success rate. AQF certified education consultancy." path="/about" />
       <Navbar />
 
       {/* ── HERO ── */}

@@ -137,9 +137,12 @@ const DestinationDetail = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title={`Study in ${destination.country} | Universities, Courses & Visa Guide | Applyza`}
+        description={(destination.overview || "").substring(0, 155)}
+        path={`/study-destinations/${slug}`}
+      />
       <Navbar solid />
-
-      {/* Hero */}
       <section className="relative h-[35vh] min-h-[280px] flex items-end">
         <img src={bgImage} alt={destination.country} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-primary/75" />

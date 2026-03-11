@@ -123,6 +123,21 @@ const CourseDetail = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title={`${course.title} at ${course.university_name} | Applyza`}
+        description={`Study ${course.title} at ${course.university_name} in ${course.city}, ${course.country}. ${course.duration || ""}, ${course.tuition_fee ? `£${course.tuition_fee.toLocaleString()}/year` : ""}. Apply with expert guidance from Applyza.`}
+        path={`/find-a-course/${course.slug}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: course.title,
+          description: course.description || `${course.title} at ${course.university_name}`,
+          provider: { "@type": "Organization", name: course.university_name },
+          ...(course.tuition_fee && {
+            offers: { "@type": "Offer", price: course.tuition_fee, priceCurrency: "GBP" },
+          }),
+        }}
+      />
       <Navbar solid />
 
       {/* Breadcrumb */}
