@@ -51,8 +51,9 @@ export const useFormProtection = ({ formId }: UseFormProtectionOptions) => {
       // Rate limit check
       const result = checkRateLimit(formId);
       if (!result.allowed) {
-        setRateLimitMsg(result.reason);
-        if (result.cooldownRemaining > 0) setCooldown(result.cooldownRemaining);
+        setRateLimitMsg((result as { reason: string }).reason);
+        const remaining = (result as { cooldownRemaining: number }).cooldownRemaining;
+        if (remaining > 0) setCooldown(remaining);
         return false;
       }
 
