@@ -66,6 +66,8 @@ const FAQ = () => {
         }}
       />
       <Navbar solid />
+
+      {/* Hero */}
       <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>
         <div className="container pb-12 pt-28">
           <Breadcrumb>
