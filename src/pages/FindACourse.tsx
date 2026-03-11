@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown } from "lucide-react";
@@ -546,6 +547,7 @@ const FindACourse = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title="Find a Course | Search Study Abroad Programmes | Applyza" description="Browse courses across the UK, Europe, and beyond. Filter by country, subject, fees, and study level. Expert guidance from AQF certified counsellors." path="/find-a-course" />
       <Navbar solid />
 
       {/* Hero */}

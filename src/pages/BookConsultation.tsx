@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
@@ -128,6 +129,7 @@ const BookConsultation = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO title="Book a Free Consultation | Applyza" description="Book a free consultation with an Applyza counsellor. University applications, visa support, and student guidance." path="/book-a-consultation" />
       <Navbar solid />
 
       <section className="bg-card border-b border-border pt-20">

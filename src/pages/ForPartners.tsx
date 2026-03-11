@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
@@ -82,6 +83,7 @@ const ForPartners = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Recruitment Partners | Join the Applyza Network" description="Join Applyza's recruitment partner network. Refer students, earn commissions, and access our course database." path="/for-partners" />
       <Navbar solid />
 
       {/* Hero */}

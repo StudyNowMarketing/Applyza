@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
@@ -103,6 +104,7 @@ const ForInstitutions = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Partner With Applyza | Student Recruitment for Universities" description="Reach qualified international students from 10+ countries. Applyza delivers application-ready students through expert counselling and AI-powered matching." path="/for-institutions" />
       <Navbar solid />
 
       {/* Hero */}

@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -22,6 +23,7 @@ const differentiators = [
 
 const StudentCounselling = () => (
   <div className="min-h-screen">
+    <SEO title="Student Counselling | Free Academic Guidance | Applyza" description="Not sure what or where to study? Our certified counsellors provide honest, personalised guidance — completely free." path="/services/student-counselling" />
     <Navbar />
     <ServiceHero
       heading="Not Sure Where to Start? That's Exactly Why We're Here."

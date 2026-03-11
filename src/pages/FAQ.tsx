@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -48,6 +49,22 @@ const faqData = [
 const FAQ = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title="FAQ | Frequently Asked Questions | Applyza"
+        description="Find answers to common questions about studying abroad, visa applications, course selection, and Applyza's free services."
+        path="/faq"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqData.flatMap((group) =>
+            group.items.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            }))
+          ),
+        }}
+      />
       <Navbar solid />
 
       {/* Hero */}

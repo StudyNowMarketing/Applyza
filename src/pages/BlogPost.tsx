@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
@@ -102,6 +103,12 @@ const BlogPost = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO
+        title={`${post.title} | Applyza Blog`}
+        description={(post.excerpt || post.content).substring(0, 155)}
+        path={`/blog/${post.slug}`}
+        ogImage={post.featured_image_url || undefined}
+      />
       <Navbar solid />
 
       <section className="bg-primary pt-28 pb-8">

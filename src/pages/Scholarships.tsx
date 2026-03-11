@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -43,6 +44,7 @@ const Scholarships = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Scholarships & Funding | Study Abroad Financial Support | Applyza" description="Browse scholarships from partner universities. Tuition discounts, merit awards, and funding opportunities for international students." path="/scholarships" />
       <Navbar solid />
 
       {/* Hero */}

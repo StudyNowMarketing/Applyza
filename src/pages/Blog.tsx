@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -31,6 +32,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Blog | Study Abroad Guides, Visa Tips & Insights | Applyza" description="Expert guides on university applications, visa processes, scholarships, and student life abroad." path="/blog" />
       <Navbar solid />
 
       {/* Hero */}

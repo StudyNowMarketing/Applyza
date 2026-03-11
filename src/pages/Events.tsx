@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
@@ -118,6 +119,7 @@ const Events = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Events | The Applyza Experience | Meet Universities" description="Join Applyza events across the globe. Meet university representatives, attend expert panels, and get personalised guidance." path="/events" />
       <Navbar solid />
 
       <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>

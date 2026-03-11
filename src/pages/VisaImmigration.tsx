@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -36,6 +37,7 @@ const refusalReasons = [
 
 const VisaImmigration = () => (
   <div className="min-h-screen">
+    <SEO title="Visa & Immigration Support | 99% Success Rate | Applyza" description="Expert visa application support with a 99% success rate. Document preparation, financial guidance, and compliance support." path="/services/visa-immigration" />
     <Navbar />
     <ServiceHero
       heading="99% Success Rate. Every Application, Every Time."

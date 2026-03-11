@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
@@ -75,6 +76,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title="Contact Applyza | Get in Touch" description="Contact Applyza for free study abroad guidance. Reach us by email, WhatsApp, or book a consultation." path="/contact" />
       <Navbar solid />
 
       <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>

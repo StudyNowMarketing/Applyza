@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -27,6 +28,7 @@ const included = [
 
 const UniversityApplications = () => (
   <div className="min-h-screen">
+    <SEO title="University Application Support | Apply with Expert Help | Applyza" description="Get expert help with your university application — completely free. Course matching, document preparation, and application management." path="/services/university-applications" />
     <Navbar />
     <ServiceHero
       heading="Your Application, Our Expertise"
