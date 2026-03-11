@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
+import FormError from "@/components/FormError";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -9,10 +10,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
-import { Users, Globe, Cpu, FileCheck, ShieldCheck, BarChart3 } from "lucide-react";
+import { Users, Globe, Cpu, FileCheck, ShieldCheck, BarChart3, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
+import { useFormProtection } from "@/hooks/useFormProtection";
 
 const benefits = [
   { icon: Users, title: "Qualified Student Referrals", desc: "Every student we refer has been assessed and counselled by our team." },
@@ -39,6 +42,7 @@ const steps = [
 
 const ForInstitutions = () => {
   const { toast } = useToast();
+  const { rateLimitMsg, canSubmit, onSuccess, isBlocked } = useFormProtection({ formId: "institution" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
@@ -67,21 +71,29 @@ const ForInstitutions = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    if (!canSubmit(form.email)) return;
+
     setSubmitting(true);
-    const { error } = await supabase.from("institution_enquiries").insert({
-      institution_name: form.institution_name.trim(),
-      contact_name: form.contact_name.trim(),
-      job_title: form.job_title.trim() || null,
-      email: form.email.trim(),
-      phone: form.phone.trim() || null,
-      country: form.country.trim(),
-      message: form.message.trim() || null,
-    });
-    setSubmitting(false);
-    if (error) {
-      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
-    } else {
-      setSubmitted(true);
+    try {
+      const { error } = await supabase.from("institution_enquiries").insert({
+        institution_name: sanitize(form.institution_name, FIELD_LIMITS.name),
+        contact_name: sanitize(form.contact_name, FIELD_LIMITS.name),
+        job_title: form.job_title.trim() ? sanitize(form.job_title, FIELD_LIMITS.short) : null,
+        email: sanitize(form.email, FIELD_LIMITS.email),
+        phone: form.phone.trim() ? sanitize(form.phone, FIELD_LIMITS.phone) : null,
+        country: sanitize(form.country, FIELD_LIMITS.short),
+        message: form.message.trim() ? sanitize(form.message, FIELD_LIMITS.message) : null,
+      });
+      if (error) {
+        toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
+      } else {
+        onSuccess(form.email);
+        setSubmitted(true);
+      }
+    } catch {
+      toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -171,49 +183,50 @@ const ForInstitutions = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
+              <FormError message={rateLimitMsg} />
               <div>
                 <Label htmlFor="institution_name">Institution Name *</Label>
-                <Input id="institution_name" value={form.institution_name} onChange={(e) => setForm({ ...form, institution_name: e.target.value })} />
+                <Input id="institution_name" value={form.institution_name} onChange={(e) => setForm({ ...form, institution_name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} />
                 {errors.institution_name && <p className="text-sm text-destructive mt-1">{errors.institution_name}</p>}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <Label htmlFor="contact_name">Contact Person Name *</Label>
-                  <Input id="contact_name" value={form.contact_name} onChange={(e) => setForm({ ...form, contact_name: e.target.value })} />
+                  <Input id="contact_name" value={form.contact_name} onChange={(e) => setForm({ ...form, contact_name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} />
                   {errors.contact_name && <p className="text-sm text-destructive mt-1">{errors.contact_name}</p>}
                 </div>
                 <div>
                   <Label htmlFor="job_title">Job Title</Label>
-                  <Input id="job_title" value={form.job_title} onChange={(e) => setForm({ ...form, job_title: e.target.value })} />
+                  <Input id="job_title" value={form.job_title} onChange={(e) => setForm({ ...form, job_title: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.short} />
                 </div>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <Label htmlFor="inst_email">Email *</Label>
-                  <Input id="inst_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                  <Input id="inst_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.email} />
                   {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                 </div>
                 <div>
                   <Label htmlFor="inst_phone">Phone</Label>
-                  <Input id="inst_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                  <Input id="inst_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.phone} />
                 </div>
               </div>
               <div>
                 <Label htmlFor="inst_country">Country *</Label>
-                <Input id="inst_country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} />
+                <Input id="inst_country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.short} />
                 {errors.country && <p className="text-sm text-destructive mt-1">{errors.country}</p>}
               </div>
               <div>
                 <Label htmlFor="inst_message">Message</Label>
-                <Textarea id="inst_message" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+                <Textarea id="inst_message" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.message} />
               </div>
               <ConsentCheckbox
                 checked={consent}
                 onCheckedChange={setConsent}
                 label="I consent to Applyza processing this enquiry to discuss a potential partnership. Privacy Policy."
               />
-              <Button type="submit" variant="teal" size="lg" className="w-full rounded-full" disabled={submitting || !consent}>
-                {submitting ? "Submitting..." : "Submit Enquiry"}
+              <Button type="submit" variant="teal" size="lg" className="w-full rounded-full" disabled={submitting || !consent || isBlocked}>
+                {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Enquiry"}
               </Button>
             </form>
           )}

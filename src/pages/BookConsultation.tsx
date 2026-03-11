@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
+import FormError from "@/components/FormError";
 import { Link } from "react-router-dom";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
@@ -31,11 +32,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CalendarIcon, CheckCircle, Mail, MessageCircle } from "lucide-react";
+import { CalendarIcon, CheckCircle, Loader2, Mail, MessageCircle } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
+import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
+import { useFormProtection } from "@/hooks/useFormProtection";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -59,6 +62,7 @@ const consultTypes = ["Video Call", "Phone Call", "In-Person"];
 
 const BookConsultation = () => {
   const { toast } = useToast();
+  const { rateLimitMsg, canSubmit, onSuccess, isBlocked } = useFormProtection({ formId: "consultation" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date>();
@@ -92,23 +96,31 @@ const BookConsultation = () => {
       return;
     }
 
-    setLoading(true);
-    const { error } = await supabase.from("consultation_requests").insert({
-      name: result.data.name,
-      email: result.data.email,
-      phone: result.data.phone,
-      service_interest: result.data.service_interest,
-      consultation_type: result.data.consultation_type,
-      preferred_date: result.data.preferred_date || null,
-      message: result.data.message || null,
-    });
-    setLoading(false);
+    if (!canSubmit(result.data.email)) return;
 
-    if (error) {
-      toast({ title: "Something went wrong", description: "Please try again or contact us directly.", variant: "destructive" });
-      return;
+    setLoading(true);
+    try {
+      const { error } = await supabase.from("consultation_requests").insert({
+        name: sanitize(result.data.name, FIELD_LIMITS.name),
+        email: sanitize(result.data.email, FIELD_LIMITS.email),
+        phone: sanitize(result.data.phone, FIELD_LIMITS.phone),
+        service_interest: sanitize(result.data.service_interest, FIELD_LIMITS.short),
+        consultation_type: sanitize(result.data.consultation_type, FIELD_LIMITS.short),
+        preferred_date: result.data.preferred_date || null,
+        message: result.data.message ? sanitize(result.data.message, FIELD_LIMITS.message) : null,
+      });
+
+      if (error) {
+        toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
+        return;
+      }
+      onSuccess(result.data.email);
+      setSubmitted(true);
+    } catch {
+      toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
+    } finally {
+      setLoading(false);
     }
-    setSubmitted(true);
   };
 
   const update = (field: string, value: string) =>
@@ -160,28 +172,30 @@ const BookConsultation = () => {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
+              <FormError message={rateLimitMsg} />
+
               <div>
                 <Label htmlFor="name">Full Name *</Label>
-                <Input id="name" value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="Your full name" />
+                <Input id="name" value={form.name} onChange={(e) => update("name", e.target.value)} placeholder="Your full name" disabled={loading} maxLength={FIELD_LIMITS.name} />
                 {errors.name && <p className="text-destructive text-xs mt-1">{errors.name}</p>}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <Label htmlFor="email">Email *</Label>
-                  <Input id="email" type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="you@example.com" />
+                  <Input id="email" type="email" value={form.email} onChange={(e) => update("email", e.target.value)} placeholder="you@example.com" disabled={loading} maxLength={FIELD_LIMITS.email} />
                   {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
                 </div>
                 <div>
                   <Label htmlFor="phone">Phone *</Label>
-                  <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="+44 7XXX XXXXXX" />
+                  <Input id="phone" value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder="+44 7XXX XXXXXX" disabled={loading} maxLength={FIELD_LIMITS.phone} />
                   {errors.phone && <p className="text-destructive text-xs mt-1">{errors.phone}</p>}
                 </div>
               </div>
 
               <div>
                 <Label>Service Interest *</Label>
-                <Select value={form.service_interest} onValueChange={(v) => update("service_interest", v)}>
+                <Select value={form.service_interest} onValueChange={(v) => update("service_interest", v)} disabled={loading}>
                   <SelectTrigger><SelectValue placeholder="Select a service" /></SelectTrigger>
                   <SelectContent>
                     {services.map((s) => <SelectItem key={s} value={s}>{s}</SelectItem>)}
@@ -198,6 +212,7 @@ const BookConsultation = () => {
                       key={t}
                       type="button"
                       onClick={() => update("consultation_type", t)}
+                      disabled={loading}
                       className={cn(
                         "px-4 py-2 rounded-lg text-sm font-medium border transition-all",
                         form.consultation_type === t
@@ -216,7 +231,7 @@ const BookConsultation = () => {
                 <Label>Preferred Date</Label>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Button variant="outline" className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}>
+                    <Button variant="outline" className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")} disabled={loading}>
                       <CalendarIcon className="mr-2 h-4 w-4" />
                       {date ? format(date, "PPP") : "Pick a date"}
                     </Button>
@@ -235,7 +250,7 @@ const BookConsultation = () => {
 
               <div>
                 <Label htmlFor="message">Message (optional)</Label>
-                <Textarea id="message" value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Tell us about your goals..." rows={4} />
+                <Textarea id="message" value={form.message} onChange={(e) => update("message", e.target.value)} placeholder="Tell us about your goals..." rows={4} disabled={loading} maxLength={FIELD_LIMITS.message} />
               </div>
 
               <ConsentCheckbox
@@ -244,8 +259,8 @@ const BookConsultation = () => {
                 label="I consent to Applyza collecting and processing my personal data for the purpose of providing education consultancy services. I have read the Privacy Policy."
               />
 
-              <Button type="submit" variant="teal" size="lg" className="w-full" disabled={loading || !consent}>
-                {loading ? "Submitting..." : "Submit Booking Request"}
+              <Button type="submit" variant="teal" size="lg" className="w-full" disabled={loading || !consent || isBlocked}>
+                {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Booking Request"}
               </Button>
             </form>
           )}
