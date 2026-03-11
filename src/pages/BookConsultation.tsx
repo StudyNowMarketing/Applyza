@@ -128,9 +128,8 @@ const BookConsultation = () => {
     setForm((prev) => ({ ...prev, [field]: value }));
 
   return (
-    <>
-      <SEO title="Book a Free Consultation | Applyza" description="Book a free consultation with an Applyza counsellor. University applications, visa support, and student guidance." path="/book-a-consultation" />
     <div className="min-h-screen">
+      <SEO title="Book a Free Consultation | Applyza" description="Book a free consultation with an Applyza counsellor. University applications, visa support, and student guidance." path="/book-a-consultation" />
       <Navbar solid />
 
       <section className="bg-card border-b border-border pt-20">
