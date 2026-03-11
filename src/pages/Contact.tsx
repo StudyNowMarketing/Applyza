@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
+import FormError from "@/components/FormError";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -10,9 +11,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Phone, MessageCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
+import { useFormProtection } from "@/hooks/useFormProtection";
 
 const socials = [
   { name: "Instagram", url: "https://instagram.com/applyzahq", icon: "M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" },
@@ -25,6 +28,7 @@ const socials = [
 
 const Contact = () => {
   const { toast } = useToast();
+  const { rateLimitMsg, canSubmit, onSuccess, isBlocked } = useFormProtection({ formId: "contact" });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", user_type: "", message: "" });
@@ -45,19 +49,27 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    if (!canSubmit(form.email)) return;
+
     setSubmitting(true);
-    const { error } = await supabase.from("contact_messages").insert({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim() || null,
-      user_type: form.user_type,
-      message: form.message.trim(),
-    });
-    setSubmitting(false);
-    if (error) {
-      toast({ title: "Error", description: "Something went wrong. Please try again.", variant: "destructive" });
-    } else {
-      setSubmitted(true);
+    try {
+      const { error } = await supabase.from("contact_messages").insert({
+        name: sanitize(form.name, FIELD_LIMITS.name),
+        email: sanitize(form.email, FIELD_LIMITS.email),
+        phone: form.phone.trim() ? sanitize(form.phone, FIELD_LIMITS.phone) : null,
+        user_type: sanitize(form.user_type, FIELD_LIMITS.short),
+        message: sanitize(form.message, FIELD_LIMITS.message),
+      });
+      if (error) {
+        toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
+      } else {
+        onSuccess(form.email);
+        setSubmitted(true);
+      }
+    } catch {
+      toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -65,7 +77,6 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar solid />
 
-      {/* Hero */}
       <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>
         <div className="container pb-12 pt-28">
           <Breadcrumb>
@@ -82,10 +93,8 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Two-column */}
       <section className="bg-background py-16 md:py-20">
         <div className="container grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12">
-          {/* Left — Form */}
           <div>
             <h2 className="text-2xl font-extrabold text-primary mb-6">Send Us a Message</h2>
 
@@ -96,26 +105,27 @@ const Contact = () => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
+                <FormError message={rateLimitMsg} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <Label htmlFor="c_name">Full Name *</Label>
-                    <Input id="c_name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                    <Input id="c_name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} />
                     {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                   </div>
                   <div>
                     <Label htmlFor="c_email">Email *</Label>
-                    <Input id="c_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                    <Input id="c_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.email} />
                     {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <Label htmlFor="c_phone">Phone</Label>
-                    <Input id="c_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+                    <Input id="c_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.phone} />
                   </div>
                   <div>
                     <Label htmlFor="c_type">I am a... *</Label>
-                    <Select value={form.user_type} onValueChange={(v) => setForm({ ...form, user_type: v })}>
+                    <Select value={form.user_type} onValueChange={(v) => setForm({ ...form, user_type: v })} disabled={submitting}>
                       <SelectTrigger id="c_type"><SelectValue placeholder="Select" /></SelectTrigger>
                       <SelectContent>
                         <SelectItem value="Student">Student</SelectItem>
@@ -130,7 +140,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <Label htmlFor="c_message">Message *</Label>
-                  <Textarea id="c_message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
+                  <Textarea id="c_message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.message} />
                   {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                 </div>
                 <ConsentCheckbox
@@ -138,16 +148,14 @@ const Contact = () => {
                   onCheckedChange={setConsent}
                   label="I consent to Applyza collecting and processing my personal data to respond to my enquiry. I have read the Privacy Policy."
                 />
-                <Button type="submit" variant="teal" size="lg" className="rounded-full w-full sm:w-auto" disabled={submitting || !consent}>
-                  {submitting ? "Sending..." : "Send Message"}
+                <Button type="submit" variant="teal" size="lg" className="rounded-full w-full sm:w-auto" disabled={submitting || !consent || isBlocked}>
+                  {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : "Send Message"}
                 </Button>
               </form>
             )}
           </div>
 
-          {/* Right — Info */}
           <div className="space-y-6">
-            {/* HQ Card */}
             <div className="bg-primary rounded-2xl p-8 text-primary-foreground">
               <h3 className="text-xl font-bold mb-5">Applyza HQ</h3>
               <div className="space-y-4 text-sm">
@@ -166,7 +174,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Socials */}
             <div>
               <h3 className="text-lg font-bold text-primary mb-4">Connect With Us</h3>
               <div className="flex flex-wrap gap-3">
@@ -179,7 +186,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* WhatsApp */}
             <a href="https://wa.me/message/applyzahq?text=Hi%20Applyza%2C%20I%20have%20a%20question" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-2xl p-5 transition-colors">
               <div className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">

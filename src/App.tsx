@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
@@ -54,60 +55,62 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <CookieConsent />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/university-applications" element={<UniversityApplications />} />
-            <Route path="/services/visa-immigration" element={<VisaImmigration />} />
-            <Route path="/services/student-counselling" element={<StudentCounselling />} />
-            <Route path="/services/accommodation" element={<Accommodation />} />
-            <Route path="/find-a-course" element={<FindACourse />} />
-            <Route path="/find-a-course/:slug" element={<CourseDetail />} />
-            <Route path="/book-a-consultation" element={<BookConsultation />} />
-            <Route path="/scholarships" element={<Scholarships />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/study-destinations" element={<StudyDestinations />} />
-            <Route path="/study-destinations/:slug" element={<DestinationDetail />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-and-conditions" element={<TermsConditions />} />
-            <Route path="/anti-slavery-policy" element={<AntiSlaveryPolicy />} />
-            <Route path="/for-institutions" element={<ForInstitutions />} />
-            <Route path="/for-partners" element={<ForPartners />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<FAQ />} />
+        <ErrorBoundary>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <CookieConsent />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/university-applications" element={<UniversityApplications />} />
+              <Route path="/services/visa-immigration" element={<VisaImmigration />} />
+              <Route path="/services/student-counselling" element={<StudentCounselling />} />
+              <Route path="/services/accommodation" element={<Accommodation />} />
+              <Route path="/find-a-course" element={<FindACourse />} />
+              <Route path="/find-a-course/:slug" element={<CourseDetail />} />
+              <Route path="/book-a-consultation" element={<BookConsultation />} />
+              <Route path="/scholarships" element={<Scholarships />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/study-destinations" element={<StudyDestinations />} />
+              <Route path="/study-destinations/:slug" element={<DestinationDetail />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-and-conditions" element={<TermsConditions />} />
+              <Route path="/anti-slavery-policy" element={<AntiSlaveryPolicy />} />
+              <Route path="/for-institutions" element={<ForInstitutions />} />
+              <Route path="/for-partners" element={<ForPartners />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<FAQ />} />
 
-            {/* Admin */}
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="consultations" element={<AdminConsultations />} />
-              <Route path="contact-messages" element={<AdminContactMessages />} />
-              <Route path="institution-enquiries" element={<AdminInstitutionEnquiries />} />
-              <Route path="partner-enquiries" element={<AdminPartnerEnquiries />} />
-              <Route path="courses" element={<AdminCourses />} />
-              <Route path="courses/new" element={<AdminCourseForm />} />
-              <Route path="courses/edit/:id" element={<AdminCourseForm />} />
-              <Route path="blog" element={<AdminBlog />} />
-              <Route path="blog/new" element={<AdminBlogForm />} />
-              <Route path="blog/edit/:id" element={<AdminBlogForm />} />
-              <Route path="events" element={<AdminEvents />} />
-              <Route path="events/new" element={<AdminEventForm />} />
-              <Route path="events/edit/:id" element={<AdminEventForm />} />
-              <Route path="scholarships" element={<AdminScholarships />} />
-              <Route path="scholarships/new" element={<AdminScholarshipForm />} />
-              <Route path="scholarships/edit/:id" element={<AdminScholarshipForm />} />
-            </Route>
+              {/* Admin */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="consultations" element={<AdminConsultations />} />
+                <Route path="contact-messages" element={<AdminContactMessages />} />
+                <Route path="institution-enquiries" element={<AdminInstitutionEnquiries />} />
+                <Route path="partner-enquiries" element={<AdminPartnerEnquiries />} />
+                <Route path="courses" element={<AdminCourses />} />
+                <Route path="courses/new" element={<AdminCourseForm />} />
+                <Route path="courses/edit/:id" element={<AdminCourseForm />} />
+                <Route path="blog" element={<AdminBlog />} />
+                <Route path="blog/new" element={<AdminBlogForm />} />
+                <Route path="blog/edit/:id" element={<AdminBlogForm />} />
+                <Route path="events" element={<AdminEvents />} />
+                <Route path="events/new" element={<AdminEventForm />} />
+                <Route path="events/edit/:id" element={<AdminEventForm />} />
+                <Route path="scholarships" element={<AdminScholarships />} />
+                <Route path="scholarships/new" element={<AdminScholarshipForm />} />
+                <Route path="scholarships/edit/:id" element={<AdminScholarshipForm />} />
+              </Route>
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </ErrorBoundary>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
