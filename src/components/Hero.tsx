@@ -152,11 +152,10 @@ const Hero = () => {
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                     placeholder="Search courses, universities, or subjects..."
-                    className="w-full pl-9 pr-4 py-3 text-sm text-white rounded-lg outline-none"
+                    className="w-full pl-9 pr-4 py-3 text-sm text-white rounded-lg outline-none hero-search-input"
                     style={{
                       backgroundColor: "rgba(255,255,255,0.05)",
-                      "::placeholder": { color: "rgba(255,255,255,0.4)" },
-                    } as React.CSSProperties}
+                    }}
                   />
                 </div>
                 <button
