@@ -26,7 +26,7 @@ const reasons = [
   {
     icon: Globe,
     title: "Global Office Network",
-    text: "Offices in Lagos, Abuja, London, and Dhaka — global scale with a local personal touch.",
+    text: "Offices in Nicosia, Lagos, Accra, Nairobi, Doha, and Istanbul — global scale with a local personal touch.",
     iconBg: "rgba(27,33,80,0.10)",
     iconColor: "#1B2150",
   },
