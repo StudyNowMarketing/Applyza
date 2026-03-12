@@ -23,7 +23,7 @@ const destinations = [
   { name: "Japan", flag: "🇯🇵", slug: "japan", courses: "600+", partners: "15+", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80" },
   { name: "China", flag: "🇨🇳", slug: "china", courses: "800+", partners: "20+", image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" },
   { name: "Russia", flag: "🇷🇺", slug: "russia", courses: "400+", partners: "10+", image: "https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&q=80" },
-  { name: "Hungary", flag: "🇭🇺", slug: "hungary", courses: "250+", partners: "8+", image: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=800&q=80" },
+  { name: "Hungary", flag: "🇭🇺", slug: "hungary", courses: "250+", partners: "8+", image: "https://images.unsplash.com/photo-1541849546-216549ae216d?w=800&q=80" },
 ];
 
 const StudyDestinations = () => (
