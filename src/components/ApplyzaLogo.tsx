@@ -41,7 +41,7 @@ const ApplyzaLogo = ({ height = 40, className = "", variant = "dark" }: { height
       <text
         x="62"
         y="40"
-        fill="#1B2150"
+        fill={textColor}
         fontFamily="'Plus Jakarta Sans', sans-serif"
         fontWeight="800"
         fontSize="28"
