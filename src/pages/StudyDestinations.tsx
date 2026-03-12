@@ -9,16 +9,26 @@ import { GraduationCap, Building } from "lucide-react";
 
 const destinations = [
   { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom", courses: "500+", partners: "30+", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" },
+  { name: "United States", flag: "🇺🇸", slug: "usa", courses: "3,000+", partners: "50+", image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f04?w=800&q=80" },
+  { name: "Canada", flag: "🇨🇦", slug: "canada", courses: "1,500+", partners: "25+", image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80" },
   { name: "Germany", flag: "🇩🇪", slug: "germany", courses: "120+", partners: "15+", image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80" },
   { name: "France", flag: "🇫🇷", slug: "france", courses: "80+", partners: "12+", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" },
   { name: "Ireland", flag: "🇮🇪", slug: "ireland", courses: "60+", partners: "10+", image: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=800&q=80" },
   { name: "Malta", flag: "🇲🇹", slug: "malta", courses: "40+", partners: "8+", image: "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80" },
   { name: "Netherlands", flag: "🇳🇱", slug: "netherlands", courses: "90+", partners: "14+", image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800&q=80" },
+  { name: "Spain", flag: "🇪🇸", slug: "spain", courses: "400+", partners: "10+", image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80" },
+  { name: "Portugal", flag: "🇵🇹", slug: "portugal", courses: "300+", partners: "8+", image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80" },
+  { name: "Cyprus", flag: "🇨🇾", slug: "cyprus", courses: "200+", partners: "5+", image: "https://images.unsplash.com/photo-1580227974546-fbd48825d991?w=800&q=80" },
+  { name: "United Arab Emirates", flag: "🇦🇪", slug: "uae", courses: "500+", partners: "12+", image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" },
+  { name: "Japan", flag: "🇯🇵", slug: "japan", courses: "600+", partners: "15+", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80" },
+  { name: "China", flag: "🇨🇳", slug: "china", courses: "800+", partners: "20+", image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" },
+  { name: "Russia", flag: "🇷🇺", slug: "russia", courses: "400+", partners: "10+", image: "https://images.unsplash.com/photo-1513326738677-b964603b136d?w=800&q=80" },
+  { name: "Hungary", flag: "🇭🇺", slug: "hungary", courses: "250+", partners: "8+", image: "https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=800&q=80" },
 ];
 
 const StudyDestinations = () => (
   <div className="min-h-screen flex flex-col bg-background">
-    <SEO title="Study Destinations | Where to Study Abroad | Applyza" description="Explore study destinations across the UK, Germany, France, Ireland, Malta, and the Netherlands. Compare costs, visas, and universities." path="/study-destinations" />
+    <SEO title="Study Destinations | Where to Study Abroad | Applyza" description="Explore 16 study destinations worldwide including the UK, USA, Canada, Germany, France, and more. Compare costs, visas, and universities." path="/study-destinations" />
     <Navbar solid />
 
     {/* Dark Hero */}
@@ -37,7 +47,7 @@ const StudyDestinations = () => (
         </Breadcrumb>
         <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Study Destinations</h1>
         <p className="text-white/60 text-sm sm:text-base max-w-xl">
-          Explore our top study destinations across the UK and Europe. Each country offers unique opportunities for international students.
+          Explore our top study destinations worldwide. Each country offers unique opportunities for international students.
         </p>
       </div>
     </section>
@@ -52,7 +62,7 @@ const StudyDestinations = () => (
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
             >
               <Link
                 to={`/study-destinations/${d.slug}`}

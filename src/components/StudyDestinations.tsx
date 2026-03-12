@@ -11,6 +11,20 @@ const destinations = [
     image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80",
   },
   {
+    name: "United States",
+    code: "US",
+    slug: "usa",
+    courses: "3,000+",
+    image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f04?w=800&q=80",
+  },
+  {
+    name: "Canada",
+    code: "CA",
+    slug: "canada",
+    courses: "1,500+",
+    image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80",
+  },
+  {
     name: "Germany",
     code: "DE",
     slug: "germany",
@@ -30,13 +44,6 @@ const destinations = [
     slug: "ireland",
     courses: "900+",
     image: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=800&q=80",
-  },
-  {
-    name: "Malta",
-    code: "MT",
-    slug: "malta",
-    courses: "400+",
-    image: "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80",
   },
 ];
 
@@ -71,66 +78,48 @@ const StudyDestinations = () => {
           </p>
         </motion.div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-          {destinations.map((d, i) => {
-            const gridClass = i === 0
-              ? "col-span-2 md:col-span-3 md:row-span-2"
-              : i <= 2
-              ? "col-span-1 md:col-span-3"
-              : "col-span-1 md:col-span-3";
-
-            const cardHeight = i === 0 ? "280px" : "180px";
-
-            return (
-              <motion.div
-                key={d.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={gridClass}
-                style={{ height: i === 0 ? "calc(180px + 180px + 12px)" : cardHeight }}
+        {/* 3x2 grid of top 6 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {destinations.map((d, i) => (
+            <motion.div
+              key={d.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <Link
+                to={`/study-destinations/${d.slug}`}
+                className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
+                style={{ border: "1px solid rgba(255,255,255,0.10)" }}
               >
-                <Link
-                  to={`/study-destinations/${d.slug}`}
-                  className="relative block h-full rounded-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
-                  style={{ border: "1px solid rgba(255,255,255,0.10)" }}
-                >
-                  {/* Background image */}
-                  <img
-                    src={d.image}
-                    alt={d.name}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                <img
+                  src={d.image}
+                  alt={d.name}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-                  {/* Dark overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white z-10"
+                  style={{ backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
+                  {d.code}
+                </div>
 
-                  {/* Country code badge */}
-                  <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white z-10"
-                    style={{ backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
-                    {d.code}
-                  </div>
+                <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium z-10"
+                  style={{ color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.40)", backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
+                  {d.courses} courses
+                </div>
 
-                  {/* Course count badge */}
-                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium z-10"
-                    style={{ color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.40)", backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
-                    {d.courses} courses
-                  </div>
-
-                  {/* Bottom content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                    <h3 className="text-white text-xl font-bold">{d.name}</h3>
-                    <span className="text-sm font-medium group-hover:text-white transition-colors" style={{ color: "#2EC4B6" }}>
-                      Explore courses →
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
+                <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
+                  <h3 className="text-white text-xl font-bold">{d.name}</h3>
+                  <span className="text-sm font-medium group-hover:text-white transition-colors" style={{ color: "#2EC4B6" }}>
+                    Explore courses →
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
         </div>
 
         <div className="text-center mt-8">
