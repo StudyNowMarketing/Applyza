@@ -9,12 +9,22 @@ const destinations = [
     slug: "united-kingdom",
     courses: "2,500+",
     unis: "Oxford, Cambridge, UCL, Imperial",
-    shape: (
-      <>
-        <circle cx="75%" cy="30%" r="40" fill="rgba(46,196,182,0.12)" />
-        <circle cx="80%" cy="45%" r="30" fill="rgba(46,196,182,0.10)" />
-        <circle cx="70%" cy="50%" r="25" fill="rgba(46,196,182,0.08)" />
-      </>
+    landmark: (
+      // Big Ben silhouette
+      <svg viewBox="0 0 120 160" fill="none" className="absolute right-4 bottom-8 h-[140px] w-auto opacity-[0.15] pointer-events-none">
+        <rect x="48" y="20" width="24" height="130" rx="2" fill="white"/>
+        <rect x="44" y="140" width="32" height="10" rx="1" fill="white"/>
+        <rect x="40" y="148" width="40" height="8" rx="1" fill="white"/>
+        <rect x="52" y="10" width="16" height="14" rx="1" fill="white"/>
+        <polygon points="60,0 50,10 70,10" fill="white"/>
+        <rect x="54" y="30" width="12" height="16" rx="6" fill="rgba(0,0,0,0.3)"/>
+        <line x1="60" y1="32" x2="60" y2="44" stroke="white" strokeWidth="1"/>
+        <line x1="55" y1="38" x2="65" y2="38" stroke="white" strokeWidth="1"/>
+        <rect x="50" y="55" width="20" height="3" rx="1" fill="white"/>
+        <rect x="50" y="75" width="20" height="3" rx="1" fill="white"/>
+        <rect x="50" y="95" width="20" height="3" rx="1" fill="white"/>
+        <rect x="50" y="115" width="20" height="3" rx="1" fill="white"/>
+      </svg>
     ),
   },
   {
@@ -23,12 +33,20 @@ const destinations = [
     slug: "germany",
     courses: "1,800+",
     unis: "TU Munich, Heidelberg, LMU",
-    shape: (
-      <>
-        <polygon points="85,15 65,55 105,55" fill="rgba(255,255,255,0.08)" />
-        <polygon points="85,25 72,50 98,50" fill="rgba(255,255,255,0.06)" />
-        <line x1="60" y1="55" x2="110" y2="55" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
-      </>
+    landmark: (
+      // Brandenburg Gate silhouette
+      <svg viewBox="0 0 140 100" fill="none" className="absolute right-3 bottom-8 h-[100px] w-auto opacity-[0.15] pointer-events-none">
+        <rect x="10" y="25" width="10" height="65" rx="1" fill="white"/>
+        <rect x="30" y="25" width="10" height="65" rx="1" fill="white"/>
+        <rect x="50" y="25" width="10" height="65" rx="1" fill="white"/>
+        <rect x="70" y="25" width="10" height="65" rx="1" fill="white"/>
+        <rect x="90" y="25" width="10" height="65" rx="1" fill="white"/>
+        <rect x="110" y="25" width="10" height="65" rx="1" fill="white"/>
+        <rect x="5" y="18" width="120" height="8" rx="1" fill="white"/>
+        <rect x="5" y="88" width="120" height="6" rx="1" fill="white"/>
+        <rect x="45" y="5" width="40" height="14" rx="1" fill="white"/>
+        <polygon points="65,0 55,5 75,5" fill="white"/>
+      </svg>
     ),
   },
   {
@@ -37,12 +55,16 @@ const destinations = [
     slug: "france",
     courses: "1,200+",
     unis: "Sorbonne, Sciences Po, HEC",
-    shape: (
-      <>
-        <polygon points="85,10 70,75 100,75" fill="rgba(107,63,160,0.15)" />
-        <line x1="85" y1="10" x2="85" y2="5" stroke="rgba(107,63,160,0.12)" strokeWidth="3" />
-        <rect x="74" y="75" width="22" height="5" rx="1" fill="rgba(107,63,160,0.10)" />
-      </>
+    landmark: (
+      // Eiffel Tower silhouette
+      <svg viewBox="0 0 80 160" fill="none" className="absolute right-6 bottom-8 h-[120px] w-auto opacity-[0.15] pointer-events-none">
+        <polygon points="40,0 20,155 60,155" fill="white"/>
+        <rect x="15" y="155" width="50" height="5" rx="1" fill="white"/>
+        <rect x="26" y="100" width="28" height="4" rx="1" fill="white"/>
+        <rect x="30" y="60" width="20" height="3" rx="1" fill="white"/>
+        <ellipse cx="40" cy="45" rx="6" ry="8" fill="rgba(0,0,0,0.4)"/>
+        <rect x="22" y="120" width="36" height="4" rx="1" fill="white"/>
+      </svg>
     ),
   },
   {
@@ -51,12 +73,18 @@ const destinations = [
     slug: "ireland",
     courses: "900+",
     unis: "Trinity College, UCD, DCU",
-    shape: (
-      <>
-        <ellipse cx="80" cy="40" rx="30" ry="35" fill="rgba(46,196,182,0.10)" />
-        <ellipse cx="75" cy="35" rx="20" ry="25" fill="rgba(46,196,182,0.08)" />
-        <path d="M70 35 Q80 15 90 35 Q80 22 70 35Z" fill="rgba(46,196,182,0.12)" />
-      </>
+    landmark: (
+      // Celtic harp silhouette
+      <svg viewBox="0 0 80 110" fill="none" className="absolute right-4 bottom-8 h-[100px] w-auto opacity-[0.15] pointer-events-none">
+        <path d="M25 100 Q10 60 25 20 Q35 5 50 5 Q65 5 60 25" stroke="white" strokeWidth="5" fill="none" strokeLinecap="round"/>
+        <rect x="22" y="95" width="40" height="8" rx="4" fill="white"/>
+        <line x1="30" y1="95" x2="55" y2="25" stroke="white" strokeWidth="1.5"/>
+        <line x1="35" y1="95" x2="57" y2="30" stroke="white" strokeWidth="1.5"/>
+        <line x1="40" y1="95" x2="59" y2="35" stroke="white" strokeWidth="1.5"/>
+        <line x1="45" y1="95" x2="60" y2="42" stroke="white" strokeWidth="1.5"/>
+        <line x1="50" y1="95" x2="60" y2="50" stroke="white" strokeWidth="1.5"/>
+        <line x1="55" y1="95" x2="60" y2="60" stroke="white" strokeWidth="1.5"/>
+      </svg>
     ),
   },
   {
@@ -65,12 +93,20 @@ const destinations = [
     slug: "malta",
     courses: "400+",
     unis: "University of Malta, MCAST",
-    shape: (
-      <>
-        <rect x="60" y="30" width="14" height="30" rx="2" fill="rgba(255,255,255,0.08)" />
-        <rect x="78" y="25" width="12" height="35" rx="2" fill="rgba(255,255,255,0.06)" />
-        <rect x="94" y="35" width="10" height="25" rx="2" fill="rgba(255,255,255,0.08)" />
-      </>
+    landmark: (
+      // Church dome skyline silhouette
+      <svg viewBox="0 0 140 100" fill="none" className="absolute right-3 bottom-8 h-[100px] w-auto opacity-[0.15] pointer-events-none">
+        <rect x="10" y="50" width="25" height="45" rx="1" fill="white"/>
+        <path d="M10 50 Q22 30 35 50" fill="white"/>
+        <rect x="19" y="25" width="4" height="10" fill="white"/>
+        <line x1="21" y1="22" x2="21" y2="25" stroke="white" strokeWidth="2"/>
+        <rect x="50" y="40" width="35" height="55" rx="1" fill="white"/>
+        <path d="M50 40 Q67 15 85 40" fill="white"/>
+        <rect x="64" y="8" width="4" height="10" fill="white"/>
+        <line x1="66" y1="4" x2="66" y2="8" stroke="white" strokeWidth="2"/>
+        <rect x="100" y="55" width="20" height="40" rx="1" fill="white"/>
+        <path d="M100 55 Q110 42 120 55" fill="white"/>
+      </svg>
     ),
   },
 ];
@@ -78,10 +114,8 @@ const destinations = [
 const StudyDestinations = () => {
   return (
     <section className="relative" style={{ backgroundColor: "#0a0d24" }}>
-      {/* Subtle top separator */}
       <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)" }} />
 
-      {/* Glow effects */}
       <div className="absolute top-[10%] right-[-5%] w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{ backgroundColor: "rgba(46,196,182,0.10)", filter: "blur(120px)" }} />
       <div className="absolute bottom-[10%] left-[-5%] w-[200px] h-[200px] rounded-full pointer-events-none"
@@ -108,14 +142,16 @@ const StudyDestinations = () => {
           </p>
         </motion.div>
 
-        {/* Compact bento grid */}
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-3 auto-rows-[180px] md:auto-rows-[200px]" style={{ maxHeight: "500px" }}>
+        {/* Bento grid */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
           {destinations.map((d, i) => {
             const gridClass = i === 0
               ? "col-span-2 md:col-span-3 md:row-span-2"
               : i <= 2
               ? "col-span-1 md:col-span-3"
               : "col-span-1 md:col-span-3";
+
+            const cardHeight = i === 0 ? "280px" : "180px";
 
             return (
               <motion.div
@@ -125,24 +161,22 @@ const StudyDestinations = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className={gridClass}
+                style={{ height: i === 0 ? "calc(180px + 180px + 12px)" : cardHeight }}
               >
                 <Link
                   to={`/study-destinations/${d.slug}`}
                   className="relative block h-full rounded-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
                   style={{
-                    background: "linear-gradient(135deg, #1a1f4d 0%, #0a0d24 100%)",
+                    backgroundColor: "#0f1635",
                     border: "1px solid rgba(255,255,255,0.10)",
-                    maxHeight: i === 0 ? "400px" : "200px",
                   }}
                 >
                   {/* Hover glow */}
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"
                     style={{ boxShadow: "inset 0 0 40px rgba(46,196,182,0.08)" }} />
 
-                  {/* SVG decoration */}
-                  <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
-                    {d.shape}
-                  </svg>
+                  {/* Landmark silhouette */}
+                  {d.landmark}
 
                   {/* Country code badge */}
                   <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
@@ -151,16 +185,16 @@ const StudyDestinations = () => {
                   </div>
 
                   {/* Course count badge */}
-                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium"
-                    style={{ color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.30)" }}>
+                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium z-10"
+                    style={{ color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.30)", backgroundColor: "rgba(15,22,53,0.8)" }}>
                     {d.courses} courses
                   </div>
 
-                  {/* Bottom content with dark gradient overlay */}
+                  {/* Bottom gradient overlay + content */}
                   <div className="absolute bottom-0 left-0 right-0 p-4"
-                    style={{ background: "linear-gradient(to top, rgba(10,13,36,0.9) 0%, transparent 100%)" }}>
-                    <h3 className="text-white text-lg md:text-2xl font-bold">{d.name}</h3>
-                    <span className="text-white/60 text-xs font-medium group-hover:text-white transition-colors">
+                    style={{ background: "linear-gradient(to top, #0f1635 0%, rgba(15,22,53,0.95) 40%, transparent 100%)" }}>
+                    <h3 className="text-white text-xl font-bold">{d.name}</h3>
+                    <span className="text-sm font-medium group-hover:text-white transition-colors" style={{ color: "#2EC4B6" }}>
                       Explore courses →
                     </span>
                   </div>
