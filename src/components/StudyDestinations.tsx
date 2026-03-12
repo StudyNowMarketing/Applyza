@@ -15,7 +15,7 @@ const destinations = [
     code: "US",
     slug: "usa",
     courses: "3,000+",
-    image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f04?w=800&q=80",
+    image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80",
   },
   {
     name: "Canada",
