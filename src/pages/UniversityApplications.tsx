@@ -42,7 +42,7 @@ const UniversityApplications = () => (
 
     {/* The Challenge */}
     <section className="bg-background">
-      <div className="container py-12 md:py-20">
+      <div className="container py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,22 +50,24 @@ const UniversityApplications = () => (
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto"
         >
-          <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-4">The Challenge</h2>
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+          <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">The Challenge</h2>
+          <p className="text-muted-foreground leading-relaxed text-sm">
             Applying to universities abroad is complex — different countries have different requirements, deadlines vary by institution, and a single mistake on your application can cost you months. Most students don't know where to start, and even fewer have access to someone who can guide them through it properly.
           </p>
-          <p className="text-muted-foreground leading-relaxed text-sm md:text-base mt-4">
+          <p className="text-muted-foreground leading-relaxed text-sm mt-3">
             That's where we come in. With thousands of successful applications under our belt, we know exactly what admissions teams are looking for — and how to position your application for success.
           </p>
         </motion.div>
       </div>
     </section>
 
-    {/* Our Process */}
-    <section className="bg-card">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-12">Our Process</h2>
-        <div className="max-w-3xl mx-auto space-y-0">
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
+    {/* Our Process — Vertical Timeline */}
+    <section className="bg-background">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">Our Process</h2>
+        <div className="max-w-2xl mx-auto">
           {steps.map((step, i) => (
             <motion.div
               key={step.title}
@@ -73,21 +75,19 @@ const UniversityApplications = () => (
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="flex gap-5 relative"
+              className="flex gap-4 relative"
             >
-              {/* Timeline line */}
               <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 z-10 border-2 border-secondary/20">
-                  <step.icon className="text-secondary" size={20} />
+                <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 z-10 text-white text-xs font-bold" style={{ background: "linear-gradient(135deg, hsl(169 63% 47%), hsl(169 63% 40%))" }}>
+                  {i + 1}
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="w-0.5 flex-1 bg-secondary/15 mt-1" />
+                  <div className="w-0.5 flex-1 bg-secondary/20 mt-1" />
                 )}
               </div>
-              <div className="pb-10">
-                <span className="text-xs font-bold text-secondary uppercase tracking-wider">Step {i + 1}</span>
-                <h3 className="font-bold text-primary text-base mt-1">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{step.desc}</p>
+              <div className="pb-8">
+                <h3 className="font-bold text-foreground text-base">{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{step.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -95,11 +95,13 @@ const UniversityApplications = () => (
       </div>
     </section>
 
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
     {/* What's Included */}
     <section className="bg-background">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">What's Included</h2>
-        <div className="max-w-2xl mx-auto grid sm:grid-cols-2 gap-4">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">What's Included</h2>
+        <div className="max-w-2xl mx-auto grid sm:grid-cols-2 gap-3">
           {included.map((item, i) => (
             <motion.div
               key={item}
@@ -107,10 +109,10 @@ const UniversityApplications = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
-              className="flex items-start gap-3"
+              className="flex items-start gap-3 bg-card rounded-lg p-3 border border-border"
             >
-              <div className="w-6 h-6 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 mt-0.5">
-                <Check className="text-secondary" size={14} />
+              <div className="w-5 h-5 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 mt-0.5">
+                <Check className="text-secondary" size={12} />
               </div>
               <span className="text-sm text-foreground">{item}</span>
             </motion.div>
