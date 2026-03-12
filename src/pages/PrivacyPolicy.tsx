@@ -58,42 +58,35 @@ const sections = [
 ];
 
 const PrivacyPolicy = () => (
-  <div className="min-h-screen">
+  <div className="min-h-screen flex flex-col bg-background">
     <Navbar solid />
 
-    {/* Breadcrumb */}
-    <section className="bg-card border-b border-border pt-20">
-      <div className="container py-4">
+    {/* Dark Hero */}
+    <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+      <div className="container relative z-10 pt-20">
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Privacy Policy</BreadcrumbPage>
-            </BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-white/40 hover:text-white/60 text-sm">Home</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator className="text-white/30" />
+            <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">Privacy Policy</BreadcrumbPage></BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Privacy Policy</h1>
+        <p className="text-white/40 text-sm">Last updated: March 2026</p>
       </div>
     </section>
 
     {/* Content */}
-    <section className="container py-12 md:py-20 max-w-3xl">
-      <h1 className="text-3xl md:text-4xl font-extrabold text-primary mb-2">
-        Privacy Policy
-      </h1>
-      <p className="text-muted-foreground text-sm mb-10">Last updated: March 2026</p>
-
-      <div className="space-y-8">
-        {sections.map((s) => (
-          <div key={s.title}>
-            <h2 className="text-lg font-bold text-primary mb-2">{s.title}</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">{s.text}</p>
-          </div>
-        ))}
+    <section className="bg-background py-12 flex-1">
+      <div className="container max-w-3xl">
+        <div className="space-y-8">
+          {sections.map((s) => (
+            <div key={s.title}>
+              <h2 className="text-base font-bold text-primary mb-2">{s.title}</h2>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.text}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 

@@ -4,21 +4,28 @@ import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 const AntiSlaveryPolicy = () => (
-  <div className="min-h-screen">
+  <div className="min-h-screen flex flex-col bg-background">
     <Navbar solid />
-    <section className="bg-card border-b border-border pt-20">
-      <div className="container py-4">
-        <Breadcrumb><BreadcrumbList>
-          <BreadcrumbItem><BreadcrumbLink asChild><Link to="/">Home</Link></BreadcrumbLink></BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem><BreadcrumbPage>Anti-Slavery Policy</BreadcrumbPage></BreadcrumbItem>
-        </BreadcrumbList></Breadcrumb>
+
+    <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+      <div className="container relative z-10 pt-20">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-white/40 hover:text-white/60 text-sm">Home</Link></BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbSeparator className="text-white/30" />
+            <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">Anti-Slavery Policy</BreadcrumbPage></BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Anti-Slavery Policy</h1>
       </div>
     </section>
-    <section className="container py-20 max-w-2xl">
-      <h1 className="text-3xl font-extrabold text-primary mb-4">Anti-Slavery Policy</h1>
-      <p className="text-muted-foreground">This page is being updated. Please contact <a href="mailto:info@applyza.com" className="text-secondary font-semibold hover:underline">info@applyza.com</a> for any enquiries.</p>
+
+    <section className="bg-background py-12 flex-1">
+      <div className="container max-w-3xl">
+        <p className="text-sm text-muted-foreground">This page is being updated. Please contact <a href="mailto:info@applyza.com" className="text-secondary font-semibold hover:underline">info@applyza.com</a> for any enquiries.</p>
+      </div>
     </section>
+
     <Footer />
   </div>
 );
