@@ -18,7 +18,7 @@ const destinations = [
   { name: "Netherlands", flag: "🇳🇱", slug: "netherlands", courses: "90+", partners: "14+", image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800&q=80" },
   { name: "Spain", flag: "🇪🇸", slug: "spain", courses: "400+", partners: "10+", image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?w=800&q=80" },
   { name: "Portugal", flag: "🇵🇹", slug: "portugal", courses: "300+", partners: "8+", image: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800&q=80" },
-  { name: "Cyprus", flag: "🇨🇾", slug: "cyprus", courses: "200+", partners: "5+", image: "https://images.unsplash.com/photo-1580227974546-fbd48825d991?w=800&q=80" },
+  { name: "Cyprus", flag: "🇨🇾", slug: "cyprus", courses: "200+", partners: "5+", image: "https://images.unsplash.com/photo-1600430188203-bbb8dac0318f?w=800&q=80" },
   { name: "United Arab Emirates", flag: "🇦🇪", slug: "uae", courses: "500+", partners: "12+", image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80" },
   { name: "Japan", flag: "🇯🇵", slug: "japan", courses: "600+", partners: "15+", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80" },
   { name: "China", flag: "🇨🇳", slug: "china", courses: "800+", partners: "20+", image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80" },
