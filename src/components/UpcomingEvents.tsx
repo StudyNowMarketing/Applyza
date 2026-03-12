@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
+import { MapPin, Clock, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const events = [
@@ -11,6 +11,9 @@ const events = [
     year: "2026",
     location: "Nairobi, Kenya",
     description: "Meet top UK university representatives, attend expert panels on study abroad options, and get one-on-one guidance from our counsellors.",
+    type: "In-Person",
+    time: "10:00 AM — 4:00 PM",
+    attendees: "500+",
   },
   {
     title: "The Applyza Experience — Accra",
@@ -19,6 +22,9 @@ const events = [
     year: "2026",
     location: "Accra, Ghana",
     description: "Explore scholarships, learn about visa requirements, and discover programmes tailored to your career goals.",
+    type: "In-Person",
+    time: "11:00 AM — 5:00 PM",
+    attendees: "300+",
   },
   {
     title: "The Applyza Experience — Lagos",
@@ -27,60 +33,123 @@ const events = [
     year: "2026",
     location: "Lagos, Nigeria",
     description: "Our biggest event of the season. Speak directly with admissions teams and get your application reviewed on the spot.",
+    type: "In-Person",
+    time: "9:00 AM — 5:00 PM",
+    attendees: "1,000+",
   },
 ];
 
 const UpcomingEvents = () => {
+  const featured = events[0];
+  const rest = events.slice(1);
+
   return (
-    <section className="bg-background">
-      <div className="container py-12 md:py-20">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
-            The Applyza Experience
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Join us at our events across the globe. Meet university representatives face-to-face, attend expert panels, and get your questions answered.
-          </p>
+    <section className="bg-white">
+      <div className="container py-16 md:py-24">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+          <div>
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
+              style={{ background: "rgba(107,63,160,0.1)", color: "#6B3FA0" }}>
+              <Calendar size={12} /> Mark Your Calendar
+            </span>
+            <h2 className="text-2xl md:text-4xl font-extrabold text-primary">
+              Upcoming Events
+            </h2>
+            <p className="text-muted-foreground mt-3 max-w-xl">
+              Join us at our events across the globe. Meet university representatives face-to-face and get your questions answered.
+            </p>
+          </div>
+          <Button className="rounded-full shrink-0" style={{ background: "#1B2150" }} asChild>
+            <Link to="/events">View All Events →</Link>
+          </Button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {events.map((event, i) => (
-            <motion.div
-              key={event.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: i * 0.1 }}
-              className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex"
-            >
-              <div className="shrink-0 w-24 flex flex-col items-center justify-center gradient-purple text-accent-foreground">
-                <span className="text-3xl font-extrabold leading-none">{event.day}</span>
-                <span className="text-xs font-semibold tracking-wider mt-1">{event.month}</span>
+        {/* Bento layout */}
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6">
+          {/* Featured */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="rounded-2xl p-8 flex flex-col justify-between min-h-[380px]"
+            style={{ background: "linear-gradient(135deg, #1B2150, #0a0d24)" }}
+          >
+            <div>
+              <div className="flex flex-wrap items-center gap-2 mb-6">
+                <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
+                  style={{ background: "#2EC4B6", color: "#0a0d24" }}>
+                  Featured Event
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
+                  style={{ background: "rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.8)", border: "1px solid rgba(255,255,255,0.15)" }}>
+                  {featured.type}
+                </span>
               </div>
-              <div className="p-5 flex flex-col justify-between flex-1">
-                <div>
-                  <h3 className="font-bold text-primary text-sm mb-1 leading-snug">{event.title}</h3>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1 mb-2">
-                    <MapPin size={12} /> {event.location}
-                  </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-4">{event.description}</p>
+
+              <div className="flex items-start gap-5">
+                <div className="shrink-0 text-center">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: "#2EC4B6" }}>{featured.month}</p>
+                  <p className="text-5xl font-extrabold text-white leading-none mt-1">{featured.day}</p>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="rounded-full border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground w-fit text-xs"
-                  asChild
-                >
-                  <Link to="/events">Register →</Link>
-                </Button>
+                <div>
+                  <h3 className="text-xl font-bold text-white leading-snug mb-2">{featured.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>{featured.description}</p>
+                </div>
               </div>
-            </motion.div>
-          ))}
+            </div>
+
+            <div className="mt-6">
+              <div className="flex flex-wrap items-center gap-4 text-[11px] mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <span className="inline-flex items-center gap-1"><Clock size={11} /> {featured.time}</span>
+                <span className="inline-flex items-center gap-1"><MapPin size={11} /> {featured.location}</span>
+                <span className="inline-flex items-center gap-1"><Users size={11} /> {featured.attendees} expected</span>
+              </div>
+              <Button className="rounded-full" style={{ background: "#2EC4B6", color: "#0a0d24" }} asChild>
+                <Link to="/events">Register Now — Free →</Link>
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Smaller cards */}
+          <div className="flex flex-col gap-6">
+            {rest.map((event, i) => (
+              <motion.div
+                key={event.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.1 }}
+                className="bg-card rounded-xl p-5 flex items-start gap-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                style={{ border: "1px solid hsl(230 25% 93%)" }}
+              >
+                {/* Date badge */}
+                <div className="shrink-0 w-16 h-16 rounded-xl flex flex-col items-center justify-center"
+                  style={{ background: "hsl(230 33% 97%)" }}>
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{event.month}</span>
+                  <span className="text-2xl font-extrabold text-primary leading-none">{event.day}</span>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2"
+                    style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6" }}>
+                    {event.type}
+                  </span>
+                  <h3 className="font-bold text-primary text-sm leading-snug mb-1">{event.title}</h3>
+                  <div className="flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground">
+                    <span className="inline-flex items-center gap-1"><Clock size={10} /> {event.time}</span>
+                    <span className="inline-flex items-center gap-1"><MapPin size={10} /> {event.location}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         <div className="flex justify-center mt-10">
-          <Link to="/events" className="text-secondary font-semibold text-sm hover:underline">
-            See All Events →
+          <Link to="/events" className="font-semibold text-sm hover:underline" style={{ color: "#2EC4B6" }}>
+            See more events →
           </Link>
         </div>
       </div>
