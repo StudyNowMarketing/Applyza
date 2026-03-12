@@ -45,34 +45,25 @@ const Hero = () => {
       {/* Teal glow — top right */}
       <div
         className="absolute top-[-5%] right-[-5%] w-[600px] h-[600px] rounded-full pointer-events-none"
-        style={{
-          backgroundColor: "rgba(46,196,182,0.20)",
-          filter: "blur(120px)",
-        }}
+        style={{ backgroundColor: "rgba(46,196,182,0.20)", filter: "blur(120px)" }}
       />
 
       {/* Purple glow — center left */}
       <div
         className="absolute top-[30%] left-[-8%] w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{
-          backgroundColor: "rgba(107,63,160,0.30)",
-          filter: "blur(100px)",
-        }}
+        style={{ backgroundColor: "rgba(107,63,160,0.30)", filter: "blur(100px)" }}
       />
 
       {/* Teal glow — bottom right */}
       <div
         className="absolute bottom-[-5%] right-[10%] w-[300px] h-[300px] rounded-full pointer-events-none"
-        style={{
-          backgroundColor: "rgba(46,196,182,0.15)",
-          filter: "blur(100px)",
-        }}
+        style={{ backgroundColor: "rgba(46,196,182,0.15)", filter: "blur(100px)" }}
       />
 
-      <div className="container relative z-10 py-20 md:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.7fr] gap-8 lg:gap-12 items-center">
           {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-6 order-2 lg:order-1">
+          <div className="flex flex-col gap-5 order-2 lg:order-1">
             {/* Video Placeholder */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -81,49 +72,27 @@ const Hero = () => {
               className="group relative w-full aspect-video rounded-2xl overflow-hidden cursor-pointer"
               style={{ border: "1px solid rgba(255,255,255,0.10)" }}
             >
-              {/* Video bg gradient */}
               <div
                 className="absolute inset-0"
-                style={{
-                  background: "linear-gradient(135deg, #1B2150 0%, #0a0d24 100%)",
-                }}
+                style={{ background: "linear-gradient(135deg, #1B2150 0%, #0a0d24 100%)" }}
               />
-              {/* Bottom overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              {/* Decorative blurred circles inside */}
               <div
                 className="absolute top-[10%] right-[15%] w-32 h-32 rounded-full pointer-events-none"
-                style={{
-                  backgroundColor: "rgba(46,196,182,0.12)",
-                  filter: "blur(50px)",
-                }}
+                style={{ backgroundColor: "rgba(46,196,182,0.12)", filter: "blur(50px)" }}
               />
               <div
                 className="absolute bottom-[15%] left-[10%] w-24 h-24 rounded-full pointer-events-none"
-                style={{
-                  backgroundColor: "rgba(107,63,160,0.15)",
-                  filter: "blur(40px)",
-                }}
+                style={{ backgroundColor: "rgba(107,63,160,0.15)", filter: "blur(40px)" }}
               />
-              {/* Play button */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-lg shadow-white/10 transition-transform group-hover:scale-110">
-                  <Play
-                    size={28}
-                    className="ml-1"
-                    style={{ color: "#0a0d24" }}
-                    fill="#0a0d24"
-                  />
+                <div className="w-14 h-14 lg:w-18 lg:h-18 rounded-full bg-white/90 flex items-center justify-center shadow-lg shadow-white/10 transition-transform group-hover:scale-110">
+                  <Play size={24} className="ml-1" style={{ color: "#0a0d24" }} fill="#0a0d24" />
                 </div>
               </div>
-              {/* Bottom text */}
               <div className="absolute bottom-3 left-4 right-4 flex items-end justify-between">
-                <span className="text-white/80 text-xs font-medium">
-                  Watch: How Applyza Works
-                </span>
-                <span className="text-white/50 text-[10px] font-medium">
-                  2:30
-                </span>
+                <span className="text-white/80 text-xs font-medium">Watch: How Applyza Works</span>
+                <span className="text-white/50 text-[10px] font-medium">2:30</span>
               </div>
             </motion.div>
 
@@ -142,32 +111,23 @@ const Hero = () => {
             >
               <div className="flex items-center gap-2">
                 <div className="relative flex-1">
-                  <Search
-                    size={16}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40"
-                  />
+                  <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" />
                   <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                     placeholder="Search courses, universities, or subjects..."
-                    className="w-full pl-9 pr-4 py-3 text-sm text-white rounded-lg outline-none hero-search-input"
-                    style={{
-                      backgroundColor: "rgba(255,255,255,0.05)",
-                    }}
+                    className="w-full pl-9 pr-4 py-2.5 text-sm text-white rounded-lg outline-none hero-search-input"
+                    style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
                   />
                 </div>
                 <button
                   onClick={handleSearch}
-                  className="flex items-center gap-1.5 rounded-lg px-5 py-3 text-sm font-semibold text-white shrink-0 transition-colors"
+                  className="flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shrink-0 transition-colors"
                   style={{ backgroundColor: "#2EC4B6" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.backgroundColor = "#25a89c")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.backgroundColor = "#2EC4B6")
-                  }
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#25a89c")}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2EC4B6")}
                 >
                   Search
                   <ArrowRight size={14} />
@@ -200,7 +160,7 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-x-4 gap-y-1 mt-2"
+              className="flex flex-wrap gap-x-4 gap-y-1"
             >
               {badges.map((b) => (
                 <span key={b} className="text-white/70 text-xs font-medium">
@@ -212,26 +172,19 @@ const Hero = () => {
 
           {/* RIGHT COLUMN */}
           <div className="relative hidden lg:flex items-center justify-center order-1 lg:order-2">
-            <div className="relative w-full max-w-sm aspect-square flex items-center justify-center">
+            <div className="relative w-full max-w-xs aspect-square flex items-center justify-center">
               {/* Decorative concentric circles */}
-              <div
-                className="absolute w-[320px] h-[320px] rounded-full"
-                style={{ border: "1px solid rgba(255,255,255,0.05)" }}
-              />
-              <div
-                className="absolute w-[220px] h-[220px] rounded-full"
-                style={{ border: "1px solid rgba(255,255,255,0.05)" }}
-              />
+              <div className="absolute w-[280px] h-[280px] rounded-full" style={{ border: "1px solid rgba(255,255,255,0.05)" }} />
+              <div className="absolute w-[190px] h-[190px] rounded-full" style={{ border: "1px solid rgba(255,255,255,0.05)" }} />
 
-              {/* Badge 1: 99% Visa Success — top center */}
+              {/* Badge 1: 99% Visa Success */}
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
-                className="absolute top-0 left-1/2 -translate-x-1/2 rounded-xl px-5 py-3.5 backdrop-blur-xl"
+                className="absolute top-0 left-1/2 -translate-x-1/2 rounded-xl px-4 py-3 backdrop-blur-xl"
                 style={{
-                  background:
-                    "linear-gradient(135deg, rgba(46,196,182,0.20) 0%, rgba(46,196,182,0.10) 100%)",
+                  background: "linear-gradient(135deg, rgba(46,196,182,0.20) 0%, rgba(46,196,182,0.10) 100%)",
                   border: "1px solid rgba(46,196,182,0.30)",
                 }}
               >
@@ -240,13 +193,11 @@ const Hero = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: "#4ade80" }} />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: "#22c55e" }} />
                   </span>
-                  <span className="text-white text-sm font-semibold whitespace-nowrap">
-                    99% Visa Success
-                  </span>
+                  <span className="text-white text-sm font-semibold whitespace-nowrap">99% Visa Success</span>
                 </div>
               </motion.div>
 
-              {/* Badge 2: 3,000+ Students Placed — center */}
+              {/* Badge 2: 3,000+ Students Placed */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -257,18 +208,11 @@ const Hero = () => {
                   border: "1px solid rgba(255,255,255,0.20)",
                 }}
               >
-                <div
-                  className="text-4xl font-bold"
-                  style={{ color: "#2EC4B6" }}
-                >
-                  3,000+
-                </div>
-                <div className="text-white/60 text-sm font-medium mt-1">
-                  Students Placed
-                </div>
+                <div className="text-4xl font-bold" style={{ color: "#2EC4B6" }}>3,000+</div>
+                <div className="text-white/60 text-sm font-medium mt-1">Students Placed</div>
               </motion.div>
 
-              {/* Badge 3: 150+ Universities — bottom left */}
+              {/* Badge 3: 150+ Universities */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -279,19 +223,12 @@ const Hero = () => {
                   border: "1px solid rgba(255,255,255,0.20)",
                 }}
               >
-                <div
-                  className="w-10 h-10 rounded-lg flex items-center justify-center text-lg"
-                  style={{ backgroundColor: "rgba(107,63,160,0.30)" }}
-                >
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style={{ backgroundColor: "rgba(107,63,160,0.30)" }}>
                   🎓
                 </div>
                 <div>
-                  <div className="text-white text-sm font-semibold">
-                    150+ Universities
-                  </div>
-                  <div className="text-white/50 text-[10px] font-medium">
-                    UK, Europe & beyond
-                  </div>
+                  <div className="text-white text-sm font-semibold">150+ Universities</div>
+                  <div className="text-white/50 text-[10px] font-medium">UK, Europe & beyond</div>
                 </div>
               </motion.div>
             </div>

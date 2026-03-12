@@ -44,12 +44,12 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       }`}
       style={showSolid ? { backgroundColor: "rgba(10, 13, 36, 0.95)" } : undefined}
     >
-      <div className="container flex items-center justify-between h-16 md:h-20">
+      <div className="container flex items-center justify-between h-16 lg:h-20">
         <Link to="/" className="shrink-0">
-          <ApplyzaLogo height={40} variant="light" />
+          <ApplyzaLogo height={36} variant="light" />
         </Link>
 
-        <div className="hidden xl:flex items-center gap-6 lg:gap-8">
+        <div className="hidden lg:flex items-center gap-5 xl:gap-7">
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -61,7 +61,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
           ))}
         </div>
 
-        <div className="hidden xl:flex items-center gap-5">
+        <div className="hidden lg:flex items-center gap-4">
           <button
             onClick={handleClientLogin}
             className="text-white/60 hover:text-white text-xs font-normal transition-colors whitespace-nowrap"
@@ -70,7 +70,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
           </button>
           <Link
             to="/book-a-consultation"
-            className="rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-colors whitespace-nowrap"
+            className="rounded-full px-5 py-2 text-sm font-semibold text-white transition-colors whitespace-nowrap"
             style={{ backgroundColor: "#2EC4B6" }}
             onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#25a89c")}
             onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2EC4B6")}
@@ -80,7 +80,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
         </div>
 
         <button
-          className="xl:hidden text-white"
+          className="lg:hidden text-white"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -90,7 +90,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
       {mobileOpen && (
         <div
-          className="xl:hidden border-t border-white/10 pb-6 backdrop-blur-xl"
+          className="lg:hidden border-t border-white/10 pb-6 backdrop-blur-xl"
           style={{ backgroundColor: "rgba(10, 13, 36, 0.95)" }}
         >
           <div className="container flex flex-col gap-3 pt-4">
