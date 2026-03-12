@@ -8,12 +8,12 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { GraduationCap, Building } from "lucide-react";
 
 const destinations = [
-  { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom", courses: "500+", partners: "30+", pattern: "M0,0 L60,30 L0,60 Z M80,0 L140,30 L80,60 Z M40,40 L100,70 L40,100 Z" },
-  { name: "Germany", flag: "🇩🇪", slug: "germany", courses: "120+", partners: "15+", pattern: "M0,0 h40 v40 h-40 Z M50,50 h40 v40 h-40 Z M100,0 h40 v40 h-40 Z" },
-  { name: "France", flag: "🇫🇷", slug: "france", courses: "80+", partners: "12+", pattern: "M70,0 L140,70 L70,140 L0,70 Z" },
-  { name: "Ireland", flag: "🇮🇪", slug: "ireland", courses: "60+", partners: "10+", pattern: "M0,20 Q70,0 140,20 Q70,40 0,20 Z M0,60 Q70,40 140,60 Q70,80 0,60 Z" },
-  { name: "Malta", flag: "🇲🇹", slug: "malta", courses: "40+", partners: "8+", pattern: "M70,0 A70,70 0 1,1 69.9,0 Z M70,30 A40,40 0 1,0 70.1,30 Z" },
-  { name: "Netherlands", flag: "🇳🇱", slug: "netherlands", courses: "90+", partners: "14+", pattern: "M0,0 L70,35 L140,0 L140,70 L70,35 L0,70 Z" },
+  { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom", courses: "500+", partners: "30+", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" },
+  { name: "Germany", flag: "🇩🇪", slug: "germany", courses: "120+", partners: "15+", image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80" },
+  { name: "France", flag: "🇫🇷", slug: "france", courses: "80+", partners: "12+", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" },
+  { name: "Ireland", flag: "🇮🇪", slug: "ireland", courses: "60+", partners: "10+", image: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=800&q=80" },
+  { name: "Malta", flag: "🇲🇹", slug: "malta", courses: "40+", partners: "8+", image: "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=800&q=80" },
+  { name: "Netherlands", flag: "🇳🇱", slug: "netherlands", courses: "90+", partners: "14+", image: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=800&q=80" },
 ];
 
 const StudyDestinations = () => (
@@ -56,16 +56,18 @@ const StudyDestinations = () => (
             >
               <Link
                 to={`/study-destinations/${d.slug}`}
-                className="block rounded-xl overflow-hidden border border-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 max-h-[240px]"
+                className="block rounded-xl overflow-hidden border border-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
               >
-                {/* Top: dark gradient with geometric pattern */}
-                <div className="relative h-[120px] overflow-hidden" style={{ background: "linear-gradient(135deg, #1B2150, #0a0d24)" }}>
-                  <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 140 120" preserveAspectRatio="xMidYMid slice">
-                    <path d={d.pattern} fill="white" />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-5xl">{d.flag}</span>
-                  </div>
+                {/* Top: country photo */}
+                <div className="relative h-[160px] overflow-hidden">
+                  <img
+                    src={d.image}
+                    alt={d.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <span className="absolute top-3 left-3 text-3xl drop-shadow-lg">{d.flag}</span>
                 </div>
                 {/* Bottom: white info */}
                 <div className="bg-card p-4">
