@@ -60,10 +60,9 @@ const Hero = () => {
         style={{ backgroundColor: "rgba(46,196,182,0.15)", filter: "blur(100px)" }}
       />
 
-      <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.7fr] gap-8 lg:gap-12 items-center">
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-5 order-2 lg:order-1">
+      <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16 flex justify-center">
+        <div className="w-full max-w-[800px]">
+          <div className="flex flex-col gap-5">
             {/* Video Placeholder */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -168,70 +167,6 @@ const Hero = () => {
                 </span>
               ))}
             </motion.div>
-          </div>
-
-          {/* RIGHT COLUMN */}
-          <div className="relative hidden lg:flex items-center justify-center order-1 lg:order-2">
-            <div className="relative w-full max-w-xs aspect-square flex items-center justify-center">
-              {/* Decorative concentric circles */}
-              <div className="absolute w-[280px] h-[280px] rounded-full" style={{ border: "1px solid rgba(255,255,255,0.05)" }} />
-              <div className="absolute w-[190px] h-[190px] rounded-full" style={{ border: "1px solid rgba(255,255,255,0.05)" }} />
-
-              {/* Badge 1: 99% Visa Success */}
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                className="absolute top-0 left-1/2 -translate-x-1/2 rounded-xl px-4 py-3 backdrop-blur-xl"
-                style={{
-                  background: "linear-gradient(135deg, rgba(46,196,182,0.20) 0%, rgba(46,196,182,0.10) 100%)",
-                  border: "1px solid rgba(46,196,182,0.30)",
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: "#4ade80" }} />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: "#22c55e" }} />
-                  </span>
-                  <span className="text-white text-sm font-semibold whitespace-nowrap">99% Visa Success</span>
-                </div>
-              </motion.div>
-
-              {/* Badge 2: 3,000+ Students Placed */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.7, delay: 0.5 }}
-                className="rounded-2xl p-5 text-center backdrop-blur-xl"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.20)",
-                }}
-              >
-                <div className="text-4xl font-bold" style={{ color: "#2EC4B6" }}>3,000+</div>
-                <div className="text-white/60 text-sm font-medium mt-1">Students Placed</div>
-              </motion.div>
-
-              {/* Badge 3: 150+ Universities */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.7 }}
-                className="absolute bottom-4 left-0 rounded-xl p-3 backdrop-blur-xl flex items-center gap-3"
-                style={{
-                  backgroundColor: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.20)",
-                }}
-              >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style={{ backgroundColor: "rgba(107,63,160,0.30)" }}>
-                  🎓
-                </div>
-                <div>
-                  <div className="text-white text-sm font-semibold">150+ Universities</div>
-                  <div className="text-white/50 text-[10px] font-medium">UK, Europe & beyond</div>
-                </div>
-              </motion.div>
-            </div>
           </div>
         </div>
       </div>
