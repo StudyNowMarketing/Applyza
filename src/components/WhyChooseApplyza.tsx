@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { Bot, CircleDollarSign, ShieldCheck, Heart, Globe, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -47,8 +48,28 @@ const reasons = [
 ];
 
 const WhyChooseApplyza = () => {
+  const [hoveredDesktop, setHoveredDesktop] = useState<number | null>(null);
+  const [expandedMobile, setExpandedMobile] = useState<number | null>(null);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleMobileTap = (i: number) => {
+    setExpandedMobile((prev) => (prev === i ? null : i));
+  };
+
   return (
-    <section className="bg-white">
+    <section className="bg-white" ref={sectionRef}>
       <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
       <div className="container py-12 md:py-16">
         <motion.div
@@ -68,8 +89,7 @@ const WhyChooseApplyza = () => {
             Why Choose{" "}
             <span className="relative inline-block">
               Applyza?
-              <span className="absolute -bottom-1 left-0 right-0 h-1 rounded-full"
-                style={{ backgroundColor: "#2EC4B6" }} />
+              <span className="absolute -bottom-1 left-0 right-0 h-1 rounded-full" style={{ backgroundColor: "#2EC4B6" }} />
             </span>
           </h2>
           <p className="text-muted-foreground mt-2 max-w-lg mx-auto text-sm">
@@ -78,28 +98,56 @@ const WhyChooseApplyza = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {reasons.map((r, i) => (
-            <motion.div
-              key={r.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="relative bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 p-5 min-h-[200px]"
-            >
-              <span className="absolute top-3 right-3 text-xs font-bold text-gray-300">
-                {String(i + 1).padStart(2, "0")}
-              </span>
+          {reasons.map((r, i) => {
+            const isExpanded = hoveredDesktop === i || expandedMobile === i;
+            return (
+              <motion.div
+                key={r.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="relative bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden"
+                style={{
+                  borderLeft: isExpanded ? `4px solid ${r.iconColor}` : "4px solid transparent",
+                  boxShadow: isExpanded ? "0 10px 30px -10px rgba(0,0,0,0.12)" : undefined,
+                }}
+                onMouseEnter={() => setHoveredDesktop(i)}
+                onMouseLeave={() => setHoveredDesktop(null)}
+                onClick={() => handleMobileTap(i)}
+              >
+                <div className="p-5">
+                  <span className="absolute top-3 right-3 text-xs font-bold text-gray-300">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
 
-              <div className="w-10 h-10 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: r.iconBg }}>
-                <r.icon size={20} style={{ color: r.iconColor }} />
-              </div>
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="w-14 h-14 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300"
+                      style={{
+                        backgroundColor: r.iconBg,
+                        transform: isExpanded ? "scale(1.1)" : "scale(1)",
+                      }}
+                    >
+                      <r.icon size={26} style={{ color: r.iconColor }} />
+                    </div>
+                    <h3 className="text-base font-bold" style={{ color: "#1B2150" }}>{r.title}</h3>
+                  </div>
 
-              <h3 className="text-base font-bold mt-3" style={{ color: "#1B2150" }}>{r.title}</h3>
-              <p className="text-sm text-gray-500 mt-1 leading-relaxed">{r.text}</p>
-            </motion.div>
-          ))}
+                  {/* Description — always visible on lg, animated on smaller */}
+                  <div
+                    className="overflow-hidden transition-all duration-300 ease-in-out"
+                    style={{
+                      maxHeight: isExpanded ? "200px" : "0px",
+                      opacity: isExpanded ? 1 : 0,
+                      marginTop: isExpanded ? "12px" : "0px",
+                    }}
+                  >
+                    <p className="text-sm text-gray-500 leading-relaxed pl-[72px]">{r.text}</p>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
