@@ -1,12 +1,12 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FinalCTA from "@/components/FinalCTA";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { motion } from "framer-motion";
-import { Heart, Eye, Zap, Globe } from "lucide-react";
+import { Heart, Eye, Zap, Globe, MapPin, Building2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 /* ── count-up hook (reused pattern from TrustStats) ── */
 function useCountUp(target: number, duration = 2000) {
@@ -49,23 +49,30 @@ const values = [
   { icon: Globe, title: "Global Mindset, Personal Touch", desc: "We serve students from across the world, but we never treat them like a number." },
 ];
 
+const offices = [
+  { city: "Nicosia", country: "Cyprus", hq: true },
+  { city: "Lagos", country: "Nigeria", hq: false },
+  { city: "Accra", country: "Ghana", hq: false },
+  { city: "Nairobi", country: "Kenya", hq: false },
+  { city: "Doha", country: "Qatar", hq: false },
+  { city: "Istanbul", country: "Türkiye", hq: false },
+];
+
 const stats = [
   { value: 3000, suffix: "+", label: "Students Placed" },
   { value: 150, suffix: "+", label: "Partner Universities" },
   { value: 99, suffix: "%", label: "Visa Success Rate" },
-  { value: 10, suffix: "+", label: "Countries Represented" },
-  { value: 10, suffix: "+", label: "Expert Counsellors" },
-  { value: 1, suffix: "", label: "Headquarters in Cyprus", display: "Cyprus" },
+  { value: 10, suffix: "+", label: "Years Experience" },
 ];
 
-const StatCard = ({ value, suffix, label, display }: { value: number; suffix: string; label: string; display?: string }) => {
+const StatItem = ({ value, suffix, label }: { value: number; suffix: string; label: string }) => {
   const { count, ref } = useCountUp(value);
   return (
-    <div ref={ref} className="text-center py-8">
-      <div className="text-3xl md:text-5xl font-extrabold text-primary">
-        {display || `${count.toLocaleString()}${suffix}`}
+    <div ref={ref} className="text-center">
+      <div className="text-2xl md:text-3xl font-bold text-secondary">
+        {count.toLocaleString()}{suffix}
       </div>
-      <div className="text-sm text-muted-foreground mt-2">{label}</div>
+      <div className="text-xs text-white/50 mt-1">{label}</div>
     </div>
   );
 };
@@ -78,72 +85,112 @@ const About = () => {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[40vh] gradient-navy flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent to-accent/10 pointer-events-none" />
-        <div className="container relative z-10 py-28 md:py-32">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs text-primary-foreground/50 mb-6">
-            <Link to="/" className="hover:text-primary-foreground transition-colors">Home</Link>
+      <section className="relative overflow-hidden" style={{ background: "#0a0d24" }}>
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px]" style={{ background: "hsl(265 44% 44%)" }} />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px]" style={{ background: "hsl(169 63% 47%)" }} />
+        <div className="container relative z-10 py-12">
+          <nav className="flex items-center gap-2 text-xs text-white/40 mb-4">
+            <Link to="/" className="hover:text-white/70 transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-primary-foreground/80">About</span>
+            <span className="text-white/60">About</span>
           </nav>
-
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-[48px] md:leading-tight font-extrabold text-primary-foreground mb-5 max-w-2xl"
+            className="text-2xl sm:text-3xl font-bold text-white mb-3 max-w-2xl"
           >
-            Built for Students Who Dream Bigger
+            About Applyza
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-primary-foreground/70 text-base md:text-lg leading-relaxed max-w-xl"
+            className="text-white/60 text-sm md:text-base leading-relaxed max-w-xl"
           >
-            Applyza is a global education platform that connects ambitious students with world-class universities — completely free of charge.
+            A global education platform that connects ambitious students with world-class universities — completely free of charge.
           </motion.p>
         </div>
       </section>
 
       {/* ── OUR STORY ── */}
       <section className="bg-background">
-        <div className="container py-12 md:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+        <div className="container py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="lg:col-span-3 space-y-5 text-muted-foreground text-sm md:text-base leading-relaxed"
+              className="space-y-4"
             >
-              <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-2">Our Story</h2>
-              <p>Every year, millions of students dream of studying abroad. But for too many, the process feels impossible — confusing visa requirements, overwhelming course options, and the fear of making the wrong choice.</p>
-              <p className="font-semibold text-foreground">We built Applyza to change that.</p>
-              <p>Born from the team behind Study Now — a consultancy that has placed over 3,000 students at 150+ universities with a 99% visa success rate — Applyza is the next generation of international education support. We've taken everything we've learned from years of helping students navigate the system and combined it with modern technology to create a platform that's faster, smarter, and more accessible than anything we've built before.</p>
-              <p>Our AI-powered course matching helps students find programmes they're eligible for in seconds. Our expert counsellors provide personalised guidance at every stage. And we do it all without charging students a single penny.</p>
-              <p className="font-semibold text-foreground italic">We believe that where you study shouldn't be limited by where you're from.</p>
+              <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">Our Story</h2>
+              <p className="text-muted-foreground text-sm leading-[1.8]">
+                Every year, millions of students dream of studying abroad. But for too many, the process feels impossible — confusing visa requirements, overwhelming course options, and the fear of making the wrong choice.
+              </p>
+
+              {/* Pull quote */}
+              <div className="border-l-4 border-secondary pl-4 py-2 my-4">
+                <p className="text-base md:text-lg font-semibold text-foreground italic leading-relaxed">
+                  We built Applyza to change that.
+                </p>
+              </div>
+
+              <p className="text-muted-foreground text-sm leading-[1.8]">
+                Born from the team behind Study Now — a consultancy that has placed over 3,000 students at 150+ universities with a 99% visa success rate — Applyza is the next generation of international education support.
+              </p>
+              <p className="text-muted-foreground text-sm leading-[1.8]">
+                Our AI-powered course matching helps students find programmes they're eligible for in seconds. Our expert counsellors provide personalised guidance at every stage. And we do it all without charging students a single penny.
+              </p>
+
+              {/* Pull quote */}
+              <div className="border-l-4 border-secondary pl-4 py-2 my-4">
+                <p className="text-base font-semibold text-foreground italic leading-relaxed">
+                  We believe that where you study shouldn't be limited by where you're from.
+                </p>
+              </div>
             </motion.div>
 
+            {/* Right: Timeline milestones */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
-              className="lg:col-span-2"
+              className="space-y-0"
             >
-              <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-accent/10 via-secondary/10 to-muted flex items-center justify-center">
-                <span className="text-muted-foreground/40 text-sm font-medium">Team Photo</span>
-              </div>
+              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-6">Key Milestones</h3>
+              {[
+                { year: "2014", text: "Study Now consultancy founded" },
+                { year: "2017", text: "1,000th student placed internationally" },
+                { year: "2019", text: "AQF certification achieved" },
+                { year: "2021", text: "Expanded to 6 global offices" },
+                { year: "2023", text: "3,000+ students placed, 150+ partners" },
+                { year: "2024", text: "Applyza platform launched" },
+              ].map((m, i, arr) => (
+                <div key={m.year} className="flex gap-4">
+                  <div className="flex flex-col items-center">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 z-10 text-white text-[10px] font-bold" style={{ background: "linear-gradient(135deg, hsl(169 63% 47%), hsl(169 63% 40%))" }}>
+                      {m.year.slice(2)}
+                    </div>
+                    {i < arr.length - 1 && <div className="w-0.5 flex-1 bg-secondary/20 mt-1" />}
+                  </div>
+                  <div className="pb-6">
+                    <span className="text-xs font-bold text-secondary">{m.year}</span>
+                    <p className="text-sm text-foreground mt-0.5">{m.text}</p>
+                  </div>
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── OUR MISSION ── */}
-      <section style={{ background: "hsl(265 44% 97%)" }}>
-        <div className="container py-12 md:py-20">
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
+      {/* ── MISSION ── */}
+      <section className="bg-background">
+        <div className="container py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -151,19 +198,23 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto text-center"
           >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-accent mb-6">Our Mission</h2>
-            <p className="text-xl md:text-2xl font-bold text-primary leading-relaxed italic">
+            <span className="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-3 text-accent" style={{ backgroundColor: "hsl(265 44% 44% / 0.1)" }}>
+              Our Mission
+            </span>
+            <p className="text-lg md:text-xl font-bold text-foreground leading-relaxed italic">
               "To remove the barriers between ambitious students and world-class education — through expert guidance, smart technology, and a commitment to making the process completely free."
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* ── OUR VALUES ── */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
+      {/* ── VALUES ── */}
       <section className="bg-background">
-        <div className="container py-12 md:py-20">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-12">Our Values</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="container py-12">
+          <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">Our Values</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
@@ -171,22 +222,24 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="bg-card rounded-2xl shadow-sm p-8 hover:shadow-lg transition-shadow duration-300"
+                className="bg-card rounded-xl border border-border p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
               >
-                <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mb-5">
-                  <v.icon className="text-secondary" size={22} />
+                <div className="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center mb-3">
+                  <v.icon className="text-secondary" size={16} />
                 </div>
-                <h3 className="font-bold text-primary text-base mb-2">{v.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
+                <h3 className="font-bold text-foreground text-sm mb-1">{v.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{v.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── OUR COMMITMENT TO QUALITY ── */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
+      {/* ── COMMITMENT TO QUALITY ── */}
       <section className="bg-background">
-        <div className="container py-12 md:py-20">
+        <div className="container py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -194,11 +247,11 @@ const About = () => {
             transition={{ duration: 0.5 }}
             className="max-w-3xl mx-auto"
           >
-            <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-8">Our Commitment to Quality</h2>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-6">Our Commitment to Quality</h2>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-3">
               Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents. Our counsellors are trained and certified through the British Council's UK Certified Counsellor programme.
             </p>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-6">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               We are committed to supporting genuine students who are serious about their education. We carefully assess every student's academic background, career goals, and study intent before recommending programmes. We do not guarantee admission or visa outcomes — but we do guarantee honest, professional guidance based on years of experience.
             </p>
             <a
@@ -213,20 +266,94 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── BY THE NUMBERS ── */}
-      <section className="bg-card">
-        <div className="container py-12 md:py-20">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-12">By the Numbers</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      {/* ── OUR OFFICES — Dark section ── */}
+      <section style={{ background: "#0a0d24" }}>
+        <div className="container py-12">
+          <h2 className="text-xl md:text-2xl font-bold text-white text-center mb-8">Our Global Presence</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {offices.map((o, i) => (
+              <motion.div
+                key={o.city}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className={`relative rounded-xl p-5 border backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 ${
+                  o.hq
+                    ? "bg-white/10 border-secondary/30 md:col-span-1"
+                    : "bg-white/5 border-white/10"
+                }`}
+              >
+                {o.hq && (
+                  <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-secondary/20 text-secondary">
+                    HQ
+                  </span>
+                )}
+                <div className="flex items-center gap-3">
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${o.hq ? "bg-secondary/20" : "bg-white/10"}`}>
+                    {o.hq ? <Building2 size={14} className="text-secondary" /> : <MapPin size={14} className="text-white/60" />}
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-sm">{o.city}</h3>
+                    <p className="text-white/40 text-xs">{o.country}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STATS — Dark section ── */}
+      <section style={{ background: "#080b1e" }}>
+        <div className="container py-10">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 max-w-3xl mx-auto">
             {stats.map((s) => (
-              <StatCard key={s.label} {...s} />
+              <StatItem key={s.label} {...s} />
             ))}
           </div>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <FinalCTA />
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(169 63% 47%), hsl(169 63% 40%))" }} />
+        <div className="container relative z-10 py-12 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-xl md:text-2xl font-bold text-white mb-2"
+          >
+            Start Your Journey
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-white/80 max-w-xl mx-auto mb-6 text-sm"
+          >
+            Ready to take the first step toward your international education? Book a free consultation today.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Button
+              size="lg"
+              className="rounded-full bg-white text-primary hover:bg-white/90 font-bold px-8"
+              asChild
+            >
+              <Link to="/book-a-consultation">Book a Free Consultation</Link>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppButton />
     </div>
