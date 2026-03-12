@@ -9,7 +9,7 @@ import { GraduationCap, Building } from "lucide-react";
 
 const destinations = [
   { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom", courses: "500+", partners: "30+", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" },
-  { name: "United States", flag: "🇺🇸", slug: "usa", courses: "3,000+", partners: "50+", image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f04?w=800&q=80" },
+  { name: "United States", flag: "🇺🇸", slug: "usa", courses: "3,000+", partners: "50+", image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80" },
   { name: "Canada", flag: "🇨🇦", slug: "canada", courses: "1,500+", partners: "25+", image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80" },
   { name: "Germany", flag: "🇩🇪", slug: "germany", courses: "120+", partners: "15+", image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80" },
   { name: "France", flag: "🇫🇷", slug: "france", courses: "80+", partners: "12+", image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80" },
