@@ -33,7 +33,7 @@ const Hero = () => {
     <section
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #0a0d24 0%, #0f1235 100%)",
+        background: "linear-gradient(135deg, #0a0d24 0%, #050714 100%)",
       }}
     >
       {/* Teal glow - top right */}

@@ -41,8 +41,8 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="text-primary-foreground text-xl md:text-2xl font-extrabold tracking-tight shrink-0">
-          Applyza
+        <Link to="/" className="shrink-0">
+          <img src="/logo.png" alt="Applyza" className="h-10 w-auto" />
         </Link>
 
         <div className="hidden xl:flex items-center gap-6 lg:gap-8">
