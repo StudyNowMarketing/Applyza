@@ -45,19 +45,21 @@ const UpcomingEvents = () => {
 
   return (
     <section className="bg-white">
-      <div className="container py-16 md:py-24">
+      {/* Subtle top separator */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+      <div className="container py-12 md:py-16">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 gap-4">
           <div>
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3"
               style={{ background: "rgba(107,63,160,0.1)", color: "#6B3FA0" }}>
               <Calendar size={12} /> Mark Your Calendar
             </span>
-            <h2 className="text-2xl md:text-4xl font-extrabold text-primary">
+            <h2 className="text-xl md:text-3xl font-extrabold text-primary mb-2">
               Upcoming Events
             </h2>
-            <p className="text-muted-foreground mt-3 max-w-xl">
-              Join us at our events across the globe. Meet university representatives face-to-face and get your questions answered.
+            <p className="text-muted-foreground max-w-xl text-sm">
+              Join us at events across the globe. Meet university representatives and get your questions answered.
             </p>
           </div>
           <Button className="rounded-full shrink-0" style={{ background: "#1B2150" }} asChild>
@@ -66,18 +68,18 @@ const UpcomingEvents = () => {
         </div>
 
         {/* Bento layout */}
-        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-6">
+        <div className="grid lg:grid-cols-[1.4fr_1fr] gap-5">
           {/* Featured */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl p-8 flex flex-col justify-between min-h-[380px]"
+            className="rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px]"
             style={{ background: "linear-gradient(135deg, #1B2150, #0a0d24)" }}
           >
             <div>
-              <div className="flex flex-wrap items-center gap-2 mb-6">
+              <div className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
                   style={{ background: "#2EC4B6", color: "#0a0d24" }}>
                   Featured Event
@@ -88,23 +90,23 @@ const UpcomingEvents = () => {
                 </span>
               </div>
 
-              <div className="flex items-start gap-5">
+              <div className="flex items-start gap-4">
                 <div className="shrink-0 text-center">
-                  <p className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: "#2EC4B6" }}>{featured.month}</p>
-                  <p className="text-5xl font-extrabold text-white leading-none mt-1">{featured.day}</p>
+                  <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "#2EC4B6" }}>{featured.month}</p>
+                  <p className="text-4xl font-extrabold text-white leading-none mt-1">{featured.day}</p>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white leading-snug mb-2">{featured.title}</h3>
+                  <h3 className="text-lg font-bold text-white leading-snug mb-1.5">{featured.title}</h3>
                   <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.6)" }}>{featured.description}</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6">
-              <div className="flex flex-wrap items-center gap-4 text-[11px] mb-5" style={{ color: "rgba(255,255,255,0.5)" }}>
-                <span className="inline-flex items-center gap-1"><Clock size={11} /> {featured.time}</span>
-                <span className="inline-flex items-center gap-1"><MapPin size={11} /> {featured.location}</span>
-                <span className="inline-flex items-center gap-1"><Users size={11} /> {featured.attendees} expected</span>
+            <div className="mt-5">
+              <div className="flex flex-wrap items-center gap-4 text-[10px] mb-4" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <span className="inline-flex items-center gap-1"><Clock size={10} /> {featured.time}</span>
+                <span className="inline-flex items-center gap-1"><MapPin size={10} /> {featured.location}</span>
+                <span className="inline-flex items-center gap-1"><Users size={10} /> {featured.attendees} expected</span>
               </div>
               <Button className="rounded-full" style={{ background: "#2EC4B6", color: "#0a0d24" }} asChild>
                 <Link to="/events">Register Now — Free →</Link>
@@ -113,7 +115,7 @@ const UpcomingEvents = () => {
           </motion.div>
 
           {/* Smaller cards */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5">
             {rest.map((event, i) => (
               <motion.div
                 key={event.title}
@@ -121,25 +123,24 @@ const UpcomingEvents = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="bg-card rounded-xl p-5 flex items-start gap-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                className="bg-card rounded-xl p-4 flex items-start gap-3 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}
               >
-                {/* Date badge */}
-                <div className="shrink-0 w-16 h-16 rounded-xl flex flex-col items-center justify-center"
+                <div className="shrink-0 w-14 h-14 rounded-lg flex flex-col items-center justify-center"
                   style={{ background: "hsl(230 33% 97%)" }}>
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{event.month}</span>
-                  <span className="text-2xl font-extrabold text-primary leading-none">{event.day}</span>
+                  <span className="text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">{event.month}</span>
+                  <span className="text-xl font-extrabold text-primary leading-none">{event.day}</span>
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full mb-2"
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full mb-1.5"
                     style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6" }}>
                     {event.type}
                   </span>
                   <h3 className="font-bold text-primary text-sm leading-snug mb-1">{event.title}</h3>
-                  <div className="flex flex-wrap items-center gap-3 text-[11px] text-muted-foreground">
-                    <span className="inline-flex items-center gap-1"><Clock size={10} /> {event.time}</span>
-                    <span className="inline-flex items-center gap-1"><MapPin size={10} /> {event.location}</span>
+                  <div className="flex flex-wrap items-center gap-3 text-[10px] text-muted-foreground">
+                    <span className="inline-flex items-center gap-1"><Clock size={9} /> {event.time}</span>
+                    <span className="inline-flex items-center gap-1"><MapPin size={9} /> {event.location}</span>
                   </div>
                 </div>
               </motion.div>
@@ -147,7 +148,7 @@ const UpcomingEvents = () => {
           </div>
         </div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-8">
           <Link to="/events" className="font-semibold text-sm hover:underline" style={{ color: "#2EC4B6" }}>
             See more events →
           </Link>
