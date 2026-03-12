@@ -1,6 +1,6 @@
 import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import ApplyzaLogo from "@/components/ApplyzaLogo";
+
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -62,7 +62,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8">
           {/* Col 1 — Brand + Contact */}
           <div className="lg:col-span-2">
-            <ApplyzaLogo height={32} variant="light" />
+            <img src="/logo.png" alt="Applyza" className="h-8 w-auto mb-5" />
             <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.45)" }}>
               The smartest way to study abroad. Expert guidance, AI-powered course matching, and end-to-end support — completely free.
             </p>
