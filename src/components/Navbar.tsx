@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-
+import ApplyzaLogo from "@/components/ApplyzaLogo";
 
 const navTabs = [
   {
@@ -123,7 +123,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
         {/* Logo */}
         <Link to="/" className="shrink-0">
-          <img src="/logo.png" alt="Applyza" className="h-10 w-auto" />
+          <ApplyzaLogo height={36} variant="light" />
         </Link>
 
         {/* Desktop tabs */}
