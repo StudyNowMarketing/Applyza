@@ -63,7 +63,6 @@ const Index = () => {
       <UpcomingEvents />
       <Testimonials />
       <BlogPreview />
-      <PartnerLogos />
       <FinalCTA />
       <Footer />
       <WhatsAppButton />
