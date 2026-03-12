@@ -71,41 +71,52 @@ const Events = () => {
 
   const EventCard = ({ event, isPast = false }: { event: any; isPast?: boolean }) => {
     const eventDate = new Date(event.date);
+    const isVirtual = event.location?.toLowerCase().includes("virtual") || event.location?.toLowerCase().includes("online");
     return (
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className={`bg-card rounded-2xl shadow-sm border flex flex-col sm:flex-row items-stretch overflow-hidden ${isPast ? "opacity-60" : "hover:shadow-md transition-shadow"}`}
+        className={`bg-card rounded-xl border border-border shadow-sm flex flex-col sm:flex-row items-stretch overflow-hidden ${isPast ? "opacity-50" : "hover:shadow-md transition-shadow"}`}
       >
-        <div className={`flex flex-col items-center justify-center px-6 py-5 sm:px-8 shrink-0 ${isPast ? "bg-muted" : "bg-accent"}`}>
-          <span className={`text-3xl font-extrabold ${isPast ? "text-muted-foreground" : "text-accent-foreground"}`}>
-            {format(eventDate, "dd")}
-          </span>
-          <span className={`text-sm font-medium uppercase ${isPast ? "text-muted-foreground" : "text-accent-foreground/80"}`}>
+        {/* Date badge */}
+        <div className={`flex flex-col items-center justify-center px-5 py-4 sm:px-6 shrink-0 border-r border-border ${isPast ? "bg-muted" : ""}`}
+          style={!isPast ? { borderColor: "hsl(169 63% 47%)", borderRightWidth: 2 } : {}}>
+          <span className={`text-xs font-semibold uppercase ${isPast ? "text-muted-foreground" : "text-secondary"}`}>
             {format(eventDate, "MMM")}
           </span>
-          <span className={`text-xs ${isPast ? "text-muted-foreground" : "text-accent-foreground/60"}`}>
+          <span className={`text-2xl font-bold leading-none ${isPast ? "text-muted-foreground" : "text-primary"}`}>
+            {format(eventDate, "dd")}
+          </span>
+          <span className={`text-[10px] ${isPast ? "text-muted-foreground" : "text-muted-foreground"}`}>
             {format(eventDate, "yyyy")}
           </span>
         </div>
 
-        <div className="flex-1 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4">
-          <div className="flex-1">
-            <h3 className="text-lg font-bold text-primary mb-1">{event.title}</h3>
+        {/* Content */}
+        <div className="flex-1 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-3">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className={`text-base font-bold leading-snug ${isPast ? "text-muted-foreground" : "text-primary"}`}>{event.title}</h3>
+              {!isPast && isVirtual !== undefined && (
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${isVirtual ? "bg-blue-50 text-blue-600" : "bg-orange-50 text-orange-600"}`}>
+                  {isVirtual ? "Virtual" : "In-Person"}
+                </span>
+              )}
+            </div>
             {event.location && (
-              <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-2">
-                <MapPin size={14} className="text-secondary shrink-0" />
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
+                <MapPin size={12} className="text-secondary shrink-0" />
                 <span>{event.location}</span>
               </div>
             )}
             {event.description && (
-              <p className="text-sm text-muted-foreground leading-relaxed">{event.description}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{event.description}</p>
             )}
           </div>
           {!isPast && (
             <div className="shrink-0">
-              <Button variant="outline" className="rounded-full border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground" asChild>
+              <Button size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs px-4" asChild>
                 <a href={event.registration_url || "/book-a-consultation"} target={event.registration_url ? "_blank" : undefined} rel="noopener noreferrer">
                   Register →
                 </a>
@@ -122,39 +133,45 @@ const Events = () => {
       <SEO title="Events | The Applyza Experience | Meet Universities" description="Join Applyza events across the globe. Meet university representatives, attend expert panels, and get personalised guidance." path="/events" />
       <Navbar solid />
 
-      <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>
-        <div className="container pb-12 pt-28">
+      {/* Dark Hero */}
+      <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20" style={{ background: "radial-gradient(circle, hsl(169 63% 47% / 0.4), transparent 70%)" }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-15" style={{ background: "radial-gradient(circle, hsl(265 44% 44% / 0.3), transparent 70%)" }} />
+        </div>
+        <div className="container relative z-10 pt-20">
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-primary-foreground/60">Home</Link></BreadcrumbLink></BreadcrumbItem>
-              <BreadcrumbSeparator className="text-primary-foreground/40" />
-              <BreadcrumbItem><BreadcrumbPage className="text-primary-foreground/80">Events</BreadcrumbPage></BreadcrumbItem>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-white/40 hover:text-white/60 text-sm">Home</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator className="text-white/30" />
+              <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">Events</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-primary-foreground mt-4 mb-3">The Applyza Experience</h1>
-          <p className="text-primary-foreground/70 text-base md:text-lg max-w-2xl leading-relaxed">
-            Join us at our events across the globe. Meet university representatives, attend expert panels, and get your questions answered by our counsellors.
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">The Applyza Experience</h1>
+          <p className="text-white/60 text-sm sm:text-base max-w-xl">
+            Join us at our events across the globe. Meet university representatives, attend expert panels, and get your questions answered.
           </p>
         </div>
       </section>
 
-      <section className="bg-background py-12 md:py-16 flex-1">
-        <div className="container max-w-4xl space-y-5">
+      {/* Events */}
+      <section className="bg-background py-10 flex-1">
+        <div className="container max-w-3xl space-y-4">
           {isLoading ? (
-            <div className="space-y-4">
+            <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-card rounded-2xl h-32 animate-pulse" />
+                <div key={i} className="bg-card rounded-xl h-24 animate-pulse border border-border" />
               ))}
             </div>
           ) : isError ? (
             <div className="text-center py-16">
-              <p className="text-muted-foreground">Something went wrong. Please refresh the page or contact us at <a href="mailto:info@applyza.com" className="text-secondary underline">info@applyza.com</a>.</p>
+              <p className="text-muted-foreground text-sm">Something went wrong. Please refresh the page or contact us at <a href="mailto:info@applyza.com" className="text-secondary underline">info@applyza.com</a>.</p>
             </div>
           ) : upcoming.length > 0 ? (
             upcoming.map((event) => <EventCard key={event.id} event={event} />)
           ) : (
             <div className="text-center py-16">
-              <p className="text-muted-foreground mb-4">No upcoming events at the moment. Follow us on social media for announcements.</p>
+              <p className="text-muted-foreground text-sm mb-4">No upcoming events at the moment. Follow us on social media for announcements.</p>
               <div className="flex justify-center gap-3">
                 {["Instagram", "TikTok", "LinkedIn"].map((s) => (
                   <a key={s} href={`https://${s.toLowerCase()}.com/applyzahq`} target="_blank" rel="noopener noreferrer"
@@ -165,14 +182,14 @@ const Events = () => {
           )}
 
           {past.length > 0 && (
-            <div className="pt-8">
+            <div className="pt-6">
               <button onClick={() => setShowPast(!showPast)}
                 className="flex items-center gap-2 text-muted-foreground hover:text-primary text-sm font-medium transition-colors">
                 {showPast ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 {showPast ? "Hide" : "Show"} Past Events ({past.length})
               </button>
               {showPast && (
-                <div className="space-y-4 mt-4">
+                <div className="space-y-3 mt-3">
                   {past.map((event) => <EventCard key={event.id} event={event} isPast />)}
                 </div>
               )}
@@ -181,20 +198,21 @@ const Events = () => {
         </div>
       </section>
 
-      <section className="bg-muted py-14">
-        <div className="container max-w-xl text-center">
-          <h2 className="text-xl md:text-2xl font-extrabold text-primary mb-3">Want to be notified about future events?</h2>
-          <p className="text-muted-foreground text-sm mb-6">Enter your email and we'll let you know when new events are announced.</p>
+      {/* Subscribe */}
+      <section className="bg-card border-t border-border py-10">
+        <div className="container max-w-md text-center">
+          <h2 className="text-lg font-bold text-primary mb-2">Want to be notified about future events?</h2>
+          <p className="text-muted-foreground text-xs mb-5">Enter your email and we'll let you know when new events are announced.</p>
           {subscribed ? (
-            <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-6 text-center">
-              <p className="font-bold text-primary">You're subscribed! We'll notify you about upcoming events.</p>
+            <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-5 text-center">
+              <p className="font-semibold text-primary text-sm">You're subscribed! We'll notify you about upcoming events.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubscribe} className="space-y-4 max-w-md mx-auto">
+            <form onSubmit={handleSubscribe} className="space-y-3">
               <FormError message={rateLimitMsg} />
-              <div className="flex gap-3">
-                <Input type="email" placeholder="Your email address" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} className="flex-1" disabled={subscribing} maxLength={FIELD_LIMITS.email} />
-                <Button type="submit" variant="teal" className="rounded-full shrink-0" disabled={subscribing || !subConsent || isBlocked}>
+              <div className="flex gap-2">
+                <Input type="email" placeholder="Your email address" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} className="flex-1 rounded-lg h-10 border-border focus-visible:ring-secondary" disabled={subscribing} maxLength={FIELD_LIMITS.email} />
+                <Button type="submit" size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground shrink-0 px-5" disabled={subscribing || !subConsent || isBlocked}>
                   {subscribing ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
                 </Button>
               </div>
