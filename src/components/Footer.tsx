@@ -1,5 +1,6 @@
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import ApplyzaLogo from "@/components/ApplyzaLogo";
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -52,7 +53,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Col 1 */}
           <div>
-            <h3 className="text-primary-foreground text-xl font-extrabold mb-3">Applyza</h3>
+            <ApplyzaLogo height={36} />
             <p className="text-primary-foreground/50 text-sm mb-5 leading-relaxed">The smartest way to study abroad.</p>
             <div className="flex gap-3">
               {socials.map(({ icon: Icon, href }) => (
