@@ -46,7 +46,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="shrink-0">
-          <ApplyzaLogo height={40} />
+          <ApplyzaLogo height={40} variant="light" />
         </Link>
 
         <div className="hidden xl:flex items-center gap-6 lg:gap-8">
