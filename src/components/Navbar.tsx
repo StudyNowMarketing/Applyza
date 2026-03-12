@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import ApplyzaLogo from "@/components/ApplyzaLogo";
 
 const navLinks = [
   { label: "Find a Course", to: "/find-a-course" },
