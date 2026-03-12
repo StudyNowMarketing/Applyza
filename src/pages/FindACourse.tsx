@@ -1,7 +1,7 @@
 import SEO from "@/components/SEO";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, SlidersHorizontal, X, BookOpen, ChevronDown } from "lucide-react";
+import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -73,10 +73,10 @@ const DURATION_OPTIONS = [
 ];
 
 const LEVEL_COLORS: Record<string, string> = {
-  Foundation: "bg-amber-100 text-amber-800",
-  Undergraduate: "bg-blue-100 text-blue-800",
-  Postgraduate: "bg-purple-100 text-purple-800",
-  "Top-Up": "bg-emerald-100 text-emerald-800",
+  Foundation: "bg-amber-50 text-amber-700 border-amber-200",
+  Undergraduate: "bg-blue-50 text-blue-700 border-blue-200",
+  Postgraduate: "bg-purple-50 text-purple-700 border-purple-200",
+  "Top-Up": "bg-emerald-50 text-emerald-700 border-emerald-200",
 };
 
 // --- Collapsible filter section ---
@@ -91,18 +91,30 @@ const FilterSection = ({
 }) => {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div>
+    <div className="border-b border-gray-100 pb-4">
       <button
-        className="flex items-center justify-between w-full text-sm font-bold text-foreground mb-2"
+        className="flex items-center justify-between w-full text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2"
         onClick={() => setOpen(!open)}
       >
         {title}
         <ChevronDown
-          size={14}
-          className={`text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
+          size={13}
+          className={`text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
       </button>
-      {open && <div>{children}</div>}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -152,21 +164,22 @@ const UniversityFilter = ({
           setDropdownOpen(true);
         }}
         onFocus={() => setDropdownOpen(true)}
-        className="text-sm h-9"
+        className="text-sm h-8 rounded-lg border-gray-200 focus:border-secondary focus:ring-secondary/20"
       />
       {dropdownOpen && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto">
+        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-100 rounded-lg shadow-lg z-10 max-h-48 overflow-y-auto">
           {filtered.length === 0 ? (
-            <p className="text-xs text-muted-foreground p-3">No match</p>
+            <p className="text-xs text-gray-400 p-3">No match</p>
           ) : (
             filtered.map((u) => (
               <label
                 key={u}
-                className="flex items-center gap-2 px-3 py-1.5 hover:bg-muted/50 cursor-pointer"
+                className="flex items-center gap-2 px-3 py-1.5 hover:bg-gray-50 cursor-pointer"
               >
                 <Checkbox
                   checked={selected.includes(u)}
                   onCheckedChange={() => toggle(u)}
+                  className="data-[state=checked]:bg-secondary data-[state=checked]:border-secondary"
                 />
                 <span className="text-sm text-foreground truncate">{u}</span>
               </label>
@@ -179,7 +192,8 @@ const UniversityFilter = ({
           {selected.map((u) => (
             <span
               key={u}
-              className="inline-flex items-center gap-1 bg-muted text-foreground text-[11px] px-2 py-0.5 rounded-full"
+              className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full"
+              style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6" }}
             >
               {u.length > 20 ? u.slice(0, 20) + "…" : u}
               <button onClick={() => toggle(u)}>
@@ -227,13 +241,14 @@ const ActiveFilterPill = ({
   label: string;
   onRemove: () => void;
 }) => (
-  <span className="inline-flex items-center gap-1 bg-secondary/15 text-secondary border border-secondary/25 text-xs font-medium px-2.5 py-1 rounded-full">
+  <span className="inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full"
+    style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.2)" }}>
     {label}
     <button
       onClick={onRemove}
       className="hover:bg-secondary/20 rounded-full p-0.5 transition-colors"
     >
-      <X size={12} />
+      <X size={11} />
     </button>
   </span>
 );
@@ -274,7 +289,6 @@ const FindACourse = () => {
     },
   });
 
-  // Derive unique university names
   const universityNames = useMemo(
     () => [...new Set(courses.map((c) => c.university_name))].sort(),
     [courses]
@@ -435,7 +449,7 @@ const FindACourse = () => {
   }
 
   const filterPanel = (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <FilterSection title="Country">
         {COUNTRIES.map((c) => (
           <label key={c} className="flex items-center gap-2 cursor-pointer py-1">
@@ -444,6 +458,7 @@ const FindACourse = () => {
               onCheckedChange={() =>
                 toggleFilter(selectedCountries, c, setSelectedCountries)
               }
+              className="rounded data-[state=checked]:bg-secondary data-[state=checked]:border-secondary"
             />
             <span className="text-sm text-foreground">{c}</span>
           </label>
@@ -466,6 +481,7 @@ const FindACourse = () => {
               onCheckedChange={() =>
                 toggleFilter(selectedLevels, l, setSelectedLevels)
               }
+              className="rounded data-[state=checked]:bg-secondary data-[state=checked]:border-secondary"
             />
             <span className="text-sm text-foreground">{l}</span>
           </label>
@@ -480,6 +496,7 @@ const FindACourse = () => {
               onCheckedChange={() =>
                 toggleFilter(selectedSubjects, s, setSelectedSubjects)
               }
+              className="rounded data-[state=checked]:bg-secondary data-[state=checked]:border-secondary"
             />
             <span className="text-sm text-foreground">{s}</span>
           </label>
@@ -494,6 +511,7 @@ const FindACourse = () => {
               onCheckedChange={() =>
                 toggleFilter(selectedIntakes, i, setSelectedIntakes)
               }
+              className="rounded data-[state=checked]:bg-secondary data-[state=checked]:border-secondary"
             />
             <span className="text-sm text-foreground">{i}</span>
           </label>
@@ -508,6 +526,7 @@ const FindACourse = () => {
               onCheckedChange={() =>
                 toggleFilter(selectedDurations, d, setSelectedDurations)
               }
+              className="rounded data-[state=checked]:bg-secondary data-[state=checked]:border-secondary"
             />
             <span className="text-sm text-foreground">{d}</span>
           </label>
@@ -523,25 +542,29 @@ const FindACourse = () => {
           onValueChange={setFeeRange}
           className="mb-2"
         />
-        <div className="flex justify-between text-xs text-muted-foreground">
+        <div className="flex justify-between text-xs text-gray-400">
           <span>£{feeRange[0].toLocaleString()}</span>
           <span>£{feeRange[1].toLocaleString()}</span>
         </div>
       </FilterSection>
 
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-bold text-foreground">
+      <div className="flex items-center justify-between pt-1">
+        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
           Scholarship Available
         </span>
         <Switch
           checked={scholarshipOnly}
           onCheckedChange={setScholarshipOnly}
+          className="data-[state=checked]:bg-secondary"
         />
       </div>
 
-      <Button variant="outline" className="w-full" onClick={clearAll}>
+      <button
+        onClick={clearAll}
+        className="w-full text-sm text-gray-400 hover:text-secondary transition-colors text-center py-2"
+      >
         Clear All Filters
-      </Button>
+      </button>
     </div>
   );
 
@@ -551,23 +574,26 @@ const FindACourse = () => {
       <Navbar solid />
 
       {/* Hero */}
-      <section className="gradient-navy pt-28 pb-14 md:pt-36 md:pb-20">
-        <div className="container">
-          <Breadcrumb className="mb-6">
+      <section className="relative overflow-hidden" style={{ background: "#0a0d24" }}>
+        {/* Glow effects */}
+        <div className="absolute top-0 right-[10%] w-[300px] h-[300px] rounded-full pointer-events-none"
+          style={{ background: "rgba(46,196,182,0.08)", filter: "blur(100px)" }} />
+        <div className="absolute bottom-0 left-[5%] w-[200px] h-[200px] rounded-full pointer-events-none"
+          style={{ background: "rgba(107,63,160,0.10)", filter: "blur(80px)" }} />
+
+        <div className="container relative z-10 pt-28 pb-12 md:pt-32 md:pb-14">
+          <Breadcrumb className="mb-5">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link
-                    to="/"
-                    className="text-primary-foreground/60 hover:text-primary-foreground"
-                  >
+                  <Link to="/" style={{ color: "rgba(255,255,255,0.4)" }} className="hover:text-white/70 text-sm transition-colors">
                     Home
                   </Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
-              <BreadcrumbSeparator className="text-primary-foreground/40" />
+              <BreadcrumbSeparator style={{ color: "rgba(255,255,255,0.25)" }} />
               <BreadcrumbItem>
-                <BreadcrumbPage className="text-primary-foreground">
+                <BreadcrumbPage className="text-white/80 text-sm">
                   Find a Course
                 </BreadcrumbPage>
               </BreadcrumbItem>
@@ -578,7 +604,7 @@ const FindACourse = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-[44px] md:leading-tight font-extrabold text-primary-foreground mb-4"
+            className="text-2xl md:text-3xl font-bold text-white mb-2"
           >
             Find Your Perfect Course
           </motion.h1>
@@ -586,7 +612,8 @@ const FindACourse = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-primary-foreground/70 text-base md:text-lg mb-8 max-w-xl"
+            className="text-sm md:text-base mb-6 max-w-xl"
+            style={{ color: "rgba(255,255,255,0.6)" }}
           >
             Search thousands of programmes across 150+ universities worldwide
           </motion.p>
@@ -595,29 +622,34 @@ const FindACourse = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex bg-primary-foreground rounded-full overflow-hidden shadow-2xl w-full md:w-[70%]"
+            className="flex rounded-xl overflow-hidden w-full md:w-[65%] backdrop-blur-xl"
+            style={{ background: "rgba(255,255,255,0.10)", border: "1px solid rgba(255,255,255,0.20)" }}
           >
+            <div className="flex items-center pl-4">
+              <Search size={16} style={{ color: "rgba(255,255,255,0.4)" }} />
+            </div>
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search courses, universities, or subjects..."
-              className="flex-1 px-5 py-3.5 text-sm text-foreground bg-transparent outline-none placeholder:text-muted-foreground min-w-0"
+              className="flex-1 px-3 py-3 text-sm text-white bg-transparent outline-none placeholder:text-white/40 min-w-0"
             />
-            <Button variant="teal" className="rounded-full m-1 px-5 shrink-0">
-              <Search size={18} />
+            <Button className="rounded-lg m-1.5 px-5 shrink-0" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
+              Search
             </Button>
           </motion.div>
         </div>
       </section>
 
       {/* Content */}
-      <section className="container py-10 md:py-14">
-        <div className="flex gap-8">
+      <section className="container py-8 md:py-12">
+        <div className="flex gap-6">
           {/* Desktop sidebar */}
-          <aside className="hidden lg:block w-72 shrink-0">
-            <div className="sticky top-24 bg-card rounded-xl border border-border p-5 max-h-[calc(100vh-7rem)] overflow-y-auto">
-              <h3 className="font-bold text-foreground mb-4">Filters</h3>
+          <aside className="hidden lg:block w-64 shrink-0">
+            <div className="sticky top-24 bg-white rounded-xl shadow-sm p-4 max-h-[calc(100vh-7rem)] overflow-y-auto"
+              style={{ border: "1px solid hsl(230 25% 93%)" }}>
+              <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Filters</h3>
               {filterPanel}
             </div>
           </aside>
@@ -625,22 +657,22 @@ const FindACourse = () => {
           {/* Mobile filter FAB */}
           <div className="lg:hidden fixed bottom-20 right-4 z-40">
             <Button
-              variant="teal"
               size="lg"
               className="rounded-full shadow-xl"
+              style={{ background: "#2EC4B6", color: "#0a0d24" }}
               onClick={() => setMobileFiltersOpen(true)}
             >
-              <SlidersHorizontal size={18} />
+              <SlidersHorizontal size={16} />
               Filters
               {activeFilters.length > 0 && (
-                <span className="ml-1 bg-primary-foreground text-secondary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="ml-1 bg-white text-secondary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                   {activeFilters.length}
                 </span>
               )}
             </Button>
           </div>
 
-          {/* Mobile filter slide-out (from left) */}
+          {/* Mobile filter slide-out */}
           <AnimatePresence>
             {mobileFiltersOpen && (
               <div className="fixed inset-0 z-50 lg:hidden">
@@ -648,7 +680,8 @@ const FindACourse = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-foreground/50"
+                  className="absolute inset-0"
+                  style={{ background: "rgba(10,13,36,0.6)" }}
                   onClick={() => setMobileFiltersOpen(false)}
                 />
                 <motion.div
@@ -656,12 +689,12 @@ const FindACourse = () => {
                   animate={{ x: 0 }}
                   exit={{ x: "-100%" }}
                   transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                  className="absolute left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-card overflow-y-auto p-6"
+                  className="absolute left-0 top-0 bottom-0 w-80 max-w-[85vw] bg-white overflow-y-auto p-5"
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h3 className="font-bold text-foreground">Filters</h3>
+                  <div className="flex items-center justify-between mb-5">
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Filters</h3>
                     <button onClick={() => setMobileFiltersOpen(false)}>
-                      <X size={20} className="text-muted-foreground" />
+                      <X size={18} className="text-gray-400" />
                     </button>
                   </div>
                   {filterPanel}
@@ -684,15 +717,15 @@ const FindACourse = () => {
                 ))}
                 <button
                   onClick={clearAll}
-                  className="text-xs text-muted-foreground hover:text-foreground underline ml-1"
+                  className="text-xs text-gray-400 hover:text-secondary underline ml-1 transition-colors"
                 >
                   Clear all
                 </button>
               </div>
             )}
 
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-              <p className="text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+              <p className="text-sm text-gray-500">
                 Showing{" "}
                 <span className="font-semibold text-foreground">
                   {filtered.length}
@@ -700,7 +733,7 @@ const FindACourse = () => {
                 courses
               </p>
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-52">
+                <SelectTrigger className="w-48 rounded-lg border-gray-200 text-sm h-9">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -717,49 +750,50 @@ const FindACourse = () => {
             </div>
 
             {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <div
                     key={i}
-                    className="bg-card rounded-xl border border-border p-5 animate-pulse"
+                    className="bg-white rounded-xl p-5 animate-pulse"
+                    style={{ border: "1px solid hsl(230 25% 93%)" }}
                   >
-                    <div className="h-3 w-32 bg-muted rounded mb-3" />
-                    <div className="h-5 w-3/4 bg-muted rounded mb-4" />
+                    <div className="h-3 w-28 bg-gray-100 rounded mb-3" />
+                    <div className="h-5 w-3/4 bg-gray-100 rounded mb-4" />
                     <div className="flex gap-2 mb-3">
-                      <div className="h-3 w-16 bg-muted rounded" />
-                      <div className="h-3 w-12 bg-muted rounded" />
-                      <div className="h-5 w-20 bg-muted rounded-full" />
+                      <div className="h-3 w-16 bg-gray-100 rounded" />
+                      <div className="h-3 w-12 bg-gray-100 rounded" />
+                      <div className="h-5 w-20 bg-gray-100 rounded-full" />
                     </div>
-                    <div className="h-6 w-24 bg-muted rounded mb-4" />
+                    <div className="h-6 w-24 bg-gray-100 rounded mb-4" />
                     <div className="flex gap-2 pt-2">
-                      <div className="h-9 flex-1 bg-muted rounded" />
-                      <div className="h-9 flex-1 bg-muted rounded" />
+                      <div className="h-9 flex-1 bg-gray-100 rounded-lg" />
+                      <div className="h-9 flex-1 bg-gray-100 rounded-lg" />
                     </div>
                   </div>
                 ))}
               </div>
             ) : filtered.length === 0 ? (
-              <div className="text-center py-20 px-4">
-                <div className="w-20 h-20 mx-auto mb-6 bg-muted rounded-full flex items-center justify-center">
-                  <BookOpen size={32} className="text-muted-foreground" />
+              <div className="text-center py-16 px-4">
+                <div className="w-16 h-16 mx-auto mb-5 bg-gray-50 rounded-full flex items-center justify-center">
+                  <BookOpen size={28} className="text-gray-300" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">
+                <h3 className="text-lg font-bold text-foreground mb-2">
                   No courses match your search
                 </h3>
-                <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+                <p className="text-sm text-gray-500 mb-5 max-w-md mx-auto">
                   Try adjusting your filters or book a consultation for personalised recommendations.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button variant="outline" onClick={clearAll}>
+                  <Button variant="outline" onClick={clearAll} className="rounded-lg">
                     Clear Filters
                   </Button>
-                  <Button variant="teal" asChild>
+                  <Button asChild className="rounded-lg" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
                     <Link to="/book-a-consultation">Book a Consultation</Link>
                   </Button>
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filtered.map((course) => (
                   <CourseCard key={course.id} course={course} />
                 ))}
@@ -776,43 +810,50 @@ const FindACourse = () => {
 };
 
 const CourseCard = ({ course }: { course: Course }) => (
-  <div className="bg-card rounded-xl border border-border p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-    <p className="text-xs text-muted-foreground mb-1">
+  <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+    style={{ border: "1px solid hsl(230 25% 93%)" }}>
+    <p className="text-[11px] text-gray-400 mb-1 font-medium">
       {course.university_name}
     </p>
-    <h3 className="text-lg font-bold text-foreground leading-snug mb-3">
+    <h3 className="text-base font-bold leading-snug mb-3" style={{ color: "#1B2150" }}>
       {course.title}
     </h3>
 
-    <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-3">
-      <span>🇬🇧 {course.city}</span>
-      <span className="text-border">|</span>
-      <span>{course.duration}</span>
+    <div className="flex flex-wrap items-center gap-2 text-[11px] text-gray-500 mb-3">
+      <span className="inline-flex items-center gap-1">
+        <MapPin size={11} className="text-gray-400" /> {course.city}
+      </span>
+      {course.duration && (
+        <span className="inline-flex items-center gap-1">
+          <Clock size={11} className="text-gray-400" /> {course.duration}
+        </span>
+      )}
       <span
-        className={`px-2 py-0.5 rounded-full text-[11px] font-semibold ${
-          LEVEL_COLORS[course.study_level] ?? "bg-muted text-muted-foreground"
+        className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${
+          LEVEL_COLORS[course.study_level] ?? "bg-gray-50 text-gray-600 border-gray-200"
         }`}
       >
         {course.study_level}
       </span>
     </div>
 
-    <p className="text-base font-bold text-foreground mb-2">
+    <p className="text-xl font-bold mb-2" style={{ color: "#1B2150" }}>
       £{course.tuition_fee?.toLocaleString()}{" "}
-      <span className="text-xs font-normal text-muted-foreground">/ year</span>
+      <span className="text-xs font-normal text-gray-400">/ year</span>
     </p>
 
     {course.scholarship_available && (
-      <Badge variant="secondary" className="mb-3 text-[11px]">
-        Scholarship Available
-      </Badge>
+      <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2.5 py-1 rounded-full mb-3 w-fit"
+        style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6" }}>
+        <Sparkles size={10} /> Scholarship Available
+      </span>
     )}
 
     <div className="flex gap-2 mt-auto pt-2">
-      <Button variant="outline" size="sm" className="flex-1" asChild>
+      <Button variant="outline" size="sm" className="flex-1 rounded-lg text-xs" style={{ borderColor: "#1B2150", color: "#1B2150" }} asChild>
         <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
       </Button>
-      <Button variant="teal" size="sm" className="flex-1" asChild>
+      <Button size="sm" className="flex-1 rounded-lg text-xs" style={{ background: "#2EC4B6", color: "#0a0d24" }} asChild>
         <Link to="/book-a-consultation">Apply with Applyza</Link>
       </Button>
     </div>
