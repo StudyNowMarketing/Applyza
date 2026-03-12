@@ -16,7 +16,7 @@ const faqData = [
       { q: "What countries can I study in through Applyza?", a: "We support students applying to universities in the United Kingdom, Germany, France, Ireland, Malta, the Netherlands, Canada, the USA, and more. Our course database is constantly growing." },
       { q: "Which countries do you support students from?", a: "We work with students from Nigeria, Ghana, Kenya, Türkiye, Qatar, and many other countries. If you're unsure whether we can help, just reach out." },
       { q: "How is Applyza different from other education consultancies?", a: "We combine the personal touch of an experienced consultancy with AI-powered technology. Our course matcher helps you find programmes you're eligible for instantly. Our counsellors provide real, human guidance. And everything is free." },
-      { q: "Is Applyza a regulated education agent?", a: "Yes. Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents, established by the British Council, BUILA, UKCISA, and Universities UK International. Our counsellors are trained and certified through the British Council's programme." },
+      { q: "Is Applyza a regulated education agent?", a: "Yes. Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents, established by leading international education bodies. Our counsellors are trained and certified through recognized professional programmes." },
     ],
   },
   {

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Bot, CircleDollarSign, ShieldCheck, Heart, Globe, Trophy } from "lucide-react";
+import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 const reasons = [
@@ -18,11 +18,11 @@ const reasons = [
     iconColor: "#6B3FA0",
   },
   {
-    icon: Trophy,
-    title: "Accredited & Trusted",
-    text: "Backed by British Council and leading education bodies with over a decade of experience.",
-    iconBg: "rgba(217,160,50,0.12)",
-    iconColor: "#d9a032",
+    icon: Clock,
+    title: "Fast Response",
+    text: "Get a response within 24 hours. We know your time is valuable when you're planning your future.",
+    iconBg: "rgba(107,63,160,0.12)",
+    iconColor: "#6b3fa0",
   },
   {
     icon: Globe,
