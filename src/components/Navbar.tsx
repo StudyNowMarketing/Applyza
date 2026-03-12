@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-
+import ApplyzaLogo from "@/components/ApplyzaLogo";
 
 const navTabs = [
   {
