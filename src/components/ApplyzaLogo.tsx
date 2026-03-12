@@ -1,4 +1,5 @@
-const ApplyzaLogo = ({ height = 40, className = "" }: { height?: number; className?: string }) => {
+const ApplyzaLogo = ({ height = 40, className = "", variant = "dark" }: { height?: number; className?: string; variant?: "dark" | "light" }) => {
+  const textColor = variant === "light" ? "#FFFFFF" : "#1B2150";
   const iconH = height;
   const iconW = iconH * 0.75;
   const textH = height * 0.45;
@@ -40,7 +41,7 @@ const ApplyzaLogo = ({ height = 40, className = "" }: { height?: number; classNa
       <text
         x="62"
         y="40"
-        fill="#1B2150"
+        fill={textColor}
         fontFamily="'Plus Jakarta Sans', sans-serif"
         fontWeight="800"
         fontSize="28"

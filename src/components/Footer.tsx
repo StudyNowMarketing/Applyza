@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Col 1 */}
           <div>
-            <ApplyzaLogo height={36} />
+            <ApplyzaLogo height={36} variant="light" />
             <p className="text-primary-foreground/50 text-sm mb-5 leading-relaxed">The smartest way to study abroad.</p>
             <div className="flex gap-3">
               {socials.map(({ icon: Icon, href }) => (
