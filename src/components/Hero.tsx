@@ -60,10 +60,9 @@ const Hero = () => {
         style={{ backgroundColor: "rgba(46,196,182,0.15)", filter: "blur(100px)" }}
       />
 
-      <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.7fr] gap-8 lg:gap-12 items-center">
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-5 order-2 lg:order-1">
+      <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16 flex justify-center">
+        <div className="w-full max-w-[800px]">
+          <div className="flex flex-col gap-5">
             {/* Video Placeholder */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
