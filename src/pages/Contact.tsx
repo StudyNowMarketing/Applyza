@@ -79,56 +79,63 @@ const Contact = () => {
       <SEO title="Contact Applyza | Get in Touch" description="Contact Applyza for free study abroad guidance. Reach us by email, WhatsApp, or book a consultation." path="/contact" />
       <Navbar solid />
 
-      <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>
-        <div className="container pb-12 pt-28">
+      {/* Dark Hero */}
+      <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20" style={{ background: "radial-gradient(circle, hsl(169 63% 47% / 0.4), transparent 70%)" }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-15" style={{ background: "radial-gradient(circle, hsl(265 44% 44% / 0.3), transparent 70%)" }} />
+        </div>
+        <div className="container relative z-10 pt-20">
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-primary-foreground/60">Home</Link></BreadcrumbLink></BreadcrumbItem>
-              <BreadcrumbSeparator className="text-primary-foreground/40" />
-              <BreadcrumbItem><BreadcrumbPage className="text-primary-foreground/80">Contact</BreadcrumbPage></BreadcrumbItem>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-white/40 hover:text-white/60 text-sm">Home</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator className="text-white/30" />
+              <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">Contact</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-primary-foreground mt-4 mb-3">Let's Talk</h1>
-          <p className="text-primary-foreground/70 text-base md:text-lg max-w-2xl leading-relaxed">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Let's Talk</h1>
+          <p className="text-white/60 text-sm sm:text-base max-w-xl">
             Whether you're a student with questions, a university looking to partner, or an agent who wants to join our network — we'd love to hear from you.
           </p>
         </div>
       </section>
 
-      <section className="bg-background py-16 md:py-20">
-        <div className="container grid grid-cols-1 lg:grid-cols-[55%_45%] gap-12">
-          <div>
-            <h2 className="text-2xl font-extrabold text-primary mb-6">Send Us a Message</h2>
+      {/* Form + Info */}
+      <section className="bg-background py-12">
+        <div className="container grid grid-cols-1 lg:grid-cols-[55%_45%] gap-8">
+          {/* Left: Form */}
+          <div className="bg-card rounded-xl shadow-sm border border-border p-6">
+            <h2 className="text-xl font-bold text-primary mb-5">Send Us a Message</h2>
 
             {submitted ? (
-              <div className="bg-secondary/10 border border-secondary/30 rounded-2xl p-8 text-center">
-                <h3 className="text-xl font-bold text-primary mb-2">Thank you for your message</h3>
-                <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
+              <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-8 text-center">
+                <h3 className="text-lg font-bold text-primary mb-2">Thank you for your message</h3>
+                <p className="text-muted-foreground text-sm">We'll get back to you within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <FormError message={rateLimitMsg} />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="c_name">Full Name *</Label>
-                    <Input id="c_name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} />
+                    <Label htmlFor="c_name" className="text-sm text-muted-foreground mb-1.5 block">Full Name *</Label>
+                    <Input id="c_name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} className="rounded-lg h-11 border-border focus-visible:ring-secondary" placeholder="Your full name" />
                     {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <Label htmlFor="c_email">Email *</Label>
-                    <Input id="c_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.email} />
+                    <Label htmlFor="c_email" className="text-sm text-muted-foreground mb-1.5 block">Email *</Label>
+                    <Input id="c_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.email} className="rounded-lg h-11 border-border focus-visible:ring-secondary" placeholder="you@example.com" />
                     {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="c_phone">Phone</Label>
-                    <Input id="c_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.phone} />
+                    <Label htmlFor="c_phone" className="text-sm text-muted-foreground mb-1.5 block">Phone</Label>
+                    <Input id="c_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.phone} className="rounded-lg h-11 border-border focus-visible:ring-secondary" placeholder="+1 234 567 890" />
                   </div>
                   <div>
-                    <Label htmlFor="c_type">I am a... *</Label>
+                    <Label htmlFor="c_type" className="text-sm text-muted-foreground mb-1.5 block">I am a... *</Label>
                     <Select value={form.user_type} onValueChange={(v) => setForm({ ...form, user_type: v })} disabled={submitting}>
-                      <SelectTrigger id="c_type"><SelectValue placeholder="Select" /></SelectTrigger>
+                      <SelectTrigger id="c_type" className="rounded-lg h-11 border-border focus:ring-secondary"><SelectValue placeholder="Select" /></SelectTrigger>
                       <SelectContent>
                         <SelectItem value="Student">Student</SelectItem>
                         <SelectItem value="Parent">Parent</SelectItem>
@@ -141,8 +148,8 @@ const Contact = () => {
                   </div>
                 </div>
                 <div>
-                  <Label htmlFor="c_message">Message *</Label>
-                  <Textarea id="c_message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.message} />
+                  <Label htmlFor="c_message" className="text-sm text-muted-foreground mb-1.5 block">Message *</Label>
+                  <Textarea id="c_message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.message} className="rounded-lg border-border focus-visible:ring-secondary" placeholder="How can we help you?" />
                   {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                 </div>
                 <ConsentCheckbox
@@ -150,38 +157,40 @@ const Contact = () => {
                   onCheckedChange={setConsent}
                   label="I consent to Applyza collecting and processing my personal data to respond to my enquiry. I have read the Privacy Policy."
                 />
-                <Button type="submit" variant="teal" size="lg" className="rounded-full w-full sm:w-auto" disabled={submitting || !consent || isBlocked}>
+                <Button type="submit" size="lg" className="rounded-full px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full sm:w-auto" disabled={submitting || !consent || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : "Send Message"}
                 </Button>
               </form>
             )}
           </div>
 
-          <div className="space-y-6">
-            <div className="bg-primary rounded-2xl p-8 text-primary-foreground">
-              <h3 className="text-xl font-bold mb-5">Applyza HQ</h3>
+          {/* Right: Info */}
+          <div className="space-y-5">
+            <div className="rounded-xl p-6" style={{ background: "#0a0d24" }}>
+              <h3 className="text-lg font-bold text-white mb-5">Applyza HQ</h3>
               <div className="space-y-4 text-sm">
                 <div className="flex items-start gap-3">
                   <MapPin size={18} className="text-secondary shrink-0 mt-0.5" />
-                  <span className="text-primary-foreground/80">Cyprus</span>
+                  <span className="text-white/70">Cyprus</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <Mail size={18} className="text-secondary shrink-0 mt-0.5" />
-                  <a href="mailto:info@applyza.com" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">info@applyza.com</a>
+                  <a href="mailto:info@applyza.com" className="text-white/70 hover:text-white transition-colors">info@applyza.com</a>
                 </div>
                 <div className="flex items-start gap-3">
                   <Phone size={18} className="text-secondary shrink-0 mt-0.5" />
-                  <span className="text-primary-foreground/50">Phone number coming soon</span>
+                  <span className="text-white/40">Phone number coming soon</span>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-bold text-primary mb-4">Connect With Us</h3>
-              <div className="flex flex-wrap gap-3">
+              <h3 className="text-sm font-semibold text-primary mb-3">Connect With Us</h3>
+              <div className="flex flex-wrap gap-2.5">
                 {socials.map((s) => (
                   <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" title={s.name}
-                    className="w-10 h-10 rounded-full bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary flex items-center justify-center transition-colors">
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-200 hover:shadow-[0_0_12px_hsl(169_63%_47%/0.5)]"
+                    style={{ background: "#0a0d24" }}>
                     <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d={s.icon} /></svg>
                   </a>
                 ))}
@@ -189,13 +198,13 @@ const Contact = () => {
             </div>
 
             <a href="https://wa.me/message/applyzahq?text=Hi%20Applyza%2C%20I%20have%20a%20question" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-2xl p-5 transition-colors">
-              <div className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">
+              className="flex items-center gap-3 bg-[#25D366] hover:bg-[#20b858] rounded-xl p-4 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                 <MessageCircle size={20} className="text-white" />
               </div>
               <div>
-                <p className="font-bold text-primary text-sm">Chat on WhatsApp</p>
-                <p className="text-muted-foreground text-xs">Quick responses, real humans</p>
+                <p className="font-bold text-white text-sm">Chat on WhatsApp</p>
+                <p className="text-white/80 text-xs">Quick responses, real humans</p>
               </div>
             </a>
           </div>

@@ -67,36 +67,44 @@ const FAQ = () => {
       />
       <Navbar solid />
 
-      {/* Hero */}
-      <section className="bg-primary" style={{ minHeight: "35vh", display: "flex", alignItems: "flex-end" }}>
-        <div className="container pb-12 pt-28">
+      {/* Dark Hero */}
+      <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20" style={{ background: "radial-gradient(circle, hsl(169 63% 47% / 0.4), transparent 70%)" }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full opacity-15" style={{ background: "radial-gradient(circle, hsl(265 44% 44% / 0.3), transparent 70%)" }} />
+        </div>
+        <div className="container relative z-10 pt-20">
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-primary-foreground/60">Home</Link></BreadcrumbLink></BreadcrumbItem>
-              <BreadcrumbSeparator className="text-primary-foreground/40" />
-              <BreadcrumbItem><BreadcrumbPage className="text-primary-foreground/80">FAQ</BreadcrumbPage></BreadcrumbItem>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-white/40 hover:text-white/60 text-sm">Home</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator className="text-white/30" />
+              <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">FAQ</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-primary-foreground mt-4 mb-3">Frequently Asked Questions</h1>
-          <p className="text-primary-foreground/70 text-base md:text-lg max-w-2xl leading-relaxed">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Frequently Asked Questions</h1>
+          <p className="text-white/60 text-sm sm:text-base max-w-xl">
             Got questions? We've got answers. And if you can't find what you're looking for, book a free consultation.
           </p>
         </div>
       </section>
 
       {/* FAQ Content */}
-      <section className="bg-background py-16 md:py-20">
+      <section className="bg-background py-12">
         <div className="container max-w-3xl">
           {faqData.map((group) => (
             <div key={group.category} className="mb-10 last:mb-0">
-              <h2 className="text-xl md:text-2xl font-extrabold text-primary mb-5">{group.category}</h2>
-              <Accordion type="single" collapsible className="space-y-3">
+              <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-4">{group.category}</h2>
+              <Accordion type="single" collapsible>
                 {group.items.map((item, i) => (
-                  <AccordionItem key={i} value={`${group.category}-${i}`} className="bg-card rounded-xl border shadow-sm px-5">
-                    <AccordionTrigger className="text-left text-primary font-semibold text-sm md:text-base hover:no-underline py-4">
+                  <AccordionItem
+                    key={i}
+                    value={`${group.category}-${i}`}
+                    className="border-b border-border py-0.5 data-[state=open]:border-l-2 data-[state=open]:border-l-secondary data-[state=open]:pl-4 transition-all duration-200"
+                  >
+                    <AccordionTrigger className="text-left text-primary font-semibold text-sm sm:text-base hover:no-underline py-3.5 [&[data-state=open]>svg]:rotate-180">
                       {item.q}
                     </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-4">
+                    <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-3.5">
                       {item.a}
                     </AccordionContent>
                   </AccordionItem>
@@ -108,15 +116,15 @@ const FAQ = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-accent py-14">
+      <section className="py-12" style={{ background: "linear-gradient(135deg, hsl(169 63% 47%), hsl(169 63% 40%))" }}>
         <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-accent-foreground mb-3">Still have questions?</h2>
-          <p className="text-accent-foreground/70 mb-6">Our team is here to help — book a free consultation or get in touch.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="teal" size="lg" className="rounded-full" asChild>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Still have questions?</h2>
+          <p className="text-white/80 text-sm mb-6">Our team is here to help — book a free consultation or get in touch.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 font-semibold px-8" asChild>
               <Link to="/book-a-consultation">Book a Free Consultation</Link>
             </Button>
-            <Button variant="outline-white" size="lg" className="rounded-full" asChild>
+            <Button size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10 px-8" asChild>
               <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
