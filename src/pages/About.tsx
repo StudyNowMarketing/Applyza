@@ -249,18 +249,18 @@ const About = () => {
           >
             <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-6">Our Commitment to Quality</h2>
             <p className="text-muted-foreground text-sm leading-relaxed mb-3">
-              Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents. Our counsellors are trained and certified through the British Council's UK Certified Counsellor programme.
+              Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents. Our counsellors are trained and certified through recognized professional programmes.
             </p>
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               We are committed to supporting genuine students who are serious about their education. We carefully assess every student's academic background, career goals, and study intent before recommending programmes. We do not guarantee admission or visa outcomes — but we do guarantee honest, professional guidance based on years of experience.
             </p>
             <a
-              href="https://www.britishcouncil.org/education/agents-counsellors/uk-quality-agent-framework"
+              href="https://www.gov.uk/government/publications/student-agents-and-advisers"
               target="_blank"
               rel="noopener noreferrer"
               className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
             >
-              Read the Student Guide to Choosing an Education Agent →
+              Learn about choosing an education agent →
             </a>
           </motion.div>
         </div>

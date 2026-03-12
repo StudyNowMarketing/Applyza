@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Bot, CircleDollarSign, ShieldCheck, Heart, Globe, Trophy } from "lucide-react";
+import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 const reasons = [
