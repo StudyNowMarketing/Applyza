@@ -37,8 +37,11 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showSolid ? "bg-primary shadow-lg" : "bg-transparent"
+        showSolid
+          ? "shadow-lg backdrop-blur-xl"
+          : "bg-transparent"
       }`}
+      style={showSolid ? { backgroundColor: "rgba(10, 13, 36, 0.95)" } : undefined}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="shrink-0">
@@ -50,7 +53,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
             <Link
               key={link.label}
               to={link.to}
-              className="text-primary-foreground/80 hover:text-primary-foreground text-[13px] font-medium transition-colors whitespace-nowrap"
+              className="text-white/80 hover:text-white text-[13px] font-medium transition-colors whitespace-nowrap"
             >
               {link.label}
             </Link>
@@ -60,17 +63,23 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
         <div className="hidden xl:flex items-center gap-5">
           <button
             onClick={handleClientLogin}
-            className="text-primary-foreground/60 hover:text-primary-foreground text-xs font-normal transition-colors whitespace-nowrap"
+            className="text-white/60 hover:text-white text-xs font-normal transition-colors whitespace-nowrap"
           >
             Client Login
           </button>
-          <Button variant="teal" size="sm" className="rounded-full" asChild>
-            <Link to="/book-a-consultation">Book a Free Consultation</Link>
-          </Button>
+          <Link
+            to="/book-a-consultation"
+            className="rounded-full px-6 py-2.5 text-sm font-semibold text-white transition-colors whitespace-nowrap"
+            style={{ backgroundColor: "#2EC4B6" }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#25a89c")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2EC4B6")}
+          >
+            Book a Free Consultation
+          </Link>
         </div>
 
         <button
-          className="xl:hidden text-primary-foreground"
+          className="xl:hidden text-white"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -79,27 +88,35 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       </div>
 
       {mobileOpen && (
-        <div className="xl:hidden bg-primary border-t border-primary-foreground/10 pb-6">
+        <div
+          className="xl:hidden border-t border-white/10 pb-6 backdrop-blur-xl"
+          style={{ backgroundColor: "rgba(10, 13, 36, 0.95)" }}
+        >
           <div className="container flex flex-col gap-3 pt-4">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 to={link.to}
                 onClick={() => setMobileOpen(false)}
-                className="text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium py-2 transition-colors"
+                className="text-white/80 hover:text-white text-sm font-medium py-2 transition-colors"
               >
                 {link.label}
               </Link>
             ))}
             <button
               onClick={(e) => { handleClientLogin(e); setMobileOpen(false); }}
-              className="text-primary-foreground/60 hover:text-primary-foreground text-sm font-normal py-2 text-left"
+              className="text-white/60 hover:text-white text-sm font-normal py-2 text-left"
             >
               Client Login
             </button>
-            <Button variant="teal" className="rounded-full mt-2 w-full" asChild>
-              <Link to="/book-a-consultation" onClick={() => setMobileOpen(false)}>Book a Free Consultation</Link>
-            </Button>
+            <Link
+              to="/book-a-consultation"
+              onClick={() => setMobileOpen(false)}
+              className="rounded-full mt-2 w-full text-center px-6 py-2.5 text-sm font-semibold text-white transition-colors"
+              style={{ backgroundColor: "#2EC4B6" }}
+            >
+              Book a Free Consultation
+            </Link>
           </div>
         </div>
       )}
