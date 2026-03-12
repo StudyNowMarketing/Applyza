@@ -1,6 +1,6 @@
 import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import ApplyzaLogo from "@/components/ApplyzaLogo";
+
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
