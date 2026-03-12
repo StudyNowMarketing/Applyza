@@ -11,31 +11,31 @@ const accreditations = [
 const PartnerLogos = () => {
   return (
     <section className="bg-white">
-      <div className="border-t" style={{ borderColor: "hsl(230 25% 92%)" }} />
-      <div className="container py-12 md:py-16">
-        <div className="flex items-center justify-center gap-2 mb-10">
-          <Shield size={14} className="text-muted-foreground/60" />
-          <h2 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/60">
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+      <div className="container py-10 md:py-12">
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <Shield size={13} className="text-muted-foreground/60" />
+          <h2 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground/60">
             Accredited & Recognized By
           </h2>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
           {accreditations.map((a) => (
-            <div key={a.initials} className="flex items-center gap-3 opacity-60 hover:opacity-90 transition-opacity">
-              <div className="w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold"
+            <div key={a.initials} className="flex items-center gap-2.5 opacity-60 hover:opacity-90 transition-opacity">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-[10px] font-bold"
                 style={{ background: "hsl(230 20% 93%)", color: "hsl(232 20% 50%)" }}>
                 {a.initials}
               </div>
               <div>
-                <p className="text-xs font-semibold" style={{ color: "hsl(232 20% 40%)" }}>{a.name}</p>
-                <p className="text-[10px]" style={{ color: "hsl(232 15% 60%)" }}>{a.role}</p>
+                <p className="text-[11px] font-semibold" style={{ color: "hsl(232 20% 40%)" }}>{a.name}</p>
+                <p className="text-[9px]" style={{ color: "hsl(232 15% 60%)" }}>{a.role}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="border-b" style={{ borderColor: "hsl(230 25% 92%)" }} />
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
     </section>
   );
 };

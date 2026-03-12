@@ -6,64 +6,63 @@ const services = [
   {
     icon: GraduationCap,
     title: "University Applications",
-    text: "Finding the right university shouldn't feel like guesswork. We match you with programmes that fit your academic profile, career goals, and budget — then manage every detail of your application from start to finish.",
+    text: "We match you with programmes that fit your academic profile, career goals, and budget — then manage every detail of your application.",
     to: "/services/university-applications",
-    tint: "rgba(107,63,160,0.06)",
+    gradient: "linear-gradient(135deg, #6B3FA0, #8B5FC0)",
     iconBg: "rgba(107,63,160,0.12)",
     iconColor: "#6B3FA0",
   },
   {
     icon: Shield,
     title: "Visa & Immigration",
-    text: "Visa applications can be stressful. Ours don't have to be. With a 99% success rate, our compliance team ensures your documents are accurate, your timelines are met, and your application has the strongest chance of approval.",
+    text: "With a 99% success rate, our compliance team ensures your documents are accurate, timelines are met, and your application is strong.",
     to: "/services/visa-immigration",
-    tint: "rgba(46,196,182,0.06)",
+    gradient: "linear-gradient(135deg, #2EC4B6, #20A89A)",
     iconBg: "rgba(46,196,182,0.12)",
     iconColor: "#2EC4B6",
   },
   {
     icon: Users,
     title: "Student Counselling",
-    text: "Not sure which path to take? Our counsellors help you explore your options — from choosing between undergraduate and postgraduate programmes to mapping out a career you'll love. No pressure, just honest guidance.",
+    text: "Our counsellors help you explore options — from choosing programmes to mapping out a career you'll love. No pressure, just guidance.",
     to: "/services/student-counselling",
-    tint: "rgba(27,33,80,0.04)",
+    gradient: "linear-gradient(135deg, #1B2150, #2D3570)",
     iconBg: "rgba(27,33,80,0.10)",
     iconColor: "#1B2150",
   },
   {
     icon: Home,
     title: "Accommodation Support",
-    text: "A great education deserves a comfortable home. We help you find safe, affordable housing near your university so you can focus on what matters — your studies.",
+    text: "We help you find safe, affordable housing near your university so you can focus on what matters — your studies.",
     to: "/services/accommodation",
-    tint: "rgba(217,160,50,0.06)",
-    iconBg: "rgba(217,160,50,0.12)",
-    iconColor: "#d9a032",
+    gradient: "linear-gradient(135deg, #F59E0B, #D97706)",
+    iconBg: "rgba(245,158,11,0.12)",
+    iconColor: "#D97706",
   },
 ];
 
 const ServicesOverview = () => {
   return (
     <section className="bg-white">
-      <div className="container py-16 md:py-24">
-        <div className="text-center mb-12">
+      {/* Subtle top separator */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+      <div className="container py-12 md:py-16">
+        <div className="text-center mb-8">
           <span
-            className="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-4"
-            style={{
-              color: "#2EC4B6",
-              backgroundColor: "rgba(46,196,182,0.10)",
-            }}
+            className="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-3"
+            style={{ color: "#2EC4B6", backgroundColor: "rgba(46,196,182,0.10)" }}
           >
             Our Services
           </span>
-          <h2 className="text-2xl md:text-4xl font-extrabold text-foreground mb-4">
+          <h2 className="text-xl md:text-3xl font-extrabold text-foreground mb-2">
             Everything You Need to Study Abroad
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            From course selection to visa approval — we provide expert, impartial guidance at every stage of your study abroad journey.
+          <p className="text-muted-foreground max-w-xl mx-auto text-sm">
+            From course selection to visa approval — expert, impartial guidance at every stage.
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 gap-5">
           {services.map((s, i) => (
             <motion.div
               key={s.title}
@@ -71,27 +70,23 @@ const ServicesOverview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 min-h-[360px] flex flex-col overflow-hidden"
+              className="bg-white rounded-xl border border-gray-100 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 min-h-[280px] flex flex-col overflow-hidden"
             >
-              {/* Tinted top area */}
-              <div
-                className="h-2 w-full"
-                style={{ backgroundColor: s.tint }}
-              />
+              {/* Gradient banner */}
+              <div className="h-10 w-full" style={{ background: s.gradient }} />
 
-              <div className="p-6 flex flex-col flex-1">
-                {/* Icon */}
+              <div className="p-5 md:p-6 flex flex-col flex-1">
                 <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
                   style={{ backgroundColor: s.iconBg }}
                 >
-                  <s.icon size={24} style={{ color: s.iconColor }} />
+                  <s.icon size={20} style={{ color: s.iconColor }} />
                 </div>
 
-                <h3 className="text-xl font-bold text-foreground mb-2">
+                <h3 className="text-lg font-bold text-foreground mb-1.5">
                   {s.title}
                 </h3>
-                <p className="text-sm text-gray-600 leading-relaxed mb-6 flex-1">
+                <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
                   {s.text}
                 </p>
 

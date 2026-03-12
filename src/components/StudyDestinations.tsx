@@ -11,9 +11,9 @@ const destinations = [
     unis: "Oxford, Cambridge, UCL, Imperial",
     shape: (
       <>
-        <rect x="70%" y="10%" width="60" height="120" rx="4" fill="rgba(255,255,255,0.04)" />
-        <rect x="73%" y="5%" width="14" height="30" rx="2" fill="rgba(255,255,255,0.06)" />
-        <circle cx="80%" cy="50%" r="30" fill="rgba(255,255,255,0.03)" />
+        <circle cx="75%" cy="30%" r="40" fill="rgba(46,196,182,0.12)" />
+        <circle cx="80%" cy="45%" r="30" fill="rgba(46,196,182,0.10)" />
+        <circle cx="70%" cy="50%" r="25" fill="rgba(46,196,182,0.08)" />
       </>
     ),
   },
@@ -25,9 +25,9 @@ const destinations = [
     unis: "TU Munich, Heidelberg, LMU",
     shape: (
       <>
-        <polygon points="80,20 60,60 100,60" fill="rgba(255,255,255,0.04)" />
-        <polygon points="80,30 65,55 95,55" fill="rgba(255,255,255,0.03)" />
-        <rect x="65" y="60" width="30" height="8" rx="2" fill="rgba(255,255,255,0.04)" />
+        <polygon points="85,15 65,55 105,55" fill="rgba(255,255,255,0.08)" />
+        <polygon points="85,25 72,50 98,50" fill="rgba(255,255,255,0.06)" />
+        <line x1="60" y1="55" x2="110" y2="55" stroke="rgba(255,255,255,0.08)" strokeWidth="2" />
       </>
     ),
   },
@@ -39,9 +39,9 @@ const destinations = [
     unis: "Sorbonne, Sciences Po, HEC",
     shape: (
       <>
-        <polygon points="85,15 75,70 95,70" fill="rgba(255,255,255,0.05)" />
-        <line x1="85" y1="15" x2="85" y2="8" stroke="rgba(255,255,255,0.06)" strokeWidth="2" />
-        <rect x="78" y="70" width="14" height="4" rx="1" fill="rgba(255,255,255,0.04)" />
+        <polygon points="85,10 70,75 100,75" fill="rgba(107,63,160,0.15)" />
+        <line x1="85" y1="10" x2="85" y2="5" stroke="rgba(107,63,160,0.12)" strokeWidth="3" />
+        <rect x="74" y="75" width="22" height="5" rx="1" fill="rgba(107,63,160,0.10)" />
       </>
     ),
   },
@@ -53,8 +53,9 @@ const destinations = [
     unis: "Trinity College, UCD, DCU",
     shape: (
       <>
-        <ellipse cx="80" cy="40" rx="25" ry="30" fill="rgba(255,255,255,0.03)" />
-        <path d="M70 35 Q80 20 90 35 Q80 25 70 35Z" fill="rgba(255,255,255,0.05)" />
+        <ellipse cx="80" cy="40" rx="30" ry="35" fill="rgba(46,196,182,0.10)" />
+        <ellipse cx="75" cy="35" rx="20" ry="25" fill="rgba(46,196,182,0.08)" />
+        <path d="M70 35 Q80 15 90 35 Q80 22 70 35Z" fill="rgba(46,196,182,0.12)" />
       </>
     ),
   },
@@ -66,9 +67,9 @@ const destinations = [
     unis: "University of Malta, MCAST",
     shape: (
       <>
-        <rect x="65" y="40" width="12" height="20" rx="2" fill="rgba(255,255,255,0.04)" />
-        <rect x="80" y="35" width="10" height="25" rx="2" fill="rgba(255,255,255,0.03)" />
-        <rect x="93" y="42" width="8" height="18" rx="2" fill="rgba(255,255,255,0.04)" />
+        <rect x="60" y="30" width="14" height="30" rx="2" fill="rgba(255,255,255,0.08)" />
+        <rect x="78" y="25" width="12" height="35" rx="2" fill="rgba(255,255,255,0.06)" />
+        <rect x="94" y="35" width="10" height="25" rx="2" fill="rgba(255,255,255,0.08)" />
       </>
     ),
   },
@@ -77,52 +78,44 @@ const destinations = [
 const StudyDestinations = () => {
   return (
     <section className="relative" style={{ backgroundColor: "#0a0d24" }}>
-      {/* Glow effects */}
-      <div
-        className="absolute top-[10%] right-[-5%] w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{ backgroundColor: "rgba(46,196,182,0.10)", filter: "blur(120px)" }}
-      />
-      <div
-        className="absolute bottom-[10%] left-[-5%] w-[300px] h-[300px] rounded-full pointer-events-none"
-        style={{ backgroundColor: "rgba(107,63,160,0.15)", filter: "blur(100px)" }}
-      />
+      {/* Subtle top separator */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)" }} />
 
-      <div className="container relative z-10 py-16 md:py-24">
+      {/* Glow effects */}
+      <div className="absolute top-[10%] right-[-5%] w-[300px] h-[300px] rounded-full pointer-events-none"
+        style={{ backgroundColor: "rgba(46,196,182,0.10)", filter: "blur(120px)" }} />
+      <div className="absolute bottom-[10%] left-[-5%] w-[200px] h-[200px] rounded-full pointer-events-none"
+        style={{ backgroundColor: "rgba(107,63,160,0.15)", filter: "blur(100px)" }} />
+
+      <div className="container relative z-10 py-12 md:py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
-          <span
-            className="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-4"
-            style={{ color: "#2EC4B6", backgroundColor: "rgba(46,196,182,0.10)" }}
-          >
+          <span className="inline-block text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-3"
+            style={{ color: "#2EC4B6", backgroundColor: "rgba(46,196,182,0.10)" }}>
             Popular Destinations
           </span>
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-3">
+          <h2 className="text-xl md:text-3xl font-extrabold text-white mb-2">
             Where Will You{" "}
             <span style={{ color: "#2EC4B6" }}>Study?</span>
           </h2>
-          <p className="text-white/50 max-w-lg mx-auto">
+          <p className="text-white/50 max-w-lg mx-auto text-sm">
             Explore top study destinations and find the perfect place for your academic journey.
           </p>
         </motion.div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 auto-rows-[220px] md:auto-rows-[240px]">
+        {/* Compact bento grid */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-3 auto-rows-[180px] md:auto-rows-[200px]" style={{ maxHeight: "500px" }}>
           {destinations.map((d, i) => {
-            const isUK = i === 0;
-            const gridClass = isUK
-              ? "md:col-span-3 md:row-span-2"
+            const gridClass = i === 0
+              ? "col-span-2 md:col-span-3 md:row-span-2"
               : i <= 2
-              ? "md:col-span-2"
-              : "md:col-span-2 lg:col-span-2";
-
-            // For the last card (Malta) when 5 items with col-span-2 each, 
-            // we need to handle the odd one
-            const finalGridClass = i === 4 ? "md:col-span-1 lg:col-span-1" : gridClass;
+              ? "col-span-1 md:col-span-3"
+              : "col-span-1 md:col-span-3";
 
             return (
               <motion.div
@@ -131,21 +124,20 @@ const StudyDestinations = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`${i === 0 ? "md:col-span-3 md:row-span-2" : i <= 2 ? "md:col-span-2" : "md:col-span-2 lg:col-span-" + (i === 4 ? "1" : "2")}`}
+                className={gridClass}
               >
                 <Link
                   to={`/study-destinations/${d.slug}`}
-                  className="relative block h-full rounded-2xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
+                  className="relative block h-full rounded-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
                   style={{
                     background: "linear-gradient(135deg, #1a1f4d 0%, #0a0d24 100%)",
                     border: "1px solid rgba(255,255,255,0.10)",
+                    maxHeight: i === 0 ? "400px" : "200px",
                   }}
                 >
                   {/* Hover glow */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"
-                    style={{ boxShadow: "inset 0 0 40px rgba(46,196,182,0.08)" }}
-                  />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"
+                    style={{ boxShadow: "inset 0 0 40px rgba(46,196,182,0.08)" }} />
 
                   {/* SVG decoration */}
                   <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
@@ -153,25 +145,22 @@ const StudyDestinations = () => {
                   </svg>
 
                   {/* Country code badge */}
-                  <div className="absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                    style={{ backgroundColor: "rgba(255,255,255,0.10)" }}
-                  >
+                  <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                    style={{ backgroundColor: "rgba(255,255,255,0.10)" }}>
                     {d.code}
                   </div>
 
                   {/* Course count badge */}
-                  <div
-                    className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-medium"
-                    style={{ color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.30)" }}
-                  >
+                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium"
+                    style={{ color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.30)" }}>
                     {d.courses} courses
                   </div>
 
-                  {/* Bottom content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="text-white/40 text-xs mb-1 truncate">{d.unis}</p>
-                    <h3 className="text-white text-xl md:text-2xl font-bold">{d.name}</h3>
-                    <span className="text-white/70 text-sm font-medium group-hover:text-white transition-colors">
+                  {/* Bottom content with dark gradient overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4"
+                    style={{ background: "linear-gradient(to top, rgba(10,13,36,0.9) 0%, transparent 100%)" }}>
+                    <h3 className="text-white text-lg md:text-2xl font-bold">{d.name}</h3>
+                    <span className="text-white/60 text-xs font-medium group-hover:text-white transition-colors">
                       Explore courses →
                     </span>
                   </div>
@@ -181,7 +170,7 @@ const StudyDestinations = () => {
           })}
         </div>
 
-        <div className="text-center mt-10">
+        <div className="text-center mt-8">
           <Button
             variant="outline-white"
             size="lg"

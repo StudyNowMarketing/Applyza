@@ -33,18 +33,20 @@ const BlogPreview = () => {
 
   return (
     <section style={{ background: "#f8f9fa" }}>
-      <div className="container py-16 md:py-24">
+      {/* Subtle top separator */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+      <div className="container py-12 md:py-16">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 gap-4">
           <div>
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4"
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full mb-3"
               style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6" }}>
               <BookOpen size={12} /> Resources & Guides
             </span>
-            <h2 className="text-2xl md:text-4xl font-extrabold text-primary">
+            <h2 className="text-xl md:text-3xl font-extrabold text-primary mb-2">
               From Our Blog
             </h2>
-            <p className="text-muted-foreground mt-3 max-w-xl">
+            <p className="text-muted-foreground max-w-xl text-sm">
               Expert guides, tips, and insights to help you navigate your study abroad journey.
             </p>
           </div>
@@ -54,7 +56,7 @@ const BlogPreview = () => {
         </div>
 
         {/* Bento layout */}
-        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6">
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-5">
           {/* Featured post */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -63,35 +65,33 @@ const BlogPreview = () => {
             transition={{ duration: 0.5 }}
           >
             <Link to="/blog" className="group block">
-              <div className="relative rounded-2xl overflow-hidden bg-card shadow-sm hover:shadow-lg transition-all duration-300"
+              <div className="relative rounded-xl overflow-hidden bg-card shadow-sm hover:shadow-lg transition-all duration-300"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}>
-                {/* Thumbnail */}
-                <div className="h-56 md:h-72 relative overflow-hidden"
+                <div className="h-48 md:h-56 relative overflow-hidden"
                   style={{ background: "linear-gradient(135deg, rgba(46,196,182,0.15), rgba(107,63,160,0.15), hsl(230 33% 94%))" }}>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: "rgba(46,196,182,0.15)" }}>
-                      <BookOpen size={32} style={{ color: "#2EC4B6", opacity: 0.4 }} />
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "rgba(46,196,182,0.15)" }}>
+                      <BookOpen size={28} style={{ color: "#2EC4B6", opacity: 0.4 }} />
                     </div>
                   </div>
-                  {/* Arrow */}
-                  <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  <div className="absolute bottom-3 right-3 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                     style={{ background: "#2EC4B6" }}>
-                    <ArrowUpRight size={16} style={{ color: "#0a0d24" }} />
+                    <ArrowUpRight size={14} style={{ color: "#0a0d24" }} />
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full mb-3"
+                <div className="p-5">
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full mb-2"
                     style={{ background: "rgba(46,196,182,0.1)", color: "#2EC4B6" }}>
                     {featured.category}
                   </span>
-                  <h3 className="font-bold text-primary text-lg leading-snug mb-2 group-hover:text-secondary transition-colors">
+                  <h3 className="font-bold text-primary text-base leading-snug mb-1.5 group-hover:text-secondary transition-colors">
                     {featured.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-3 line-clamp-2">{featured.excerpt}</p>
-                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-2 line-clamp-2">{featured.excerpt}</p>
+                  <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
                     <span>{featured.date}</span>
-                    <span className="inline-flex items-center gap-1"><Clock size={10} /> {featured.readTime}</span>
+                    <span className="inline-flex items-center gap-1"><Clock size={9} /> {featured.readTime}</span>
                   </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@ const BlogPreview = () => {
           </motion.div>
 
           {/* Smaller posts */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-5">
             {rest.map((post, i) => (
               <motion.div
                 key={post.title}
@@ -108,23 +108,22 @@ const BlogPreview = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
               >
-                <Link to="/blog" className="group flex gap-4 bg-card rounded-xl p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                <Link to="/blog" className="group flex gap-3 bg-card rounded-xl p-3 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
                   style={{ border: "1px solid hsl(230 25% 93%)" }}>
-                  {/* Small thumbnail */}
-                  <div className="shrink-0 w-28 h-24 rounded-lg overflow-hidden flex items-center justify-center"
+                  <div className="shrink-0 w-24 h-20 rounded-lg overflow-hidden flex items-center justify-center"
                     style={{ background: "linear-gradient(135deg, rgba(107,63,160,0.1), rgba(46,196,182,0.1))" }}>
-                    <BookOpen size={20} className="text-muted-foreground/30" />
+                    <BookOpen size={18} className="text-muted-foreground/30" />
                   </div>
                   <div className="flex-1 min-w-0 flex flex-col justify-center">
-                    <span className="text-[10px] font-bold uppercase tracking-wider mb-1.5" style={{ color: "#2EC4B6" }}>
+                    <span className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: "#2EC4B6" }}>
                       {post.category}
                     </span>
-                    <h3 className="font-bold text-primary text-sm leading-snug mb-1.5 line-clamp-2 group-hover:text-secondary transition-colors">
+                    <h3 className="font-bold text-primary text-sm leading-snug mb-1 line-clamp-2 group-hover:text-secondary transition-colors">
                       {post.title}
                     </h3>
-                    <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+                    <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
                       <span>{post.date}</span>
-                      <span className="inline-flex items-center gap-1"><Clock size={10} /> {post.readTime}</span>
+                      <span className="inline-flex items-center gap-1"><Clock size={9} /> {post.readTime}</span>
                     </div>
                   </div>
                 </Link>
@@ -133,7 +132,7 @@ const BlogPreview = () => {
           </div>
         </div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-8">
           <Link to="/blog" className="font-semibold text-sm hover:underline" style={{ color: "#2EC4B6" }}>
             Explore all articles →
           </Link>

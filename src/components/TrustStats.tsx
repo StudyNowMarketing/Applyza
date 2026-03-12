@@ -58,16 +58,13 @@ const StatItem = ({
 }) => {
   const { count, ref } = useCountUp(value);
   return (
-    <div ref={ref} className="text-center px-4 py-8">
-      <div
-        className="text-5xl md:text-6xl font-bold italic"
-        style={{ color: "#2EC4B6" }}
-      >
+    <div ref={ref} className="text-center px-4 py-6">
+      <div className="text-4xl md:text-5xl font-bold italic" style={{ color: "#2EC4B6" }}>
         {count.toLocaleString()}
         {suffix}
       </div>
-      <div className="text-white font-semibold text-base mt-3">{label}</div>
-      <div className="text-white/50 text-sm mt-1">{sublabel}</div>
+      <div className="text-white font-semibold text-sm mt-2">{label}</div>
+      <div className="text-white/50 text-xs mt-0.5">{sublabel}</div>
     </div>
   );
 };
@@ -75,17 +72,15 @@ const StatItem = ({
 const TrustStats = () => {
   return (
     <section className="relative" style={{ backgroundColor: "#0a0d24" }}>
-      {/* Dot grid pattern overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />
 
-      <div className="container relative z-10 py-16 md:py-20">
+      <div className="container relative z-10 py-10 md:py-14">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((s) => (
             <StatItem key={s.label} {...s} />
@@ -96,14 +91,14 @@ const TrustStats = () => {
       {/* Wave divider */}
       <div className="relative -mb-px">
         <svg
-          viewBox="0 0 1440 80"
+          viewBox="0 0 1440 60"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-auto block"
           preserveAspectRatio="none"
         >
           <path
-            d="M0 40C240 80 480 0 720 40C960 80 1200 0 1440 40V80H0V40Z"
+            d="M0 30C240 60 480 0 720 30C960 60 1200 0 1440 30V60H0V30Z"
             fill="#f8f9fa"
           />
         </svg>
