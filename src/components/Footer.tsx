@@ -1,6 +1,5 @@
-import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import ApplyzaLogo from "@/components/ApplyzaLogo";
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -14,7 +13,7 @@ const TikTokIcon = ({ size = 14 }: { size?: number }) => (
   </svg>
 );
 
-const studentLinks: { label: string; to: string }[] = [
+const studentLinks = [
   { label: "Find a Course", to: "/find-a-course" },
   { label: "Study Destinations", to: "/study-destinations" },
   { label: "Scholarships", to: "/scholarships" },
@@ -22,8 +21,8 @@ const studentLinks: { label: string; to: string }[] = [
   { label: "FAQ", to: "/faq" },
 ];
 
-const companyLinks: { label: string; to: string }[] = [
-  { label: "About", to: "/about" },
+const companyLinks = [
+  { label: "About Us", to: "/about" },
   { label: "Our Offices", to: "/contact" },
   { label: "Testimonials", to: "/about" },
   { label: "Blog", to: "/blog" },
@@ -31,7 +30,7 @@ const companyLinks: { label: string; to: string }[] = [
   { label: "Contact", to: "/contact" },
 ];
 
-const partnerLinks: { label: string; to: string }[] = [
+const partnerLinks = [
   { label: "For Institutions", to: "/for-institutions" },
   { label: "For Recruitment Partners", to: "/for-partners" },
   { label: "Partner Universities", to: "/find-a-course" },
@@ -46,23 +45,109 @@ const socials = [
   { icon: Youtube, href: "https://youtube.com/@applyzahq" },
 ];
 
+const offices = [
+  { city: "Nicosia, Cyprus", tag: "HQ" },
+  { city: "Lagos, Nigeria", tag: null },
+  { city: "Accra, Ghana", tag: null },
+  { city: "Nairobi, Kenya", tag: null },
+  { city: "Doha, Qatar", tag: null },
+  { city: "Istanbul, Türkiye", tag: null },
+];
+
 const Footer = () => {
   return (
-    <footer className="bg-primary" style={{ background: "hsl(232 50% 14%)" }}>
+    <footer style={{ background: "linear-gradient(180deg, #0a0d24, #050714)" }}>
       <div className="container py-14 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
-          {/* Col 1 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 lg:gap-8">
+          {/* Col 1 — Brand + Contact */}
+          <div className="lg:col-span-2">
+            <img src="/logo.png" alt="Applyza" className="h-9 w-auto mb-4" />
+            <p className="text-sm leading-relaxed mb-5" style={{ color: "rgba(255,255,255,0.45)" }}>
+              The smartest way to study abroad. Expert guidance, AI-powered course matching, and end-to-end support — completely free.
+            </p>
+
+            <div className="space-y-2.5 mb-6">
+              <a href="mailto:info@applyza.com" className="flex items-center gap-2 text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <Mail size={13} /> info@applyza.com
+              </a>
+              <span className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <Phone size={13} /> +44 (0) 000 000 0000
+              </span>
+            </div>
+
+            <a
+              href="https://wa.me/447000000000?text=Hi%2C%20I%27d%20like%20to%20learn%20more%20about%20Applyza"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full transition-opacity hover:opacity-90"
+              style={{ background: "#25D366", color: "white" }}
+            >
+              <MessageCircle size={14} /> Chat on WhatsApp
+            </a>
+          </div>
+
+          {/* Col 2 — For Students */}
           <div>
-            <ApplyzaLogo height={36} variant="light" />
-            <p className="text-primary-foreground/50 text-sm mb-5 leading-relaxed">The smartest way to study abroad.</p>
-            <div className="flex gap-3">
+            <h4 className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>For Students</h4>
+            <ul className="space-y-2.5">
+              {studentLinks.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3 — Company */}
+          <div>
+            <h4 className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>Company</h4>
+            <ul className="space-y-2.5">
+              {companyLinks.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 4 — Partners */}
+          <div>
+            <h4 className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>Partners</h4>
+            <ul className="space-y-2.5">
+              {partnerLinks.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Follow Us */}
+            <h4 className="text-[11px] font-semibold uppercase tracking-[0.15em] mt-8 mb-4" style={{ color: "rgba(255,255,255,0.35)" }}>Follow Us</h4>
+            <div className="flex flex-wrap gap-2.5">
               {socials.map(({ icon: Icon, href }) => (
                 <a
                   key={href}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/60 hover:bg-secondary hover:text-secondary-foreground transition-colors"
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300"
+                  style={{ background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.55)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = "rgba(46,196,182,0.2)";
+                    e.currentTarget.style.color = "#2EC4B6";
+                    e.currentTarget.style.boxShadow = "0 0 16px rgba(46,196,182,0.3)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+                    e.currentTarget.style.boxShadow = "none";
+                  }}
                 >
                   <Icon size={14} />
                 </a>
@@ -70,43 +155,20 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Col 2 */}
+          {/* Col 5 — Our Offices */}
           <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-4">For Students</h4>
+            <h4 className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>Our Offices</h4>
             <ul className="space-y-2.5">
-              {studentLinks.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 3 */}
-          <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-4">Company</h4>
-            <ul className="space-y-2.5">
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4 */}
-          <div>
-            <h4 className="text-primary-foreground font-bold text-sm mb-4">Partners</h4>
-            <ul className="space-y-2.5">
-              {partnerLinks.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
-                    {link.label}
-                  </Link>
+              {offices.map((office) => (
+                <li key={office.city} className="flex items-center gap-2 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                  <MapPin size={11} style={{ color: "#2EC4B6", opacity: 0.7 }} />
+                  {office.city}
+                  {office.tag && (
+                    <span className="text-[9px] font-bold uppercase px-1.5 py-0.5 rounded ml-1"
+                      style={{ background: "rgba(46,196,182,0.15)", color: "#2EC4B6" }}>
+                      {office.tag}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -115,13 +177,19 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-primary-foreground/10">
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-primary-foreground/40 text-xs">© 2026 Applyza. All Rights Reserved.</p>
-          <div className="flex gap-4 text-xs">
-            <Link to="/privacy-policy" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Privacy Policy</Link>
-            <Link to="/terms-and-conditions" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Terms & Conditions</Link>
-            <Link to="/anti-slavery-policy" className="text-primary-foreground/40 hover:text-primary-foreground transition-colors">Anti-Slavery Policy</Link>
+          <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+            © 2026 Applyza. All rights reserved.
+          </p>
+          <div className="flex flex-wrap gap-4 text-xs">
+            <Link to="/privacy-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Privacy Policy</Link>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
+            <Link to="/terms-and-conditions" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Terms of Service</Link>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
+            <Link to="/anti-slavery-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Cookie Policy</Link>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
+            <Link to="/anti-slavery-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Accessibility</Link>
           </div>
         </div>
       </div>
