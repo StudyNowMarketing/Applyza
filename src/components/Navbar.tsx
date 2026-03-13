@@ -218,8 +218,8 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto bg-white">
           <div className="container flex flex-col py-6 gap-1">
-            {navTabs.map((tab) => (
-              <div key={tab.label}>
+            {navTabs.map((tab, tabIndex) => (
+              <div key={tab.label} className="mobile-menu-item" style={{ animationDelay: `${tabIndex * 100}ms` }}>
                 <button
                   onClick={() => setMobileExpanded(mobileExpanded === tab.label ? null : tab.label)}
                   className="flex items-center justify-between w-full py-3 text-gray-800 text-base font-medium"
