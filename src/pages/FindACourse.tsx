@@ -47,6 +47,8 @@ type Course = {
   description: string | null;
   scholarship_available: boolean | null;
   featured: boolean | null;
+  entry_requirements: string | null;
+  english_requirements: string | null;
 };
 
 const COUNTRIES = ["United Kingdom"];
