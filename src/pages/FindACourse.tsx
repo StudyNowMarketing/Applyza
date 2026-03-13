@@ -809,7 +809,7 @@ const FindACourse = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filtered.map((course) => (
-                  <CourseCard key={course.id} course={course} />
+                  <CourseCard key={course.id} course={course} isCompared={compareIds.includes(course.id)} onToggleCompare={() => toggleCompare(course.id)} compareDisabled={compareIds.length >= 3 && !compareIds.includes(course.id)} />
                 ))}
               </div>
             )}
