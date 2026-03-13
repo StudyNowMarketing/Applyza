@@ -106,12 +106,3 @@
 .animate-gradient-shift {
   animation: gradient-shift 6s ease infinite;
 }
-
-/* Hide scrollbar for horizontal scroll containers */
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
