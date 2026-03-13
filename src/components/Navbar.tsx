@@ -91,7 +91,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
     setOpenTab(null);
   }, [location.pathname]);
 
-  const showSolid = solid || scrolled;
+  
 
   const handleClientLogin = (e: React.MouseEvent) => {
     e.preventDefault();
