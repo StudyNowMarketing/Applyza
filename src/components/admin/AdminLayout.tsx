@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import NotificationBell from "@/components/admin/NotificationBell";
 import {
   Home, Calendar, Mail, Building2, Handshake, BookOpen, Edit,
   CalendarDays, Award, LogOut, ExternalLink, Menu, X, Search as SearchIcon,
