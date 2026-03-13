@@ -137,8 +137,8 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
               <button
                 className={`flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors rounded-lg whitespace-nowrap ${
                   isTabActive(tab)
-                    ? "text-white"
-                    : "text-white/70 hover:text-white"
+                    ? "text-gray-900"
+                    : "text-gray-700 hover:text-secondary"
                 }`}
               >
                 {tab.label}
