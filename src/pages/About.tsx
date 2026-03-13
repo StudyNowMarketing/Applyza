@@ -81,7 +81,7 @@ const StatItem = ({ value, suffix, label }: { value: number; suffix: string; lab
 const About = () => {
   return (
     <div className="min-h-screen">
-      <SEO title="About Applyza | Global Education Platform | AQF Certified" description="Applyza is built by the team behind Study Now. 3,000+ students placed, 99% visa success rate. AQF certified education consultancy." path="/about" />
+      <SEO title="About Applyza | Global Education Platform | AQF Certified" description="Applyza is a global education consultancy helping international students access world-class universities. 150+ partners, 99% visa success rate." path="/about" />
       <Navbar />
 
       {/* ── HERO ── */}
