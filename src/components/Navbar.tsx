@@ -216,18 +216,18 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto bg-white">
+        <div className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto mobile-menu-enter" style={{ backgroundColor: "#1B2150" }}>
           <div className="container flex flex-col py-6 gap-1">
             {navTabs.map((tab) => (
-              <div key={tab.label}>
+              <div key={tab.label} className="mobile-menu-item">
                 <button
                   onClick={() => setMobileExpanded(mobileExpanded === tab.label ? null : tab.label)}
-                  className="flex items-center justify-between w-full py-3 text-gray-800 text-base font-medium"
+                  className="flex items-center justify-between w-full py-3 text-white text-base font-medium"
                 >
                   {tab.label}
                   <ChevronDown
                     size={16}
-                    className={`text-gray-400 transition-transform duration-200 ${
+                    className={`text-white/50 transition-transform duration-200 ${
                       mobileExpanded === tab.label ? "rotate-180" : ""
                     }`}
                   />
@@ -237,7 +237,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                     {tab.sections.map((section, si) => (
                       <div key={si}>
                         {section.heading && (
-                          <p className="text-[10px] uppercase font-semibold text-gray-400 tracking-wide pt-2 pb-1">
+                          <p className="text-[10px] uppercase font-semibold text-white/40 tracking-wide pt-2 pb-1">
                             {section.heading}
                           </p>
                         )}
@@ -246,7 +246,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                             key={link.to}
                             to={link.to}
                             onClick={() => setMobileOpen(false)}
-                            className="block py-2 text-sm text-gray-600 hover:text-secondary transition-colors"
+                            className="block py-2 text-sm text-white/70 hover:text-secondary transition-colors"
                           >
                             {link.label}
                           </Link>
@@ -255,13 +255,13 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                     ))}
                   </div>
                 )}
-                <div className="border-t border-gray-100" />
+                <div className="border-t border-white/10" />
               </div>
             ))}
 
             <button
               onClick={(e) => { handleClientLogin(e); setMobileOpen(false); }}
-              className="text-gray-500 hover:text-gray-700 text-sm py-3 text-left"
+              className="text-white/50 hover:text-white text-sm py-3 text-left mobile-menu-item"
             >
               Client Login
             </button>
