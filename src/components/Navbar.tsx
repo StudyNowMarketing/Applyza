@@ -216,7 +216,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto bg-white">
+        <div className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto mobile-menu-enter" style={{ backgroundColor: "#1B2150" }}>
           <div className="container flex flex-col py-6 gap-1">
             {navTabs.map((tab) => (
               <div key={tab.label}>
