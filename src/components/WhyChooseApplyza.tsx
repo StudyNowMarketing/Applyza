@@ -106,7 +106,7 @@ const WhyChooseApplyza = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="relative bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden"
+                className="relative bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden hover-lift"
                 style={{
                   borderLeft: isExpanded ? `4px solid ${r.iconColor}` : "4px solid transparent",
                   boxShadow: isExpanded ? "0 10px 30px -10px rgba(0,0,0,0.12)" : undefined,

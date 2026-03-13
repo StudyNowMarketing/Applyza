@@ -123,7 +123,7 @@ const UpcomingEvents = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="bg-card rounded-xl p-4 flex items-start gap-3 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                className="bg-card rounded-xl p-4 flex items-start gap-3 hover-lift transition-all duration-300"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}
               >
                 <div className="shrink-0 w-14 h-14 rounded-lg flex flex-col items-center justify-center"
