@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import VideoPlaceholder from "@/components/VideoPlaceholder";
-import { motion } from "framer-motion";
 
 const reasons = [
   {
