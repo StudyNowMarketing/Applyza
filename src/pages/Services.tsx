@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceHero from "@/components/ServiceHero";
 import ServiceCTA from "@/components/ServiceCTA";
+import GenuineStudentBanner from "@/components/GenuineStudentBanner";
 import { GraduationCap, Shield, Users, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -126,7 +127,11 @@ const Services = () => (
           ))}
         </div>
       </div>
-    </section>
+     </section>
+
+    <div className="container max-w-3xl">
+      <GenuineStudentBanner />
+    </div>
 
     <ServiceCTA label="Book a Free Consultation" />
     <Footer />

@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle, Settings } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle, Settings, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCookieConsent } from "@/components/CookieConsent";
 
@@ -176,6 +176,16 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Genuine Student Commitment */}
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <div className="container py-4 flex items-start gap-2.5">
+          <ShieldCheck size={13} className="shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.25)" }} />
+          <p className="text-[11px] leading-relaxed" style={{ color: "rgba(255,255,255,0.25)" }}>
+            Applyza is committed to supporting genuine students with legitimate educational intent. We do not facilitate immigration without genuine educational purpose. We comply with the UK Agent Quality Framework (AQF) and work only with accredited educational institutions.
+          </p>
         </div>
       </div>
 
