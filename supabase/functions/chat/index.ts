@@ -37,10 +37,10 @@ serve(async (req) => {
   try {
     const { message, sessionId, conversationHistory, pageUrl } = await req.json();
 
-    const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY");
-    if (!ANTHROPIC_API_KEY) {
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) {
       return new Response(
-        JSON.stringify({ error: "ANTHROPIC_API_KEY is not configured" }),
+        JSON.stringify({ error: "LOVABLE_API_KEY is not configured" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -54,51 +54,57 @@ serve(async (req) => {
     try {
       const { data: knowledge } = await supabase
         .from("chatbot_knowledge")
-        .select("question, answer, category")
+        .select("title, content, category")
+        .eq("status", "active")
         .limit(50);
 
       if (knowledge && knowledge.length > 0) {
         knowledgeContext =
           "\n\nHere is additional knowledge from our database that may help you answer:\n" +
           knowledge
-            .map((k: any) => `Q: ${k.question}\nA: ${k.answer}`)
+            .map((k: any) => `Topic: ${k.title}\nInfo: ${k.content}`)
             .join("\n\n");
       }
     } catch (e) {
       console.error("Error fetching knowledge:", e);
     }
 
-    // Build messages for Claude
-    const claudeMessages = (conversationHistory || []).map((m: any) => ({
-      role: m.role,
-      content: m.content,
-    }));
-    claudeMessages.push({ role: "user", content: message });
+    // Build messages for Lovable AI (OpenAI-compatible format)
+    const aiMessages: any[] = [
+      { role: "system", content: SYSTEM_PROMPT + knowledgeContext },
+    ];
+    for (const m of (conversationHistory || [])) {
+      aiMessages.push({ role: m.role, content: m.content });
+    }
+    aiMessages.push({ role: "user", content: message });
 
-    // Call Anthropic Claude API
-    const anthropicResponse = await fetch("https://api.anthropic.com/v1/messages", {
+    // Call Lovable AI Gateway
+    const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        "x-api-key": ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1024,
-        system: SYSTEM_PROMPT + knowledgeContext,
-        messages: claudeMessages,
+        model: "google/gemini-3-flash-preview",
+        messages: aiMessages,
       }),
     });
 
-    if (!anthropicResponse.ok) {
-      const errorText = await anthropicResponse.text();
-      console.error("Anthropic API error:", anthropicResponse.status, errorText);
+    if (!aiResponse.ok) {
+      const errorText = await aiResponse.text();
+      console.error("Lovable AI error:", aiResponse.status, errorText);
 
-      if (anthropicResponse.status === 429) {
+      if (aiResponse.status === 429) {
         return new Response(
           JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }),
           { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+      if (aiResponse.status === 402) {
+        return new Response(
+          JSON.stringify({ error: "AI service credits exhausted. Please try again later." }),
+          { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
@@ -108,65 +114,36 @@ serve(async (req) => {
       );
     }
 
-    const data = await anthropicResponse.json();
-    const aiResponse = data.content?.[0]?.text || "I'm sorry, I couldn't generate a response. Please try again.";
+    const data = await aiResponse.json();
+    const responseText = data.choices?.[0]?.message?.content || "I'm sorry, I couldn't generate a response. Please try again.";
 
     // Detect lead info in the user's message
     const emailMatch = message.match(/[\w.-]+@[\w.-]+\.\w{2,}/);
     const nameMatch = message.match(/(?:my name is|i'm|i am)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)/i);
 
-    // Save/update conversation in database
-    const fullHistory = [
-      ...(conversationHistory || []),
-      { role: "user", content: message },
-      { role: "assistant", content: aiResponse },
-    ];
-
+    // Save conversation turn to database
     try {
-      const { data: existing } = await supabase
-        .from("chatbot_conversations")
-        .select("id, lead_captured, student_name, student_email")
-        .eq("session_id", sessionId)
-        .maybeSingle();
-
-      const updateData: any = {
-        messages: fullHistory,
+      const insertData: any = {
+        session_id: sessionId,
+        user_message: message,
+        bot_response: responseText,
         page_url: pageUrl,
-        updated_at: new Date().toISOString(),
+        lead_captured: !!emailMatch,
       };
 
       if (emailMatch) {
-        updateData.student_email = emailMatch[0];
-        updateData.lead_captured = true;
+        insertData.student_email = emailMatch[0];
       }
       if (nameMatch) {
-        updateData.student_name = nameMatch[1];
+        insertData.student_name = nameMatch[1];
       }
 
-      if (existing) {
-        // Preserve existing lead data
-        if (existing.student_email && !updateData.student_email) {
-          delete updateData.student_email;
-          delete updateData.lead_captured;
-        }
-        if (existing.student_name && !updateData.student_name) {
-          delete updateData.student_name;
-        }
-        await supabase
-          .from("chatbot_conversations")
-          .update(updateData)
-          .eq("id", existing.id);
-      } else {
-        await supabase.from("chatbot_conversations").insert({
-          session_id: sessionId,
-          ...updateData,
-        });
-      }
+      await supabase.from("chatbot_conversations").insert(insertData);
     } catch (e) {
       console.error("Error saving conversation:", e);
     }
 
-    return new Response(JSON.stringify({ response: aiResponse }), {
+    return new Response(JSON.stringify({ response: responseText }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
