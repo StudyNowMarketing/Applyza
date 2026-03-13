@@ -16,6 +16,7 @@ import VisaImmigration from "./pages/VisaImmigration.tsx";
 import StudentCounselling from "./pages/StudentCounselling.tsx";
 import Accommodation from "./pages/Accommodation.tsx";
 import FindACourse from "./pages/FindACourse.tsx";
+import EligibilityCheck from "./pages/EligibilityCheck.tsx";
 import CourseDetail from "./pages/CourseDetail.tsx";
 import BookConsultation from "./pages/BookConsultation.tsx";
 import Scholarships from "./pages/Scholarships.tsx";
