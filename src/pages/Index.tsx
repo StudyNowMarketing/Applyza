@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import EligibilityQuizCTA from "@/components/EligibilityQuizCTA";
 import TrustStats from "@/components/TrustStats";
 import HowItWorks from "@/components/HowItWorks";
 import ServicesOverview from "@/components/ServicesOverview";
@@ -55,6 +56,7 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
+      <EligibilityQuizCTA />
       <TrustStats />
       <HowItWorks />
       <ServicesOverview />

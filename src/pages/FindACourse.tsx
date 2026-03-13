@@ -1,13 +1,15 @@
 import SEO from "@/components/SEO";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles } from "lucide-react";
+import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CourseCompareBar from "@/components/CourseCompareBar";
+import CourseCompareModal from "@/components/CourseCompareModal";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
@@ -45,6 +47,8 @@ type Course = {
   description: string | null;
   scholarship_available: boolean | null;
   featured: boolean | null;
+  entry_requirements: string | null;
+  english_requirements: string | null;
 };
 
 const COUNTRIES = ["United Kingdom"];
@@ -275,6 +279,14 @@ const FindACourse = () => {
   const [scholarshipOnly, setScholarshipOnly] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
+  const toggleCompare = (id: string) => {
+    setCompareIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : prev.length < 3 ? [...prev, id] : prev
+    );
+  };
 
   const { data: courses = [], isLoading } = useQuery({
     queryKey: ["courses"],
@@ -282,12 +294,14 @@ const FindACourse = () => {
       const { data, error } = await supabase
         .from("courses")
         .select(
-          "id, title, slug, university_name, country, city, subject_area, study_level, duration, tuition_fee, intake_dates, description, scholarship_available, featured"
+          "id, title, slug, university_name, country, city, subject_area, study_level, duration, tuition_fee, intake_dates, description, scholarship_available, featured, entry_requirements, english_requirements"
         );
       if (error) throw error;
       return data as Course[];
     },
   });
+
+  const compareCourses = useMemo(() => courses.filter((c) => compareIds.includes(c.id)), [courses, compareIds]);
 
   const universityNames = useMemo(
     () => [...new Set(courses.map((c) => c.university_name))].sort(),
@@ -795,7 +809,7 @@ const FindACourse = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filtered.map((course) => (
-                  <CourseCard key={course.id} course={course} />
+                  <CourseCard key={course.id} course={course} isCompared={compareIds.includes(course.id)} onToggleCompare={() => toggleCompare(course.id)} compareDisabled={compareIds.length >= 3 && !compareIds.includes(course.id)} />
                 ))}
               </div>
             )}
@@ -803,16 +817,43 @@ const FindACourse = () => {
         </div>
       </section>
 
+      <CourseCompareBar
+        courses={compareCourses.map((c) => ({ id: c.id, title: c.title, university_name: c.university_name }))}
+        onRemove={(id) => setCompareIds((prev) => prev.filter((x) => x !== id))}
+        onClear={() => setCompareIds([])}
+        onCompare={() => setShowCompareModal(true)}
+      />
+      <AnimatePresence>
+        {showCompareModal && compareCourses.length >= 2 && (
+          <CourseCompareModal courses={compareCourses} onClose={() => setShowCompareModal(false)} />
+        )}
+      </AnimatePresence>
       <Footer />
       <WhatsAppButton />
     </div>
   );
 };
 
-const CourseCard = ({ course }: { course: Course }) => (
-  <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
-    style={{ border: "1px solid hsl(230 25% 93%)" }}>
-    <p className="text-[11px] text-gray-400 mb-1 font-medium">
+const CourseCard = ({ course, isCompared, onToggleCompare, compareDisabled }: { course: Course; isCompared: boolean; onToggleCompare: () => void; compareDisabled: boolean }) => (
+  <div className="relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+    style={{ border: isCompared ? "2px solid #2EC4B6" : "1px solid hsl(230 25% 93%)" }}>
+    {/* Compare button */}
+    <button
+      onClick={(e) => { e.preventDefault(); onToggleCompare(); }}
+      disabled={compareDisabled}
+      className={`absolute top-3 right-3 flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full transition-all ${
+        isCompared
+          ? "text-white"
+          : compareDisabled
+          ? "bg-gray-50 text-gray-300 cursor-not-allowed"
+          : "bg-gray-50 text-gray-500 hover:bg-gray-100"
+      }`}
+      style={isCompared ? { background: "#2EC4B6" } : undefined}
+    >
+      <GitCompareArrows size={10} /> {isCompared ? "Added" : "Compare"}
+    </button>
+
+    <p className="text-[11px] text-gray-400 mb-1 font-medium pr-20">
       {course.university_name}
     </p>
     <h3 className="text-base font-bold leading-snug mb-3" style={{ color: "#1B2150" }}>

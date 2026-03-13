@@ -12,6 +12,7 @@ const navTabs = [
       {
         links: [
           { label: "Find a Course", to: "/find-a-course" },
+          { label: "Check Eligibility", to: "/eligibility-check" },
           { label: "Scholarships", to: "/scholarships" },
           { label: "Study Destinations", to: "/study-destinations" },
         ],
