@@ -271,42 +271,78 @@ export type Database = {
       }
       eligibility_leads: {
         Row: {
+          age_range: string | null
           budget: string | null
           country: string | null
           created_at: string
+          current_visa: string | null
           destinations: string | null
           education_level: string | null
           email: string
+          english_score: string | null
+          english_test: string | null
+          grade_classification: string | null
           id: string
           name: string
+          needs_scholarship: string | null
           phone: string
+          preferred_start: string | null
+          study_gap: string | null
+          study_gap_reason: string | null
+          study_level: string | null
           subjects: string | null
+          visa_refused: string | null
+          visa_refused_country: string | null
           whatsapp: string | null
         }
         Insert: {
+          age_range?: string | null
           budget?: string | null
           country?: string | null
           created_at?: string
+          current_visa?: string | null
           destinations?: string | null
           education_level?: string | null
           email: string
+          english_score?: string | null
+          english_test?: string | null
+          grade_classification?: string | null
           id?: string
           name: string
+          needs_scholarship?: string | null
           phone: string
+          preferred_start?: string | null
+          study_gap?: string | null
+          study_gap_reason?: string | null
+          study_level?: string | null
           subjects?: string | null
+          visa_refused?: string | null
+          visa_refused_country?: string | null
           whatsapp?: string | null
         }
         Update: {
+          age_range?: string | null
           budget?: string | null
           country?: string | null
           created_at?: string
+          current_visa?: string | null
           destinations?: string | null
           education_level?: string | null
           email?: string
+          english_score?: string | null
+          english_test?: string | null
+          grade_classification?: string | null
           id?: string
           name?: string
+          needs_scholarship?: string | null
           phone?: string
+          preferred_start?: string | null
+          study_gap?: string | null
+          study_gap_reason?: string | null
+          study_level?: string | null
           subjects?: string | null
+          visa_refused?: string | null
+          visa_refused_country?: string | null
           whatsapp?: string | null
         }
         Relationships: []
