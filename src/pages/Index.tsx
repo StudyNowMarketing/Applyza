@@ -63,7 +63,7 @@ const Index = () => {
       <StudyDestinations />
       <PartnerUniversities />
       <WhyChooseApplyza />
-      <ScholarshipsPreview />
+      
       <UpcomingEvents />
       <Testimonials />
       <BlogPreview />
