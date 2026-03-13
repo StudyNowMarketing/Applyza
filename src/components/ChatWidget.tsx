@@ -57,6 +57,13 @@ const ChatWidget: React.FC = () => {
     typeof window !== "undefined" &&
     ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
+  // Listen for external open-chatbot events
+  useEffect(() => {
+    const handler = () => setIsOpen(true);
+    window.addEventListener("open-chatbot", handler);
+    return () => window.removeEventListener("open-chatbot", handler);
+  }, []);
+
   // Pulse animation every 30s
   useEffect(() => {
     if (isOpen) return;
