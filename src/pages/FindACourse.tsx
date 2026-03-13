@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import CourseCompareBar from "@/components/CourseCompareBar";
 import CourseCompareModal from "@/components/CourseCompareModal";
 import { Button } from "@/components/ui/button";
@@ -829,7 +828,6 @@ const FindACourse = () => {
         )}
       </AnimatePresence>
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

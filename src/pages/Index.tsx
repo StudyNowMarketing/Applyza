@@ -15,7 +15,6 @@ import Testimonials from "@/components/Testimonials";
 import FinalCTA from "@/components/FinalCTA";
 import WhatsAppCommunity from "@/components/WhatsAppCommunity";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import SocialProofNotifications from "@/components/SocialProofNotifications";
 
 const homepageJsonLd = [
@@ -70,7 +69,6 @@ const Index = () => {
       <WhatsAppCommunity />
       <FinalCTA />
       <Footer />
-      <WhatsAppButton />
       <SocialProofNotifications />
     </div>
   );

@@ -1,7 +1,6 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceHero from "@/components/ServiceHero";
 import ServiceCTA from "@/components/ServiceCTA";
 import OtherServices from "@/components/OtherServices";
@@ -82,7 +81,6 @@ const Accommodation = () => (
     <OtherServices currentPath="/services/accommodation" />
     <ServiceCTA label="Book a Consultation" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

@@ -1,7 +1,6 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useCookieConsent } from "@/components/CookieConsent";
@@ -122,7 +121,6 @@ const CookiePolicy = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };
