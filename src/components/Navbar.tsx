@@ -227,7 +227,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                   {tab.label}
                   <ChevronDown
                     size={16}
-                    className={`text-gray-400 transition-transform duration-200 ${
+                    className={`text-white/50 transition-transform duration-200 ${
                       mobileExpanded === tab.label ? "rotate-180" : ""
                     }`}
                   />
