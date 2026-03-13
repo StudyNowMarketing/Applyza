@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
 
 const events = [
   {
@@ -152,6 +153,23 @@ const UpcomingEvents = () => {
           <Link to="/events" className="font-semibold text-sm hover:underline" style={{ color: "#2EC4B6" }}>
             See more events →
           </Link>
+        </div>
+
+        {/* Event video showcase */}
+        <div className="mt-14">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-xl md:text-2xl font-extrabold text-primary text-center mb-6"
+          >
+            Experience an Applyza Event
+          </motion.h3>
+          <VideoPlaceholder
+            caption="See what The Applyza Experience is all about"
+            placeholderText="Event Highlights Coming Soon"
+          />
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import VideoPlaceholder from "@/components/VideoPlaceholder";
 
 const reasons = [
   {
@@ -148,6 +149,14 @@ const WhyChooseApplyza = () => {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Video section */}
+        <div className="mt-12">
+          <VideoPlaceholder
+            caption="Watch: Why thousands of students trust Applyza"
+            placeholderText="Video Coming Soon"
+          />
         </div>
       </div>
     </section>
