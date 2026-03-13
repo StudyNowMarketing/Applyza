@@ -11,7 +11,7 @@ import WhyChooseApplyza from "@/components/WhyChooseApplyza";
 
 import UpcomingEvents from "@/components/UpcomingEvents";
 import Testimonials from "@/components/Testimonials";
-import BlogPreview from "@/components/BlogPreview";
+
 import FinalCTA from "@/components/FinalCTA";
 import WhatsAppCommunity from "@/components/WhatsAppCommunity";
 import Footer from "@/components/Footer";
