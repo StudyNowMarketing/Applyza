@@ -4,7 +4,7 @@ const stats = [
   { value: 3000, suffix: "+", label: "Students Placed", sublabel: "Worldwide" },
   { value: 150, suffix: "+", label: "Partner Universities", sublabel: "UK, Europe & beyond" },
   { value: 99, suffix: "%", label: "Visa Success", sublabel: "Approval rate" },
-  { value: 10, suffix: "+", label: "Years Experience", sublabel: "Industry expertise" },
+  { value: 6, suffix: "", label: "Global Offices", sublabel: "Worldwide presence" },
 ];
 
 function useCountUp(target: number, duration = 1500) {

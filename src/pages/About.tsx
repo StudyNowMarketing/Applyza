@@ -62,7 +62,7 @@ const stats = [
   { value: 3000, suffix: "+", label: "Students Placed" },
   { value: 150, suffix: "+", label: "Partner Universities" },
   { value: 99, suffix: "%", label: "Visa Success Rate" },
-  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 6, suffix: "", label: "Global Offices" },
 ];
 
 const StatItem = ({ value, suffix, label }: { value: number; suffix: string; label: string }) => {
@@ -81,7 +81,7 @@ const StatItem = ({ value, suffix, label }: { value: number; suffix: string; lab
 const About = () => {
   return (
     <div className="min-h-screen">
-      <SEO title="About Applyza | Global Education Platform | AQF Certified" description="Applyza is built by the team behind Study Now. 3,000+ students placed, 99% visa success rate. AQF certified education consultancy." path="/about" />
+      <SEO title="About Applyza | Global Education Platform | AQF Certified" description="Applyza is a global education consultancy helping international students access world-class universities. 150+ partners, 99% visa success rate." path="/about" />
       <Navbar />
 
       {/* ── HERO ── */}
@@ -137,10 +137,7 @@ const About = () => {
               </div>
 
               <p className="text-muted-foreground text-sm leading-[1.8]">
-                Born from the team behind Study Now — a consultancy that has placed over 3,000 students at 150+ universities with a 99% visa success rate — Applyza is the next generation of international education support.
-              </p>
-              <p className="text-muted-foreground text-sm leading-[1.8]">
-                Our AI-powered course matching helps students find programmes they're eligible for in seconds. Our expert counsellors provide personalised guidance at every stage. And we do it all without charging students a single penny.
+                Applyza is a global education consultancy that helps international students access world-class universities across the UK, Europe, and beyond. Our AI-powered course matching helps students find programmes they're eligible for in seconds. Our expert counsellors provide personalised guidance at every stage. And we do it all without charging students a single penny.
               </p>
 
               {/* Pull quote */}
@@ -161,12 +158,10 @@ const About = () => {
             >
               <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-6">Key Milestones</h3>
               {[
-                { year: "2014", text: "Study Now consultancy founded" },
-                { year: "2017", text: "1,000th student placed internationally" },
-                { year: "2019", text: "AQF certification achieved" },
-                { year: "2021", text: "Expanded to 6 global offices" },
-                { year: "2023", text: "3,000+ students placed, 150+ partners" },
-                { year: "2024", text: "Applyza platform launched" },
+                { year: "2026", text: "Applyza platform launched" },
+                { year: "2026", text: "150+ partner universities onboarded" },
+                { year: "2026", text: "Offices established across 6 countries" },
+                { year: "2026", text: "AI-powered course matching system launched" },
               ].map((m, i, arr) => (
                 <div key={m.year} className="flex gap-4">
                   <div className="flex flex-col items-center">
