@@ -141,6 +141,9 @@ const App = () => (
             <BrowserRouter>
               <CookieConsent />
               <AnimatedRoutes />
+              <Suspense fallback={null}>
+                <ChatWidget />
+              </Suspense>
             </BrowserRouter>
           </ErrorBoundary>
         </TooltipProvider>
