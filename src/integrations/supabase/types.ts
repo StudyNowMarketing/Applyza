@@ -85,70 +85,79 @@ export type Database = {
       }
       chatbot_conversations: {
         Row: {
+          bot_response: string
           created_at: string
           id: string
+          language: string
           lead_captured: boolean
-          messages: Json
           page_url: string | null
           session_id: string
           student_email: string | null
           student_name: string | null
-          updated_at: string
+          user_message: string
         }
         Insert: {
+          bot_response: string
           created_at?: string
           id?: string
+          language?: string
           lead_captured?: boolean
-          messages?: Json
           page_url?: string | null
           session_id: string
           student_email?: string | null
           student_name?: string | null
-          updated_at?: string
+          user_message: string
         }
         Update: {
+          bot_response?: string
           created_at?: string
           id?: string
+          language?: string
           lead_captured?: boolean
-          messages?: Json
           page_url?: string | null
           session_id?: string
           student_email?: string | null
           student_name?: string | null
-          updated_at?: string
+          user_message?: string
         }
         Relationships: []
       }
       chatbot_knowledge: {
         Row: {
-          answer: string
-          category: string | null
-          created_at: string | null
+          category: string
+          content: string
+          country: string | null
           id: string
-          keywords: string[] | null
-          question: string
+          last_updated: string
           source_url: string | null
-          updated_at: string | null
+          status: string
+          subcategory: string
+          title: string
+          university: string | null
         }
         Insert: {
-          answer: string
-          category?: string | null
-          created_at?: string | null
+          category: string
+          content: string
+          country?: string | null
           id?: string
-          keywords?: string[] | null
-          question: string
+          last_updated?: string
           source_url?: string | null
-          updated_at?: string | null
+          status?: string
+          subcategory: string
+          title: string
+          university?: string | null
         }
         Update: {
-          answer?: string
-          category?: string | null
-          created_at?: string | null
+          category?: string
+          content?: string
+          country?: string | null
           id?: string
-          keywords?: string[] | null
-          question?: string
+          last_updated?: string
           source_url?: string | null
-          updated_at?: string | null
+          status?: string
+          subcategory?: string
+          title?: string
+          university?: string | null
         }
         Relationships: []
       }
