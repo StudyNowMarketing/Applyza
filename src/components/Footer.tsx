@@ -20,6 +20,7 @@ const studentLinks = [
   { label: "Study Destinations", to: "/study-destinations" },
   { label: "Scholarships", to: "/scholarships" },
   { label: "Book a Consultation", to: "/book-a-consultation" },
+  { label: "WhatsApp Community", to: "https://wa.me/message/YOUR_WHATSAPP_LINK", external: true },
   { label: "FAQ", to: "/faq" },
 ];
 

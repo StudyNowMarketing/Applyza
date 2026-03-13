@@ -65,9 +65,11 @@ const Index = () => {
       <UpcomingEvents />
       <Testimonials />
       <BlogPreview />
+      <WhatsAppCommunity />
       <FinalCTA />
       <Footer />
       <WhatsAppButton />
+      <SocialProofNotifications />
     </div>
   );
 };
