@@ -18,6 +18,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
 import { useFormProtection } from "@/hooks/useFormProtection";
+import { createNotification } from "@/lib/notifications";
 
 const benefits = [
   { icon: Database, title: "150+ Universities", desc: "Access our full course database spanning universities worldwide." },
@@ -82,6 +83,11 @@ const ForPartners = () => {
       } else {
         onSuccess(form.email);
         setSubmitted(true);
+        createNotification({
+          type: "partner",
+          title: "New Partner Enquiry",
+          message: `${form.name}${form.company_name ? ` from ${form.company_name}` : ""} (${form.email})`,
+        });
       }
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });

@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
 import { useFormProtection } from "@/hooks/useFormProtection";
+import { createNotification } from "@/lib/notifications";
 
 const benefits = [
   { icon: Users, title: "Qualified Student Referrals", desc: "Every student we refer has been assessed and counselled by our team." },
@@ -90,6 +91,11 @@ const ForInstitutions = () => {
       } else {
         onSuccess(form.email);
         setSubmitted(true);
+        createNotification({
+          type: "institution",
+          title: "New Institution Enquiry",
+          message: `${form.contact_name} from ${form.institution_name} (${form.email})`,
+        });
       }
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });

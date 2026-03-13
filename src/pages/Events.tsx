@@ -17,6 +17,7 @@ import { format, isBefore, startOfDay } from "date-fns";
 import { motion } from "framer-motion";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
 import { useFormProtection } from "@/hooks/useFormProtection";
+import { createNotification } from "@/lib/notifications";
 
 const Events = () => {
   const { toast } = useToast();
@@ -60,6 +61,11 @@ const Events = () => {
         onSuccess(subEmail);
         setSubscribed(true);
         toast({ title: "You're subscribed!", description: "We'll notify you about upcoming events." });
+        createNotification({
+          type: "event_registration",
+          title: "New Event Subscriber",
+          message: `${subEmail} subscribed to event notifications`,
+        });
         setSubEmail("");
       }
     } catch {
