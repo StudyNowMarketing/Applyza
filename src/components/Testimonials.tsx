@@ -83,7 +83,7 @@ const Testimonials = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="rounded-xl p-4 backdrop-blur-md"
+                className="rounded-xl p-4 backdrop-blur-md hover-lift"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
               >
                 {/* Video placeholder */}

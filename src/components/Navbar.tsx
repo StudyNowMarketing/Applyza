@@ -117,7 +117,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 ${
-        scrolled ? "shadow-md" : "shadow-sm"
+        scrolled ? "shadow-md bg-white/95 backdrop-blur-sm" : "shadow-sm"
       }`}
     >
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
