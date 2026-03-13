@@ -151,6 +151,14 @@ const WhyChooseApplyza = () => {
             );
           })}
         </div>
+
+        {/* Video section */}
+        <div className="mt-12">
+          <VideoPlaceholder
+            caption="Watch: Why thousands of students trust Applyza"
+            placeholderText="Video Coming Soon"
+          />
+        </div>
       </div>
     </section>
   );
