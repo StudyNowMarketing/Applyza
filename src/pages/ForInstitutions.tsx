@@ -235,7 +235,7 @@ const ForInstitutions = () => {
                 <ConsentCheckbox
                   checked={consent}
                   onCheckedChange={setConsent}
-                  label="I consent to Applyza processing this enquiry to discuss a potential partnership. Privacy Policy."
+                  label="I agree to the Privacy Policy and consent to Applyza processing this data to discuss a potential partnership."
                 />
                 <Button type="submit" size="lg" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" disabled={submitting || !consent || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Enquiry"}

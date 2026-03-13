@@ -155,7 +155,7 @@ const Contact = () => {
                 <ConsentCheckbox
                   checked={consent}
                   onCheckedChange={setConsent}
-                  label="I consent to Applyza collecting and processing my personal data to respond to my enquiry. I have read the Privacy Policy."
+                  label="I agree to the Privacy Policy and consent to Applyza processing my personal data to respond to my enquiry."
                 />
                 <Button type="submit" size="lg" className="rounded-full px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full sm:w-auto" disabled={submitting || !consent || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : "Send Message"}

@@ -258,7 +258,7 @@ const BookConsultation = () => {
                 <ConsentCheckbox
                   checked={consent}
                   onCheckedChange={setConsent}
-                  label="I consent to Applyza collecting and processing my personal data for the purpose of providing education consultancy services. I have read the Privacy Policy."
+                  label="I agree to the Privacy Policy and consent to Applyza processing my personal data to arrange my consultation."
                 />
 
                 <Button type="submit" size="lg" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" disabled={loading || !consent || isBlocked}>
