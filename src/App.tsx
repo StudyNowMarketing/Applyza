@@ -25,6 +25,8 @@ import BlogPost from "./pages/BlogPost.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
 import AntiSlaveryPolicy from "./pages/AntiSlaveryPolicy.tsx";
+import CookiePolicy from "./pages/CookiePolicy.tsx";
+import Accessibility from "./pages/Accessibility.tsx";
 import StudyDestinations from "./pages/StudyDestinations.tsx";
 import DestinationDetail from "./pages/DestinationDetail.tsx";
 import ForInstitutions from "./pages/ForInstitutions.tsx";
@@ -85,6 +87,8 @@ const AnimatedRoutes = () => {
         <Route path="/privacy-policy" element={<P><PrivacyPolicy /></P>} />
         <Route path="/terms-and-conditions" element={<P><TermsConditions /></P>} />
         <Route path="/anti-slavery-policy" element={<P><AntiSlaveryPolicy /></P>} />
+        <Route path="/cookie-policy" element={<P><CookiePolicy /></P>} />
+        <Route path="/accessibility" element={<P><Accessibility /></P>} />
         <Route path="/for-institutions" element={<P><ForInstitutions /></P>} />
         <Route path="/for-partners" element={<P><ForPartners /></P>} />
         <Route path="/contact" element={<P><Contact /></P>} />

@@ -1,5 +1,6 @@
-import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCookieConsent } from "@/components/CookieConsent";
 
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
@@ -56,6 +57,7 @@ const offices = [
 ];
 
 const Footer = () => {
+  const { openPreferences } = useCookieConsent();
   return (
     <footer style={{ background: "linear-gradient(180deg, #0a0d24, #050714)" }}>
       <div className="container py-14 md:py-20">
@@ -183,14 +185,24 @@ const Footer = () => {
           <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
             © 2026 Applyza. All rights reserved.
           </p>
-          <div className="flex flex-wrap gap-4 text-xs">
+          <div className="flex flex-wrap gap-4 text-xs items-center">
             <Link to="/privacy-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Privacy Policy</Link>
             <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
             <Link to="/terms-and-conditions" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Terms of Service</Link>
             <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
-            <Link to="/privacy-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Cookie Policy</Link>
+            <Link to="/cookie-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Cookie Policy</Link>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
+            <Link to="/accessibility" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Accessibility</Link>
             <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
             <Link to="/anti-slavery-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Modern Slavery Policy</Link>
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
+            <button
+              onClick={openPreferences}
+              className="transition-colors hover:text-white flex items-center gap-1"
+              style={{ color: "rgba(255,255,255,0.3)" }}
+            >
+              <Settings size={10} /> Cookie Settings
+            </button>
           </div>
         </div>
       </div>

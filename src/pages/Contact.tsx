@@ -43,6 +43,7 @@ const Contact = () => {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Invalid email format";
     if (!form.user_type) e.user_type = "Please select an option";
     if (!form.message.trim()) e.message = "Message is required";
+    if (!consent) e.consent = "Please agree to the Privacy Policy to continue";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -155,9 +156,10 @@ const Contact = () => {
                 <ConsentCheckbox
                   checked={consent}
                   onCheckedChange={setConsent}
-                  label="I consent to Applyza collecting and processing my personal data to respond to my enquiry. I have read the Privacy Policy."
+                  label="I agree to the Privacy Policy and consent to Applyza processing my personal data to respond to my enquiry."
                 />
-                <Button type="submit" size="lg" className="rounded-full px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full sm:w-auto" disabled={submitting || !consent || isBlocked}>
+                {errors.consent && <p className="text-sm text-destructive mt-1">{errors.consent}</p>}
+                <Button type="submit" size="lg" className="rounded-full px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full sm:w-auto" disabled={submitting || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : "Send Message"}
                 </Button>
               </form>
