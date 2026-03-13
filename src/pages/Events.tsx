@@ -61,6 +61,11 @@ const Events = () => {
         onSuccess(subEmail);
         setSubscribed(true);
         toast({ title: "You're subscribed!", description: "We'll notify you about upcoming events." });
+        createNotification({
+          type: "event_registration",
+          title: "New Event Subscriber",
+          message: `${subEmail} subscribed to event notifications`,
+        });
         setSubEmail("");
       }
     } catch {

@@ -83,6 +83,11 @@ const ForPartners = () => {
       } else {
         onSuccess(form.email);
         setSubmitted(true);
+        createNotification({
+          type: "partner",
+          title: "New Partner Enquiry",
+          message: `${form.name}${form.company_name ? ` from ${form.company_name}` : ""} (${form.email})`,
+        });
       }
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });

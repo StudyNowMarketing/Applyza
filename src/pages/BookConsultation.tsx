@@ -118,6 +118,11 @@ const BookConsultation = () => {
       }
       onSuccess(result.data.email);
       setSubmitted(true);
+      createNotification({
+        type: "consultation",
+        title: "New Consultation Request",
+        message: `${result.data.name} (${result.data.email}) requested a ${result.data.consultation_type} for ${result.data.service_interest}`,
+      });
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
     } finally {

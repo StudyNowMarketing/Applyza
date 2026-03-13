@@ -91,6 +91,11 @@ const ForInstitutions = () => {
       } else {
         onSuccess(form.email);
         setSubmitted(true);
+        createNotification({
+          type: "institution",
+          title: "New Institution Enquiry",
+          message: `${form.contact_name} from ${form.institution_name} (${form.email})`,
+        });
       }
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });

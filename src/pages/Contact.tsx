@@ -68,6 +68,11 @@ const Contact = () => {
       } else {
         onSuccess(form.email);
         setSubmitted(true);
+        createNotification({
+          type: "contact",
+          title: "New Contact Form Submission",
+          message: `${form.name} (${form.email}) submitted a contact form: "${form.message.slice(0, 100)}"`,
+        });
       }
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
