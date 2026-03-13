@@ -294,7 +294,6 @@ const BookConsultation = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

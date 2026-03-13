@@ -828,7 +828,6 @@ const FindACourse = () => {
         )}
       </AnimatePresence>
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

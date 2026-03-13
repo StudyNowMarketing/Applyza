@@ -157,7 +157,6 @@ const VisaImmigration = () => (
     </div>
     <ServiceCTA label="Book a Free Visa Consultation →" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

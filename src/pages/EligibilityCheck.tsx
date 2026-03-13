@@ -287,7 +287,6 @@ const EligibilityCheck = () => {
       </div>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

@@ -134,7 +134,6 @@ const Services = () => (
 
     <ServiceCTA label="Book a Free Consultation" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

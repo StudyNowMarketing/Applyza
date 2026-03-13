@@ -69,7 +69,6 @@ const Index = () => {
       <WhatsAppCommunity />
       <FinalCTA />
       <Footer />
-      <WhatsAppButton />
       <SocialProofNotifications />
     </div>
   );

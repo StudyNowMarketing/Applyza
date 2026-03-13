@@ -81,7 +81,6 @@ const Accommodation = () => (
     <OtherServices currentPath="/services/accommodation" />
     <ServiceCTA label="Book a Consultation" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

@@ -123,7 +123,6 @@ const UniversityApplications = () => (
     <OtherServices currentPath="/services/university-applications" />
     <ServiceCTA label="Book a Free Consultation →" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

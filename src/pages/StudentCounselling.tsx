@@ -89,7 +89,6 @@ const StudentCounselling = () => (
     <OtherServices currentPath="/services/student-counselling" />
     <ServiceCTA label="Book a Free Counselling Session →" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

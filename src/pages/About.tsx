@@ -349,7 +349,6 @@ const About = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };
