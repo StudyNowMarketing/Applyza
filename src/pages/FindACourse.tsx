@@ -279,7 +279,16 @@ const FindACourse = () => {
   const [scholarshipOnly, setScholarshipOnly] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
 
+  const toggleCompare = (id: string) => {
+    setCompareIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : prev.length < 3 ? [...prev, id] : prev
+    );
+  };
+
+  const compareCourses = useMemo(() => courses.filter((c) => compareIds.includes(c.id)), [courses, compareIds]);
   const { data: courses = [], isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
