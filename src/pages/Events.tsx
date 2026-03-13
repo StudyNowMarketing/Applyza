@@ -17,6 +17,7 @@ import { format, isBefore, startOfDay } from "date-fns";
 import { motion } from "framer-motion";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
 import { useFormProtection } from "@/hooks/useFormProtection";
+import { createNotification } from "@/lib/notifications";
 
 const Events = () => {
   const { toast } = useToast();
