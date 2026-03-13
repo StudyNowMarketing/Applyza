@@ -83,6 +83,42 @@ export type Database = {
         }
         Relationships: []
       }
+      chatbot_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          lead_captured: boolean
+          messages: Json
+          page_url: string | null
+          session_id: string
+          student_email: string | null
+          student_name: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lead_captured?: boolean
+          messages?: Json
+          page_url?: string | null
+          session_id: string
+          student_email?: string | null
+          student_name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lead_captured?: boolean
+          messages?: Json
+          page_url?: string | null
+          session_id?: string
+          student_email?: string | null
+          student_name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       chatbot_knowledge: {
         Row: {
           answer: string
