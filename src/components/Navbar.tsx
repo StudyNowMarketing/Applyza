@@ -261,7 +261,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
             <button
               onClick={(e) => { handleClientLogin(e); setMobileOpen(false); }}
-              className="text-gray-500 hover:text-gray-700 text-sm py-3 text-left"
+              className="text-white/50 hover:text-white text-sm py-3 text-left mobile-menu-item"
             >
               Client Login
             </button>
