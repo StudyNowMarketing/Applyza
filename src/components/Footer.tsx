@@ -96,9 +96,15 @@ const Footer = () => {
             <ul className="space-y-2.5">
               {studentLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.55)" }}>
-                    {link.label}
-                  </Link>
+                  {(link as any).external ? (
+                    <a href={link.to} target="_blank" rel="noopener noreferrer" className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link to={link.to} className="text-sm transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
