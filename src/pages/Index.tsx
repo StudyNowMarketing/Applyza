@@ -8,10 +8,10 @@ import ServicesOverview from "@/components/ServicesOverview";
 import StudyDestinations from "@/components/StudyDestinations";
 import PartnerUniversities from "@/components/PartnerUniversities";
 import WhyChooseApplyza from "@/components/WhyChooseApplyza";
-import ScholarshipsPreview from "@/components/ScholarshipsPreview";
+
 import UpcomingEvents from "@/components/UpcomingEvents";
 import Testimonials from "@/components/Testimonials";
-import BlogPreview from "@/components/BlogPreview";
+
 import FinalCTA from "@/components/FinalCTA";
 import WhatsAppCommunity from "@/components/WhatsAppCommunity";
 import Footer from "@/components/Footer";
@@ -63,10 +63,10 @@ const Index = () => {
       <StudyDestinations />
       <PartnerUniversities />
       <WhyChooseApplyza />
-      <ScholarshipsPreview />
+      
       <UpcomingEvents />
       <Testimonials />
-      <BlogPreview />
+      
       <WhatsAppCommunity />
       <FinalCTA />
       <Footer />
