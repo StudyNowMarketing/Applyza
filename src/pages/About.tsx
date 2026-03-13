@@ -1,7 +1,6 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { motion } from "framer-motion";
 import { Heart, Eye, Zap, Globe, MapPin, Building2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
