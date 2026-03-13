@@ -59,7 +59,6 @@ const Accessibility = () => (
     </section>
 
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

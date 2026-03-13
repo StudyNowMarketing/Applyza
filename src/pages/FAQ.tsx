@@ -131,7 +131,6 @@ const FAQ = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

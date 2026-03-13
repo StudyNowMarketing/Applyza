@@ -237,7 +237,6 @@ const PrivacyPolicy = () => (
     </section>
 
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

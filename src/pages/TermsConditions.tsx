@@ -127,7 +127,6 @@ const TermsConditions = () => (
     </section>
 
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

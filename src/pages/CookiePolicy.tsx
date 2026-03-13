@@ -121,7 +121,6 @@ const CookiePolicy = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };
