@@ -1,19 +1,16 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import EligibilityQuizCTA from "@/components/EligibilityQuizCTA";
-import TrustStats from "@/components/TrustStats";
-import HowItWorks from "@/components/HowItWorks";
-
-import StudyDestinations from "@/components/StudyDestinations";
-import PartnerUniversities from "@/components/PartnerUniversities";
-import WhyChooseApplyza from "@/components/WhyChooseApplyza";
-
-import UpcomingEvents from "@/components/UpcomingEvents";
-import Testimonials from "@/components/Testimonials";
-
-import FinalCTA from "@/components/FinalCTA";
-import WhatsAppCommunity from "@/components/WhatsAppCommunity";
+import HeroSection from "@/components/homepage/HeroSection";
+import AnimatedStats from "@/components/homepage/AnimatedStats";
+import MissionStatement from "@/components/homepage/MissionStatement";
+import ServicesCards from "@/components/homepage/ServicesCards";
+import PartnerLogos from "@/components/homepage/PartnerLogos";
+import DestinationsSection from "@/components/homepage/DestinationsSection";
+import ProofSection from "@/components/homepage/ProofSection";
+import TestimonialsSection from "@/components/homepage/TestimonialsSection";
+import AiChatbotCTA from "@/components/homepage/AiChatbotCTA";
+import BlogPreviewSection from "@/components/homepage/BlogPreviewSection";
+import FinalCTASection from "@/components/homepage/FinalCTASection";
 import Footer from "@/components/Footer";
 import SocialProofNotifications from "@/components/SocialProofNotifications";
 
@@ -54,20 +51,17 @@ const Index = () => {
         jsonLd={homepageJsonLd}
       />
       <Navbar />
-      <Hero />
-      <EligibilityQuizCTA />
-      <TrustStats />
-      <HowItWorks />
-      
-      <StudyDestinations />
-      <PartnerUniversities />
-      <WhyChooseApplyza />
-      
-      <UpcomingEvents />
-      <Testimonials />
-      
-      <WhatsAppCommunity />
-      <FinalCTA />
+      <HeroSection />
+      <AnimatedStats />
+      <MissionStatement />
+      <ServicesCards />
+      <PartnerLogos />
+      <DestinationsSection />
+      <ProofSection />
+      <TestimonialsSection />
+      <AiChatbotCTA />
+      <BlogPreviewSection />
+      <FinalCTASection />
       <Footer />
       <SocialProofNotifications />
     </div>
