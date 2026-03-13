@@ -237,7 +237,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                     {tab.sections.map((section, si) => (
                       <div key={si}>
                         {section.heading && (
-                          <p className="text-[10px] uppercase font-semibold text-gray-400 tracking-wide pt-2 pb-1">
+                          <p className="text-[10px] uppercase font-semibold text-white/40 tracking-wide pt-2 pb-1">
                             {section.heading}
                           </p>
                         )}
