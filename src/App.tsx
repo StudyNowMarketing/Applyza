@@ -57,6 +57,9 @@ import AdminContent from "./pages/admin/AdminContent.tsx";
 import AdminTeam from "./pages/admin/AdminTeam.tsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
+import { lazy, Suspense } from "react";
+
+const ChatWidget = lazy(() => import("./components/ChatWidget.tsx"));
 
 const queryClient = new QueryClient();
 
