@@ -12,8 +12,10 @@ import UpcomingEvents from "@/components/UpcomingEvents";
 import Testimonials from "@/components/Testimonials";
 import BlogPreview from "@/components/BlogPreview";
 import FinalCTA from "@/components/FinalCTA";
+import WhatsAppCommunity from "@/components/WhatsAppCommunity";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SocialProofNotifications from "@/components/SocialProofNotifications";
 
 const homepageJsonLd = [
   {
@@ -63,9 +65,11 @@ const Index = () => {
       <UpcomingEvents />
       <Testimonials />
       <BlogPreview />
+      <WhatsAppCommunity />
       <FinalCTA />
       <Footer />
       <WhatsAppButton />
+      <SocialProofNotifications />
     </div>
   );
 };
