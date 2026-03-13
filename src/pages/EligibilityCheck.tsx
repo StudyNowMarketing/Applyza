@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { supabase } from "@/integrations/supabase/client";
 import { createNotification } from "@/lib/notifications";
-import { sanitizeText } from "@/lib/sanitize";
+import { sanitize } from "@/lib/sanitize";
 
 const COUNTRIES = [
   { emoji: "🇳🇬", name: "Nigeria" },
