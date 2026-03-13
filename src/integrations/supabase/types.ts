@@ -236,6 +236,48 @@ export type Database = {
         }
         Relationships: []
       }
+      eligibility_leads: {
+        Row: {
+          budget: string | null
+          country: string | null
+          created_at: string
+          destinations: string | null
+          education_level: string | null
+          email: string
+          id: string
+          name: string
+          phone: string
+          subjects: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          budget?: string | null
+          country?: string | null
+          created_at?: string
+          destinations?: string | null
+          education_level?: string | null
+          email: string
+          id?: string
+          name: string
+          phone: string
+          subjects?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          budget?: string | null
+          country?: string | null
+          created_at?: string
+          destinations?: string | null
+          education_level?: string | null
+          email?: string
+          id?: string
+          name?: string
+          phone?: string
+          subjects?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
       event_subscribers: {
         Row: {
           created_at: string | null
