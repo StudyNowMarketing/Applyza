@@ -33,12 +33,24 @@ const Hero = () => {
       className="relative min-h-[90vh] flex items-center overflow-hidden"
       style={{ backgroundColor: "#0a0d24" }}
     >
-      {/* Radial gradient overlay */}
+      {/* Animated radial gradient overlay */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none animate-gradient-shift"
         style={{
           background:
             "radial-gradient(ellipse at top left, #1a1f4d 0%, #0a0d24 50%, #050714 100%)",
+          backgroundSize: "200% 200%",
+        }}
+      />
+
+      {/* Subtle moving dot pattern */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        style={{
+          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
         }}
       />
 
