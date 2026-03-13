@@ -62,7 +62,7 @@ const stats = [
   { value: 3000, suffix: "+", label: "Students Placed" },
   { value: 150, suffix: "+", label: "Partner Universities" },
   { value: 99, suffix: "%", label: "Visa Success Rate" },
-  { value: 10, suffix: "+", label: "Years Experience" },
+  { value: 6, suffix: "", label: "Global Offices" },
 ];
 
 const StatItem = ({ value, suffix, label }: { value: number; suffix: string; label: string }) => {

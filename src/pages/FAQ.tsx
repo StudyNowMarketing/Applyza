@@ -12,7 +12,7 @@ const faqData = [
     category: "General",
     items: [
       { q: "Is Applyza really free for students?", a: "Yes, completely. We never charge students for our services — not for consultations, applications, or visa support. Our services are funded by our university partners." },
-      { q: "Who is Applyza?", a: "Applyza is a global education platform built by the team behind Study Now, which has placed over 3,000 students at 150+ universities with a 99% visa success rate. We combine expert counselling with AI technology to make studying abroad simpler, smarter, and free." },
+      { q: "Who is Applyza?", a: "Applyza is a global education consultancy that helps international students access world-class universities. With 150+ partner universities, a 99% visa success rate, and offices in 6 countries, we combine expert counselling with AI technology to make studying abroad simpler, smarter, and free." },
       { q: "What countries can I study in through Applyza?", a: "We support students applying to universities in the United Kingdom, Germany, France, Ireland, Malta, the Netherlands, Canada, the USA, and more. Our course database is constantly growing." },
       { q: "Which countries do you support students from?", a: "We work with students from Nigeria, Ghana, Kenya, Türkiye, Qatar, and many other countries. If you're unsure whether we can help, just reach out." },
       { q: "How is Applyza different from other education consultancies?", a: "We combine the personal touch of an experienced consultancy with AI-powered technology. Our course matcher helps you find programmes you're eligible for instantly. Our counsellors provide real, human guidance. And everything is free." },
