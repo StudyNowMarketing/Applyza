@@ -30,6 +30,7 @@ const staticPages = [
   { path: "/cookie-policy", priority: "0.4", changefreq: "monthly" },
   { path: "/anti-slavery-policy", priority: "0.4", changefreq: "monthly" },
   { path: "/accessibility", priority: "0.4", changefreq: "monthly" },
+];
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
