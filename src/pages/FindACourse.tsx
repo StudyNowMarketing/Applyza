@@ -834,10 +834,26 @@ const FindACourse = () => {
   );
 };
 
-const CourseCard = ({ course }: { course: Course }) => (
-  <div className="bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
-    style={{ border: "1px solid hsl(230 25% 93%)" }}>
-    <p className="text-[11px] text-gray-400 mb-1 font-medium">
+const CourseCard = ({ course, isCompared, onToggleCompare, compareDisabled }: { course: Course; isCompared: boolean; onToggleCompare: () => void; compareDisabled: boolean }) => (
+  <div className="relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
+    style={{ border: isCompared ? "2px solid #2EC4B6" : "1px solid hsl(230 25% 93%)" }}>
+    {/* Compare button */}
+    <button
+      onClick={(e) => { e.preventDefault(); onToggleCompare(); }}
+      disabled={compareDisabled}
+      className={`absolute top-3 right-3 flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-full transition-all ${
+        isCompared
+          ? "text-white"
+          : compareDisabled
+          ? "bg-gray-50 text-gray-300 cursor-not-allowed"
+          : "bg-gray-50 text-gray-500 hover:bg-gray-100"
+      }`}
+      style={isCompared ? { background: "#2EC4B6" } : undefined}
+    >
+      <GitCompareArrows size={10} /> {isCompared ? "Added" : "Compare"}
+    </button>
+
+    <p className="text-[11px] text-gray-400 mb-1 font-medium pr-20">
       {course.university_name}
     </p>
     <h3 className="text-base font-bold leading-snug mb-3" style={{ color: "#1B2150" }}>
