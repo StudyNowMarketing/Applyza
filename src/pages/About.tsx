@@ -137,10 +137,7 @@ const About = () => {
               </div>
 
               <p className="text-muted-foreground text-sm leading-[1.8]">
-                Born from the team behind Study Now — a consultancy that has placed over 3,000 students at 150+ universities with a 99% visa success rate — Applyza is the next generation of international education support.
-              </p>
-              <p className="text-muted-foreground text-sm leading-[1.8]">
-                Our AI-powered course matching helps students find programmes they're eligible for in seconds. Our expert counsellors provide personalised guidance at every stage. And we do it all without charging students a single penny.
+                Applyza is a global education consultancy that helps international students access world-class universities across the UK, Europe, and beyond. Our AI-powered course matching helps students find programmes they're eligible for in seconds. Our expert counsellors provide personalised guidance at every stage. And we do it all without charging students a single penny.
               </p>
 
               {/* Pull quote */}
