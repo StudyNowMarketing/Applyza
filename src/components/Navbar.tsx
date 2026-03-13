@@ -123,7 +123,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
         {/* Logo */}
         <Link to="/" className="shrink-0">
-          <img src="/logo-transparent.png" alt="Applyza" className="h-10 w-auto [filter:brightness(0)_invert(1)]" />
+          <img src="/logo.png" alt="Applyza" className="h-10 w-auto [filter:brightness(0)_invert(1)]" />
         </Link>
 
         {/* Desktop tabs */}
