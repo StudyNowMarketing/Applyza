@@ -286,7 +286,7 @@ const FindACourse = () => {
       const { data, error } = await supabase
         .from("courses")
         .select(
-          "id, title, slug, university_name, country, city, subject_area, study_level, duration, tuition_fee, intake_dates, description, scholarship_available, featured"
+          "id, title, slug, university_name, country, city, subject_area, study_level, duration, tuition_fee, intake_dates, description, scholarship_available, featured, entry_requirements, english_requirements"
         );
       if (error) throw error;
       return data as Course[];
