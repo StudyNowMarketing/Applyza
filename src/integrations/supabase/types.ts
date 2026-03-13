@@ -83,6 +83,39 @@ export type Database = {
         }
         Relationships: []
       }
+      chatbot_knowledge: {
+        Row: {
+          answer: string
+          category: string | null
+          created_at: string | null
+          id: string
+          keywords: string[] | null
+          question: string
+          source_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          answer: string
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          keywords?: string[] | null
+          question: string
+          source_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          answer?: string
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          keywords?: string[] | null
+          question?: string
+          source_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       consultation_requests: {
         Row: {
           consultation_type: string
