@@ -276,7 +276,7 @@ const BookConsultation = () => {
                 <Mail size={14} /> info@applyza.com
               </a>
               <a
-                href={`https://wa.me/?text=${encodeURIComponent("Hi, I'd like to book a consultation with Applyza")}`}
+                href={`https://wa.me/447000000000?text=${encodeURIComponent("Hi, I'd like to book a consultation with Applyza")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-secondary font-semibold hover:underline"

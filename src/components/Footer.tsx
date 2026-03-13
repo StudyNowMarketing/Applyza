@@ -188,9 +188,9 @@ const Footer = () => {
             <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
             <Link to="/terms-and-conditions" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Terms of Service</Link>
             <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
-            <Link to="/anti-slavery-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Cookie Policy</Link>
+            <Link to="/privacy-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Cookie Policy</Link>
             <span style={{ color: "rgba(255,255,255,0.15)" }}>|</span>
-            <Link to="/anti-slavery-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Accessibility</Link>
+            <Link to="/anti-slavery-policy" className="transition-colors hover:text-white" style={{ color: "rgba(255,255,255,0.3)" }}>Modern Slavery Policy</Link>
           </div>
         </div>
       </div>
