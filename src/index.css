@@ -78,36 +78,69 @@
   }
 }
 
+/* ── Marquee ── */
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
 
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ── Hero gradient shift ── */
 @keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animate-gradient-shift {
   animation: gradient-shift 6s ease infinite;
 }
 
-/* ── Global hover enhancements ── */
+/* ════════════════════════════════════════════════
+   GLOBAL SCROLL-REVEAL ANIMATION SYSTEM
+   Uses [data-scroll] attribute set by ScrollAnimator
+   ════════════════════════════════════════════════ */
+
+/* Hidden states — each type has its own start transform */
+[data-scroll="heading"],
+[data-scroll="paragraph"],
+[data-scroll="card"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+[data-scroll="paragraph"] {
+  transition-delay: 0.15s;
+}
+
+[data-scroll="img"] {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* Stagger for grid/card items */
+[data-scroll="card"] {
+  transition-delay: calc(var(--stagger-index, 0) * 100ms);
+}
+
+/* Visible state — everything resolves to normal */
+[data-scroll="visible"] {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+/* ════════════════════════════════════════════════
+   GLOBAL HOVER EFFECTS
+   ════════════════════════════════════════════════ */
 
 /* Card hover lift */
 .hover-lift {
@@ -119,12 +152,20 @@
 }
 
 /* Button hover lift */
-button, a[class*="rounded-full"] {
+button,
+a[class*="rounded-full"] {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
-button:hover:not(:disabled), a[class*="rounded-full"]:hover {
+button:hover:not(:disabled),
+a[class*="rounded-full"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Teal glow for CTA buttons */
+a[href="/book-a-consultation"]:hover,
+a[href*="book-a-consultation"]:hover {
+  box-shadow: 0 6px 20px hsl(169 63% 47% / 0.35);
 }
 
 /* Nav link teal underline */
@@ -141,13 +182,124 @@ nav a::after {
   background: #2EC4B6;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 nav a:hover::after {
   transform: scaleX(1);
 }
 
-/* Marquee pause on hover */
-.animate-marquee:hover {
-  animation-play-state: paused;
+/* Arrow links — arrow slides right on hover */
+a:has(> span:last-child),
+a[class*="arrow"] {
+  transition: color 0.2s ease;
+}
+
+/* Image zoom inside cards on hover */
+.hover-lift:hover img,
+[class*="card"]:hover img,
+[class*="Card"]:hover img {
+  transform: scale(1.03);
+}
+.hover-lift img,
+[class*="card"] img,
+[class*="Card"] img {
+  transition: transform 0.3s ease;
+}
+
+/* ════════════════════════════════════════════════
+   FORM FOCUS ANIMATIONS
+   ════════════════════════════════════════════════ */
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+  border-color: hsl(169 63% 47%) !important;
+  box-shadow: 0 0 0 3px hsl(169 63% 47% / 0.15);
+}
+
+/* ════════════════════════════════════════════════
+   FAQ ACCORDION ENHANCEMENTS
+   ════════════════════════════════════════════════ */
+
+[data-radix-accordion-content] {
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+/* ════════════════════════════════════════════════
+   DESTINATION CARD IMAGE ZOOM
+   ════════════════════════════════════════════════ */
+
+.destination-card:hover img {
+  transform: scale(1.05);
+}
+.destination-card img {
+  transition: transform 0.3s ease;
+}
+.destination-card:hover .destination-overlay {
+  opacity: 0.25;
+}
+.destination-overlay {
+  transition: opacity 0.3s ease;
+}
+
+/* ════════════════════════════════════════════════
+   SKELETON / LOADING SHIMMER
+   ════════════════════════════════════════════════ */
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, hsl(230 33% 94%) 25%, hsl(230 33% 97%) 50%, hsl(230 33% 94%) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ════════════════════════════════════════════════
+   PARTNER LOGOS GREYSCALE → COLOR
+   ════════════════════════════════════════════════ */
+
+.partner-logo {
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.partner-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* ════════════════════════════════════════════════
+   PULSE ANIMATION (for step numbers, date badges)
+   ════════════════════════════════════════════════ */
+
+@keyframes subtle-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.85; }
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 2s ease-in-out 1;
+}
+
+/* ════════════════════════════════════════════════
+   MOBILE MENU STAGGER
+   ════════════════════════════════════════════════ */
+
+@keyframes menu-item-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mobile-menu-item {
+  animation: menu-item-in 0.3s ease forwards;
+  opacity: 0;
 }
