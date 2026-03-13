@@ -40,6 +40,7 @@ import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
 import { useFormProtection } from "@/hooks/useFormProtection";
+import { createNotification } from "@/lib/notifications";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
