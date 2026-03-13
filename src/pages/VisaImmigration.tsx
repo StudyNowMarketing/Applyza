@@ -5,6 +5,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceHero from "@/components/ServiceHero";
 import ServiceCTA from "@/components/ServiceCTA";
 import OtherServices from "@/components/OtherServices";
+import GenuineStudentBanner from "@/components/GenuineStudentBanner";
 import { motion } from "framer-motion";
 import { ClipboardCheck, FileText, Wallet, FileCheck, MessageCircle, HeartHandshake, AlertTriangle } from "lucide-react";
 
