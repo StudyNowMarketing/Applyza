@@ -78,104 +78,38 @@
   }
 }
 
-/* ═══════════════════════════════════════════
-   KEYFRAMES
-   ═══════════════════════════════════════════ */
-
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes fade-up-in {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+  0% {
+    transform: translateX(0);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  100% {
+    transform: translateX(-50%);
   }
-}
-
-@keyframes scale-fade-in {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes subtle-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes skeleton-load {
-  0% { opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { opacity: 0.5; }
 }
 
 .animate-marquee {
   animation: marquee 20s linear infinite;
 }
 
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .animate-gradient-shift {
   animation: gradient-shift 6s ease infinite;
 }
 
-/* ═══════════════════════════════════════════
-   INTERSECTION OBSERVER CSS ANIMATIONS
-   Elements start invisible then animate when .is-visible is added by JS
-   ═══════════════════════════════════════════ */
+/* ── Global hover enhancements ── */
 
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.animate-on-scroll-scale {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-.animate-on-scroll-scale.is-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Stagger delay helpers */
-.stagger-1 { transition-delay: 0.1s; }
-.stagger-2 { transition-delay: 0.2s; }
-.stagger-3 { transition-delay: 0.3s; }
-.stagger-4 { transition-delay: 0.4s; }
-.stagger-5 { transition-delay: 0.5s; }
-
-/* ═══════════════════════════════════════════
-   GLOBAL HOVER EFFECTS
-   ═══════════════════════════════════════════ */
-
-/* Card hover lift — applies to any element with hover-lift or common card patterns */
+/* Card hover lift */
 .hover-lift {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -184,37 +118,13 @@
   box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.15);
 }
 
-/* Global button hover lift */
-button:not([data-no-lift]),
-a[class*="rounded-full"]:not([data-no-lift]) {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+/* Button hover lift */
+button, a[class*="rounded-full"] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
-button:hover:not(:disabled):not([data-no-lift]),
-a[class*="rounded-full"]:hover:not([data-no-lift]) {
+button:hover:not(:disabled), a[class*="rounded-full"]:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* CTA "Book a Consultation" teal glow */
-a[class*="bg-secondary"]:hover,
-button[class*="bg-secondary"]:hover {
-  box-shadow: 0 4px 20px rgba(46, 196, 182, 0.35);
-}
-
-/* Arrow links — arrow moves right on hover */
-a:hover > .lucide-arrow-right,
-a:hover > svg[class*="arrow"],
-button:hover > .lucide-arrow-right {
-  transform: translateX(4px);
-  transition: transform 0.2s ease;
-}
-
-/* Card image zoom on hover */
-.group:hover img {
-  transform: scale(1.03);
-}
-.group img {
-  transition: transform 0.3s ease;
 }
 
 /* Nav link teal underline */
@@ -231,7 +141,7 @@ nav a::after {
   background: #2EC4B6;
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 nav a:hover::after {
   transform: scaleX(1);
@@ -240,69 +150,4 @@ nav a:hover::after {
 /* Marquee pause on hover */
 .animate-marquee:hover {
   animation-play-state: paused;
-}
-
-/* ═══════════════════════════════════════════
-   FORM ENHANCEMENTS
-   ═══════════════════════════════════════════ */
-
-/* Input focus teal border transition */
-input:not([type="checkbox"]):not([type="radio"]),
-textarea,
-select {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-input:not([type="checkbox"]):not([type="radio"]):focus,
-textarea:focus,
-select:focus {
-  border-color: #2EC4B6 !important;
-  box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.12);
-}
-
-/* Skeleton / shimmer loading */
-.skeleton-shimmer {
-  background: linear-gradient(90deg, hsl(230 33% 94%) 25%, hsl(230 33% 97%) 50%, hsl(230 33% 94%) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: 0.5rem;
-}
-
-/* ═══════════════════════════════════════════
-   ACCORDION ENHANCEMENTS
-   ═══════════════════════════════════════════ */
-
-[data-state="open"] > [data-accordion-icon] {
-  transform: rotate(180deg);
-}
-[data-accordion-icon] {
-  transition: transform 0.3s ease;
-}
-
-/* ═══════════════════════════════════════════
-   MOBILE MENU ANIMATION
-   ═══════════════════════════════════════════ */
-
-.mobile-menu-enter {
-  animation: fade-up-in 0.3s ease-out forwards;
-}
-
-.mobile-menu-item {
-  opacity: 0;
-  animation: fade-up-in 0.4s ease-out forwards;
-}
-
-/* Stagger mobile menu items */
-.mobile-menu-item:nth-child(1) { animation-delay: 0.05s; }
-.mobile-menu-item:nth-child(2) { animation-delay: 0.1s; }
-.mobile-menu-item:nth-child(3) { animation-delay: 0.15s; }
-.mobile-menu-item:nth-child(4) { animation-delay: 0.2s; }
-.mobile-menu-item:nth-child(5) { animation-delay: 0.25s; }
-.mobile-menu-item:nth-child(6) { animation-delay: 0.3s; }
-
-/* ═══════════════════════════════════════════
-   SUBTLE PULSE (for date badges, step icons)
-   ═══════════════════════════════════════════ */
-
-.animate-subtle-pulse {
-  animation: subtle-pulse 2s ease-in-out 1;
 }
