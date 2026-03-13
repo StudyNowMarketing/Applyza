@@ -8,7 +8,7 @@ import ServicesOverview from "@/components/ServicesOverview";
 import StudyDestinations from "@/components/StudyDestinations";
 import PartnerUniversities from "@/components/PartnerUniversities";
 import WhyChooseApplyza from "@/components/WhyChooseApplyza";
-import ScholarshipsPreview from "@/components/ScholarshipsPreview";
+
 import UpcomingEvents from "@/components/UpcomingEvents";
 import Testimonials from "@/components/Testimonials";
 import BlogPreview from "@/components/BlogPreview";
