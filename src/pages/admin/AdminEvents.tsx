@@ -11,7 +11,6 @@ import { generateSlug } from "@/components/admin/DeleteConfirmDialog";
 
 const AdminEvents = () => {
   const { toast } = useToast();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [filter, setFilter] = useState<"all" | "upcoming" | "past">("all");
