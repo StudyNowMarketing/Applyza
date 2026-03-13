@@ -7,40 +7,59 @@ const stats = [
   { value: 10, suffix: "+", label: "Years Experience", sublabel: "Industry expertise" },
 ];
 
-function useCountUp(target: number, duration = 2000) {
+function useCountUp(target: number, duration = 1500) {
   const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
+  const startedRef = useRef(false);
+  const doneRef = useRef(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setStarted(true);
+        if (entry.isIntersecting && !startedRef.current) {
+          startedRef.current = true;
+          runAnimation();
+        }
+        // Snap to final if scrolled past before animation completes
+        if (!entry.isIntersecting && startedRef.current && !doneRef.current) {
+          doneRef.current = true;
+          setCount(target);
+        }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
-  useEffect(() => {
-    if (!started) return;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    const interval = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(interval);
-      } else {
-        setCount(Math.floor(current));
-      }
-    }, duration / steps);
-    return () => clearInterval(interval);
-  }, [started, target, duration]);
+    const startTime = { current: 0 };
+    let rafId: number;
+
+    function runAnimation() {
+      startTime.current = performance.now();
+      const step = (now: number) => {
+        if (doneRef.current) return;
+        const elapsed = now - startTime.current;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease-out cubic for snappy feel
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        setCount(current);
+        if (progress < 1) {
+          rafId = requestAnimationFrame(step);
+        } else {
+          doneRef.current = true;
+        }
+      };
+      rafId = requestAnimationFrame(step);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [target, duration]);
 
   return { count, ref };
 }
