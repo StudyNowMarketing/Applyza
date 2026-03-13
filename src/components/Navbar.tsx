@@ -205,7 +205,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden text-white"
+          className="lg:hidden text-gray-700"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
