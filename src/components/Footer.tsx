@@ -57,6 +57,7 @@ const offices = [
 ];
 
 const Footer = () => {
+  const { openPreferences } = useCookieConsent();
   return (
     <footer style={{ background: "linear-gradient(180deg, #0a0d24, #050714)" }}>
       <div className="container py-14 md:py-20">
