@@ -25,6 +25,8 @@ import BlogPost from "./pages/BlogPost.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
 import AntiSlaveryPolicy from "./pages/AntiSlaveryPolicy.tsx";
+import CookiePolicy from "./pages/CookiePolicy.tsx";
+import Accessibility from "./pages/Accessibility.tsx";
 import StudyDestinations from "./pages/StudyDestinations.tsx";
 import DestinationDetail from "./pages/DestinationDetail.tsx";
 import ForInstitutions from "./pages/ForInstitutions.tsx";
