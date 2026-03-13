@@ -91,7 +91,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
     setOpenTab(null);
   }, [location.pathname]);
 
-  const showSolid = solid || scrolled;
+  
 
   const handleClientLogin = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -115,15 +115,14 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showSolid ? "shadow-lg backdrop-blur-xl" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 ${
+        scrolled ? "shadow-md" : "shadow-sm"
       }`}
-      style={showSolid ? { backgroundColor: "rgba(10, 13, 36, 0.95)" } : undefined}
     >
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
         {/* Logo */}
         <Link to="/" className="shrink-0">
-          <img src="/logo.png" alt="Applyza" className="h-10 w-auto mix-blend-screen" />
+          <img src="/logo.png" alt="Applyza" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop tabs */}
@@ -138,8 +137,8 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
               <button
                 className={`flex items-center gap-1 px-3 py-2 text-[13px] font-medium transition-colors rounded-lg whitespace-nowrap ${
                   isTabActive(tab)
-                    ? "text-white"
-                    : "text-white/70 hover:text-white"
+                    ? "text-gray-900"
+                    : "text-gray-700 hover:text-secondary"
                 }`}
               >
                 {tab.label}
@@ -192,7 +191,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
         <div className="hidden lg:flex items-center gap-4">
           <button
             onClick={handleClientLogin}
-            className="text-white/50 hover:text-white text-xs font-normal transition-colors whitespace-nowrap"
+            className="text-gray-500 hover:text-gray-700 text-xs font-normal transition-colors whitespace-nowrap"
           >
             Client Login
           </button>
@@ -206,7 +205,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
         {/* Mobile hamburger */}
         <button
-          className="lg:hidden text-white"
+          className="lg:hidden text-gray-700"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -216,21 +215,18 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div
-          className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto"
-          style={{ backgroundColor: "#0a0d24" }}
-        >
+        <div className="lg:hidden fixed inset-0 top-16 z-40 overflow-y-auto bg-white">
           <div className="container flex flex-col py-6 gap-1">
             {navTabs.map((tab) => (
               <div key={tab.label}>
                 <button
                   onClick={() => setMobileExpanded(mobileExpanded === tab.label ? null : tab.label)}
-                  className="flex items-center justify-between w-full py-3 text-white/90 text-base font-medium"
+                  className="flex items-center justify-between w-full py-3 text-gray-800 text-base font-medium"
                 >
                   {tab.label}
                   <ChevronDown
                     size={16}
-                    className={`text-white/40 transition-transform duration-200 ${
+                    className={`text-gray-400 transition-transform duration-200 ${
                       mobileExpanded === tab.label ? "rotate-180" : ""
                     }`}
                   />
@@ -240,7 +236,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                     {tab.sections.map((section, si) => (
                       <div key={si}>
                         {section.heading && (
-                          <p className="text-[10px] uppercase font-semibold text-white/30 tracking-wide pt-2 pb-1">
+                          <p className="text-[10px] uppercase font-semibold text-gray-400 tracking-wide pt-2 pb-1">
                             {section.heading}
                           </p>
                         )}
@@ -249,7 +245,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                             key={link.to}
                             to={link.to}
                             onClick={() => setMobileOpen(false)}
-                            className="block py-2 text-sm text-white/60 hover:text-white transition-colors"
+                            className="block py-2 text-sm text-gray-600 hover:text-secondary transition-colors"
                           >
                             {link.label}
                           </Link>
@@ -258,13 +254,13 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                     ))}
                   </div>
                 )}
-                <div className="border-t border-white/5" />
+                <div className="border-t border-gray-100" />
               </div>
             ))}
 
             <button
               onClick={(e) => { handleClientLogin(e); setMobileOpen(false); }}
-              className="text-white/40 hover:text-white text-sm py-3 text-left"
+              className="text-gray-500 hover:text-gray-700 text-sm py-3 text-left"
             >
               Client Login
             </button>
