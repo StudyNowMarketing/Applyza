@@ -110,6 +110,9 @@ const AnimatedRoutes = () => {
           <Route path="scholarships" element={<AdminScholarships />} />
           <Route path="scholarships/new" element={<AdminScholarshipForm />} />
           <Route path="scholarships/edit/:id" element={<AdminScholarshipForm />} />
+          <Route path="seo" element={<AdminSeo />} />
+          <Route path="content" element={<AdminContent />} />
+          <Route path="team" element={<AdminTeam />} />
         </Route>
 
         <Route path="*" element={<P><NotFound /></P>} />
