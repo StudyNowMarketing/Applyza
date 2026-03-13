@@ -288,8 +288,6 @@ const FindACourse = () => {
     );
   };
 
-  const compareCourses = useMemo(() => courses.filter((c) => compareIds.includes(c.id)), [courses, compareIds]);
-
   const { data: courses = [], isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
@@ -302,6 +300,8 @@ const FindACourse = () => {
       return data as Course[];
     },
   });
+
+  const compareCourses = useMemo(() => courses.filter((c) => compareIds.includes(c.id)), [courses, compareIds]);
 
   const universityNames = useMemo(
     () => [...new Set(courses.map((c) => c.university_name))].sort(),
