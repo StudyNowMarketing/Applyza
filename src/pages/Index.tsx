@@ -56,6 +56,7 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
+      <EligibilityQuizCTA />
       <TrustStats />
       <HowItWorks />
       <ServicesOverview />

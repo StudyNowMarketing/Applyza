@@ -181,10 +181,10 @@ const EligibilityCheck = () => {
     if (!canNext()) return;
     setSubmitting(true);
     try {
-      const sanitizedName = sanitizeText(name);
-      const sanitizedEmail = sanitizeText(email);
-      const sanitizedPhone = sanitizeText(phone);
-      const sanitizedWhatsapp = sanitizeText(whatsapp);
+      const sanitizedName = sanitize(name, 100);
+      const sanitizedEmail = sanitize(email, 255);
+      const sanitizedPhone = sanitize(phone, 30);
+      const sanitizedWhatsapp = sanitize(whatsapp, 30);
 
       await supabase.from("eligibility_leads" as any).insert({
         name: sanitizedName,
