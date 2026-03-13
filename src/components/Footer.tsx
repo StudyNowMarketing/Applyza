@@ -1,5 +1,6 @@
-import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
+import { Instagram, Facebook, Linkedin, Youtube, MapPin, Mail, Phone, MessageCircle, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCookieConsent } from "@/components/CookieConsent";
 
 
 const XIcon = ({ size = 14 }: { size?: number }) => (
