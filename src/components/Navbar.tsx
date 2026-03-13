@@ -115,15 +115,14 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showSolid ? "shadow-lg backdrop-blur-xl" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white border-b border-gray-100 ${
+        scrolled ? "shadow-md" : "shadow-sm"
       }`}
-      style={showSolid ? { backgroundColor: "rgba(10, 13, 36, 0.95)" } : undefined}
     >
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
         {/* Logo */}
         <Link to="/" className="shrink-0">
-          <img src="/logo.png" alt="Applyza" className="h-10 w-auto mix-blend-screen" />
+          <img src="/logo.png" alt="Applyza" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop tabs */}
