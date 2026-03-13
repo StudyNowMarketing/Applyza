@@ -817,6 +817,17 @@ const FindACourse = () => {
         </div>
       </section>
 
+      <CourseCompareBar
+        courses={compareCourses.map((c) => ({ id: c.id, title: c.title, university_name: c.university_name }))}
+        onRemove={(id) => setCompareIds((prev) => prev.filter((x) => x !== id))}
+        onClear={() => setCompareIds([])}
+        onCompare={() => setShowCompareModal(true)}
+      />
+      <AnimatePresence>
+        {showCompareModal && compareCourses.length >= 2 && (
+          <CourseCompareModal courses={compareCourses} onClose={() => setShowCompareModal(false)} />
+        )}
+      </AnimatePresence>
       <Footer />
       <WhatsAppButton />
     </div>
