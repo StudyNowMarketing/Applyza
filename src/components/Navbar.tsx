@@ -255,7 +255,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                     ))}
                   </div>
                 )}
-                <div className="border-t border-gray-100" />
+                <div className="border-t border-white/10" />
               </div>
             ))}
 
