@@ -147,9 +147,12 @@ const AdminLayout = () => {
             </button>
             <h1 className="text-lg font-bold text-primary truncate">{pageTitle}</h1>
           </div>
-          <a href="/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-secondary hover:underline shrink-0">
-            View Site <ExternalLink size={14} />
-          </a>
+          <div className="flex items-center gap-2 shrink-0">
+            <NotificationBell />
+            <a href="/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-sm text-secondary hover:underline">
+              View Site <ExternalLink size={14} />
+            </a>
+          </div>
         </header>
         <main className="flex-1 p-4 md:p-6 bg-background overflow-x-auto">
           <Outlet />
