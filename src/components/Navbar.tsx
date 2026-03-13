@@ -246,7 +246,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
                             key={link.to}
                             to={link.to}
                             onClick={() => setMobileOpen(false)}
-                            className="block py-2 text-sm text-gray-600 hover:text-secondary transition-colors"
+                            className="block py-2 text-sm text-white/70 hover:text-secondary transition-colors"
                           >
                             {link.label}
                           </Link>
