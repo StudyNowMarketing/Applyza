@@ -222,8 +222,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
               <div key={tab.label} className="mobile-menu-item">
                 <button
                   onClick={() => setMobileExpanded(mobileExpanded === tab.label ? null : tab.label)}
-                  className="flex items-center justify-between w-full py-3 text-white text-base font-medium">
-                >
+                  className="flex items-center justify-between w-full py-3 text-white text-base font-medium"
                   {tab.label}
                   <ChevronDown
                     size={16}
