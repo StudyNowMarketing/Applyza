@@ -206,7 +206,6 @@ const BlogPost = () => {
       </article>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

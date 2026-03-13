@@ -95,7 +95,6 @@ const StudyDestinations = () => (
     </section>
 
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

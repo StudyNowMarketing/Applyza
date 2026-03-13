@@ -363,7 +363,6 @@ const DestinationDetail = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

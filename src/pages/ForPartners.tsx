@@ -295,7 +295,6 @@ const ForPartners = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

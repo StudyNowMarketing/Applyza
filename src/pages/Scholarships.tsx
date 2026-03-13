@@ -180,7 +180,6 @@ const Scholarships = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

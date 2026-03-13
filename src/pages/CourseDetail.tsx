@@ -424,7 +424,6 @@ const CourseDetail = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

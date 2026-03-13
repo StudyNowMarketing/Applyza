@@ -232,7 +232,6 @@ const Events = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

@@ -263,7 +263,6 @@ const ForInstitutions = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

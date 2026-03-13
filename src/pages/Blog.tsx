@@ -185,7 +185,6 @@ const Blog = () => {
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };
