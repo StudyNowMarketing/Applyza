@@ -49,6 +49,9 @@ import AdminEvents from "./pages/admin/AdminEvents.tsx";
 import AdminEventForm from "./pages/admin/AdminEventForm.tsx";
 import AdminScholarships from "./pages/admin/AdminScholarships.tsx";
 import AdminScholarshipForm from "./pages/admin/AdminScholarshipForm.tsx";
+import AdminSeo from "./pages/admin/AdminSeo.tsx";
+import AdminContent from "./pages/admin/AdminContent.tsx";
+import AdminTeam from "./pages/admin/AdminTeam.tsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
 
