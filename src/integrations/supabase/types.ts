@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          name: string | null
+          role: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          name?: string | null
+          role?: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string | null
+          role?: string
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author: string | null
@@ -308,6 +332,69 @@ export type Database = {
           message?: string | null
           phone?: string | null
           status?: string | null
+        }
+        Relationships: []
+      }
+      page_content: {
+        Row: {
+          content: string | null
+          id: string
+          page_slug: string
+          section_key: string
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          content?: string | null
+          id?: string
+          page_slug: string
+          section_key: string
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          content?: string | null
+          id?: string
+          page_slug?: string
+          section_key?: string
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      page_seo: {
+        Row: {
+          description: string | null
+          focus_keyword: string | null
+          id: string
+          og_image: string | null
+          page_name: string
+          page_slug: string
+          title: string | null
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          description?: string | null
+          focus_keyword?: string | null
+          id?: string
+          og_image?: string | null
+          page_name: string
+          page_slug: string
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          description?: string | null
+          focus_keyword?: string | null
+          id?: string
+          og_image?: string | null
+          page_name?: string
+          page_slug?: string
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
         }
         Relationships: []
       }
