@@ -288,7 +288,8 @@ const FindACourse = () => {
     );
   };
 
-  
+  const compareCourses = useMemo(() => courses.filter((c) => compareIds.includes(c.id)), [courses, compareIds]);
+
   const { data: courses = [], isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
