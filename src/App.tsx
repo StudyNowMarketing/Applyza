@@ -141,6 +141,7 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <CookieConsent />
+              <ScrollAnimator />
               <AnimatedRoutes />
               <Suspense fallback={null}>
                 <ChatWidget />
