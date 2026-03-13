@@ -127,7 +127,11 @@ const Services = () => (
           ))}
         </div>
       </div>
-    </section>
+     </section>
+
+    <div className="container max-w-3xl">
+      <GenuineStudentBanner />
+    </div>
 
     <ServiceCTA label="Book a Free Consultation" />
     <Footer />

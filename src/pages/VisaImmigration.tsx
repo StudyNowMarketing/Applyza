@@ -153,6 +153,9 @@ const VisaImmigration = () => (
     </section>
 
     <OtherServices currentPath="/services/visa-immigration" />
+    <div className="container max-w-3xl">
+      <GenuineStudentBanner />
+    </div>
     <ServiceCTA label="Book a Free Visa Consultation →" />
     <Footer />
     <WhatsAppButton />
