@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceHero from "@/components/ServiceHero";
 import ServiceCTA from "@/components/ServiceCTA";
+import GenuineStudentBanner from "@/components/GenuineStudentBanner";
 import { GraduationCap, Shield, Users, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
