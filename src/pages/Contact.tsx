@@ -43,6 +43,7 @@ const Contact = () => {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Invalid email format";
     if (!form.user_type) e.user_type = "Please select an option";
     if (!form.message.trim()) e.message = "Message is required";
+    if (!consent) e.consent = "Please agree to the Privacy Policy to continue";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
