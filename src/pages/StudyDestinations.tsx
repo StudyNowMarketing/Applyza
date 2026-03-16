@@ -82,7 +82,8 @@ const StudyDestinations = () => (
                         src={d.image}
                         alt={d.name}
                         loading="lazy"
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        className="w-full h-full object-cover ken-burns"
+                        style={{ animationDelay: `${(i % 5) * -2.4}s` }}
                       />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" style={{ zIndex: 2 }} />
