@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";

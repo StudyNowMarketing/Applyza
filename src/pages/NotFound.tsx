@@ -1,4 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";

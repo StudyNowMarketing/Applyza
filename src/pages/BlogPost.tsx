@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";

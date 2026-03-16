@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
