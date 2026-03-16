@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { supabase } from "@/integrations/supabase/client";
