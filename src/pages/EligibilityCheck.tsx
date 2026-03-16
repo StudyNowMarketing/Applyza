@@ -186,13 +186,13 @@ const EligibilityCheck = () => {
                       <ArrowLeft size={14} /> Back
                     </button>
                   ) : <div />}
-                  <Button
+                  <MovingBorderButton
                     onClick={() => setStep(step + 1)}
                     disabled={!canNext()}
-                    className="rounded-full px-6 bg-secondary text-secondary-foreground hover:bg-secondary/90 disabled:opacity-50"
+                    className="px-6 py-2.5 text-sm"
                   >
                     {step === 4 ? "See My Results" : "Next"} <ArrowRight size={14} className="ml-1" />
-                  </Button>
+                  </MovingBorderButton>
                 </div>
               </div>
             </div>
