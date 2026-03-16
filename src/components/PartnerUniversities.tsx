@@ -45,12 +45,15 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
 
   return (
     <div
-      className="flex items-center justify-center rounded-lg bg-white shrink-0 logo-card-hover"
+      className="flex items-center justify-center rounded-lg bg-white shrink-0"
       style={{
         border: "1px solid #E5E7EB",
-        padding: "12px 20px",
-        minWidth: "160px",
+        padding: "20px 32px",
+        minWidth: "180px",
+        transition: "transform 0.3s ease",
       }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.05)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
     >
       {failed ? (
         <span className="text-sm font-semibold whitespace-nowrap" style={{ color: "#1B2150" }}>
@@ -61,20 +64,7 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
           src={logo}
           alt={name}
           onError={() => setFailed(true)}
-          className="h-[50px] w-auto object-contain"
-          style={{
-            filter: "grayscale(100%)",
-            opacity: 0.6,
-            transition: "filter 0.3s ease, opacity 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.filter = "grayscale(0%)";
-            e.currentTarget.style.opacity = "1";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.filter = "grayscale(100%)";
-            e.currentTarget.style.opacity = "0.6";
-          }}
+          className="h-[80px] w-auto object-contain"
         />
       )}
     </div>
@@ -118,7 +108,7 @@ const PartnerUniversities = () => {
         </motion.div>
 
         {/* Logo slider rows */}
-        <div className="relative space-y-4">
+        <div className="relative space-y-5">
           {/* Fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
