@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CardGlow } from "@/components/ui/CardGlow";
 
 const destinations = [
   {
