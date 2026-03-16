@@ -589,6 +589,7 @@ const FindACourse = () => {
 
       {/* Hero */}
       <section className="relative overflow-hidden" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
         {/* Glow effects */}
         <div className="absolute top-0 right-[10%] w-[300px] h-[300px] rounded-full pointer-events-none"
           style={{ background: "rgba(46,196,182,0.08)", filter: "blur(100px)" }} />

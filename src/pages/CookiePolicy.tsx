@@ -19,6 +19,7 @@ const CookiePolicy = () => {
       <Navbar solid />
 
       <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
         <div className="container relative z-10 pt-20">
           <Breadcrumb>
             <BreadcrumbList>

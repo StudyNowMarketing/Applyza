@@ -149,7 +149,8 @@ const ForPartners = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-8" style={{ background: "#0a0d24" }}>
+      <section className="relative py-8" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
         <div className="container flex flex-wrap justify-center gap-8 md:gap-16">
           {[
             { value: "150+", label: "University Partners" },

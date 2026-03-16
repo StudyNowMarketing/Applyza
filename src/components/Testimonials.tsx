@@ -50,6 +50,7 @@ const Testimonials = () => {
 
   return (
     <section className="relative overflow-hidden" style={{ background: "#0a0d24" }}>
+      <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#6B3FA0" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
       {/* Subtle top separator */}
       <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)" }} />
 

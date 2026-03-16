@@ -121,6 +121,7 @@ const BlogPost = () => {
 
       {/* Dark Hero */}
       <section className="relative overflow-hidden py-8" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#6B3FA0" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-15" style={{ background: "radial-gradient(circle, hsl(169 63% 47% / 0.3), transparent 70%)" }} />
         </div>

@@ -263,7 +263,8 @@ const About = () => {
       </section>
 
       {/* ── OUR OFFICES — Dark section ── */}
-      <section style={{ background: "#0a0d24" }}>
+      <section className="relative" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#6B3FA0" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
         <div className="container py-12">
           <h2 className="text-xl md:text-2xl font-bold text-white text-center mb-8">Our Global Presence</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">

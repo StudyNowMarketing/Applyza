@@ -146,6 +146,7 @@ const DestinationDetail = () => {
 
       {/* Dark Hero */}
       <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
         <img src={bgImage} alt={destination.country} className="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(10,13,36,0.8), rgba(10,13,36,0.95))" }} />
         <div className="absolute inset-0 pointer-events-none">
