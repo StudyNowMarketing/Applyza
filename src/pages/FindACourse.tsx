@@ -804,9 +804,9 @@ const FindACourse = () => {
                   <Button variant="outline" onClick={clearAll} className="rounded-lg">
                     Clear Filters
                   </Button>
-                  <Button asChild className="rounded-lg" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
-                    <Link to="/book-a-consultation">Book a Consultation</Link>
-                  </Button>
+                  <MovingBorderButton to="/book-a-consultation" className="px-5 py-2 text-sm">
+                    Book a Consultation
+                  </MovingBorderButton>
                 </div>
               </div>
             ) : (
