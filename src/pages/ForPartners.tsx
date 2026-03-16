@@ -124,9 +124,9 @@ const ForPartners = () => {
           <p className="text-white/50 text-sm max-w-xl">
             Are you an education agent or recruitment partner? Join our growing network to refer students, earn commissions, and access our full course database.
           </p>
-          <Button onClick={scrollToForm} size="sm" className="mt-4 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs px-6">
+          <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
             Register Interest
-          </Button>
+          </MovingBorderButton>
         </div>
       </section>
 
