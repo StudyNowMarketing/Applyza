@@ -138,7 +138,7 @@ const VisaImmigration = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card rounded-xl p-5 shadow-sm border border-destructive/10 hover:shadow-md transition-all duration-300 overflow-visible glow-card"
+              className="bg-card rounded-xl p-5 shadow-sm border border-destructive/10 hover:shadow-md transition-all duration-300 card-glow"
             >
               <div className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center mb-3">
                 <AlertTriangle className="text-destructive" size={14} />

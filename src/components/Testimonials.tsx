@@ -85,7 +85,7 @@ const Testimonials = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="relative rounded-xl p-4 backdrop-blur-md overflow-visible glow-card"
+                className="relative rounded-xl p-4 backdrop-blur-md card-glow"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
               >
                 {/* Video placeholder */}

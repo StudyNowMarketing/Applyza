@@ -136,7 +136,7 @@ const ForPartners = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {benefits.map((b, i) => (
               <motion.div key={b.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                className="bg-card rounded-xl p-4 border border-border hover:shadow-md transition-shadow overflow-visible glow-card">
+                className="bg-card rounded-xl p-4 border border-border hover:shadow-md transition-shadow card-glow">
                 <div className="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center mb-3">
                   <b.icon className="text-secondary" size={16} />
                 </div>

@@ -836,7 +836,7 @@ const FindACourse = () => {
 };
 
 const CourseCard = ({ course, isCompared, onToggleCompare, compareDisabled }: { course: Course; isCompared: boolean; onToggleCompare: () => void; compareDisabled: boolean }) => (
-  <div className="relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col overflow-visible glow-card"
+  <div className="relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col card-glow"
     style={{ border: isCompared ? "2px solid #2EC4B6" : "1px solid hsl(230 25% 93%)" }}>
     {/* Compare button */}
     <button

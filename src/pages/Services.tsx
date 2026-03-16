@@ -95,7 +95,7 @@ const Services = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-all duration-300 min-h-[280px] flex flex-col overflow-visible glow-card"
+              className="bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-all duration-300 min-h-[280px] flex flex-col card-glow"
             >
               <div className="h-10 w-full" style={{ background: s.gradient }} />
               <div className="p-5 md:p-6 flex flex-col flex-1">

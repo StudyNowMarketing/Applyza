@@ -114,7 +114,7 @@ const Blog = () => {
             <>
               {/* Featured post */}
               {featured && (
-                <Link to={`/blog/${featured.slug}`} className="group block bg-card rounded-xl overflow-visible shadow-sm hover:shadow-lg transition-all border border-border mb-8 glow-card">
+                <Link to={`/blog/${featured.slug}`} className="group block bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border mb-8 card-glow">
                   <div className="flex flex-col md:flex-row">
                     <div className="h-48 md:h-auto md:w-2/5 bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/10 flex items-center justify-center">
                       {featured.featured_image_url ? (
@@ -146,7 +146,7 @@ const Blog = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {rest.map((post, i) => (
                     <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }}>
-                      <Link to={`/blog/${post.slug}`} className="group block bg-card rounded-xl overflow-visible shadow-sm hover:shadow-md transition-all border border-border glow-card">
+                      <Link to={`/blog/${post.slug}`} className="group block bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-border card-glow">
                         <div className="h-36 bg-gradient-to-br from-primary/10 via-secondary/8 to-accent/8 flex items-center justify-center">
                           {post.featured_image_url ? (
                             <img src={post.featured_image_url} alt={post.title} className="w-full h-full object-cover" />

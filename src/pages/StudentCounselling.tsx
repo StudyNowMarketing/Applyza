@@ -46,7 +46,7 @@ const StudentCounselling = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-border overflow-visible glow-card"
+              className="bg-card rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-border card-glow"
             >
               <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
                 <c.icon className="text-secondary" size={18} />
@@ -73,7 +73,7 @@ const StudentCounselling = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-card rounded-xl p-5 shadow-sm text-center border border-border hover:shadow-md transition-all duration-300 overflow-visible glow-card"
+              className="bg-card rounded-xl p-5 shadow-sm text-center border border-border hover:shadow-md transition-all duration-300 card-glow"
             >
               <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3">
                 <d.icon className="text-accent" size={18} />
