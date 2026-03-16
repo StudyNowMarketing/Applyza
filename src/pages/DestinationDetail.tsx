@@ -111,9 +111,9 @@ const DestinationDetail = () => {
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-2">Destination not found</h1>
           <p className="text-muted-foreground text-sm mb-4">The destination you're looking for doesn't exist or may have been removed.</p>
-          <Button variant="teal" asChild>
-            <Link to="/study-destinations"><ArrowLeft size={16} /> Back to Destinations</Link>
-          </Button>
+          <MovingBorderButton to="/study-destinations" className="px-5 py-2 text-sm gap-2">
+            <ArrowLeft size={16} /> Back to Destinations
+          </MovingBorderButton>
         </div>
         <Footer />
       </div>
