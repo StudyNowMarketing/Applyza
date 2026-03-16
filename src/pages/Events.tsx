@@ -123,11 +123,9 @@ const Events = () => {
           </div>
           {!isPast && (
             <div className="shrink-0">
-              <Button size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs px-4" asChild>
-                <a href={event.registration_url || "/book-a-consultation"} target={event.registration_url ? "_blank" : undefined} rel="noopener noreferrer">
-                  Register →
-                </a>
-              </Button>
+              <MovingBorderButton href={event.registration_url || "/book-a-consultation"} className="px-4 py-1.5 text-xs">
+                Register →
+              </MovingBorderButton>
             </div>
           )}
         </div>
