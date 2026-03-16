@@ -303,3 +303,13 @@ select:focus {
   animation: menu-item-in 0.3s ease forwards;
   opacity: 0;
 }
+
+/* ═══════════════════════════════════════════════
+   GLOWING EFFECT
+   ════════════════════════════════════════════════ */
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}

@@ -3,6 +3,7 @@ import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
+import { CardGlow } from "@/components/ui/CardGlow";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
@@ -837,6 +838,7 @@ const FindACourse = () => {
 const CourseCard = ({ course, isCompared, onToggleCompare, compareDisabled }: { course: Course; isCompared: boolean; onToggleCompare: () => void; compareDisabled: boolean }) => (
   <div className="relative bg-white rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col"
     style={{ border: isCompared ? "2px solid #2EC4B6" : "1px solid hsl(230 25% 93%)" }}>
+    <CardGlow spread={30} proximity={48} borderWidth={2} />
     {/* Compare button */}
     <button
       onClick={(e) => { e.preventDefault(); onToggleCompare(); }}

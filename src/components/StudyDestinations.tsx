@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CardGlow } from "@/components/ui/CardGlow";
 
 const destinations = [
   {
@@ -93,6 +94,7 @@ const StudyDestinations = () => {
                 className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
                 style={{ border: "1px solid rgba(255,255,255,0.10)" }}
               >
+                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 <img
                   src={d.image}
                   alt={d.name}

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { CardGlow } from "@/components/ui/CardGlow";
 
 const reasons = [
   {
@@ -115,6 +116,7 @@ const WhyChooseApplyza = () => {
                 onMouseLeave={() => setHoveredDesktop(null)}
                 onClick={() => handleMobileTap(i)}
               >
+                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 <div className="p-5">
                   <span className="absolute top-3 right-3 text-xs font-bold text-gray-300">
                     {String(i + 1).padStart(2, "0")}

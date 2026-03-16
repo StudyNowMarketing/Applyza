@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { SparklesCore } from "@/components/ui/SparklesCore";
+import { CardGlow } from "@/components/ui/CardGlow";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -85,9 +86,10 @@ const Testimonials = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="rounded-xl p-4 backdrop-blur-md hover-lift"
+                className="relative rounded-xl p-4 backdrop-blur-md hover-lift"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
               >
+                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 {/* Video placeholder */}
                 <div className="relative aspect-video rounded-lg overflow-hidden mb-3"
                   style={{ background: "linear-gradient(135deg, #1a1f4d, #0a0d24)" }}>
