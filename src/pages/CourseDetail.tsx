@@ -279,7 +279,7 @@ const CourseDetail = () => {
             >
               <div className="lg:sticky lg:top-24 space-y-4">
                 {/* Main CTA card */}
-                <div className="bg-card rounded-xl border border-border shadow-sm p-5 space-y-4">
+                <div className="bg-card rounded-xl border border-border shadow-sm p-5 space-y-4 overflow-visible glow-card">
                   <div>
                     <p className="text-xs text-muted-foreground mb-1">Tuition Fee</p>
                     <p className="text-2xl font-bold text-primary">
