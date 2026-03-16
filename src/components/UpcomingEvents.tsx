@@ -75,7 +75,7 @@ const UpcomingEvents = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px] overflow-visible glow-card"
+            className="relative rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px] card-glow"
             style={{ background: "linear-gradient(135deg, #1B2150, #0a0d24)" }}
           >
             <div>
