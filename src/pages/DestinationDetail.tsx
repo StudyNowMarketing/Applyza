@@ -212,7 +212,7 @@ const DestinationDetail = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: i * 0.06 }}
-                  className="bg-card rounded-xl p-4 border border-border hover:shadow-md transition-shadow overflow-visible glow-card"
+                  className="bg-card rounded-xl p-4 border border-border hover:shadow-md transition-shadow card-glow"
                 >
                   <CheckCircle className="text-secondary mb-2" size={20} />
                   <h3 className="text-sm font-bold text-primary mb-1">{card.title}</h3>
