@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { GraduationCap, Building } from "lucide-react";
+import VideoBackground from "@/components/VideoBackground";
+import { getVideoForSlug } from "@/lib/destinationVideos";
 
 const destinations = [
   { name: "United Kingdom", flag: "🇬🇧", slug: "united-kingdom", courses: "500+", partners: "30+", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" },
@@ -57,41 +59,48 @@ const StudyDestinations = () => (
     <section className="flex-1 bg-background py-12">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {destinations.map((d, i) => (
-            <motion.div
-              key={d.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-            >
-              <Link
-                to={`/study-destinations/${d.slug}`}
-                className="block rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-200 card-glow"
+          {destinations.map((d, i) => {
+            const vid = getVideoForSlug(d.slug);
+            return (
+              <motion.div
+                key={d.slug}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.05 }}
               >
-                {/* Top: country photo */}
-                <div className="relative h-[160px] overflow-hidden">
-                  <img
-                    src={d.image}
-                    alt={d.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                  <span className="absolute top-3 left-3 text-3xl drop-shadow-lg">{d.flag}</span>
-                </div>
-                {/* Bottom: white info */}
-                <div className="bg-card p-4">
-                  <h3 className="text-lg font-bold text-primary mb-2">{d.name}</h3>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
-                    <span className="flex items-center gap-1"><GraduationCap size={13} /> {d.courses} courses</span>
-                    <span className="flex items-center gap-1"><Building size={13} /> {d.partners} partners</span>
+                <Link
+                  to={`/study-destinations/${d.slug}`}
+                  className="block rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-200 card-glow"
+                >
+                  {/* Top: country photo/video */}
+                  <div className="relative h-[160px] overflow-hidden">
+                    {vid ? (
+                      <VideoBackground video={vid.video} image={d.image} name={d.name} className="transition-transform duration-500 group-hover:scale-105" />
+                    ) : (
+                      <img
+                        src={d.image}
+                        alt={d.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" style={{ zIndex: 2 }} />
+                    <span className="absolute top-3 left-3 text-3xl drop-shadow-lg" style={{ zIndex: 10 }}>{d.flag}</span>
                   </div>
-                  <span className="text-secondary text-sm font-semibold">Explore →</span>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+                  {/* Bottom: white info */}
+                  <div className="bg-card p-4">
+                    <h3 className="text-lg font-bold text-primary mb-2">{d.name}</h3>
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground mb-2">
+                      <span className="flex items-center gap-1"><GraduationCap size={13} /> {d.courses} courses</span>
+                      <span className="flex items-center gap-1"><Building size={13} /> {d.partners} partners</span>
+                    </div>
+                    <span className="text-secondary text-sm font-semibold">Explore →</span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
