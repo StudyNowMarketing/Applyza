@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone, MessageCircle, Loader2 } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
