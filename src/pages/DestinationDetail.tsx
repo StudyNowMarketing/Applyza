@@ -14,6 +14,8 @@ import { motion } from "framer-motion";
 import {
   Globe, Clock, Banknote, Briefcase, MapPin, CheckCircle, BookOpen, ArrowLeft, FileText, Wrench,
 } from "lucide-react";
+import VideoBackground from "@/components/VideoBackground";
+import { getVideoForSlug } from "@/lib/destinationVideos";
 
 import ukImg from "@/assets/destinations/uk.jpg";
 import germanyImg from "@/assets/destinations/germany.jpg";
