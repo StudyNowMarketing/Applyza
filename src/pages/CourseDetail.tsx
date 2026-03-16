@@ -263,9 +263,9 @@ const CourseDetail = () => {
                         <strong className="text-foreground">Application Deadline:</strong> {course.application_deadline}
                       </p>
                     )}
-                    <Button size="sm" className="mt-3 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-                      <Link to="/book-a-consultation">Book a Free Consultation</Link>
-                    </Button>
+                    <MovingBorderButton to="/book-a-consultation" className="mt-3 px-6 py-2 text-sm">
+                      Book a Free Consultation
+                    </MovingBorderButton>
                   </div>
                 </TabsContent>
               </Tabs>
