@@ -1,137 +1,17 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef, useCallback, useState } from "react";
-
-import newyorkAsset from "../../public/videos/newyork.mp4.asset.json";
-import berlinAsset from "../../public/videos/berlin.mp4.asset.json";
-import parisAsset from "../../public/videos/paris.mp4.asset.json";
-import dublinAsset from "../../public/videos/dublin.mp4.asset.json";
+import VideoBackground from "@/components/VideoBackground";
+import { destinationVideos } from "@/lib/destinationVideos";
 
 const destinations = [
-  {
-    name: "United Kingdom",
-    code: "GB",
-    slug: "united-kingdom",
-    courses: "2,500+",
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80",
-    video: "/videos/london.mp4",
-  },
-  {
-    name: "United States",
-    code: "US",
-    slug: "usa",
-    courses: "3,000+",
-    image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80",
-    video: newyorkAsset.url,
-  },
-  {
-    name: "Canada",
-    code: "CA",
-    slug: "canada",
-    courses: "1,500+",
-    image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80",
-    video: "/videos/toronto.mp4",
-  },
-  {
-    name: "Germany",
-    code: "DE",
-    slug: "germany",
-    courses: "1,800+",
-    image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
-    video: berlinAsset.url,
-  },
-  {
-    name: "France",
-    code: "FR",
-    slug: "france",
-    courses: "1,200+",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
-    video: parisAsset.url,
-  },
-  {
-    name: "Ireland",
-    code: "IE",
-    slug: "ireland",
-    courses: "900+",
-    image: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=800&q=80",
-    video: dublinAsset.url,
-  },
+  { name: "United Kingdom", code: "GB", slug: "united-kingdom", courses: "2,500+" },
+  { name: "United States", code: "US", slug: "usa", courses: "3,000+" },
+  { name: "Canada", code: "CA", slug: "canada", courses: "1,500+" },
+  { name: "Germany", code: "DE", slug: "germany", courses: "1,800+" },
+  { name: "France", code: "FR", slug: "france", courses: "1,200+" },
+  { name: "Ireland", code: "IE", slug: "ireland", courses: "900+" },
 ];
-
-const DestinationCard = ({ d }: { d: typeof destinations[number] }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
-  const tryPlay = useCallback(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().catch((err) => console.warn(`[Video] ${d.name} play failed:`, err));
-  }, [d.name]);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    tryPlay();
-    v.addEventListener("loadeddata", () => {
-      setVideoLoaded(true);
-      tryPlay();
-    });
-  }, [tryPlay]);
-
-  return (
-    <Link
-      to={`/study-destinations/${d.slug}`}
-      className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 card-glow"
-      style={{ border: "1px solid rgba(255,255,255,0.10)" }}
-    >
-      {/* Fallback image with Ken Burns animation */}
-      <img
-        src={d.image}
-        alt={d.name}
-        loading="lazy"
-        className={`absolute inset-0 w-full h-full object-cover ken-burns ${videoLoaded ? "opacity-0" : "opacity-100"}`}
-        style={{ zIndex: 0, transition: "opacity 0.5s ease" }}
-      />
-      {/* Video on top of image */}
-      <video
-        ref={videoRef}
-        autoPlay={true}
-        muted={true}
-        loop={true}
-        playsInline={true}
-        preload="auto"
-        poster={d.image}
-        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
-        style={{ zIndex: 1, transition: "opacity 0.5s ease" }}
-        src={d.video}
-        onError={() => console.warn(`[Video] ${d.name} failed to load`)}
-      />
-      {/* Gradient overlay */}
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-xl"
-        style={{ zIndex: 2 }}
-      />
-
-      <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
-        style={{ zIndex: 10, backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
-        {d.code}
-      </div>
-
-      <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium"
-        style={{ zIndex: 10, color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.40)", backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
-        {d.courses} courses
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 p-4" style={{ zIndex: 10 }}>
-        <h3 className="text-white text-xl font-bold">{d.name}</h3>
-        <span className="text-sm font-medium group-hover:text-white transition-colors" style={{ color: "#2EC4B6" }}>
-          Explore courses →
-        </span>
-      </div>
-    </Link>
-  );
-};
 
 const StudyDestinations = () => {
   return (
@@ -165,17 +45,48 @@ const StudyDestinations = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {destinations.map((d, i) => (
-            <motion.div
-              key={d.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-            >
-              <DestinationCard d={d} />
-            </motion.div>
-          ))}
+          {destinations.map((d, i) => {
+            const vid = destinationVideos.find((v) => v.slug === d.slug);
+            return (
+              <motion.div
+                key={d.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+              >
+                <Link
+                  to={`/study-destinations/${d.slug}`}
+                  className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 card-glow"
+                  style={{ border: "1px solid rgba(255,255,255,0.10)" }}
+                >
+                  {vid ? (
+                    <VideoBackground video={vid.video} image={vid.image} name={d.name} className="transition-transform duration-500 group-hover:scale-105" />
+                  ) : (
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80" alt={d.name} className="absolute inset-0 w-full h-full object-cover" />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-xl" style={{ zIndex: 2 }} />
+
+                  <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white"
+                    style={{ zIndex: 10, backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
+                    {d.code}
+                  </div>
+
+                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-[10px] font-medium"
+                    style={{ zIndex: 10, color: "#2EC4B6", border: "1px solid rgba(46,196,182,0.40)", backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
+                    {d.courses} courses
+                  </div>
+
+                  <div className="absolute bottom-0 left-0 right-0 p-4" style={{ zIndex: 10 }}>
+                    <h3 className="text-white text-xl font-bold">{d.name}</h3>
+                    <span className="text-sm font-medium group-hover:text-white transition-colors" style={{ color: "#2EC4B6" }}>
+                      Explore courses →
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
 
         <div className="text-center mt-8">
