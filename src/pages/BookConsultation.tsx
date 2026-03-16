@@ -179,7 +179,7 @@ const BookConsultation = () => {
               </Button>
             </motion.div>
           ) : (
-            <div className="bg-card rounded-xl border border-border shadow-sm p-6">
+            <div className="bg-card rounded-xl border border-border shadow-sm p-6 card-glow">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <FormError message={rateLimitMsg} />
 
