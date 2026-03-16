@@ -65,7 +65,7 @@ const BlogPreview = () => {
             transition={{ duration: 0.5 }}
           >
             <Link to="/blog" className="group block">
-              <div className="relative rounded-xl overflow-visible bg-card shadow-sm hover:shadow-lg transition-all duration-300 glow-card"
+              <div className="relative rounded-xl overflow-hidden bg-card shadow-sm hover:shadow-lg transition-all duration-300 card-glow"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}>
                 <div className="h-48 md:h-56 relative overflow-hidden"
                   style={{ background: "linear-gradient(135deg, rgba(46,196,182,0.15), rgba(107,63,160,0.15), hsl(230 33% 94%))" }}>
