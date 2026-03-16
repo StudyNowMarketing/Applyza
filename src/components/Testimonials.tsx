@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { SparklesCore } from "@/components/ui/SparklesCore";
+import { CardGlow } from "@/components/ui/CardGlow";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
