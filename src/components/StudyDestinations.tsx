@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
+
+import newyorkAsset from "../../public/videos/newyork.mp4.asset.json";
+import berlinAsset from "../../public/videos/berlin.mp4.asset.json";
+import parisAsset from "../../public/videos/paris.mp4.asset.json";
+import dublinAsset from "../../public/videos/dublin.mp4.asset.json";
 
 const destinations = [
   {
@@ -10,7 +15,7 @@ const destinations = [
     slug: "united-kingdom",
     courses: "2,500+",
     image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80",
-    video: "https://videos.pexels.com/video-files/28988731/12494757_1920_1080_25fps.mp4",
+    video: "/videos/london.mp4",
   },
   {
     name: "United States",
@@ -18,7 +23,7 @@ const destinations = [
     slug: "usa",
     courses: "3,000+",
     image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80",
-    video: "https://videos.pexels.com/video-files/2324452/2324452-sd_640_360_24fps.mp4",
+    video: newyorkAsset.url,
   },
   {
     name: "Canada",
@@ -26,7 +31,7 @@ const destinations = [
     slug: "canada",
     courses: "1,500+",
     image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=800&q=80",
-    video: "https://videos.pexels.com/video-files/1553321/1553321-sd_640_360_30fps.mp4",
+    video: "/videos/toronto.mp4",
   },
   {
     name: "Germany",
@@ -34,7 +39,7 @@ const destinations = [
     slug: "germany",
     courses: "1,800+",
     image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=800&q=80",
-    video: "https://videos.pexels.com/video-files/2795394/2795394-sd_640_360_25fps.mp4",
+    video: berlinAsset.url,
   },
   {
     name: "France",
@@ -42,7 +47,7 @@ const destinations = [
     slug: "france",
     courses: "1,200+",
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80",
-    video: "https://videos.pexels.com/video-files/2519660/2519660-sd_640_360_25fps.mp4",
+    video: parisAsset.url,
   },
   {
     name: "Ireland",
@@ -50,12 +55,13 @@ const destinations = [
     slug: "ireland",
     courses: "900+",
     image: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=800&q=80",
-    video: "https://videos.pexels.com/video-files/6394054/6394054-sd_640_360_25fps.mp4",
+    video: dublinAsset.url,
   },
 ];
 
 const DestinationCard = ({ d }: { d: typeof destinations[number] }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const tryPlay = useCallback(() => {
     const v = videoRef.current;
@@ -66,10 +72,11 @@ const DestinationCard = ({ d }: { d: typeof destinations[number] }) => {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    // Try playing immediately and also when data is ready
     tryPlay();
-    v.addEventListener("loadeddata", tryPlay);
-    return () => v.removeEventListener("loadeddata", tryPlay);
+    v.addEventListener("loadeddata", () => {
+      setVideoLoaded(true);
+      tryPlay();
+    });
   }, [tryPlay]);
 
   return (
@@ -78,13 +85,13 @@ const DestinationCard = ({ d }: { d: typeof destinations[number] }) => {
       className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 card-glow"
       style={{ border: "1px solid rgba(255,255,255,0.10)" }}
     >
-      {/* Fallback image behind video */}
+      {/* Fallback image with Ken Burns animation */}
       <img
         src={d.image}
         alt={d.name}
         loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ zIndex: 0 }}
+        className={`absolute inset-0 w-full h-full object-cover ken-burns ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+        style={{ zIndex: 0, transition: "opacity 0.5s ease" }}
       />
       {/* Video on top of image */}
       <video
@@ -95,8 +102,8 @@ const DestinationCard = ({ d }: { d: typeof destinations[number] }) => {
         playsInline={true}
         preload="auto"
         poster={d.image}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        style={{ zIndex: 1 }}
+        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+        style={{ zIndex: 1, transition: "opacity 0.5s ease" }}
         src={d.video}
         onError={() => console.warn(`[Video] ${d.name} failed to load`)}
       />
