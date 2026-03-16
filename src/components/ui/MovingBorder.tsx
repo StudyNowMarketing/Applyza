@@ -108,7 +108,7 @@ export const MovingBorderButton = ({
   const inner = (
     <div
       className={cn(
-        "relative bg-secondary border border-secondary/30 text-secondary-foreground flex items-center justify-center w-full h-full text-sm font-semibold antialiased px-7 py-3 gap-2",
+        "relative bg-accent border border-accent/30 text-accent-foreground flex items-center justify-center w-full h-full text-sm font-semibold antialiased px-7 py-3 gap-2",
         disabled && "opacity-50 cursor-not-allowed",
         className
       )}
@@ -124,7 +124,7 @@ export const MovingBorderButton = ({
       style={{ borderRadius: `calc(${borderRadius} * 0.96)` }}
     >
       <MovingBorder duration={duration} rx="30%" ry="30%">
-        <div className="h-20 w-20 opacity-[0.8] bg-[radial-gradient(hsl(var(--secondary))_40%,transparent_60%)]" />
+        <div className="h-20 w-20 opacity-[0.8] bg-[radial-gradient(hsl(var(--accent))_40%,transparent_60%)]" />
       </MovingBorder>
     </div>
   );

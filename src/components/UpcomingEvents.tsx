@@ -108,7 +108,7 @@ const UpcomingEvents = () => {
                 <span className="inline-flex items-center gap-1"><MapPin size={10} /> {featured.location}</span>
                 <span className="inline-flex items-center gap-1"><Users size={10} /> {featured.attendees} expected</span>
               </div>
-              <Button className="rounded-full" style={{ background: "#2EC4B6", color: "#0a0d24" }} asChild>
+              <Button className="rounded-full" style={{ background: "#6B3FA0", color: "white" }} asChild>
                 <Link to="/events">Register Now — Free →</Link>
               </Button>
             </div>
