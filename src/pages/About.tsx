@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
@@ -85,6 +86,7 @@ const About = () => {
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px]" style={{ background: "hsl(265 44% 44%)" }} />
         <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px]" style={{ background: "hsl(169 63% 47%)" }} />
         <div className="container relative z-10 py-12">
@@ -261,7 +263,8 @@ const About = () => {
       </section>
 
       {/* ── OUR OFFICES — Dark section ── */}
-      <section style={{ background: "#0a0d24" }}>
+      <section className="relative" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#6B3FA0" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
         <div className="container py-12">
           <h2 className="text-xl md:text-2xl font-bold text-white text-center mb-8">Our Global Presence</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -299,7 +302,8 @@ const About = () => {
       </section>
 
       {/* ── STATS — Dark section ── */}
-      <section style={{ background: "#080b1e" }}>
+      <section className="relative" style={{ background: "#080b1e" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
         <div className="container py-10">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 max-w-3xl mx-auto">
             {stats.map((s) => (

@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
@@ -106,6 +107,7 @@ const ForPartners = () => {
 
       {/* Dark Hero */}
       <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#6B3FA0" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 right-1/3 w-80 h-80 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(265 44% 44% / 0.4), transparent 70%)" }} />
         </div>
@@ -147,7 +149,8 @@ const ForPartners = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-8" style={{ background: "#0a0d24" }}>
+      <section className="relative py-8" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
         <div className="container flex flex-wrap justify-center gap-8 md:gap-16">
           {[
             { value: "150+", label: "University Partners" },
