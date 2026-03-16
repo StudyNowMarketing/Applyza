@@ -46,7 +46,7 @@ const StudentCounselling = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 border border-border"
+              className="bg-card rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-border overflow-visible glow-card"
             >
               <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
                 <c.icon className="text-secondary" size={18} />
