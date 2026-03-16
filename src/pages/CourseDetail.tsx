@@ -111,9 +111,9 @@ const CourseDetail = () => {
             <p className="text-white/50 text-sm mb-4 max-w-md mx-auto">
               The course you're looking for doesn't exist or may have been removed.
             </p>
-            <Button size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-              <Link to="/find-a-course"><ArrowLeft size={14} className="mr-1.5" /> Back to Course Search</Link>
-            </Button>
+            <MovingBorderButton to="/find-a-course" className="px-6 py-2 text-sm gap-1.5">
+              <ArrowLeft size={14} /> Back to Course Search
+            </MovingBorderButton>
           </div>
         </section>
         <div className="flex-1" />
