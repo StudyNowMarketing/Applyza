@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
 import { Users, Globe, Cpu, FileCheck, ShieldCheck, BarChart3, Loader2 } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
