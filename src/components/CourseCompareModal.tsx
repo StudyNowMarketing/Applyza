@@ -135,7 +135,7 @@ const CourseCompareModal = ({ courses, onClose }: CourseCompareModalProps) => {
         <div className="flex gap-4 px-6 py-5 border-t border-gray-100">
           {courses.map((c) => (
             <div key={c.id} className="flex-1 flex flex-col gap-2">
-              <Button asChild size="sm" className="w-full rounded-lg text-xs" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
+              <Button asChild size="sm" className="w-full rounded-lg text-xs" style={{ background: "#6B3FA0", color: "white" }}>
                 <Link to="/book-a-consultation">Apply with Applyza</Link>
               </Button>
               <Button asChild variant="outline" size="sm" className="w-full rounded-lg text-xs" style={{ borderColor: "#1B2150", color: "#1B2150" }}>
