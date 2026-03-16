@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { Badge } from "@/components/ui/badge";
 import {
   Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator,
@@ -110,9 +111,9 @@ const DestinationDetail = () => {
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-2">Destination not found</h1>
           <p className="text-muted-foreground text-sm mb-4">The destination you're looking for doesn't exist or may have been removed.</p>
-          <Button variant="teal" asChild>
-            <Link to="/study-destinations"><ArrowLeft size={16} /> Back to Destinations</Link>
-          </Button>
+          <MovingBorderButton to="/study-destinations" className="px-5 py-2 text-sm gap-2">
+            <ArrowLeft size={16} /> Back to Destinations
+          </MovingBorderButton>
         </div>
         <Footer />
       </div>
@@ -308,9 +309,9 @@ const DestinationDetail = () => {
               <p className="text-muted-foreground text-sm mb-3">
                 We're adding courses for {destination.country} soon. In the meantime, book a consultation and our counsellors can help you find the right programme.
               </p>
-              <Button variant="teal" size="sm" asChild>
-                <Link to="/book-a-consultation">Book a Consultation</Link>
-              </Button>
+              <MovingBorderButton to="/book-a-consultation" className="px-5 py-2 text-sm">
+                Book a Consultation
+              </MovingBorderButton>
             </div>
           ) : (
             <>
@@ -337,9 +338,9 @@ const DestinationDetail = () => {
                       <Button variant="outline" size="sm" className="flex-1 text-xs" asChild>
                         <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
                       </Button>
-                      <Button variant="teal" size="sm" className="flex-1 text-xs" asChild>
-                        <Link to="/book-a-consultation">Apply with Applyza</Link>
-                      </Button>
+                      <MovingBorderButton to="/book-a-consultation" className="flex-1 px-3 py-1.5 text-xs">
+                        Apply with Applyza
+                      </MovingBorderButton>
                     </div>
                   </div>
                 ))}

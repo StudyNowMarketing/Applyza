@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 
 const EligibilityQuizCTA = () => (
   <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a0d24 0%, #1B2150 50%, #0a0d24 100%)" }}>
@@ -31,16 +32,10 @@ const EligibilityQuizCTA = () => (
         <p className="text-sm md:text-base mb-7" style={{ color: "rgba(255,255,255,0.7)" }}>
           Answer 5 quick questions and we'll match you with courses you're eligible for
         </p>
-        <Link
-          to="/eligibility-check"
-          className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white transition-colors"
-          style={{ backgroundColor: "#2EC4B6" }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#25a89c")}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2EC4B6")}
-        >
+        <MovingBorderButton to="/eligibility-check" className="px-7 py-3.5 text-sm gap-2">
           Check Your Eligibility
           <ArrowRight size={16} />
-        </Link>
+        </MovingBorderButton>
         <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,0.4)" }}>
           Takes less than 2 minutes • 100% free
         </p>

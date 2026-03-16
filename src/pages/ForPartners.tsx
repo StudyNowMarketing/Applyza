@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
 import { Database, Wallet, Headphones, Search, Loader2, Shield, TrendingUp } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -123,9 +124,9 @@ const ForPartners = () => {
           <p className="text-white/50 text-sm max-w-xl">
             Are you an education agent or recruitment partner? Join our growing network to refer students, earn commissions, and access our full course database.
           </p>
-          <Button onClick={scrollToForm} size="sm" className="mt-4 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs px-6">
+          <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
             Register Interest
-          </Button>
+          </MovingBorderButton>
         </div>
       </section>
 
@@ -272,9 +273,9 @@ const ForPartners = () => {
                   onCheckedChange={setConsent}
                   label="I agree to the Privacy Policy and consent to Applyza processing this data to discuss a potential partnership."
                 />
-                <Button type="submit" size="lg" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" disabled={submitting || !consent || isBlocked}>
+                <MovingBorderButton type="submit" containerClassName="w-full" className="w-full px-8 py-3 text-sm" disabled={submitting || !consent || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Register Interest"}
-                </Button>
+                </MovingBorderButton>
               </form>
             )}
 

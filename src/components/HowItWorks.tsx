@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Search, MessageCircle, FileCheck, Plane } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 
 const steps = [
   {
@@ -279,15 +280,9 @@ const HowItWorks = () => {
                 <p className="text-sm text-gray-500 leading-relaxed mb-5">
                   {steps[active].description}
                 </p>
-                <Link
-                  to={steps[active].ctaLink}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-colors"
-                  style={{ backgroundColor: "#2EC4B6" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#25a89c")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2EC4B6")}
-                >
+                <MovingBorderButton to={steps[active].ctaLink} className="px-5 py-2.5 text-sm">
                   {steps[active].cta}
-                </Link>
+                </MovingBorderButton>
               </div>
 
               {/* Right: visual */}

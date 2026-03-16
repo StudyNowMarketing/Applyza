@@ -34,6 +34,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon, CheckCircle, Loader2, Mail, MessageCircle } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -174,9 +175,9 @@ const BookConsultation = () => {
               <p className="text-sm text-muted-foreground">
                 One of our counsellors will contact you within 24 hours to confirm your consultation.
               </p>
-              <Button size="sm" className="mt-5 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-                <Link to="/">Back to Home</Link>
-              </Button>
+              <MovingBorderButton to="/" className="mt-5 px-6 py-2 text-sm">
+                Back to Home
+              </MovingBorderButton>
             </motion.div>
           ) : (
             <div className="bg-card rounded-xl border border-border shadow-sm p-6 card-glow">
@@ -268,9 +269,9 @@ const BookConsultation = () => {
                   label="I agree to the Privacy Policy and consent to Applyza processing my personal data to arrange my consultation."
                 />
 
-                <Button type="submit" size="lg" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" disabled={loading || !consent || isBlocked}>
+                <MovingBorderButton type="submit" containerClassName="w-full" className="w-full px-8 py-3 text-sm" disabled={loading || !consent || isBlocked}>
                   {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Booking Request"}
-                </Button>
+                </MovingBorderButton>
               </form>
             </div>
           )}

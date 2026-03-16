@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
 import { Users, Globe, Cpu, FileCheck, ShieldCheck, BarChart3, Loader2 } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -131,9 +132,9 @@ const ForInstitutions = () => {
           <p className="text-white/50 text-sm max-w-xl">
             Reach motivated, application-ready students from fast-growing education markets. We connect your institution with the right students — and handle everything from initial engagement to enrolment.
           </p>
-          <Button onClick={scrollToForm} size="sm" className="mt-4 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs px-6">
+          <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
             Submit Enquiry
-          </Button>
+          </MovingBorderButton>
         </div>
       </section>
 
@@ -245,9 +246,9 @@ const ForInstitutions = () => {
                   onCheckedChange={setConsent}
                   label="I agree to the Privacy Policy and consent to Applyza processing this data to discuss a potential partnership."
                 />
-                <Button type="submit" size="lg" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" disabled={submitting || !consent || isBlocked}>
+                <MovingBorderButton type="submit" containerClassName="w-full" className="w-full px-8 py-3 text-sm" disabled={submitting || !consent || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Enquiry"}
-                </Button>
+                </MovingBorderButton>
               </form>
             )}
           </div>

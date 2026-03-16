@@ -28,6 +28,7 @@ import {
   BookOpen,
   ArrowLeft,
 } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { useState } from "react";
 
 const LEVEL_COLORS: Record<string, string> = {
@@ -110,9 +111,9 @@ const CourseDetail = () => {
             <p className="text-white/50 text-sm mb-4 max-w-md mx-auto">
               The course you're looking for doesn't exist or may have been removed.
             </p>
-            <Button size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-              <Link to="/find-a-course"><ArrowLeft size={14} className="mr-1.5" /> Back to Course Search</Link>
-            </Button>
+            <MovingBorderButton to="/find-a-course" className="px-6 py-2 text-sm gap-1.5">
+              <ArrowLeft size={14} /> Back to Course Search
+            </MovingBorderButton>
           </div>
         </section>
         <div className="flex-1" />
@@ -262,9 +263,9 @@ const CourseDetail = () => {
                         <strong className="text-foreground">Application Deadline:</strong> {course.application_deadline}
                       </p>
                     )}
-                    <Button size="sm" className="mt-3 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-                      <Link to="/book-a-consultation">Book a Free Consultation</Link>
-                    </Button>
+                    <MovingBorderButton to="/book-a-consultation" className="mt-3 px-6 py-2 text-sm">
+                      Book a Free Consultation
+                    </MovingBorderButton>
                   </div>
                 </TabsContent>
               </Tabs>
@@ -318,9 +319,9 @@ const CourseDetail = () => {
                   )}
 
                   <div className="space-y-2 pt-2">
-                    <Button size="sm" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
-                      <Link to="/book-a-consultation">Apply with Applyza</Link>
-                    </Button>
+                    <MovingBorderButton to="/book-a-consultation" containerClassName="w-full" className="w-full px-4 py-2 text-sm">
+                      Apply with Applyza
+                    </MovingBorderButton>
                     <Button variant="outline" size="sm" className="w-full rounded-full" asChild>
                       <Link to="/book-a-consultation">Book a Consultation</Link>
                     </Button>

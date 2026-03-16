@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 
 
 const navTabs = [
@@ -196,12 +197,9 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
           >
             Client Login
           </button>
-          <Link
-            to="/book-a-consultation"
-            className="rounded-full px-5 py-2 text-sm font-semibold text-white transition-colors whitespace-nowrap bg-secondary hover:bg-secondary/90"
-          >
+          <MovingBorderButton to="/book-a-consultation" className="px-5 py-2 text-sm whitespace-nowrap">
             Book a Free Consultation
-          </Link>
+          </MovingBorderButton>
         </div>
 
         {/* Mobile hamburger */}
@@ -266,13 +264,9 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
               Client Login
             </button>
 
-            <Link
-              to="/book-a-consultation"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-full mt-4 w-full text-center px-6 py-3 text-sm font-semibold text-white bg-secondary hover:bg-secondary/90 transition-colors"
-            >
+            <MovingBorderButton to="/book-a-consultation" containerClassName="mt-4 w-full" className="w-full px-6 py-3 text-sm text-center" onClick={() => setMobileOpen(false)}>
               Book a Free Consultation
-            </Link>
+            </MovingBorderButton>
           </div>
         </div>
       )}
