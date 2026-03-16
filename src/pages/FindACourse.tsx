@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
 
 import { Link, useSearchParams } from "react-router-dom";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
