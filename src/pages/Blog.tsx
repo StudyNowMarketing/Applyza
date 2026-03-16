@@ -114,7 +114,7 @@ const Blog = () => {
             <>
               {/* Featured post */}
               {featured && (
-                <Link to={`/blog/${featured.slug}`} className="group block bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all border border-border mb-8">
+                <Link to={`/blog/${featured.slug}`} className="group block bg-card rounded-xl overflow-visible shadow-sm hover:shadow-lg transition-all border border-border mb-8 glow-card">
                   <div className="flex flex-col md:flex-row">
                     <div className="h-48 md:h-auto md:w-2/5 bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/10 flex items-center justify-center">
                       {featured.featured_image_url ? (
