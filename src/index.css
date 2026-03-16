@@ -309,6 +309,7 @@ select:focus {
    ════════════════════════════════════════════════ */
 .glow-card {
   position: relative;
+  isolation: isolate;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -323,6 +324,11 @@ select:focus {
   transition: opacity 0.3s ease;
   z-index: -1;
   animation: glowRotate 4s linear infinite;
+}
+
+.glow-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .glow-card:hover::before {
