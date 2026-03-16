@@ -175,7 +175,7 @@ const Contact = () => {
 
           {/* Right: Info */}
           <div className="space-y-5">
-            <div className="rounded-xl p-6" style={{ background: "#0a0d24" }}>
+            <div className="rounded-xl p-6 card-glow" style={{ background: "#0a0d24" }}>
               <h3 className="text-lg font-bold text-white mb-5">Applyza HQ</h3>
               <div className="space-y-4 text-sm">
                 <div className="flex items-start gap-3">

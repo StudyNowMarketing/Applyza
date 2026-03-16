@@ -184,7 +184,7 @@ const BlogPost = () => {
               <h3 className="text-lg font-bold text-primary mb-4">Related Posts</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {related.map((r) => (
-                  <Link key={r.id} to={`/blog/${r.slug}`} className="group bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 border border-border">
+                  <Link key={r.id} to={`/blog/${r.slug}`} className="group bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 border border-border card-glow">
                     <div className="h-28 bg-gradient-to-br from-primary/10 via-secondary/8 to-accent/8" />
                     <div className="p-4">
                       <h4 className="font-bold text-primary text-sm group-hover:text-secondary transition-colors line-clamp-2">{r.title}</h4>
