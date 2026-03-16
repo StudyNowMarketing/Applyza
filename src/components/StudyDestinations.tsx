@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CardGlow } from "@/components/ui/CardGlow";
 
 const destinations = [
   {
@@ -91,17 +90,16 @@ const StudyDestinations = () => {
             >
               <Link
                 to={`/study-destinations/${d.slug}`}
-                className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 hover:scale-[1.02]"
+                className="relative block h-[220px] rounded-xl overflow-visible group transition-all duration-300 glow-card"
                 style={{ border: "1px solid rgba(255,255,255,0.10)" }}
               >
-                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 <img
                   src={d.image}
                   alt={d.name}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-xl" />
 
                 <div className="absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-[10px] font-bold text-white z-10"
                   style={{ backgroundColor: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>

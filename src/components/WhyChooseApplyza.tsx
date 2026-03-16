@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
-import { CardGlow } from "@/components/ui/CardGlow";
 
 const reasons = [
   {
@@ -107,7 +106,7 @@ const WhyChooseApplyza = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="relative bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer overflow-hidden hover-lift"
+                className="relative bg-white rounded-xl border border-gray-100 shadow-sm transition-all duration-300 cursor-pointer overflow-visible glow-card"
                 style={{
                   borderLeft: isExpanded ? `4px solid ${r.iconColor}` : "4px solid transparent",
                   boxShadow: isExpanded ? "0 10px 30px -10px rgba(0,0,0,0.12)" : undefined,
@@ -116,7 +115,6 @@ const WhyChooseApplyza = () => {
                 onMouseLeave={() => setHoveredDesktop(null)}
                 onClick={() => handleMobileTap(i)}
               >
-                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 <div className="p-5">
                   <span className="absolute top-3 right-3 text-xs font-bold text-gray-300">
                     {String(i + 1).padStart(2, "0")}
