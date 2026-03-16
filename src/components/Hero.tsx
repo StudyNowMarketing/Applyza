@@ -73,6 +73,17 @@ const Hero = () => {
         style={{ backgroundColor: "rgba(46,196,182,0.15)", filter: "blur(100px)" }}
       />
 
+      {/* Sparkles */}
+      <SparklesCore
+        className="absolute inset-0 z-[1]"
+        background="transparent"
+        particleColor="#2EC4B6"
+        particleDensity={60}
+        minSize={0.4}
+        maxSize={1.5}
+        speed={1.5}
+      />
+
       <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16 flex justify-center">
         <div className="w-full max-w-[800px]">
           <div className="flex flex-col gap-5">
