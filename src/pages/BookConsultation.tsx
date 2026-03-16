@@ -34,6 +34,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { CalendarIcon, CheckCircle, Loader2, Mail, MessageCircle } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
