@@ -115,7 +115,7 @@ const WhyChooseApplyza = () => {
     hidden: { scaleX: 0 },
     visible: {
       scaleX: 1,
-      transition: { duration: 0.8, delay: 0.3 + headingWords.length * 0.15, ease: "easeOut" },
+      transition: { duration: 0.8, delay: 0.3 + headingWords.length * 0.15, ease: "easeOut" as const },
     },
   };
 
