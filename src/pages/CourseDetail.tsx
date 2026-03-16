@@ -28,6 +28,7 @@ import {
   BookOpen,
   ArrowLeft,
 } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { useState } from "react";
 
 const LEVEL_COLORS: Record<string, string> = {
