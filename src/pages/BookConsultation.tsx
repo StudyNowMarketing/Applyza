@@ -175,9 +175,9 @@ const BookConsultation = () => {
               <p className="text-sm text-muted-foreground">
                 One of our counsellors will contact you within 24 hours to confirm your consultation.
               </p>
-              <Button size="sm" className="mt-5 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-                <Link to="/">Back to Home</Link>
-              </Button>
+              <MovingBorderButton to="/" className="mt-5 px-6 py-2 text-sm">
+                Back to Home
+              </MovingBorderButton>
             </motion.div>
           ) : (
             <div className="bg-card rounded-xl border border-border shadow-sm p-6 card-glow">
