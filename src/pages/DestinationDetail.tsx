@@ -273,7 +273,7 @@ const DestinationDetail = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: i * 0.06 }}
-                    className="bg-card rounded-xl p-4 border border-border text-center"
+                    className="bg-card rounded-xl p-4 border border-border text-center overflow-visible glow-card"
                   >
                     <MapPin className="mx-auto text-secondary mb-2" size={20} />
                     <h3 className="text-sm font-bold text-primary mb-1">{city}</h3>
