@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CardGlow } from "@/components/ui/CardGlow";
 
 const events = [
   {
