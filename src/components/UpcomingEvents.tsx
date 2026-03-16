@@ -76,9 +76,10 @@ const UpcomingEvents = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px]"
+            className="relative rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px]"
             style={{ background: "linear-gradient(135deg, #1B2150, #0a0d24)" }}
           >
+            <CardGlow spread={40} proximity={64} borderWidth={2} />
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
