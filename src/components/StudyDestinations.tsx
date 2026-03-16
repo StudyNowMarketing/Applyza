@@ -99,11 +99,15 @@ const StudyDestinations = () => {
                 className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 card-glow"
                 style={{ border: "1px solid rgba(255,255,255,0.10)" }}
               >
-                <img
-                  src={d.image}
-                  alt={d.name}
-                  loading="lazy"
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={d.image}
                   className="absolute inset-0 w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
+                  src={d.video}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-xl" />
 
