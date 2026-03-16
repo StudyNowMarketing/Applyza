@@ -136,7 +136,7 @@ const WhyChooseApplyza = () => {
         transition: {
           duration: 0.6,
           delay: (i % 3) * 0.15 + (isLeftRow ? 0 : 0.1),
-          ease: "easeOut",
+          ease: "easeOut" as const,
         },
       },
     };
