@@ -3,6 +3,7 @@ import { Search, ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { SparklesCore } from "@/components/ui/SparklesCore";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 
 const filters = [
   { emoji: "🇬🇧", label: "UK", country: "United Kingdom" },
