@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Search, ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 
 const filters = [
   { emoji: "🇬🇧", label: "UK", country: "United Kingdom" },
