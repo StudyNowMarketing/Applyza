@@ -125,9 +125,10 @@ const UpcomingEvents = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="bg-card rounded-xl p-4 flex items-start gap-3 hover-lift transition-all duration-300"
+                className="relative bg-card rounded-xl p-4 flex items-start gap-3 hover-lift transition-all duration-300"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}
               >
+                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 <div className="shrink-0 w-14 h-14 rounded-lg flex flex-col items-center justify-center"
                   style={{ background: "hsl(230 33% 97%)" }}>
                   <span className="text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">{event.month}</span>
