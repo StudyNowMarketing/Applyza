@@ -3,7 +3,7 @@ import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
-import { CardGlow } from "@/components/ui/CardGlow";
+
 import { Link, useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
