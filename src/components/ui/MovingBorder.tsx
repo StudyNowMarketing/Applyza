@@ -108,7 +108,7 @@ export const MovingBorderButton = ({
   const inner = (
     <div
       className={cn(
-        "relative bg-secondary border border-secondary/30 text-secondary-foreground flex items-center justify-center w-full h-full text-sm font-semibold antialiased px-7 py-3 gap-2",
+        "relative bg-accent border border-accent/30 text-accent-foreground flex items-center justify-center w-full h-full text-sm font-semibold antialiased px-7 py-3 gap-2",
         disabled && "opacity-50 cursor-not-allowed",
         className
       )}
