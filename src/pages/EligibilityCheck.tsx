@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
