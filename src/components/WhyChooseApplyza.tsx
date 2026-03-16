@@ -133,15 +133,8 @@ const WhyChooseApplyza = () => {
                     <h3 className="text-base font-bold" style={{ color: "#1B2150" }}>{r.title}</h3>
                   </div>
 
-                  {/* Description — always visible on lg, animated on smaller */}
-                  <div
-                    className="overflow-hidden transition-all duration-300 ease-in-out"
-                    style={{
-                      maxHeight: isExpanded ? "200px" : "0px",
-                      opacity: isExpanded ? 1 : 0,
-                      marginTop: isExpanded ? "12px" : "0px",
-                    }}
-                  >
+                  {/* Description — always visible */}
+                  <div className="mt-3">
                     <p className="text-sm text-gray-500 leading-relaxed pl-[72px]">{r.text}</p>
                   </div>
                 </div>
