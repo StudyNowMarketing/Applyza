@@ -45,11 +45,11 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
 
   return (
     <div
-      className="flex items-center justify-center rounded-xl bg-white shrink-0 logo-card-hover"
+      className="flex items-center justify-center rounded-lg bg-white shrink-0 logo-card-hover"
       style={{
         border: "1px solid #E5E7EB",
-        padding: "16px 24px",
-        minWidth: "180px",
+        padding: "12px 20px",
+        minWidth: "160px",
       }}
     >
       {failed ? (
@@ -61,7 +61,7 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
           src={logo}
           alt={name}
           onError={() => setFailed(true)}
-          className="h-[60px] w-auto object-contain"
+          className="h-[50px] w-auto object-contain"
           style={{
             filter: "grayscale(100%)",
             opacity: 0.6,
