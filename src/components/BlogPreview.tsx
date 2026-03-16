@@ -108,7 +108,7 @@ const BlogPreview = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
               >
-                <Link to="/blog" className="group flex gap-3 bg-card rounded-xl p-3 hover:shadow-md transition-all duration-300 overflow-visible glow-card"
+                <Link to="/blog" className="group flex gap-3 bg-card rounded-xl p-3 hover:shadow-md transition-all duration-300 card-glow"
                   style={{ border: "1px solid hsl(230 25% 93%)" }}>
                   <div className="shrink-0 w-24 h-20 rounded-lg overflow-hidden flex items-center justify-center"
                     style={{ background: "linear-gradient(135deg, rgba(107,63,160,0.1), rgba(46,196,182,0.1))" }}>

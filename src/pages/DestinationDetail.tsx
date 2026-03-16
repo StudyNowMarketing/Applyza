@@ -305,7 +305,7 @@ const DestinationDetail = () => {
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {courses.map((course) => (
-                  <div key={course.id} className="bg-background rounded-xl border border-border p-4 hover:shadow-md transition-all duration-200 overflow-visible glow-card">
+                  <div key={course.id} className="bg-background rounded-xl border border-border p-4 hover:shadow-md transition-all duration-200 card-glow">
                     <p className="text-xs text-muted-foreground mb-1">{course.university_name}</p>
                     <h3 className="text-base font-bold text-primary leading-snug mb-2">{course.title}</h3>
                     <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground mb-2">

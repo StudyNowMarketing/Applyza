@@ -85,7 +85,7 @@ const ScholarshipsPreview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="relative bg-card rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-5 group overflow-visible glow-card"
+              className="relative bg-card rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-5 group card-glow"
               style={{ border: "1px solid hsl(230 25% 93%)" }}
             >
               {s.hot && (

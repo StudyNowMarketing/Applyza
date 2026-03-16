@@ -146,7 +146,7 @@ const Blog = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {rest.map((post, i) => (
                     <motion.div key={post.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }}>
-                      <Link to={`/blog/${post.slug}`} className="group block bg-card rounded-xl overflow-visible shadow-sm hover:shadow-md transition-all border border-border glow-card">
+                      <Link to={`/blog/${post.slug}`} className="group block bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all border border-border card-glow">
                         <div className="h-36 bg-gradient-to-br from-primary/10 via-secondary/8 to-accent/8 flex items-center justify-center">
                           {post.featured_image_url ? (
                             <img src={post.featured_image_url} alt={post.title} className="w-full h-full object-cover" />

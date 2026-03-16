@@ -90,7 +90,7 @@ const StudyDestinations = () => {
             >
               <Link
                 to={`/study-destinations/${d.slug}`}
-                className="relative block h-[220px] rounded-xl overflow-visible group transition-all duration-300 glow-card"
+                className="relative block h-[220px] rounded-xl overflow-hidden group transition-all duration-300 card-glow"
                 style={{ border: "1px solid rgba(255,255,255,0.10)" }}
               >
                 <img

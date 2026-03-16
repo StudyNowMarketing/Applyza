@@ -305,38 +305,12 @@ select:focus {
 }
 
 /* ═══════════════════════════════════════════════
-   GLOW CARD HOVER EFFECT
+   CARD GLOW HOVER EFFECT
    ════════════════════════════════════════════════ */
-.glow-card {
-  position: relative;
-  isolation: isolate;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.card-glow {
+  transition: box-shadow 0.3s ease;
 }
 
-.glow-card::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: linear-gradient(135deg, #2EC4B6, #6B3FA0, #2EC4B6, #6B3FA0);
-  background-size: 300% 300%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
-  animation: glowRotate 4s linear infinite;
-}
-
-.glow-card:hover::before {
-  opacity: 1;
-}
-
-.glow-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 20px rgba(46, 196, 182, 0.15), 0 0 40px rgba(107, 63, 160, 0.1);
-}
-
-@keyframes glowRotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.card-glow:hover {
+  box-shadow: 0 0 0 2px #2EC4B6, 0 0 15px rgba(46, 196, 182, 0.3), 0 0 30px rgba(107, 63, 160, 0.15);
 }
