@@ -132,9 +132,9 @@ const ForInstitutions = () => {
           <p className="text-white/50 text-sm max-w-xl">
             Reach motivated, application-ready students from fast-growing education markets. We connect your institution with the right students — and handle everything from initial engagement to enrolment.
           </p>
-          <Button onClick={scrollToForm} size="sm" className="mt-4 rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground text-xs px-6">
+          <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
             Submit Enquiry
-          </Button>
+          </MovingBorderButton>
         </div>
       </section>
 
