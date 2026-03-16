@@ -309,9 +309,9 @@ const DestinationDetail = () => {
               <p className="text-muted-foreground text-sm mb-3">
                 We're adding courses for {destination.country} soon. In the meantime, book a consultation and our counsellors can help you find the right programme.
               </p>
-              <Button variant="teal" size="sm" asChild>
-                <Link to="/book-a-consultation">Book a Consultation</Link>
-              </Button>
+              <MovingBorderButton to="/book-a-consultation" className="px-5 py-2 text-sm">
+                Book a Consultation
+              </MovingBorderButton>
             </div>
           ) : (
             <>
