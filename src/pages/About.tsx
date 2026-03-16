@@ -302,7 +302,8 @@ const About = () => {
       </section>
 
       {/* ── STATS — Dark section ── */}
-      <section style={{ background: "#080b1e" }}>
+      <section className="relative" style={{ background: "#080b1e" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
         <div className="container py-10">
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 max-w-3xl mx-auto">
             {stats.map((s) => (
