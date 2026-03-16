@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 
 interface Crumb {
   label: string;
@@ -17,6 +18,16 @@ const ServiceHero = ({ heading, subtext, breadcrumbs }: ServiceHeroProps) => (
     {/* Gradient glows */}
     <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-[120px]" style={{ background: "hsl(265 44% 44%)" }} />
     <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-15 blur-[100px]" style={{ background: "hsl(169 63% 47%)" }} />
+
+    <SparklesCore
+      className="absolute inset-0 z-[1]"
+      background="transparent"
+      particleColor="#2EC4B6"
+      particleDensity={40}
+      minSize={0.3}
+      maxSize={1.2}
+      speed={1}
+    />
 
     <div className="container relative z-10 py-12">
       <nav className="flex items-center gap-2 text-xs text-white/40 mb-4 flex-wrap">

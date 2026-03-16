@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Search, ArrowRight, Play } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 
 const filters = [
   { emoji: "🇬🇧", label: "UK", country: "United Kingdom" },
@@ -70,6 +71,17 @@ const Hero = () => {
       <div
         className="absolute bottom-[-5%] right-[10%] w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{ backgroundColor: "rgba(46,196,182,0.15)", filter: "blur(100px)" }}
+      />
+
+      {/* Sparkles */}
+      <SparklesCore
+        className="absolute inset-0 z-[1]"
+        background="transparent"
+        particleColor="#2EC4B6"
+        particleDensity={60}
+        minSize={0.4}
+        maxSize={1.5}
+        speed={1.5}
       />
 
       <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16 flex justify-center">
