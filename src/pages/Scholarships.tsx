@@ -127,7 +127,7 @@ const Scholarships = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {filtered.map((s, i) => (
                   <motion.div key={s.id} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.04 }}
-                    className="bg-card rounded-xl border border-border shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 p-5 flex gap-4">
+                    className="bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-all duration-200 p-5 flex gap-4 overflow-visible glow-card">
                     {/* Amount */}
                     <div className="shrink-0 flex flex-col items-center justify-center min-w-[80px]">
                       {s.amount && (

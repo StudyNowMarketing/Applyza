@@ -56,7 +56,7 @@ const PartnerUniversities = () => {
 
           <div className="flex gap-4 justify-center lg:justify-end">
             {regions.map((r) => (
-              <div key={r.label} className="text-center rounded-xl border border-gray-100 px-5 py-3">
+              <div key={r.label} className="text-center rounded-xl border border-gray-100 px-5 py-3 overflow-visible glow-card">
                 <div className="text-2xl font-bold" style={{ color: r.color }}>{r.count}</div>
                 <div className="text-xs text-gray-500 mt-0.5">{r.label}</div>
               </div>

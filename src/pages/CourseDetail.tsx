@@ -365,7 +365,7 @@ const CourseDetail = () => {
                 <Link
                   key={rc.id}
                   to={`/find-a-course/${rc.slug}`}
-                  className="bg-background rounded-xl border border-border p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 block"
+                  className="bg-background rounded-xl border border-border p-4 shadow-sm hover:shadow-md transition-all duration-200 block overflow-visible glow-card"
                 >
                   <p className="text-xs text-muted-foreground mb-1">{rc.university_name}</p>
                   <h3 className="text-sm font-bold text-primary leading-snug mb-2">{rc.title}</h3>
