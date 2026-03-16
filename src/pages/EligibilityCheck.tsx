@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft, GraduationCap } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -185,13 +186,13 @@ const EligibilityCheck = () => {
                       <ArrowLeft size={14} /> Back
                     </button>
                   ) : <div />}
-                  <Button
+                  <MovingBorderButton
                     onClick={() => setStep(step + 1)}
                     disabled={!canNext()}
-                    className="rounded-full px-6 bg-secondary text-secondary-foreground hover:bg-secondary/90 disabled:opacity-50"
+                    className="px-6 py-2.5 text-sm"
                   >
                     {step === 4 ? "See My Results" : "Next"} <ArrowRight size={14} className="ml-1" />
-                  </Button>
+                  </MovingBorderButton>
                 </div>
               </div>
             </div>
@@ -260,13 +261,14 @@ const EligibilityCheck = () => {
                           onCheckedChange={(v) => updateLead({ consent: v })}
                           label="I agree to Applyza's Privacy Policy and consent to being contacted about my course options."
                         />
-                        <Button
+                        <MovingBorderButton
                           onClick={handleSubmit}
                           disabled={!canSubmit || submitting}
-                          className="w-full rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90 disabled:opacity-50"
+                          containerClassName="w-full"
+                          className="w-full px-6 py-2.5 text-sm"
                         >
                           {submitting ? "Loading..." : "Unlock My Results"} <ArrowRight size={14} className="ml-1" />
-                        </Button>
+                        </MovingBorderButton>
                       </div>
                     </div>
                   </div>

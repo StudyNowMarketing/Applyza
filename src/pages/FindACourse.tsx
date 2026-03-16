@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
 
 import { Link, useSearchParams } from "react-router-dom";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
@@ -651,9 +652,9 @@ const FindACourse = () => {
               placeholder="Search courses, universities, or subjects..."
               className="flex-1 px-3 py-3 text-sm text-white bg-transparent outline-none placeholder:text-white/40 min-w-0"
             />
-            <Button className="rounded-lg m-1.5 px-5 shrink-0" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
+            <MovingBorderButton type="button" borderRadius="8px" className="m-1.5 px-5 py-2 text-sm shrink-0" onClick={() => {}}>
               Search
-            </Button>
+            </MovingBorderButton>
           </motion.div>
         </div>
       </section>
@@ -803,9 +804,9 @@ const FindACourse = () => {
                   <Button variant="outline" onClick={clearAll} className="rounded-lg">
                     Clear Filters
                   </Button>
-                  <Button asChild className="rounded-lg" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
-                    <Link to="/book-a-consultation">Book a Consultation</Link>
-                  </Button>
+                  <MovingBorderButton to="/book-a-consultation" className="px-5 py-2 text-sm">
+                    Book a Consultation
+                  </MovingBorderButton>
                 </div>
               </div>
             ) : (
@@ -895,9 +896,9 @@ const CourseCard = ({ course, isCompared, onToggleCompare, compareDisabled }: { 
       <Button variant="outline" size="sm" className="flex-1 rounded-lg text-xs" style={{ borderColor: "#1B2150", color: "#1B2150" }} asChild>
         <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
       </Button>
-      <Button size="sm" className="flex-1 rounded-lg text-xs" style={{ background: "#2EC4B6", color: "#0a0d24" }} asChild>
-        <Link to="/book-a-consultation">Apply with Applyza</Link>
-      </Button>
+      <MovingBorderButton to="/book-a-consultation" containerClassName="flex-1" className="w-full px-3 py-1.5 text-xs">
+        Apply with Applyza
+      </MovingBorderButton>
     </div>
   </div>
 );

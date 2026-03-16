@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { supabase } from "@/integrations/supabase/client";
@@ -161,9 +162,9 @@ const Scholarships = () => {
                 <Button variant="outline" size="sm" onClick={() => { setSelectedLevels([]); setSelectedCountries([]); }}>
                   Clear Filters
                 </Button>
-                <Button variant="teal" size="sm" className="rounded-full" asChild>
-                  <Link to="/book-a-consultation">Ask About Funding</Link>
-                </Button>
+                <MovingBorderButton to="/book-a-consultation" className="px-5 py-2 text-sm">
+                  Ask About Funding
+                </MovingBorderButton>
               </div>
             </div>
           )}
