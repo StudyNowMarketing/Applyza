@@ -116,7 +116,7 @@ const WhyChooseApplyza = () => {
                 onMouseLeave={() => setHoveredDesktop(null)}
                 onClick={() => handleMobileTap(i)}
               >
-                <div className="p-5">
+                <CardGlow spread={30} proximity={48} borderWidth={2} />
                   <span className="absolute top-3 right-3 text-xs font-bold text-gray-300">
                     {String(i + 1).padStart(2, "0")}
                   </span>
