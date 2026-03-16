@@ -201,9 +201,9 @@ const BlogPost = () => {
           <div className="mt-10 rounded-xl p-6 text-center" style={{ background: "linear-gradient(135deg, hsl(169 63% 47% / 0.1), hsl(265 44% 44% / 0.08))" }}>
             <h3 className="text-base font-bold text-primary mb-1.5">Need personalised guidance?</h3>
             <p className="text-xs text-muted-foreground mb-4">Our expert counsellors are here to help — completely free.</p>
-            <Button size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground px-6" asChild>
-              <Link to="/book-a-consultation">Book a Free Consultation</Link>
-            </Button>
+            <MovingBorderButton to="/book-a-consultation" className="px-6 py-2 text-sm">
+              Book a Free Consultation
+            </MovingBorderButton>
           </div>
         </div>
       </article>

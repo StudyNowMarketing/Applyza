@@ -218,9 +218,9 @@ const Events = () => {
               <FormError message={rateLimitMsg} />
               <div className="flex gap-2">
                 <Input type="email" placeholder="Your email address" value={subEmail} onChange={(e) => setSubEmail(e.target.value)} className="flex-1 rounded-lg h-10 border-border focus-visible:ring-secondary" disabled={subscribing} maxLength={FIELD_LIMITS.email} />
-                <Button type="submit" size="sm" className="rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground shrink-0 px-5" disabled={subscribing || !subConsent || isBlocked}>
+                <MovingBorderButton type="submit" className="px-5 py-2 text-sm shrink-0" disabled={subscribing || !subConsent || isBlocked}>
                   {subscribing ? <Loader2 className="h-4 w-4 animate-spin" /> : "Subscribe"}
-                </Button>
+                </MovingBorderButton>
               </div>
               <ConsentCheckbox
                 checked={subConsent}

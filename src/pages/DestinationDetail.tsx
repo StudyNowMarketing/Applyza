@@ -338,9 +338,9 @@ const DestinationDetail = () => {
                       <Button variant="outline" size="sm" className="flex-1 text-xs" asChild>
                         <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
                       </Button>
-                      <Button variant="teal" size="sm" className="flex-1 text-xs" asChild>
-                        <Link to="/book-a-consultation">Apply with Applyza</Link>
-                      </Button>
+                      <MovingBorderButton to="/book-a-consultation" className="flex-1 px-3 py-1.5 text-xs">
+                        Apply with Applyza
+                      </MovingBorderButton>
                     </div>
                   </div>
                 ))}
