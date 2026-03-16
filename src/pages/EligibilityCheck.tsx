@@ -261,13 +261,14 @@ const EligibilityCheck = () => {
                           onCheckedChange={(v) => updateLead({ consent: v })}
                           label="I agree to Applyza's Privacy Policy and consent to being contacted about my course options."
                         />
-                        <Button
+                        <MovingBorderButton
                           onClick={handleSubmit}
                           disabled={!canSubmit || submitting}
-                          className="w-full rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/90 disabled:opacity-50"
+                          containerClassName="w-full"
+                          className="w-full px-6 py-2.5 text-sm"
                         >
                           {submitting ? "Loading..." : "Unlock My Results"} <ArrowRight size={14} className="ml-1" />
-                        </Button>
+                        </MovingBorderButton>
                       </div>
                     </div>
                   </div>

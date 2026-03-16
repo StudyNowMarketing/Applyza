@@ -896,9 +896,9 @@ const CourseCard = ({ course, isCompared, onToggleCompare, compareDisabled }: { 
       <Button variant="outline" size="sm" className="flex-1 rounded-lg text-xs" style={{ borderColor: "#1B2150", color: "#1B2150" }} asChild>
         <Link to={`/find-a-course/${course.slug}`}>View Details</Link>
       </Button>
-      <Button size="sm" className="flex-1 rounded-lg text-xs" style={{ background: "#2EC4B6", color: "#0a0d24" }} asChild>
-        <Link to="/book-a-consultation">Apply with Applyza</Link>
-      </Button>
+      <MovingBorderButton to="/book-a-consultation" containerClassName="flex-1" className="w-full px-3 py-1.5 text-xs">
+        Apply with Applyza
+      </MovingBorderButton>
     </div>
   </div>
 );
