@@ -676,7 +676,7 @@ const FindACourse = () => {
             <Button
               size="lg"
               className="rounded-full shadow-xl"
-              style={{ background: "#2EC4B6", color: "#0a0d24" }}
+              style={{ background: "#6B3FA0", color: "white" }}
               onClick={() => setMobileFiltersOpen(true)}
             >
               <SlidersHorizontal size={16} />
