@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { GraduationCap, Shield, Users, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 
 const services = [
   {
