@@ -179,7 +179,7 @@ const BookConsultation = () => {
               </Button>
             </motion.div>
           ) : (
-            <div className="bg-card rounded-xl border border-border shadow-sm p-6">
+            <div className="bg-card rounded-xl border border-border shadow-sm p-6 card-glow">
               <form onSubmit={handleSubmit} className="space-y-4">
                 <FormError message={rateLimitMsg} />
 
@@ -276,7 +276,7 @@ const BookConsultation = () => {
           )}
 
           {/* Direct contact */}
-          <div className="mt-8 p-5 bg-card rounded-xl border border-border text-center">
+          <div className="mt-8 p-5 bg-card rounded-xl border border-border text-center card-glow">
             <p className="font-semibold text-primary text-sm mb-2">Prefer to reach us directly?</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="mailto:info@applyza.com" className="flex items-center gap-2 text-sm text-secondary font-semibold hover:underline">

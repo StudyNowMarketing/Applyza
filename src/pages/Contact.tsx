@@ -112,7 +112,7 @@ const Contact = () => {
       <section className="bg-background py-12">
         <div className="container grid grid-cols-1 lg:grid-cols-[55%_45%] gap-8">
           {/* Left: Form */}
-          <div className="bg-card rounded-xl shadow-sm border border-border p-6">
+          <div className="bg-card rounded-xl shadow-sm border border-border p-6 card-glow">
             <h2 className="text-xl font-bold text-primary mb-5">Send Us a Message</h2>
 
             {submitted ? (
@@ -175,7 +175,7 @@ const Contact = () => {
 
           {/* Right: Info */}
           <div className="space-y-5">
-            <div className="rounded-xl p-6" style={{ background: "#0a0d24" }}>
+            <div className="rounded-xl p-6 card-glow" style={{ background: "#0a0d24" }}>
               <h3 className="text-lg font-bold text-white mb-5">Applyza HQ</h3>
               <div className="space-y-4 text-sm">
                 <div className="flex items-start gap-3">

@@ -58,7 +58,7 @@ const OtherServices = ({ currentPath }: { currentPath: string }) => {
             >
               <Link
                 to={s.to}
-                className="bg-card rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col overflow-hidden group block border border-border"
+                className="bg-card rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col overflow-hidden group block border border-border card-glow"
               >
                 <div className="h-8 w-full" style={{ background: s.gradient }} />
                 <div className="p-5 flex flex-col items-center text-center">

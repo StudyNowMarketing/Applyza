@@ -108,7 +108,7 @@ const UniversityApplications = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
-              className="flex items-start gap-3 bg-card rounded-lg p-3 border border-border"
+              className="flex items-start gap-3 bg-card rounded-lg p-3 border border-border card-glow"
             >
               <div className="w-5 h-5 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 mt-0.5">
                 <Check className="text-secondary" size={12} />
