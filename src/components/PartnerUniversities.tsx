@@ -1,24 +1,37 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { InfiniteSlider } from "@/components/ui/InfiniteSlider";
+import { useState } from "react";
 
-const marqueeItems = [
-  "York St John University",
-  "University of Sunderland",
-  "University of East London",
-  "University of Wolverhampton",
-  "Buckinghamshire New University",
-  "Edge Hill University",
-  "Leeds Trinity University",
-  "Solent University",
-  "University of West London",
-  "Wrexham University",
-  "✓ 100% Free Service",
-  "✓ AQF Certified Agent",
-  "✓ AI-Powered Matching",
-  "✓ 99% Visa Success Rate",
-  "✓ Expert Counsellors",
-  "✓ End-to-End Support",
+const row1 = [
+  { name: "York St John University", logo: "https://logo.clearbit.com/yorksj.ac.uk" },
+  { name: "University of Sunderland", logo: "https://logo.clearbit.com/sunderland.ac.uk" },
+  { name: "University of East London", logo: "https://logo.clearbit.com/uel.ac.uk" },
+  { name: "University of Wolverhampton", logo: "https://logo.clearbit.com/wlv.ac.uk" },
+  { name: "Buckinghamshire New University", logo: "https://logo.clearbit.com/bucks.ac.uk" },
+  { name: "Edge Hill University", logo: "https://logo.clearbit.com/edgehill.ac.uk" },
+  { name: "Leeds Trinity University", logo: "https://logo.clearbit.com/leedstrinity.ac.uk" },
+  { name: "Solent University", logo: "https://logo.clearbit.com/solent.ac.uk" },
+  { name: "University of Law", logo: "https://logo.clearbit.com/law.ac.uk" },
+  { name: "University of Greenwich", logo: "https://logo.clearbit.com/gre.ac.uk" },
+  { name: "Coventry University", logo: "https://logo.clearbit.com/coventry.ac.uk" },
+  { name: "Middlesex University", logo: "https://logo.clearbit.com/mdx.ac.uk" },
+];
+
+const row2 = [
+  { name: "University of West London", logo: "https://logo.clearbit.com/uwl.ac.uk" },
+  { name: "Wrexham University", logo: "https://logo.clearbit.com/wrexham.ac.uk" },
+  { name: "University of Hertfordshire", logo: "https://logo.clearbit.com/herts.ac.uk" },
+  { name: "University of Bedfordshire", logo: "https://logo.clearbit.com/beds.ac.uk" },
+  { name: "De Montfort University", logo: "https://logo.clearbit.com/dmu.ac.uk" },
+  { name: "Birmingham City University", logo: "https://logo.clearbit.com/bcu.ac.uk" },
+  { name: "Anglia Ruskin University", logo: "https://logo.clearbit.com/aru.ac.uk" },
+  { name: "University of Westminster", logo: "https://logo.clearbit.com/westminster.ac.uk" },
+  { name: "London South Bank University", logo: "https://logo.clearbit.com/lsbu.ac.uk" },
+  { name: "University of Central Lancashire", logo: "https://logo.clearbit.com/uclan.ac.uk" },
+  { name: "University of Northampton", logo: "https://logo.clearbit.com/northampton.ac.uk" },
+  { name: "University of Roehampton", logo: "https://logo.clearbit.com/roehampton.ac.uk" },
 ];
 
 const regions = [
@@ -27,13 +40,53 @@ const regions = [
   { count: "20+", label: "North American", color: "#1B2150" },
 ];
 
+function LogoCard({ name, logo }: { name: string; logo: string }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div
+      className="flex items-center justify-center rounded-xl bg-white shrink-0 logo-card-hover"
+      style={{
+        border: "1px solid #E5E7EB",
+        padding: "16px 24px",
+        minWidth: "180px",
+      }}
+    >
+      {failed ? (
+        <span className="text-sm font-semibold whitespace-nowrap" style={{ color: "#1B2150" }}>
+          {name}
+        </span>
+      ) : (
+        <img
+          src={logo}
+          alt={name}
+          onError={() => setFailed(true)}
+          className="h-[60px] w-auto object-contain"
+          style={{
+            filter: "grayscale(100%)",
+            opacity: 0.6,
+            transition: "filter 0.3s ease, opacity 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "grayscale(0%)";
+            e.currentTarget.style.opacity = "1";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "grayscale(100%)";
+            e.currentTarget.style.opacity = "0.6";
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
 const PartnerUniversities = () => {
   return (
     <section className="bg-white">
-      {/* Subtle top separator */}
       <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
       <div className="container py-12 md:py-16">
-        {/* Header + Regional stats on one line */}
+        {/* Header + Regional stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -64,23 +117,23 @@ const PartnerUniversities = () => {
           </div>
         </motion.div>
 
-        {/* Marquee */}
-        <div className="relative overflow-hidden">
+        {/* Logo slider rows */}
+        <div className="relative space-y-4">
+          {/* Fade edges */}
           <div className="absolute left-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-20 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
 
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...marqueeItems, ...marqueeItems].map((item, i) => (
-              <span
-                key={i}
-                className={`mx-4 text-sm font-medium shrink-0 ${
-                  item.startsWith("✓") ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                {item.startsWith("✓") ? item : `🎓 ${item}`}
-              </span>
+          <InfiniteSlider gap={24} duration={30} durationOnHover={60}>
+            {row1.map((u) => (
+              <LogoCard key={u.name} name={u.name} logo={u.logo} />
             ))}
-          </div>
+          </InfiniteSlider>
+
+          <InfiniteSlider gap={24} duration={35} durationOnHover={60} reverse>
+            {row2.map((u) => (
+              <LogoCard key={u.name} name={u.name} logo={u.logo} />
+            ))}
+          </InfiniteSlider>
         </div>
 
         <div className="flex justify-center mt-8">
