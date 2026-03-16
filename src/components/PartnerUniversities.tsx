@@ -5,33 +5,33 @@ import { InfiniteSlider } from "@/components/ui/InfiniteSlider";
 import { useState } from "react";
 
 const row1 = [
-  { name: "York St John University", logo: "https://logo.clearbit.com/yorksj.ac.uk" },
-  { name: "University of Sunderland", logo: "https://logo.clearbit.com/sunderland.ac.uk" },
-  { name: "University of East London", logo: "https://logo.clearbit.com/uel.ac.uk" },
-  { name: "University of Wolverhampton", logo: "https://logo.clearbit.com/wlv.ac.uk" },
-  { name: "Buckinghamshire New University", logo: "https://logo.clearbit.com/bucks.ac.uk" },
-  { name: "Edge Hill University", logo: "https://logo.clearbit.com/edgehill.ac.uk" },
-  { name: "Leeds Trinity University", logo: "https://logo.clearbit.com/leedstrinity.ac.uk" },
-  { name: "Solent University", logo: "https://logo.clearbit.com/solent.ac.uk" },
-  { name: "University of Law", logo: "https://logo.clearbit.com/law.ac.uk" },
-  { name: "University of Greenwich", logo: "https://logo.clearbit.com/gre.ac.uk" },
-  { name: "Coventry University", logo: "https://logo.clearbit.com/coventry.ac.uk" },
-  { name: "Middlesex University", logo: "https://logo.clearbit.com/mdx.ac.uk" },
+  { name: "York St John University", logo: "/logos/yorksj.png" },
+  { name: "University of Sunderland", logo: "/logos/sunderland.png" },
+  { name: "University of East London", logo: "/logos/uel.png" },
+  { name: "University of Wolverhampton", logo: "/logos/wolverhampton.png" },
+  { name: "Buckinghamshire New University", logo: "/logos/bucks.png" },
+  { name: "Edge Hill University", logo: "/logos/edgehill.png" },
+  { name: "Leeds Trinity University", logo: "/logos/leedstrinity.png" },
+  { name: "Solent University", logo: "/logos/solent.png" },
+  { name: "University of Law", logo: "/logos/ulaw.png" },
+  { name: "University of Greenwich", logo: "/logos/greenwich.png" },
+  { name: "Coventry University", logo: "/logos/coventry.png" },
+  { name: "Middlesex University", logo: "/logos/middlesex.png" },
 ];
 
 const row2 = [
-  { name: "University of West London", logo: "https://logo.clearbit.com/uwl.ac.uk" },
-  { name: "Wrexham University", logo: "https://logo.clearbit.com/wrexham.ac.uk" },
-  { name: "University of Hertfordshire", logo: "https://logo.clearbit.com/herts.ac.uk" },
-  { name: "University of Bedfordshire", logo: "https://logo.clearbit.com/beds.ac.uk" },
-  { name: "De Montfort University", logo: "https://logo.clearbit.com/dmu.ac.uk" },
-  { name: "Birmingham City University", logo: "https://logo.clearbit.com/bcu.ac.uk" },
-  { name: "Anglia Ruskin University", logo: "https://logo.clearbit.com/aru.ac.uk" },
-  { name: "University of Westminster", logo: "https://logo.clearbit.com/westminster.ac.uk" },
-  { name: "London South Bank University", logo: "https://logo.clearbit.com/lsbu.ac.uk" },
-  { name: "University of Central Lancashire", logo: "https://logo.clearbit.com/uclan.ac.uk" },
-  { name: "University of Northampton", logo: "https://logo.clearbit.com/northampton.ac.uk" },
-  { name: "University of Roehampton", logo: "https://logo.clearbit.com/roehampton.ac.uk" },
+  { name: "University of West London", logo: "/logos/uwl.png" },
+  { name: "Wrexham University", logo: "/logos/wrexham.png" },
+  { name: "University of Hertfordshire", logo: "/logos/hertfordshire.png" },
+  { name: "University of Bedfordshire", logo: "/logos/bedfordshire.png" },
+  { name: "De Montfort University", logo: "/logos/dmu.png" },
+  { name: "Birmingham City University", logo: "/logos/bcu.png" },
+  { name: "Anglia Ruskin University", logo: "/logos/aru.png" },
+  { name: "University of Westminster", logo: "/logos/westminster.png" },
+  { name: "London South Bank University", logo: "/logos/lsbu.png" },
+  { name: "University of Central Lancashire", logo: "/logos/uclan.png" },
+  { name: "University of Northampton", logo: "/logos/northampton.png" },
+  { name: "University of Roehampton", logo: "/logos/roehampton.png" },
 ];
 
 const regions = [
@@ -45,11 +45,11 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
 
   return (
     <div
-      className="flex items-center justify-center rounded-xl bg-white shrink-0 logo-card-hover"
+      className="flex items-center justify-center rounded-lg bg-white shrink-0 logo-card-hover"
       style={{
         border: "1px solid #E5E7EB",
-        padding: "16px 24px",
-        minWidth: "180px",
+        padding: "12px 20px",
+        minWidth: "160px",
       }}
     >
       {failed ? (
@@ -61,7 +61,7 @@ function LogoCard({ name, logo }: { name: string; logo: string }) {
           src={logo}
           alt={name}
           onError={() => setFailed(true)}
-          className="h-[60px] w-auto object-contain"
+          className="h-[50px] w-auto object-contain"
           style={{
             filter: "grayscale(100%)",
             opacity: 0.6,
