@@ -83,7 +83,7 @@ const Events = () => {
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className={`bg-card rounded-xl border border-border shadow-sm flex flex-col sm:flex-row items-stretch overflow-hidden ${isPast ? "opacity-50" : "hover:shadow-md transition-shadow"}`}
+        className={`bg-card rounded-xl border border-border shadow-sm flex flex-col sm:flex-row items-stretch overflow-visible glow-card ${isPast ? "opacity-50" : "hover:shadow-md transition-shadow"}`}
       >
         {/* Date badge */}
         <div className={`flex flex-col items-center justify-center px-5 py-4 sm:px-6 shrink-0 border-r border-border ${isPast ? "bg-muted" : ""}`}

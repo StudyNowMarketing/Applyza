@@ -218,7 +218,7 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="bg-card rounded-xl border border-border p-4 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                className="bg-card rounded-xl border border-border p-4 hover:shadow-md transition-all duration-300 overflow-visible glow-card"
               >
                 <div className="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center mb-3">
                   <v.icon className="text-secondary" size={16} />
@@ -275,7 +275,7 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
-                className={`relative rounded-xl p-5 border backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 ${
+                className={`relative rounded-xl p-5 border backdrop-blur-sm transition-all duration-300 overflow-visible glow-card ${
                   o.hq
                     ? "bg-white/10 border-secondary/30 md:col-span-1"
                     : "bg-white/5 border-white/10"

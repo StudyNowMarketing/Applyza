@@ -65,7 +65,7 @@ const BlogPreview = () => {
             transition={{ duration: 0.5 }}
           >
             <Link to="/blog" className="group block">
-              <div className="relative rounded-xl overflow-hidden bg-card shadow-sm hover:shadow-lg transition-all duration-300"
+              <div className="relative rounded-xl overflow-visible bg-card shadow-sm hover:shadow-lg transition-all duration-300 glow-card"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}>
                 <div className="h-48 md:h-56 relative overflow-hidden"
                   style={{ background: "linear-gradient(135deg, rgba(46,196,182,0.15), rgba(107,63,160,0.15), hsl(230 33% 94%))" }}>
@@ -108,7 +108,7 @@ const BlogPreview = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
               >
-                <Link to="/blog" className="group flex gap-3 bg-card rounded-xl p-3 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+                <Link to="/blog" className="group flex gap-3 bg-card rounded-xl p-3 hover:shadow-md transition-all duration-300 overflow-visible glow-card"
                   style={{ border: "1px solid hsl(230 25% 93%)" }}>
                   <div className="shrink-0 w-24 h-20 rounded-lg overflow-hidden flex items-center justify-center"
                     style={{ background: "linear-gradient(135deg, rgba(107,63,160,0.1), rgba(46,196,182,0.1))" }}>

@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Users, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CardGlow } from "@/components/ui/CardGlow";
 
 const events = [
   {
@@ -76,10 +75,9 @@ const UpcomingEvents = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px]"
+            className="relative rounded-2xl p-5 md:p-6 flex flex-col justify-between min-h-[300px] overflow-visible glow-card"
             style={{ background: "linear-gradient(135deg, #1B2150, #0a0d24)" }}
           >
-            <CardGlow spread={40} proximity={64} borderWidth={2} />
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-4">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full"
@@ -125,10 +123,9 @@ const UpcomingEvents = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.1 }}
-                className="relative bg-card rounded-xl p-4 flex items-start gap-3 hover-lift transition-all duration-300"
+                className="relative bg-card rounded-xl p-4 flex items-start gap-3 overflow-visible glow-card transition-all duration-300"
                 style={{ border: "1px solid hsl(230 25% 93%)" }}
               >
-                <CardGlow spread={30} proximity={48} borderWidth={2} />
                 <div className="shrink-0 w-14 h-14 rounded-lg flex flex-col items-center justify-center"
                   style={{ background: "hsl(230 33% 97%)" }}>
                   <span className="text-[9px] font-semibold uppercase tracking-wider text-muted-foreground">{event.month}</span>

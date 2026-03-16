@@ -67,7 +67,7 @@ const StudyDestinations = () => (
             >
               <Link
                 to={`/study-destinations/${d.slug}`}
-                className="block rounded-xl overflow-hidden border border-border hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                className="block rounded-xl overflow-visible border border-border hover:shadow-lg transition-all duration-200 glow-card"
               >
                 {/* Top: country photo */}
                 <div className="relative h-[160px] overflow-hidden">
