@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Trophy, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import { CardGlow } from "@/components/ui/CardGlow";
 
 const reasons = [
   {
