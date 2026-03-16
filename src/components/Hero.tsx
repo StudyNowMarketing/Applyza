@@ -146,16 +146,10 @@ const Hero = () => {
                     style={{ backgroundColor: "rgba(255,255,255,0.05)" }}
                   />
                 </div>
-                <button
-                  onClick={handleSearch}
-                  className="flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-semibold text-white shrink-0 transition-colors"
-                  style={{ backgroundColor: "#2EC4B6" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#25a89c")}
-                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#2EC4B6")}
-                >
+                <MovingBorderButton onClick={handleSearch} borderRadius="0.5rem" className="px-4 py-2.5 text-sm shrink-0 gap-1.5">
                   Search
                   <ArrowRight size={14} />
-                </button>
+                </MovingBorderButton>
               </div>
 
               {/* Country pills */}

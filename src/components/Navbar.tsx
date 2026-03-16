@@ -264,13 +264,9 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
               Client Login
             </button>
 
-            <Link
-              to="/book-a-consultation"
-              onClick={() => setMobileOpen(false)}
-              className="rounded-full mt-4 w-full text-center px-6 py-3 text-sm font-semibold text-white bg-secondary hover:bg-secondary/90 transition-colors"
-            >
+            <MovingBorderButton to="/book-a-consultation" containerClassName="mt-4 w-full" className="w-full px-6 py-3 text-sm text-center" onClick={() => setMobileOpen(false)}>
               Book a Free Consultation
-            </Link>
+            </MovingBorderButton>
           </div>
         </div>
       )}

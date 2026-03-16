@@ -269,9 +269,9 @@ const BookConsultation = () => {
                   label="I agree to the Privacy Policy and consent to Applyza processing my personal data to arrange my consultation."
                 />
 
-                <Button type="submit" size="lg" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground" disabled={loading || !consent || isBlocked}>
+                <MovingBorderButton type="submit" containerClassName="w-full" className="w-full px-8 py-3 text-sm" disabled={loading || !consent || isBlocked}>
                   {loading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Booking Request"}
-                </Button>
+                </MovingBorderButton>
               </form>
             </div>
           )}

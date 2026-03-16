@@ -213,9 +213,9 @@ const ServicesOverview = () => {
                   <Link to={s.to} className="px-5 py-2.5 rounded-full text-sm font-semibold border-2 transition-colors" style={{ borderColor: "#1B2150", color: "#1B2150" }}>
                     Learn More →
                   </Link>
-                  <Link to="/book-a-consultation" className="px-5 py-2.5 rounded-full text-sm font-semibold text-white transition-colors" style={{ backgroundColor: "#2EC4B6" }}>
+                  <MovingBorderButton to="/book-a-consultation" className="px-5 py-2.5 text-sm">
                     Get Started
-                  </Link>
+                  </MovingBorderButton>
                 </div>
               </div>
               <div className="flex items-center justify-center py-4">

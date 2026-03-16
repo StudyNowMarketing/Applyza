@@ -167,9 +167,9 @@ const Contact = () => {
                   label="I agree to the Privacy Policy and consent to Applyza processing my personal data to respond to my enquiry."
                 />
                 {errors.consent && <p className="text-sm text-destructive mt-1">{errors.consent}</p>}
-                <Button type="submit" size="lg" className="rounded-full px-8 py-3 bg-secondary hover:bg-secondary/90 text-secondary-foreground w-full sm:w-auto" disabled={submitting || isBlocked}>
+                <MovingBorderButton type="submit" className="px-8 py-3 text-sm w-full sm:w-auto" disabled={submitting || isBlocked}>
                   {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> : "Send Message"}
-                </Button>
+                </MovingBorderButton>
               </form>
             )}
           </div>

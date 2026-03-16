@@ -319,9 +319,9 @@ const CourseDetail = () => {
                   )}
 
                   <div className="space-y-2 pt-2">
-                    <Button size="sm" className="w-full rounded-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold" asChild>
-                      <Link to="/book-a-consultation">Apply with Applyza</Link>
-                    </Button>
+                    <MovingBorderButton to="/book-a-consultation" containerClassName="w-full" className="w-full px-4 py-2 text-sm">
+                      Apply with Applyza
+                    </MovingBorderButton>
                     <Button variant="outline" size="sm" className="w-full rounded-full" asChild>
                       <Link to="/book-a-consultation">Book a Consultation</Link>
                     </Button>
