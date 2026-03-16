@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 
 const EligibilityQuizCTA = () => (
   <section className="relative overflow-hidden" style={{ background: "linear-gradient(135deg, #0a0d24 0%, #1B2150 50%, #0a0d24 100%)" }}>
