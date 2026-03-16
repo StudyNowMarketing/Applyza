@@ -652,9 +652,9 @@ const FindACourse = () => {
               placeholder="Search courses, universities, or subjects..."
               className="flex-1 px-3 py-3 text-sm text-white bg-transparent outline-none placeholder:text-white/40 min-w-0"
             />
-            <Button className="rounded-lg m-1.5 px-5 shrink-0" style={{ background: "#2EC4B6", color: "#0a0d24" }}>
+            <MovingBorderButton type="button" borderRadius="8px" className="m-1.5 px-5 py-2 text-sm shrink-0" onClick={() => {}}>
               Search
-            </Button>
+            </MovingBorderButton>
           </motion.div>
         </div>
       </section>
