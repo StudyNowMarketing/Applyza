@@ -6,16 +6,18 @@ import WordByWord from "@/components/WordByWord";
 
 const steps = [
   { emoji: "🌟", text: "You dream of studying abroad", accent: true },
-  { emoji: "🔍", text: "You start researching but get overwhelmed by options" },
-  { emoji: "😰", text: "Visa rules, tuition fees, deadlines — it feels like a maze" },
-  { emoji: "😟", text: "You don't know who to trust or where to start" },
-  { emoji: "⏳", text: "Time passes and your dream feels further away" },
+  { emoji: "🔍", text: "Researching but overwhelmed by options" },
+  { emoji: "😰", text: "Visa rules, fees, deadlines — a maze" },
+  { emoji: "😟", text: "Don't know who to trust" },
+  { emoji: "⏳", text: "Time passes, dream feels further away" },
   { emoji: "🔄", text: "Rinse and repeat..." },
 ];
 
 const EmpathyLoop = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const [showPunchline, setShowPunchline] = useState(false);
+  const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -26,150 +28,157 @@ const EmpathyLoop = () => {
           steps.forEach((_, i) => {
             setTimeout(() => {
               setVisibleSteps((prev) => [...prev, i]);
-            }, i * 300);
+            }, i * 330);
           });
+          // Punchline after all cards + pause
+          setTimeout(() => setShowPunchline(true), steps.length * 330 + 600);
+          setTimeout(() => setShowButton(true), steps.length * 330 + 1000);
           observer.disconnect();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  // Calculate positions in a circle
-  const getPosition = (index: number, total: number) => {
-    const angle = (index / total) * 2 * Math.PI - Math.PI / 2;
-    const radiusX = 42; // % from center
-    const radiusY = 38;
-    return {
-      left: `${50 + radiusX * Math.cos(angle)}%`,
-      top: `${50 + radiusY * Math.sin(angle)}%`,
-    };
-  };
-
   return (
-    <section className="bg-white py-16 md:py-20" ref={sectionRef}>
+    <section className="bg-white py-10 md:py-14" ref={sectionRef}>
       <div className="container">
-        <h2 className="text-2xl md:text-[44px] font-extrabold text-center leading-tight mb-12" style={{ color: "#1B2150" }}>
+        <h2
+          className="text-2xl md:text-4xl font-extrabold text-center leading-tight mb-8"
+          style={{ color: "hsl(var(--foreground))" }}
+        >
           <WordByWord text="Do You Feel Stuck in a Loop?" underlineWord="Stuck" />
         </h2>
 
-        {/* Circular loop — desktop */}
-        <div className="hidden md:block relative mx-auto" style={{ maxWidth: "700px", height: "500px" }}>
-          {/* Dotted circle path */}
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 700 500">
-            <ellipse cx="350" cy="250" rx="290" ry="190" fill="none" stroke="#e5e7eb" strokeWidth="2" strokeDasharray="8 8" />
-            {/* Arrows along the path */}
-            {steps.map((_, i) => {
-              const angle = (i / steps.length) * 2 * Math.PI - Math.PI / 2;
-              const nextAngle = ((i + 1) / steps.length) * 2 * Math.PI - Math.PI / 2;
-              const midAngle = (angle + nextAngle) / 2;
-              const ax = 350 + 290 * Math.cos(midAngle);
-              const ay = 250 + 190 * Math.sin(midAngle);
-              const rot = (midAngle * 180) / Math.PI + 90;
+        {/* Desktop: horizontal timeline */}
+        <div className="hidden md:block">
+          <div className="relative flex items-center justify-center gap-0 max-w-5xl mx-auto">
+            {steps.map((step, i) => {
+              const isVisible = visibleSteps.includes(i);
+              const isLast = i === steps.length - 1;
               return (
-                <text
-                  key={i}
-                  x={ax}
-                  y={ay}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fill="#d1d5db"
-                  fontSize="16"
-                  transform={`rotate(${rot}, ${ax}, ${ay})`}
-                >
-                  ›
-                </text>
-              );
-            })}
-          </svg>
-
-          {steps.map((step, i) => {
-            const pos = getPosition(i, steps.length);
-            const isVisible = visibleSteps.includes(i);
-            return (
-              <div
-                key={i}
-                className="absolute -translate-x-1/2 -translate-y-1/2 transition-all duration-500"
-                style={{
-                  left: pos.left,
-                  top: pos.top,
-                  opacity: isVisible ? 1 : 0,
-                  transform: `translate(-50%, -50%) scale(${isVisible ? 1 : 0.8})`,
-                }}
-              >
-                <div
-                  className="flex flex-col items-center text-center px-3 py-4 rounded-xl bg-white shadow-md border border-gray-100"
-                  style={{
-                    width: "160px",
-                    borderLeft: step.accent ? "3px solid #2EC4B6" : undefined,
-                  }}
-                >
-                  <span className="text-2xl mb-1">{step.emoji}</span>
-                  <span className="text-[11px] font-bold mb-1" style={{ color: "#9ca3af" }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-xs font-medium leading-snug" style={{ color: "#1B2150" }}>
-                    {step.text}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Mobile: vertical list */}
-        <div className="md:hidden space-y-3 max-w-sm mx-auto">
-          {steps.map((step, i) => {
-            const isVisible = visibleSteps.includes(i);
-            return (
-              <div key={i} className="relative">
-                <div
-                  className="flex items-center gap-3 p-3 rounded-xl bg-white shadow-sm border border-gray-100 transition-all duration-500"
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: `translateY(${isVisible ? 0 : 20}px)`,
-                    borderLeft: step.accent ? "3px solid #2EC4B6" : undefined,
-                  }}
-                >
-                  <span className="text-xl">{step.emoji}</span>
-                  <div>
-                    <span className="text-[10px] font-bold" style={{ color: "#9ca3af" }}>
+                <div key={i} className="flex items-center">
+                  {/* Card */}
+                  <div
+                    className="flex flex-col items-center text-center px-3 py-4 rounded-xl bg-white shadow-md border border-gray-100 relative shrink-0 transition-all duration-500"
+                    style={{
+                      width: "155px",
+                      minHeight: "140px",
+                      opacity: isVisible ? 1 : 0,
+                      transform: `scale(${isVisible ? 1 : 0.8})`,
+                      borderLeft: step.accent ? "3px solid hsl(172, 67%, 45%)" : undefined,
+                    }}
+                  >
+                    <span className="text-2xl mb-1">{step.emoji}</span>
+                    <span className="text-[10px] font-bold mb-1 text-muted-foreground">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-sm font-medium leading-snug" style={{ color: "#1B2150" }}>
+                    <p className="text-xs font-medium leading-snug text-foreground">
                       {step.text}
                     </p>
                   </div>
+                  {/* Dashed connector line */}
+                  {!isLast && (
+                    <svg width="32" height="2" className="shrink-0 mx-1">
+                      <line
+                        x1="0" y1="1" x2="32" y2="1"
+                        stroke="hsl(172, 67%, 45%)"
+                        strokeWidth="2"
+                        strokeDasharray="6 4"
+                        strokeDashoffset={isVisible && visibleSteps.includes(i + 1) ? 0 : 32}
+                        style={{ transition: "stroke-dashoffset 0.4s ease" }}
+                      />
+                    </svg>
+                  )}
                 </div>
-                {i < steps.length - 1 && (
-                  <div className="flex justify-center py-1">
-                    <div className="w-px h-4 bg-gray-200" />
-                  </div>
-                )}
-              </div>
-            );
-          })}
-          {/* Loop back arrow */}
-          <div className="flex justify-center">
-            <span className="text-gray-300 text-lg">↻</span>
+              );
+            })}
+            {/* Loop-back arrow */}
+            <svg
+              width="60" height="50"
+              className="absolute -bottom-8 right-[5%] transition-opacity duration-500"
+              style={{ opacity: visibleSteps.length === 6 ? 0.5 : 0 }}
+              viewBox="0 0 60 50"
+            >
+              <path
+                d="M55 10 C55 40, 5 40, 5 10"
+                fill="none"
+                stroke="hsl(172, 67%, 45%)"
+                strokeWidth="2"
+                strokeDasharray="6 4"
+                markerEnd="url(#arrowLoop)"
+              />
+              <defs>
+                <marker id="arrowLoop" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <path d="M0,0 L8,3 L0,6" fill="hsl(172, 67%, 45%)" />
+                </marker>
+              </defs>
+            </svg>
           </div>
         </div>
 
-        {/* Bottom text */}
-        <div className="text-center mt-10 max-w-xl mx-auto">
-          <p className="text-sm md:text-base" style={{ color: "#6b7280" }}>
+        {/* Mobile: horizontal scroll */}
+        <div className="md:hidden overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+          <div className="flex items-center gap-3 w-max">
+            {steps.map((step, i) => {
+              const isVisible = visibleSteps.includes(i);
+              return (
+                <div key={i} className="flex items-center snap-center">
+                  <div
+                    className="flex flex-col items-center text-center px-3 py-3 rounded-xl bg-white shadow-sm border border-gray-100 shrink-0 transition-all duration-500"
+                    style={{
+                      width: "160px",
+                      minHeight: "130px",
+                      opacity: isVisible ? 1 : 0,
+                      transform: `translateY(${isVisible ? 0 : 20}px)`,
+                      borderLeft: step.accent ? "3px solid hsl(172, 67%, 45%)" : undefined,
+                    }}
+                  >
+                    <span className="text-xl mb-1">{step.emoji}</span>
+                    <span className="text-[10px] font-bold mb-1 text-muted-foreground">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-xs font-medium leading-snug text-foreground">
+                      {step.text}
+                    </p>
+                  </div>
+                  {i < steps.length - 1 && (
+                    <span className="text-muted-foreground mx-1 text-xs">- - -</span>
+                  )}
+                </div>
+              );
+            })}
+            <span className="text-muted-foreground text-lg pl-1">↻</span>
+          </div>
+        </div>
+
+        {/* Punchline */}
+        <div
+          className="text-center mt-8 max-w-xl mx-auto transition-all duration-700"
+          style={{
+            opacity: showPunchline ? 1 : 0,
+            transform: `translateY(${showPunchline ? 0 : 16}px)`,
+          }}
+        >
+          <p className="text-sm md:text-base text-muted-foreground">
             Sound familiar? You're not alone. Thousands of students feel exactly the same way.
           </p>
-          <p className="text-base md:text-lg font-bold mt-3" style={{ color: "#1B2150" }}>
+          <p className="text-base md:text-lg font-bold mt-2 text-foreground">
             That's exactly why we built Applyza.
           </p>
-          <div className="mt-6">
+          <div
+            className="mt-5 transition-all duration-500"
+            style={{
+              opacity: showButton ? 1 : 0,
+              transform: `translateY(${showButton ? 0 : 10}px)`,
+            }}
+          >
             <Button
               size="lg"
-              className="rounded-full font-bold px-8 text-sm text-white"
-              style={{ backgroundColor: "#2EC4B6" }}
+              className="rounded-full font-bold px-8 text-sm text-white animate-[pulse_1.5s_ease-in-out_1]"
+              style={{ backgroundColor: "hsl(172, 67%, 45%)" }}
               asChild
             >
               <Link to="/book-a-consultation">
