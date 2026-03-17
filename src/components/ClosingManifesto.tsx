@@ -83,7 +83,7 @@ const ClosingManifesto = () => {
           {/* Big quote */}
           <div style={itemStyle(4)}>
             <blockquote className="text-xl md:text-[28px] font-bold text-white leading-snug mb-8">
-              "Your story was always meant to be shared with the world. Let us help you write the next chapter."
+              "<WordByWord text="Your story was always meant to be shared with the world. Let us help you write the next chapter." />"
             </blockquote>
           </div>
 
