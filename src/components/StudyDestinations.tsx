@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import HandUnderline from "@/components/HandUnderline";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import VideoBackground from "@/components/VideoBackground";
@@ -36,11 +37,10 @@ const StudyDestinations = () => {
             Popular Destinations
           </span>
           <h2 className="text-xl md:text-3xl font-extrabold text-white mb-2">
-            Where Will You{" "}
-            <span style={{ color: "#2EC4B6" }}>Study?</span>
+            Where Will Your <HandUnderline>Story</HandUnderline> Take You?
           </h2>
           <p className="text-white/50 max-w-lg mx-auto text-sm">
-            Explore top study destinations and find the perfect place for your academic journey.
+            Explore destinations that match your ambitions.
           </p>
         </motion.div>
 

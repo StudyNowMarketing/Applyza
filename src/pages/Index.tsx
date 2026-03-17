@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import EmpathyLoop from "@/components/EmpathyLoop";
 import EligibilityQuizCTA from "@/components/EligibilityQuizCTA";
 import TrustStats from "@/components/TrustStats";
 import HowItWorks from "@/components/HowItWorks";
@@ -12,6 +13,7 @@ import WhyChooseApplyza from "@/components/WhyChooseApplyza";
 import UpcomingEvents from "@/components/UpcomingEvents";
 import Testimonials from "@/components/Testimonials";
 
+import ClosingManifesto from "@/components/ClosingManifesto";
 import FinalCTA from "@/components/FinalCTA";
 import WhatsAppCommunity from "@/components/WhatsAppCommunity";
 import Footer from "@/components/Footer";
@@ -55,6 +57,7 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
+      <EmpathyLoop />
       <EligibilityQuizCTA />
       <TrustStats />
       <HowItWorks />
@@ -66,6 +69,7 @@ const Index = () => {
       <UpcomingEvents />
       <Testimonials />
       
+      <ClosingManifesto />
       <WhatsAppCommunity />
       <FinalCTA />
       <Footer />

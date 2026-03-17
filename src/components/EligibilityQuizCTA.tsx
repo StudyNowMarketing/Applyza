@@ -27,10 +27,10 @@ const EligibilityQuizCTA = () => (
           <Sparkles size={12} /> Quick Eligibility Check
         </div>
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-          Not Sure What to Study?
+          Not Sure Where to Start?
         </h2>
         <p className="text-sm md:text-base mb-7" style={{ color: "rgba(255,255,255,0.7)" }}>
-          Answer 5 quick questions and we'll match you with courses you're eligible for
+          Answer 5 quick questions and we'll point you in the right direction
         </p>
         <MovingBorderButton to="/eligibility-check" className="px-7 py-3.5 text-sm gap-2">
           Check Your Eligibility

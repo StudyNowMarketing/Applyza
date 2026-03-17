@@ -3,6 +3,7 @@ import { Search, MessageCircle, FileCheck, Plane } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MovingBorderButton } from "@/components/ui/MovingBorder";
+import HandUnderline from "@/components/HandUnderline";
 
 const steps = [
   {
@@ -174,16 +175,10 @@ const HowItWorks = () => {
         {/* Header */}
         <div className="text-center mb-10">
           <h2 className="text-xl md:text-3xl font-extrabold text-foreground">
-            Your Journey in{" "}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: "linear-gradient(135deg, #2EC4B6, #6B3FA0)" }}
-            >
-              Four Steps
-            </span>
+            <HandUnderline>Overwhelmed</HandUnderline> by the Process?
           </h2>
           <p className="text-muted-foreground mt-2 max-w-lg mx-auto text-sm">
-            From your first search to your first day on campus — we guide you through every step.
+            We handle everything so you don't have to.
           </p>
         </div>
 

@@ -1,4 +1,5 @@
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Heart } from "lucide-react";
+import HandUnderline from "@/components/HandUnderline";
 
 const reasons = [
   { icon: CircleDollarSign, title: "100% Free Service", text: "We assess every student's background, goals, and intent before recommending programmes. Our goal is your long-term success.", iconBg: "rgba(46,196,182,0.15)", iconColor: "#2EC4B6" },
@@ -21,17 +22,10 @@ const WhyChooseApplyza = () => (
           Why Students Trust Us
         </span>
         <h2 className="text-xl md:text-3xl font-extrabold text-foreground mb-2">
-          Why Choose{" "}
-          <span className="relative inline-block">
-            Applyza?
-            <span
-              className="absolute -bottom-1 left-0 h-1 rounded-full"
-              style={{ backgroundColor: "#2EC4B6", animation: "drawLine 1s ease-out forwards", width: "0%" }}
-            />
-          </span>
+          Why Thousands of Students <HandUnderline>Trust</HandUnderline> Us
         </h2>
         <p className="text-muted-foreground mt-2 max-w-lg mx-auto text-sm">
-          Trusted by thousands of students worldwide for honest, expert guidance.
+          Real guidance. Real results. Really free.
         </p>
       </div>
 
