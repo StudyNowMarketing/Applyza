@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import HandUnderline from "@/components/HandUnderline";
+import WordByWord from "@/components/WordByWord";
 
 const steps = [
   { emoji: "🌟", text: "You dream of studying abroad", accent: true },
