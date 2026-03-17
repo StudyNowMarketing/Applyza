@@ -150,8 +150,8 @@ const OrbitDesktop = () => {
       <div
         className="absolute flex flex-col items-center justify-center text-center px-4 pointer-events-none"
         style={{
-          width: RADIUS * 1.4,
-          height: RADIUS * 1.4,
+          width: RADIUS * 1.6,
+          height: RADIUS * 1.6,
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%)",

@@ -497,19 +497,19 @@ select:focus {
 }
 
 .empathy-orbit--paused {
-  animation: spinOrbit 30s linear infinite;
+  animation: spinOrbit 45s linear infinite;
   animation-play-state: paused;
 }
 
 .empathy-counter-spin {
-  animation: counterSpin 30s linear infinite;
+  animation: counterSpin 45s linear infinite;
 }
 
 .empathy-orbit--slow .empathy-counter-spin {
-  animation: counterSpin 90s linear infinite;
+  animation: counterSpin 120s linear infinite;
 }
 
 .empathy-orbit--paused .empathy-counter-spin {
-  animation: counterSpin 30s linear infinite;
+  animation: counterSpin 45s linear infinite;
   animation-play-state: paused;
 }
