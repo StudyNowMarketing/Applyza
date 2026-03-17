@@ -1,4 +1,5 @@
 import { Bot, CircleDollarSign, ShieldCheck, Clock, Globe, Heart } from "lucide-react";
+import HandUnderline from "@/components/HandUnderline";
 
 const reasons = [
   { icon: CircleDollarSign, title: "100% Free Service", text: "We assess every student's background, goals, and intent before recommending programmes. Our goal is your long-term success.", iconBg: "rgba(46,196,182,0.15)", iconColor: "#2EC4B6" },
