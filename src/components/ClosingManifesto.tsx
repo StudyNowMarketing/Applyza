@@ -3,6 +3,7 @@ import { SparklesCore } from "@/components/ui/SparklesCore";
 import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import WordByWord from "@/components/WordByWord";
 
 const ClosingManifesto = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -82,17 +83,20 @@ const ClosingManifesto = () => {
           {/* Big quote */}
           <div style={itemStyle(4)}>
             <blockquote className="text-xl md:text-[28px] font-bold text-white leading-snug mb-8">
-              "Your story was always meant to be shared with the world. Let us help you write the next chapter."
+              "<WordByWord text="Your story was always meant to be shared with the world. Let us help you write the next chapter." />"
             </blockquote>
           </div>
 
           {/* Image */}
-          <div style={itemStyle(4)} className="mb-10">
+          <div style={itemStyle(4)} className="mb-10 overflow-hidden rounded-2xl">
             <img
               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80"
               alt="Diverse graduating students celebrating"
-              className="w-full rounded-2xl"
-              style={{ boxShadow: "0 0 60px rgba(46,196,182,0.15)" }}
+              className="w-full rounded-2xl transition-transform duration-700"
+              style={{
+                boxShadow: "0 0 60px rgba(46,196,182,0.15)",
+                transform: visibleItems.includes(4) ? "scale(1)" : "scale(0.9)",
+              }}
               loading="lazy"
             />
           </div>

@@ -7,7 +7,7 @@ const stats = [
   { value: 6, suffix: "", label: "Global Offices", sublabel: "Worldwide presence" },
 ];
 
-function useCountUp(target: number, duration = 1500) {
+function useCountUp(target: number, duration = 2000) {
   const [count, setCount] = useState(0);
   const startedRef = useRef(false);
   const doneRef = useRef(false);

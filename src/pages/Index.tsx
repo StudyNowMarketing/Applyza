@@ -18,6 +18,8 @@ import FinalCTA from "@/components/FinalCTA";
 import WhatsAppCommunity from "@/components/WhatsAppCommunity";
 import Footer from "@/components/Footer";
 import SocialProofNotifications from "@/components/SocialProofNotifications";
+import FloatingCTA from "@/components/FloatingCTA";
+import SectionReveal from "@/components/SectionReveal";
 
 const homepageJsonLd = [
   {
@@ -57,23 +59,24 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
-      <EmpathyLoop />
-      <EligibilityQuizCTA />
+      <SectionReveal><EmpathyLoop /></SectionReveal>
+      <SectionReveal><EligibilityQuizCTA /></SectionReveal>
       <TrustStats />
-      <HowItWorks />
+      <SectionReveal><HowItWorks /></SectionReveal>
       
-      <StudyDestinations />
-      <PartnerUniversities />
-      <WhyChooseApplyza />
+      <SectionReveal><StudyDestinations /></SectionReveal>
+      <SectionReveal><PartnerUniversities /></SectionReveal>
+      <SectionReveal><WhyChooseApplyza /></SectionReveal>
       
-      <UpcomingEvents />
-      <Testimonials />
+      <SectionReveal><UpcomingEvents /></SectionReveal>
+      <SectionReveal><Testimonials /></SectionReveal>
       
-      <ClosingManifesto />
-      <WhatsAppCommunity />
-      <FinalCTA />
+      <SectionReveal><ClosingManifesto /></SectionReveal>
+      <SectionReveal><WhatsAppCommunity /></SectionReveal>
+      <SectionReveal><FinalCTA /></SectionReveal>
       <Footer />
       <SocialProofNotifications />
+      <FloatingCTA />
     </div>
   );
 };
