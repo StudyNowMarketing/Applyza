@@ -70,7 +70,7 @@ const OrbitDesktop = () => {
     if (isManualRef.current) return;
     // The CSS animation rotates 360deg in 30s (or 90s when slow)
     // Each step occupies 60deg, so spotlight changes every 5s (or 15s)
-    const interval = slow ? 15000 : 5000;
+    const interval = slow ? 20000 : 7500;
     const timer = setInterval(() => {
       if (!isManualRef.current) {
         setActiveIdx((prev) => (prev + 1) % 6);
@@ -150,8 +150,8 @@ const OrbitDesktop = () => {
       <div
         className="absolute flex flex-col items-center justify-center text-center px-4 pointer-events-none"
         style={{
-          width: RADIUS * 1.4,
-          height: RADIUS * 1.4,
+          width: RADIUS * 1.6,
+          height: RADIUS * 1.6,
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%)",
