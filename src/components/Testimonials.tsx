@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
-import HandUnderline from "@/components/HandUnderline";
+import WordByWord from "@/components/WordByWord";
 
 const stories = [
   {
