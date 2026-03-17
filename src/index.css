@@ -498,7 +498,7 @@ select:focus {
   animation: circleOrbit 30s linear infinite;
 }
 
-/* Slow mode on hover */
-.empathy-orbit--slow .empathy-orbit-img {
-  animation-duration: 120s;
+/* Pause orbit when hovering the container */
+.empathy-orbit-container:hover .empathy-orbit-img {
+  animation-play-state: paused;
 }
