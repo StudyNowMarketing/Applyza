@@ -66,12 +66,10 @@ const Testimonials = () => {
             Student Stories
           </span>
           <h2 className="text-xl md:text-3xl font-extrabold text-white mb-2">
-            What Our{" "}
-            <span style={{ color: "#2EC4B6" }}>Students</span>{" "}
-            Say
+            Their Dream Became <HandUnderline>Reality</HandUnderline>
           </h2>
           <p className="text-sm max-w-xl mx-auto" style={{ color: "rgba(255,255,255,0.6)" }}>
-            Hear from students who trusted us to guide their journey.
+            Real students. Real journeys. Real transformations.
           </p>
         </div>
 

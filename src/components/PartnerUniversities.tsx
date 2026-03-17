@@ -90,10 +90,10 @@ const PartnerUniversities = () => {
               150+
             </div>
             <h2 className="text-xl md:text-2xl font-extrabold text-foreground mt-1">
-              Partner Universities
+              You're in Good Company
             </h2>
             <p className="text-muted-foreground text-sm mt-2 max-w-md">
-              Accredited universities across the UK, Europe, North America, and beyond.
+              Our university network spans the globe.
             </p>
           </div>
 

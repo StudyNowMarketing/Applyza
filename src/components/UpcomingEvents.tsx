@@ -56,7 +56,7 @@ const UpcomingEvents = () => {
               <Calendar size={12} /> Mark Your Calendar
             </span>
             <h2 className="text-xl md:text-3xl font-extrabold text-primary mb-2">
-              Upcoming Events
+              Come Meet Us in Person
             </h2>
             <p className="text-muted-foreground max-w-xl text-sm">
               Join us at events across the globe. Meet university representatives and get your questions answered.

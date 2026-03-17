@@ -22,17 +22,10 @@ const WhyChooseApplyza = () => (
           Why Students Trust Us
         </span>
         <h2 className="text-xl md:text-3xl font-extrabold text-foreground mb-2">
-          Why Choose{" "}
-          <span className="relative inline-block">
-            Applyza?
-            <span
-              className="absolute -bottom-1 left-0 h-1 rounded-full"
-              style={{ backgroundColor: "#2EC4B6", animation: "drawLine 1s ease-out forwards", width: "0%" }}
-            />
-          </span>
+          Why Thousands of Students <HandUnderline>Trust</HandUnderline> Us
         </h2>
         <p className="text-muted-foreground mt-2 max-w-lg mx-auto text-sm">
-          Trusted by thousands of students worldwide for honest, expert guidance.
+          Real guidance. Real results. Really free.
         </p>
       </div>
 

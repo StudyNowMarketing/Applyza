@@ -3,6 +3,7 @@ import { Search, MessageCircle, FileCheck, Plane } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { MovingBorderButton } from "@/components/ui/MovingBorder";
+import HandUnderline from "@/components/HandUnderline";
 
 const steps = [
   {
