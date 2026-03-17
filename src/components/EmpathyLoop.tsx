@@ -103,10 +103,9 @@ const OrbitDesktop = () => {
   };
 
   const current = steps[displayedIdx];
-  const containerClass = hovered ? "empathy-orbit-container empathy-orbit--slow" : "empathy-orbit-container";
 
   return (
-    <div className={containerClass}>
+    <div className="empathy-orbit-container">
       {/* Dashed circle path */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 440 440">
         <circle cx="220" cy="220" r="180" fill="none" stroke="#1B2150" strokeWidth="1.5" strokeDasharray="6 8" opacity="0.1" />
