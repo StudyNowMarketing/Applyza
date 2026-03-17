@@ -489,11 +489,11 @@ select:focus {
 }
 
 .empathy-orbit {
-  animation: spinOrbit 30s linear infinite;
+  animation: spinOrbit 45s linear infinite;
 }
 
 .empathy-orbit--slow {
-  animation: spinOrbit 90s linear infinite;
+  animation: spinOrbit 120s linear infinite;
 }
 
 .empathy-orbit--paused {
