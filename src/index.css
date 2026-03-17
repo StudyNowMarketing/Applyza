@@ -475,41 +475,30 @@ select:focus {
 }
 
 /* ════════════════════════════════════════════════
-   EMPATHY LOOP ORBIT — CSS-driven rotation
+   EMPATHY LOOP ORBIT — per-image CSS orbit
    ════════════════════════════════════════════════ */
 
-@keyframes spinOrbit {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes circleOrbit {
+  0%   { transform: translate(-50%, -50%) rotate(0deg)   translateX(180px) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(180px) rotate(-360deg); }
 }
 
-@keyframes counterSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+.empathy-orbit-container {
+  position: relative;
+  width: 440px;
+  height: 440px;
+  margin: 0 auto;
 }
 
-.empathy-orbit {
-  animation: spinOrbit 45s linear infinite;
+.empathy-orbit-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  cursor: pointer;
+  animation: circleOrbit 30s linear infinite;
 }
 
-.empathy-orbit--slow {
-  animation: spinOrbit 120s linear infinite;
-}
-
-.empathy-orbit--paused {
-  animation: spinOrbit 45s linear infinite;
-  animation-play-state: paused;
-}
-
-.empathy-counter-spin {
-  animation: counterSpin 45s linear infinite;
-}
-
-.empathy-orbit--slow .empathy-counter-spin {
-  animation: counterSpin 120s linear infinite;
-}
-
-.empathy-orbit--paused .empathy-counter-spin {
-  animation: counterSpin 45s linear infinite;
-  animation-play-state: paused;
+/* Slow mode on hover */
+.empathy-orbit--slow .empathy-orbit-img {
+  animation-duration: 120s;
 }
