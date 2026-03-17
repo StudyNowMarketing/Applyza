@@ -126,7 +126,7 @@ const Testimonials = () => {
             Student Stories
           </span>
           <h2 className="text-xl md:text-3xl font-extrabold mb-2" style={{ color: "#1B2150" }}>
-            Their Dream Became <HandUnderline>Reality</HandUnderline>
+            <WordByWord text="Their Dream Became Reality" underlineWord="Reality" />
           </h2>
           <p className="text-sm text-muted-foreground max-w-xl mx-auto">
             Real students. Real journeys. Real transformations.
