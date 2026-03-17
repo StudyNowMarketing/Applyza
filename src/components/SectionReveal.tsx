@@ -32,7 +32,7 @@ const SectionReveal = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <div ref={ref} data-section-reveal={visible ? "visible" : ""}>
+    <div ref={ref} data-no-scroll-parent data-section-reveal={visible ? "visible" : ""}>
       {children}
     </div>
   );
