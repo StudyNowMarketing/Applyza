@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import HandUnderline from "@/components/HandUnderline";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import VideoBackground from "@/components/VideoBackground";
