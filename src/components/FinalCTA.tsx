@@ -14,11 +14,6 @@ const FinalCTA = () => {
           backgroundSize: "24px 24px",
         }} />
 
-      <div className="absolute top-0 left-0 right-0">
-        <svg viewBox="0 0 1440 50" fill="none" className="w-full h-6 md:h-10" preserveAspectRatio="none">
-          <path d="M0 50V0c240 35 480 50 720 50S1200 35 1440 0v50H0z" fill="white" />
-        </svg>
-      </div>
 
       <div className="container relative z-10 pt-14 pb-12 md:pt-20 md:pb-16 text-center">
         <div className="flex flex-wrap items-center justify-center gap-4 mb-6">

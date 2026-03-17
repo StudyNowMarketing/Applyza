@@ -20,6 +20,7 @@ import Footer from "@/components/Footer";
 import SocialProofNotifications from "@/components/SocialProofNotifications";
 import FloatingCTA from "@/components/FloatingCTA";
 import SectionReveal from "@/components/SectionReveal";
+import WaveDivider from "@/components/WaveDivider";
 
 const homepageJsonLd = [
   {
@@ -59,21 +60,31 @@ const Index = () => {
       />
       <Navbar />
       <Hero />
+      <WaveDivider from="#1B2150" to="#F2F3F7" variant="A" />
       <SectionReveal><EmpathyLoop /></SectionReveal>
+      <WaveDivider from="#F2F3F7" to="#0a0d24" variant="B" />
       <SectionReveal><EligibilityQuizCTA /></SectionReveal>
+      <WaveDivider from="#0a0d24" to="#0a0d24" variant="C" />
       <TrustStats />
+      <WaveDivider from="#0a0d24" to="#f8f9fa" variant="A" />
       <SectionReveal><HowItWorks /></SectionReveal>
-      
+      <WaveDivider from="#f8f9fa" to="#0a0d24" variant="B" />
       <SectionReveal><StudyDestinations /></SectionReveal>
+      <WaveDivider from="#0a0d24" to="#ffffff" variant="C" />
       <SectionReveal><PartnerUniversities /></SectionReveal>
+      <WaveDivider from="#ffffff" to="#ffffff" variant="A" />
       <SectionReveal><WhyChooseApplyza /></SectionReveal>
-      
+      <WaveDivider from="#ffffff" to="#ffffff" variant="B" />
       <SectionReveal><UpcomingEvents /></SectionReveal>
+      <WaveDivider from="#ffffff" to="#F5F6FA" variant="C" />
       <SectionReveal><Testimonials /></SectionReveal>
-      
+      <WaveDivider from="#F5F6FA" to="#1B2150" variant="A" />
       <SectionReveal><ClosingManifesto /></SectionReveal>
+      <WaveDivider from="#1B2150" to="#f0fdf4" variant="B" />
       <SectionReveal><WhatsAppCommunity /></SectionReveal>
+      <WaveDivider from="#dcfce7" to="#2EC4B6" variant="C" />
       <SectionReveal><FinalCTA /></SectionReveal>
+      <WaveDivider from="#1B9E93" to="#0a0d24" variant="A" />
       <Footer />
       <SocialProofNotifications />
       <FloatingCTA />
