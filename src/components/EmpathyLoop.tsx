@@ -50,34 +50,26 @@ const steps = [
   },
 ];
 
-const RADIUS = 180;
-const NORMAL_SIZE = 60;
-const SPOTLIGHT_SIZE = 85;
-const BADGE_SIZE = 20;
-const CONTAINER = RADIUS * 2 + SPOTLIGHT_SIZE + 40;
+const DELAY_STEP = 30 / 6; // 5s per image
 
 const OrbitDesktop = () => {
   const [activeIdx, setActiveIdx] = useState(0);
   const [displayedIdx, setDisplayedIdx] = useState(0);
   const [fading, setFading] = useState(false);
-  const [slow, setSlow] = useState(false);
-  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const manualRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const isManualRef = useRef(false);
 
-  // Auto-rotate spotlight based on CSS animation timing
+  // Auto-cycle spotlight every 5s when not hovered
   useEffect(() => {
-    if (isManualRef.current) return;
-    // The CSS animation rotates 360deg in 30s (or 90s when slow)
-    // Each step occupies 60deg, so spotlight changes every 5s (or 15s)
-    const interval = slow ? 20000 : 7500;
-    const timer = setInterval(() => {
-      if (!isManualRef.current) {
-        setActiveIdx((prev) => (prev + 1) % 6);
-      }
-    }, interval);
-    return () => clearInterval(timer);
-  }, [slow]);
+    if (hovered) return;
+    intervalRef.current = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % 6);
+    }, 5000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [hovered]);
 
   // Fade transition for center text
   useEffect(() => {
@@ -91,83 +83,40 @@ const OrbitDesktop = () => {
     }
   }, [activeIdx, displayedIdx]);
 
-  const setManualSpotlight = (idx: number, durationMs: number) => {
-    setActiveIdx(idx);
-    isManualRef.current = true;
-    if (manualRef.current) clearTimeout(manualRef.current);
-    manualRef.current = setTimeout(() => {
-      isManualRef.current = false;
-    }, durationMs);
-  };
-
   const handleHoverEnter = (idx: number) => {
-    setSlow(true);
-    setManualSpotlight(idx, 999999); // stays until hover leaves
+    setHovered(true);
+    setActiveIdx(idx);
+    if (manualRef.current) clearTimeout(manualRef.current);
   };
 
   const handleHoverLeave = () => {
-    setSlow(false);
-    isManualRef.current = false;
-    if (manualRef.current) clearTimeout(manualRef.current);
+    setHovered(false);
   };
 
   const handleClick = (idx: number) => {
-    setManualSpotlight(idx, 5000);
+    setActiveIdx(idx);
+    setHovered(true);
+    if (manualRef.current) clearTimeout(manualRef.current);
+    manualRef.current = setTimeout(() => {
+      setHovered(false);
+    }, 5000);
   };
 
   const current = steps[displayedIdx];
-  const cx = CONTAINER / 2;
-
-  const orbitClass = paused
-    ? "empathy-orbit empathy-orbit--paused"
-    : slow
-      ? "empathy-orbit empathy-orbit--slow"
-      : "empathy-orbit";
+  const containerClass = hovered ? "empathy-orbit-container empathy-orbit--slow" : "empathy-orbit-container";
 
   return (
-    <div
-      className="relative mx-auto"
-      style={{ width: CONTAINER, height: CONTAINER }}
-    >
-      {/* Orbit track */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox={`0 0 ${CONTAINER} ${CONTAINER}`}
-      >
-        <circle
-          cx="50%"
-          cy="50%"
-          r={RADIUS}
-          fill="none"
-          stroke="hsl(var(--border))"
-          strokeWidth="1.5"
-          strokeDasharray="6 6"
-          opacity="0.3"
-        />
+    <div className={containerClass}>
+      {/* Dashed circle path */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 440 440">
+        <circle cx="220" cy="220" r="180" fill="none" stroke="#1B2150" strokeWidth="1.5" strokeDasharray="6 8" opacity="0.1" />
       </svg>
 
-      {/* Center spotlight text */}
-      <div
-        className="absolute flex flex-col items-center justify-center text-center px-4 pointer-events-none"
-        style={{
-          width: RADIUS * 1.6,
-          height: RADIUS * 1.6,
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-foreground/20 mb-2">
-          THE LOOP
-        </span>
-        <div
-          className="transition-opacity duration-300"
-          style={{ opacity: fading ? 0 : 1 }}
-        >
-          <span
-            className="text-xs font-bold inline-block px-2 py-0.5 rounded-full text-white mb-1.5"
-            style={{ backgroundColor: current.color }}
-          >
+      {/* Center text */}
+      <div className="absolute z-20 flex flex-col items-center justify-center text-center" style={{ width: 200, top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+        <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-foreground/20 mb-2">THE LOOP</span>
+        <div className="transition-opacity duration-300" style={{ opacity: fading ? 0 : 1 }}>
+          <span className="text-xs font-bold inline-block px-2 py-0.5 rounded-full text-white mb-1.5" style={{ backgroundColor: current.color }}>
             Step {current.num}
           </span>
           <h3 className="text-lg font-bold text-foreground mb-1">{current.title}</h3>
@@ -175,81 +124,52 @@ const OrbitDesktop = () => {
         </div>
       </div>
 
-      {/* Rotating wrapper — single CSS animation drives all images */}
-      <div
-        className={orbitClass}
-        style={{
-          position: "absolute",
-          width: CONTAINER,
-          height: CONTAINER,
-          top: 0,
-          left: 0,
-        }}
-      >
-        {steps.map((step, i) => {
-          const angleDeg = i * 60; // static position, rotation comes from parent
-          const rad = (angleDeg * Math.PI) / 180;
-          const x = cx + RADIUS * Math.sin(rad);
-          const y = cx - RADIUS * Math.cos(rad);
-          const isSpot = i === activeIdx;
-          const size = isSpot ? SPOTLIGHT_SIZE : NORMAL_SIZE;
-
-          return (
+      {/* Orbiting images */}
+      {steps.map((step, i) => {
+        const isActive = i === activeIdx;
+        return (
+          <div
+            key={i}
+            className="empathy-orbit-img"
+            style={{ animationDelay: `${-i * DELAY_STEP}s`, zIndex: isActive ? 10 : 5 }}
+            onMouseEnter={() => handleHoverEnter(i)}
+            onMouseLeave={handleHoverLeave}
+            onClick={() => handleClick(i)}
+          >
             <div
-              key={i}
-              className="absolute empathy-counter-spin cursor-pointer"
+              className="rounded-full overflow-hidden bg-background"
               style={{
-                left: x,
-                top: y,
-                transform: "translate(-50%, -50%)",
-                zIndex: isSpot ? 10 : 5,
+                width: isActive ? 85 : 60,
+                height: isActive ? 85 : 60,
+                border: `3px solid ${isActive ? step.color : "white"}`,
+                boxShadow: isActive
+                  ? `0 0 18px 4px ${step.color}44, 0 2px 8px rgba(0,0,0,0.12)`
+                  : "0 2px 8px rgba(0,0,0,0.1)",
+                filter: isActive ? "none" : "brightness(0.85)",
+                transition: "width 0.3s ease, height 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease",
               }}
-              onMouseEnter={() => handleHoverEnter(i)}
-              onMouseLeave={handleHoverLeave}
-              onClick={() => handleClick(i)}
             >
-              <div
-                className="rounded-full overflow-hidden bg-background"
-                style={{
-                  width: size,
-                  height: size,
-                  border: `3px solid ${isSpot ? step.color : "white"}`,
-                  boxShadow: isSpot
-                    ? `0 0 18px 4px ${step.color}44, 0 2px 8px rgba(0,0,0,0.12)`
-                    : "0 2px 8px rgba(0,0,0,0.1)",
-                  transition: "width 0.4s ease, height 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
-                  filter: isSpot ? "none" : "brightness(0.85)",
-                }}
-              >
-                <img
-                  src={step.img}
-                  alt={step.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
-              {/* Badge */}
-              <div
-                className="absolute flex items-center justify-center rounded-full text-white font-bold"
-                style={{
-                  width: BADGE_SIZE,
-                  height: BADGE_SIZE,
-                  fontSize: 10,
-                  backgroundColor: step.color,
-                  top: -2,
-                  right: isSpot ? -2 : -4,
-                  border: "2px solid white",
-                  transition: "right 0.4s ease",
-                }}
-              >
-                {step.num}
-              </div>
+              <img src={step.img} alt={step.title} className="w-full h-full object-cover" loading="lazy" />
             </div>
-          );
-        })}
-      </div>
-
-      {/* Invisible hover zone for "Break the Loop" pause — handled via prop */}
+            {/* Badge */}
+            <div
+              className="absolute flex items-center justify-center rounded-full text-white font-bold"
+              style={{
+                width: 20,
+                height: 20,
+                fontSize: 10,
+                backgroundColor: step.color,
+                top: -2,
+                right: isActive ? -2 : -4,
+                border: "2px solid white",
+                transition: "right 0.3s ease",
+              }}
+            >
+              {step.num}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -262,20 +182,10 @@ const MobileCarousel = () => (
         className="bg-background rounded-xl shadow-sm p-4 shrink-0 flex flex-col items-center text-center gap-3"
         style={{ width: 220, borderTop: `3px solid ${step.color}` }}
       >
-        <div
-          className="rounded-full overflow-hidden"
-          style={{
-            width: 80,
-            height: 80,
-            border: `3px solid ${step.color}`,
-          }}
-        >
+        <div className="rounded-full overflow-hidden" style={{ width: 80, height: 80, border: `3px solid ${step.color}` }}>
           <img src={step.img} alt={step.title} className="w-full h-full object-cover" loading="lazy" />
         </div>
-        <span
-          className="text-xs font-bold px-2 py-0.5 rounded-full text-white"
-          style={{ backgroundColor: step.color }}
-        >
+        <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: step.color }}>
           Step {step.num}
         </span>
         <h4 className="text-sm font-bold text-foreground">{step.title}</h4>
@@ -296,19 +206,17 @@ const EmpathyLoop = () => {
         </h2>
       </div>
 
-      {isMobile ? <MobileCarousel /> : (
-        <div className="flex justify-center mb-6">
+      {isMobile ? (
+        <MobileCarousel />
+      ) : (
+        <div className="flex justify-center items-center mb-6">
           <OrbitDesktop />
         </div>
       )}
 
       <div className="container text-center mt-6 max-w-xl mx-auto">
-        <p className="text-sm md:text-base text-muted-foreground">
-          Sound familiar? You're not alone.
-        </p>
-        <p className="text-base md:text-lg font-bold mt-2 text-foreground">
-          That's exactly why we built Applyza.
-        </p>
+        <p className="text-sm md:text-base text-muted-foreground">Sound familiar? You're not alone.</p>
+        <p className="text-base md:text-lg font-bold mt-2 text-foreground">That's exactly why we built Applyza.</p>
         <div className="mt-5 flex justify-center">
           <MovingBorderButton to="/book-a-consultation" duration={3000}>
             Break the Loop <ArrowRight size={16} className="ml-1" />
