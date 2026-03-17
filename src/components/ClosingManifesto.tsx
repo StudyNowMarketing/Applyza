@@ -3,6 +3,7 @@ import { SparklesCore } from "@/components/ui/SparklesCore";
 import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import WordByWord from "@/components/WordByWord";
 
 const ClosingManifesto = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
