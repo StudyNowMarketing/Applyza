@@ -17,7 +17,7 @@ const destinations = [
 const StudyDestinations = () => {
   return (
     <section className="relative" style={{ backgroundColor: "#0a0d24" }}>
-      
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)" }} />
 
       <div className="absolute top-[10%] right-[-5%] w-[300px] h-[300px] rounded-full pointer-events-none"
         style={{ backgroundColor: "rgba(46,196,182,0.10)", filter: "blur(120px)" }} />

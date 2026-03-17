@@ -12,7 +12,7 @@ const reasons = [
 
 const WhyChooseApplyza = () => (
   <section className="bg-white">
-    
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
     <div className="container py-12 md:py-16">
       <div className="text-center mb-8">
         <span

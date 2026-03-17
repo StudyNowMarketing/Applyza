@@ -114,7 +114,7 @@ const Testimonials = () => {
         </span>
       </div>
 
-      
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
 
       <div className="container relative z-10 py-14 md:py-20">
         {/* Header */}

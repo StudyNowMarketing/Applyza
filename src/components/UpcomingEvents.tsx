@@ -45,6 +45,8 @@ const UpcomingEvents = () => {
 
   return (
     <section className="bg-white">
+      {/* Subtle top separator */}
+      <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
       <div className="container py-12 md:py-16">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 gap-4">
