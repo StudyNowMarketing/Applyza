@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import WordByWord from "@/components/WordByWord";
 import { MovingBorderButton } from "@/components/ui/MovingBorder";
@@ -54,93 +54,85 @@ const RADIUS = 180;
 const NORMAL_SIZE = 60;
 const SPOTLIGHT_SIZE = 85;
 const BADGE_SIZE = 20;
+const CONTAINER = RADIUS * 2 + SPOTLIGHT_SIZE + 40;
 
 const OrbitDesktop = () => {
-  const [angle, setAngle] = useState(0);
-  const [spotlightIdx, setSpotlightIdx] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(0);
   const [displayedIdx, setDisplayedIdx] = useState(0);
   const [fading, setFading] = useState(false);
-  const speedRef = useRef(360 / 30); // degrees per second (30s full rotation)
-  const hoveredRef = useRef(false);
-  const rafRef = useRef<number>(0);
-  const lastTimeRef = useRef<number>(0);
-  const manualOverrideRef = useRef(false);
+  const [slow, setSlow] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const manualRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isManualRef = useRef(false);
 
-  const getSpotlightFromAngle = useCallback((a: number) => {
-    // The image closest to the top (270 deg in standard math, but we position from top=0)
-    // Each image is at angle offset i * 60
-    // Position angle for image i = a + i * 60
-    // We want the one whose position mod 360 is closest to 0 (top)
-    let best = 0;
-    let bestDist = 999;
-    for (let i = 0; i < 6; i++) {
-      const pos = ((a + i * 60) % 360 + 360) % 360;
-      const dist = Math.min(pos, 360 - pos);
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = i;
-      }
-    }
-    return best;
-  }, []);
-
+  // Auto-rotate spotlight based on CSS animation timing
   useEffect(() => {
-    const animate = (time: number) => {
-      if (!lastTimeRef.current) lastTimeRef.current = time;
-      const dt = (time - lastTimeRef.current) / 1000;
-      lastTimeRef.current = time;
-
-      const speed = hoveredRef.current ? 360 / 80 : 360 / 30;
-      speedRef.current = speed;
-
-      setAngle((prev) => {
-        const next = (prev + speed * dt) % 360;
-        if (!manualOverrideRef.current) {
-          const newSpot = getSpotlightFromAngle(next);
-          setSpotlightIdx(newSpot);
-        }
-        return next;
-      });
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [getSpotlightFromAngle]);
+    if (isManualRef.current) return;
+    // The CSS animation rotates 360deg in 30s (or 90s when slow)
+    // Each step occupies 60deg, so spotlight changes every 5s (or 15s)
+    const interval = slow ? 15000 : 5000;
+    const timer = setInterval(() => {
+      if (!isManualRef.current) {
+        setActiveIdx((prev) => (prev + 1) % 6);
+      }
+    }, interval);
+    return () => clearInterval(timer);
+  }, [slow]);
 
   // Fade transition for center text
   useEffect(() => {
-    if (spotlightIdx !== displayedIdx) {
+    if (activeIdx !== displayedIdx) {
       setFading(true);
       const t = setTimeout(() => {
-        setDisplayedIdx(spotlightIdx);
+        setDisplayedIdx(activeIdx);
         setFading(false);
-      }, 200);
+      }, 150);
       return () => clearTimeout(t);
     }
-  }, [spotlightIdx, displayedIdx]);
+  }, [activeIdx, displayedIdx]);
+
+  const setManualSpotlight = (idx: number, durationMs: number) => {
+    setActiveIdx(idx);
+    isManualRef.current = true;
+    if (manualRef.current) clearTimeout(manualRef.current);
+    manualRef.current = setTimeout(() => {
+      isManualRef.current = false;
+    }, durationMs);
+  };
+
+  const handleHoverEnter = (idx: number) => {
+    setSlow(true);
+    setManualSpotlight(idx, 999999); // stays until hover leaves
+  };
+
+  const handleHoverLeave = () => {
+    setSlow(false);
+    isManualRef.current = false;
+    if (manualRef.current) clearTimeout(manualRef.current);
+  };
 
   const handleClick = (idx: number) => {
-    setSpotlightIdx(idx);
-    manualOverrideRef.current = true;
-    setTimeout(() => {
-      manualOverrideRef.current = false;
-    }, 3000);
+    setManualSpotlight(idx, 5000);
   };
 
   const current = steps[displayedIdx];
+  const cx = CONTAINER / 2;
+
+  const orbitClass = paused
+    ? "empathy-orbit empathy-orbit--paused"
+    : slow
+      ? "empathy-orbit empathy-orbit--slow"
+      : "empathy-orbit";
 
   return (
     <div
       className="relative mx-auto"
-      style={{ width: RADIUS * 2 + SPOTLIGHT_SIZE + 40, height: RADIUS * 2 + SPOTLIGHT_SIZE + 40 }}
-      onMouseEnter={() => (hoveredRef.current = true)}
-      onMouseLeave={() => (hoveredRef.current = false)}
+      style={{ width: CONTAINER, height: CONTAINER }}
     >
       {/* Orbit track */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox={`0 0 ${RADIUS * 2 + SPOTLIGHT_SIZE + 40} ${RADIUS * 2 + SPOTLIGHT_SIZE + 40}`}
+        viewBox={`0 0 ${CONTAINER} ${CONTAINER}`}
       >
         <circle
           cx="50%"
@@ -154,9 +146,9 @@ const OrbitDesktop = () => {
         />
       </svg>
 
-      {/* Center spotlight */}
+      {/* Center spotlight text */}
       <div
-        className="absolute flex flex-col items-center justify-center text-center px-4"
+        className="absolute flex flex-col items-center justify-center text-center px-4 pointer-events-none"
         style={{
           width: RADIUS * 1.4,
           height: RADIUS * 1.4,
@@ -169,7 +161,7 @@ const OrbitDesktop = () => {
           THE LOOP
         </span>
         <div
-          className="transition-opacity duration-[400ms]"
+          className="transition-opacity duration-300"
           style={{ opacity: fading ? 0 : 1 }}
         >
           <span
@@ -183,68 +175,81 @@ const OrbitDesktop = () => {
         </div>
       </div>
 
-      {/* Orbiting images */}
-      {steps.map((step, i) => {
-        const deg = angle + i * 60;
-        const rad = (deg * Math.PI) / 180;
-        const cx = (RADIUS * 2 + SPOTLIGHT_SIZE + 40) / 2;
-        const cy = cx;
-        const x = cx + RADIUS * Math.sin(rad);
-        const y = cy - RADIUS * Math.cos(rad);
-        const isSpot = i === spotlightIdx;
-        const size = isSpot ? SPOTLIGHT_SIZE : NORMAL_SIZE;
+      {/* Rotating wrapper — single CSS animation drives all images */}
+      <div
+        className={orbitClass}
+        style={{
+          position: "absolute",
+          width: CONTAINER,
+          height: CONTAINER,
+          top: 0,
+          left: 0,
+        }}
+      >
+        {steps.map((step, i) => {
+          const angleDeg = i * 60; // static position, rotation comes from parent
+          const rad = (angleDeg * Math.PI) / 180;
+          const x = cx + RADIUS * Math.sin(rad);
+          const y = cx - RADIUS * Math.cos(rad);
+          const isSpot = i === activeIdx;
+          const size = isSpot ? SPOTLIGHT_SIZE : NORMAL_SIZE;
 
-        return (
-          <div
-            key={i}
-            className="absolute cursor-pointer"
-            style={{
-              left: x,
-              top: y,
-              transform: "translate(-50%, -50%)",
-              zIndex: isSpot ? 10 : 5,
-              transition: "filter 0.4s",
-              filter: isSpot ? "none" : "brightness(0.85)",
-            }}
-            onClick={() => handleClick(i)}
-          >
+          return (
             <div
-              className="rounded-full overflow-hidden bg-background"
+              key={i}
+              className="absolute empathy-counter-spin cursor-pointer"
               style={{
-                width: size,
-                height: size,
-                border: `3px solid ${isSpot ? step.color : "white"}`,
-                boxShadow: isSpot
-                  ? `0 0 18px 4px ${step.color}44, 0 2px 8px rgba(0,0,0,0.12)`
-                  : "0 2px 8px rgba(0,0,0,0.1)",
-                transition: "width 0.4s, height 0.4s, border-color 0.4s, box-shadow 0.4s",
+                left: x,
+                top: y,
+                transform: "translate(-50%, -50%)",
+                zIndex: isSpot ? 10 : 5,
               }}
+              onMouseEnter={() => handleHoverEnter(i)}
+              onMouseLeave={handleHoverLeave}
+              onClick={() => handleClick(i)}
             >
-              <img
-                src={step.img}
-                alt={step.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+              <div
+                className="rounded-full overflow-hidden bg-background"
+                style={{
+                  width: size,
+                  height: size,
+                  border: `3px solid ${isSpot ? step.color : "white"}`,
+                  boxShadow: isSpot
+                    ? `0 0 18px 4px ${step.color}44, 0 2px 8px rgba(0,0,0,0.12)`
+                    : "0 2px 8px rgba(0,0,0,0.1)",
+                  transition: "width 0.4s ease, height 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
+                  filter: isSpot ? "none" : "brightness(0.85)",
+                }}
+              >
+                <img
+                  src={step.img}
+                  alt={step.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              {/* Badge */}
+              <div
+                className="absolute flex items-center justify-center rounded-full text-white font-bold"
+                style={{
+                  width: BADGE_SIZE,
+                  height: BADGE_SIZE,
+                  fontSize: 10,
+                  backgroundColor: step.color,
+                  top: -2,
+                  right: isSpot ? -2 : -4,
+                  border: "2px solid white",
+                  transition: "right 0.4s ease",
+                }}
+              >
+                {step.num}
+              </div>
             </div>
-            {/* Badge */}
-            <div
-              className="absolute flex items-center justify-center rounded-full text-white font-bold"
-              style={{
-                width: BADGE_SIZE,
-                height: BADGE_SIZE,
-                fontSize: 10,
-                backgroundColor: step.color,
-                top: -2,
-                right: isSpot ? -2 : -4,
-                border: "2px solid white",
-              }}
-            >
-              {step.num}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+
+      {/* Invisible hover zone for "Break the Loop" pause — handled via prop */}
     </div>
   );
 };
