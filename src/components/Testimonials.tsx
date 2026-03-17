@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { SparklesCore } from "@/components/ui/SparklesCore";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import HandUnderline from "@/components/HandUnderline";
 
 const testimonials = [
   {
