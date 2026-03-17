@@ -163,6 +163,10 @@
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
   will-change: transform, opacity;
+  margin-right: 0.3em;
+}
+.word-animate:last-child {
+  margin-right: 0;
 }
 
 /* ════════════════════════════════════════════════
