@@ -6,30 +6,29 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
  */
 const SectionReveal = ({ children }: { children: ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true); // Start visible to prevent invisible sections
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Check if already in viewport on mount
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight + 50 && rect.bottom > 0) {
-      setVisible(true);
-      return;
-    }
+    // Only animate sections that start below the viewport
+    if (rect.top > window.innerHeight) {
+      setVisible(false);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0, rootMargin: "0px 0px 100px 0px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        },
+        { threshold: 0, rootMargin: "0px 0px 100px 0px" }
+      );
+      observer.observe(el);
+      return () => observer.disconnect();
+    }
   }, []);
 
   return (
