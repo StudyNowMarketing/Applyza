@@ -88,12 +88,15 @@ const ClosingManifesto = () => {
           </div>
 
           {/* Image */}
-          <div style={itemStyle(4)} className="mb-10">
+          <div style={itemStyle(4)} className="mb-10 overflow-hidden rounded-2xl">
             <img
               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80"
               alt="Diverse graduating students celebrating"
-              className="w-full rounded-2xl"
-              style={{ boxShadow: "0 0 60px rgba(46,196,182,0.15)" }}
+              className="w-full rounded-2xl transition-transform duration-700"
+              style={{
+                boxShadow: "0 0 60px rgba(46,196,182,0.15)",
+                transform: visibleItems.includes(4) ? "scale(1)" : "scale(0.9)",
+              }}
               loading="lazy"
             />
           </div>

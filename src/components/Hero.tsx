@@ -89,6 +89,10 @@ const Hero = () => {
       <div className="container relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16 flex justify-center">
         <div className="w-full max-w-[800px]">
           <div className="flex flex-col gap-5">
+            {/* Hero headline */}
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white text-center leading-tight mb-2">
+              <WordByWord text="The Smartest Way to Study Abroad" underlineWord="Abroad" />
+            </h1>
             {/* Video Placeholder */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}

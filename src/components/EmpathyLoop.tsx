@@ -52,7 +52,7 @@ const EmpathyLoop = () => {
     <section className="bg-white py-16 md:py-20" ref={sectionRef}>
       <div className="container">
         <h2 className="text-2xl md:text-[44px] font-extrabold text-center leading-tight mb-12" style={{ color: "#1B2150" }}>
-          Do You Feel <HandUnderline>Stuck</HandUnderline> in a Loop?
+          <WordByWord text="Do You Feel Stuck in a Loop?" underlineWord="Stuck" />
         </h2>
 
         {/* Circular loop — desktop */}
