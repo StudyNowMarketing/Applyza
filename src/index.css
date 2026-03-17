@@ -473,3 +473,43 @@ select:focus {
 .hand-underline.visible::after {
   transform: scaleX(1);
 }
+
+/* ════════════════════════════════════════════════
+   EMPATHY LOOP ORBIT — CSS-driven rotation
+   ════════════════════════════════════════════════ */
+
+@keyframes spinOrbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes counterSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.empathy-orbit {
+  animation: spinOrbit 30s linear infinite;
+}
+
+.empathy-orbit--slow {
+  animation: spinOrbit 90s linear infinite;
+}
+
+.empathy-orbit--paused {
+  animation: spinOrbit 30s linear infinite;
+  animation-play-state: paused;
+}
+
+.empathy-counter-spin {
+  animation: counterSpin 30s linear infinite;
+}
+
+.empathy-orbit--slow .empathy-counter-spin {
+  animation: counterSpin 90s linear infinite;
+}
+
+.empathy-orbit--paused .empathy-counter-spin {
+  animation: counterSpin 30s linear infinite;
+  animation-play-state: paused;
+}
