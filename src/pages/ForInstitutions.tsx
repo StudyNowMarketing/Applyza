@@ -1,10 +1,10 @@
 import SEO from "@/components/SEO";
+import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState } from "react";
 import ConsentCheckbox from "@/components/ConsentCheckbox";
 import FormError from "@/components/FormError";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,11 +12,13 @@ import { Label } from "@/components/ui/label";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Link } from "react-router-dom";
 import { Users, Globe, Cpu, FileCheck, ShieldCheck, BarChart3, Loader2 } from "lucide-react";
+import { MovingBorderButton } from "@/components/ui/MovingBorder";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { sanitize, FIELD_LIMITS } from "@/lib/sanitize";
 import { useFormProtection } from "@/hooks/useFormProtection";
+import { createNotification } from "@/lib/notifications";
 
 const benefits = [
   { icon: Users, title: "Qualified Student Referrals", desc: "Every student we refer has been assessed and counselled by our team." },
@@ -90,6 +92,11 @@ const ForInstitutions = () => {
       } else {
         onSuccess(form.email);
         setSubmitted(true);
+        createNotification({
+          type: "institution",
+          title: "New Institution Enquiry",
+          message: `${form.contact_name} from ${form.institution_name} (${form.email})`,
+        });
       }
     } catch {
       toast({ title: "We couldn't submit your request", description: "Please try again or email us at info@applyza.com", variant: "destructive" });
@@ -107,36 +114,43 @@ const ForInstitutions = () => {
       <SEO title="Partner With Applyza | Student Recruitment for Universities" description="Reach qualified international students from 10+ countries. Applyza delivers application-ready students through expert counselling and AI-powered matching." path="/for-institutions" />
       <Navbar solid />
 
-      {/* Hero */}
-      <section className="bg-primary pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="container">
+      {/* Dark Hero */}
+      <section className="relative overflow-hidden py-10" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#2EC4B6" particleDensity={60} minSize={0.4} maxSize={1.5} speed={1.5} />
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-1/4 w-80 h-80 rounded-full opacity-10" style={{ background: "radial-gradient(circle, hsl(169 63% 47% / 0.4), transparent 70%)" }} />
+        </div>
+        <div className="container relative z-10 pt-20">
           <Breadcrumb>
             <BreadcrumbList>
-              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-primary-foreground/60">Home</Link></BreadcrumbLink></BreadcrumbItem>
-              <BreadcrumbSeparator className="text-primary-foreground/40" />
-              <BreadcrumbItem><BreadcrumbPage className="text-primary-foreground/80">For Institutions</BreadcrumbPage></BreadcrumbItem>
+              <BreadcrumbItem><BreadcrumbLink asChild><Link to="/" className="text-white/40 hover:text-white/60 text-sm">Home</Link></BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator className="text-white/30" />
+              <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">For Institutions</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-primary-foreground mt-4 mb-4">Partner With Applyza</h1>
-          <p className="text-primary-foreground/70 text-base md:text-lg max-w-2xl leading-relaxed">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Partner With Applyza</h1>
+          <p className="text-white/50 text-sm max-w-xl">
             Reach motivated, application-ready students from fast-growing education markets. We connect your institution with the right students — and handle everything from initial engagement to enrolment.
           </p>
+          <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
+            Submit Enquiry
+          </MovingBorderButton>
         </div>
       </section>
 
       {/* Benefits */}
-      <section className="bg-background py-16 md:py-20">
+      <section className="bg-background py-10">
         <div className="container">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary text-center mb-12">Why Institutions Work With Us</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-lg font-bold text-primary mb-6">Why Institutions Work With Us</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {benefits.map((b, i) => (
-              <motion.div key={b.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center mb-4">
-                  <b.icon className="text-secondary" size={22} />
+              <motion.div key={b.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                className="bg-card rounded-xl p-4 border border-border hover:shadow-md transition-shadow card-glow">
+                <div className="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center mb-3">
+                  <b.icon className="text-secondary" size={16} />
                 </div>
-                <h3 className="text-lg font-bold text-primary mb-2">{b.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
+                <h3 className="text-sm font-bold text-primary mb-1">{b.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{b.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -144,107 +158,115 @@ const ForInstitutions = () => {
       </section>
 
       {/* Stats */}
-      <section className="bg-primary py-10">
-        <div className="container grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="relative py-8" style={{ background: "#0a0d24" }}>
+        <SparklesCore className="absolute inset-0 z-[1]" background="transparent" particleColor="#6B3FA0" particleDensity={40} minSize={0.3} maxSize={1.2} speed={1} />
+        <div className="container flex flex-wrap justify-center gap-8 md:gap-16">
           {stats.map((s) => (
-            <div key={s.label}>
-              <p className="text-2xl md:text-3xl font-extrabold text-secondary">{s.value}</p>
-              <p className="text-primary-foreground/70 text-sm mt-1">{s.label}</p>
+            <div key={s.label} className="text-center">
+              <p className="text-2xl font-bold text-secondary">{s.value}</p>
+              <p className="text-white/50 text-xs mt-0.5">{s.label}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* How It Works */}
-      <section className="bg-muted py-16 md:py-20">
+      <section className="bg-card py-10">
         <div className="container">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary text-center mb-12">How It Works</h2>
+          <h2 className="text-lg font-bold text-primary mb-6">How It Works</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {steps.map((s, i) => (
-              <motion.div key={s.num} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="bg-card rounded-2xl p-6 shadow-sm">
-                <div className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground text-sm font-bold mb-4">{s.num}</div>
-                <h3 className="text-lg font-bold text-primary mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              </motion.div>
+            {steps.map((s) => (
+              <div key={s.num} className="flex items-start gap-3">
+                <div className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground text-xs font-bold shrink-0 mt-0.5">
+                  {s.num}
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-primary">{s.title}</h3>
+                  <p className="text-xs text-muted-foreground">{s.desc}</p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Enquiry Form */}
-      <section id="enquiry-form" className="bg-background py-16 md:py-20">
+      <section id="enquiry-form" className="bg-background py-10">
         <div className="container max-w-2xl">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary text-center mb-3">Partner With Us</h2>
-          <p className="text-muted-foreground text-center mb-10">Fill in the form below and our partnerships team will be in touch within 48 hours.</p>
+          <div className="bg-card rounded-xl border border-border shadow-sm p-6">
+            <h2 className="text-lg font-bold text-primary mb-1">Partner With Us</h2>
+            <p className="text-xs text-muted-foreground mb-5">Fill in the form below and our partnerships team will be in touch within 48 hours.</p>
 
-          {submitted ? (
-            <div className="bg-secondary/10 border border-secondary/30 rounded-2xl p-8 text-center">
-              <h3 className="text-xl font-bold text-primary mb-2">Thank you for your enquiry</h3>
-              <p className="text-muted-foreground">Our partnerships team will contact you within 48 hours.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <FormError message={rateLimitMsg} />
-              <div>
-                <Label htmlFor="institution_name">Institution Name *</Label>
-                <Input id="institution_name" value={form.institution_name} onChange={(e) => setForm({ ...form, institution_name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} />
-                {errors.institution_name && <p className="text-sm text-destructive mt-1">{errors.institution_name}</p>}
+            {submitted ? (
+              <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-6 text-center">
+                <h3 className="text-base font-bold text-primary mb-1">Thank you for your enquiry</h3>
+                <p className="text-sm text-muted-foreground">Our partnerships team will contact you within 48 hours.</p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <FormError message={rateLimitMsg} />
                 <div>
-                  <Label htmlFor="contact_name">Contact Person Name *</Label>
-                  <Input id="contact_name" value={form.contact_name} onChange={(e) => setForm({ ...form, contact_name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} />
-                  {errors.contact_name && <p className="text-sm text-destructive mt-1">{errors.contact_name}</p>}
+                  <Label htmlFor="institution_name" className="text-sm text-muted-foreground mb-1.5 block">Institution Name *</Label>
+                  <Input id="institution_name" value={form.institution_name} onChange={(e) => setForm({ ...form, institution_name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} className="rounded-lg h-10 border-border focus-visible:ring-secondary" />
+                  {errors.institution_name && <p className="text-sm text-destructive mt-1">{errors.institution_name}</p>}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="contact_name" className="text-sm text-muted-foreground mb-1.5 block">Contact Person *</Label>
+                    <Input id="contact_name" value={form.contact_name} onChange={(e) => setForm({ ...form, contact_name: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.name} className="rounded-lg h-10 border-border focus-visible:ring-secondary" />
+                    {errors.contact_name && <p className="text-sm text-destructive mt-1">{errors.contact_name}</p>}
+                  </div>
+                  <div>
+                    <Label htmlFor="job_title" className="text-sm text-muted-foreground mb-1.5 block">Job Title</Label>
+                    <Input id="job_title" value={form.job_title} onChange={(e) => setForm({ ...form, job_title: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.short} className="rounded-lg h-10 border-border focus-visible:ring-secondary" />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="inst_email" className="text-sm text-muted-foreground mb-1.5 block">Email *</Label>
+                    <Input id="inst_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.email} className="rounded-lg h-10 border-border focus-visible:ring-secondary" />
+                    {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                  </div>
+                  <div>
+                    <Label htmlFor="inst_phone" className="text-sm text-muted-foreground mb-1.5 block">Phone</Label>
+                    <Input id="inst_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.phone} className="rounded-lg h-10 border-border focus-visible:ring-secondary" />
+                  </div>
                 </div>
                 <div>
-                  <Label htmlFor="job_title">Job Title</Label>
-                  <Input id="job_title" value={form.job_title} onChange={(e) => setForm({ ...form, job_title: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.short} />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <Label htmlFor="inst_email">Email *</Label>
-                  <Input id="inst_email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.email} />
-                  {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                  <Label htmlFor="inst_country" className="text-sm text-muted-foreground mb-1.5 block">Country *</Label>
+                  <Input id="inst_country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.short} className="rounded-lg h-10 border-border focus-visible:ring-secondary" />
+                  {errors.country && <p className="text-sm text-destructive mt-1">{errors.country}</p>}
                 </div>
                 <div>
-                  <Label htmlFor="inst_phone">Phone</Label>
-                  <Input id="inst_phone" type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.phone} />
+                  <Label htmlFor="inst_message" className="text-sm text-muted-foreground mb-1.5 block">Message</Label>
+                  <Textarea id="inst_message" rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.message} className="rounded-lg border-border focus-visible:ring-secondary" />
                 </div>
-              </div>
-              <div>
-                <Label htmlFor="inst_country">Country *</Label>
-                <Input id="inst_country" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.short} />
-                {errors.country && <p className="text-sm text-destructive mt-1">{errors.country}</p>}
-              </div>
-              <div>
-                <Label htmlFor="inst_message">Message</Label>
-                <Textarea id="inst_message" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} disabled={submitting} maxLength={FIELD_LIMITS.message} />
-              </div>
-              <ConsentCheckbox
-                checked={consent}
-                onCheckedChange={setConsent}
-                label="I consent to Applyza processing this enquiry to discuss a potential partnership. Privacy Policy."
-              />
-              <Button type="submit" variant="teal" size="lg" className="w-full rounded-full" disabled={submitting || !consent || isBlocked}>
-                {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Enquiry"}
-              </Button>
-            </form>
-          )}
+                <ConsentCheckbox
+                  checked={consent}
+                  onCheckedChange={setConsent}
+                  label="I agree to the Privacy Policy and consent to Applyza processing this data to discuss a potential partnership."
+                />
+                <MovingBorderButton type="submit" containerClassName="w-full" className="w-full px-8 py-3 text-sm" disabled={submitting || !consent || isBlocked}>
+                  {submitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Submitting...</> : "Submit Enquiry"}
+                </MovingBorderButton>
+              </form>
+            )}
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-accent py-14">
+      <section className="py-10" style={{ background: "linear-gradient(135deg, hsl(169 63% 47%), hsl(169 63% 40%))" }}>
         <div className="container text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-accent-foreground mb-6">Join 150+ Institutions Worldwide</h2>
-          <Button variant="teal" size="lg" className="rounded-full" onClick={scrollToForm}>Submit Enquiry</Button>
+          <h2 className="text-xl font-bold text-white mb-2">Join 150+ Institutions Worldwide</h2>
+          <p className="text-white/80 text-sm mb-4">Partner with us to reach qualified, motivated students.</p>
+          <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 font-semibold px-8" onClick={scrollToForm}>
+            Submit Enquiry
+          </Button>
         </div>
       </section>
 
       <Footer />
-      <WhatsAppButton />
     </div>
   );
 };

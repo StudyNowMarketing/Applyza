@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          name: string | null
+          role: string
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          name?: string | null
+          role?: string
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          name?: string | null
+          role?: string
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author: string | null
@@ -56,6 +80,84 @@ export type Database = {
           slug?: string
           title?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      chatbot_conversations: {
+        Row: {
+          bot_response: string
+          created_at: string
+          id: string
+          language: string
+          lead_captured: boolean
+          page_url: string | null
+          session_id: string
+          student_email: string | null
+          student_name: string | null
+          user_message: string
+        }
+        Insert: {
+          bot_response: string
+          created_at?: string
+          id?: string
+          language?: string
+          lead_captured?: boolean
+          page_url?: string | null
+          session_id: string
+          student_email?: string | null
+          student_name?: string | null
+          user_message: string
+        }
+        Update: {
+          bot_response?: string
+          created_at?: string
+          id?: string
+          language?: string
+          lead_captured?: boolean
+          page_url?: string | null
+          session_id?: string
+          student_email?: string | null
+          student_name?: string | null
+          user_message?: string
+        }
+        Relationships: []
+      }
+      chatbot_knowledge: {
+        Row: {
+          category: string
+          content: string
+          country: string | null
+          id: string
+          last_updated: string
+          source_url: string | null
+          status: string
+          subcategory: string
+          title: string
+          university: string | null
+        }
+        Insert: {
+          category: string
+          content: string
+          country?: string | null
+          id?: string
+          last_updated?: string
+          source_url?: string | null
+          status?: string
+          subcategory: string
+          title: string
+          university?: string | null
+        }
+        Update: {
+          category?: string
+          content?: string
+          country?: string | null
+          id?: string
+          last_updated?: string
+          source_url?: string | null
+          status?: string
+          subcategory?: string
+          title?: string
+          university?: string | null
         }
         Relationships: []
       }
@@ -212,6 +314,84 @@ export type Database = {
         }
         Relationships: []
       }
+      eligibility_leads: {
+        Row: {
+          age_range: string | null
+          budget: string | null
+          country: string | null
+          created_at: string
+          current_visa: string | null
+          destinations: string | null
+          education_level: string | null
+          email: string
+          english_score: string | null
+          english_test: string | null
+          grade_classification: string | null
+          id: string
+          name: string
+          needs_scholarship: string | null
+          phone: string
+          preferred_start: string | null
+          study_gap: string | null
+          study_gap_reason: string | null
+          study_level: string | null
+          subjects: string | null
+          visa_refused: string | null
+          visa_refused_country: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          age_range?: string | null
+          budget?: string | null
+          country?: string | null
+          created_at?: string
+          current_visa?: string | null
+          destinations?: string | null
+          education_level?: string | null
+          email: string
+          english_score?: string | null
+          english_test?: string | null
+          grade_classification?: string | null
+          id?: string
+          name: string
+          needs_scholarship?: string | null
+          phone: string
+          preferred_start?: string | null
+          study_gap?: string | null
+          study_gap_reason?: string | null
+          study_level?: string | null
+          subjects?: string | null
+          visa_refused?: string | null
+          visa_refused_country?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          age_range?: string | null
+          budget?: string | null
+          country?: string | null
+          created_at?: string
+          current_visa?: string | null
+          destinations?: string | null
+          education_level?: string | null
+          email?: string
+          english_score?: string | null
+          english_test?: string | null
+          grade_classification?: string | null
+          id?: string
+          name?: string
+          needs_scholarship?: string | null
+          phone?: string
+          preferred_start?: string | null
+          study_gap?: string | null
+          study_gap_reason?: string | null
+          study_level?: string | null
+          subjects?: string | null
+          visa_refused?: string | null
+          visa_refused_country?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
       event_subscribers: {
         Row: {
           created_at: string | null
@@ -308,6 +488,96 @@ export type Database = {
           message?: string | null
           phone?: string | null
           status?: string | null
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string | null
+          read: boolean
+          title: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          read?: boolean
+          title: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string | null
+          read?: boolean
+          title?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      page_content: {
+        Row: {
+          content: string | null
+          id: string
+          page_slug: string
+          section_key: string
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          content?: string | null
+          id?: string
+          page_slug: string
+          section_key: string
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          content?: string | null
+          id?: string
+          page_slug?: string
+          section_key?: string
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      page_seo: {
+        Row: {
+          description: string | null
+          focus_keyword: string | null
+          id: string
+          og_image: string | null
+          page_name: string
+          page_slug: string
+          title: string | null
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          description?: string | null
+          focus_keyword?: string | null
+          id?: string
+          og_image?: string | null
+          page_name: string
+          page_slug: string
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          description?: string | null
+          focus_keyword?: string | null
+          id?: string
+          og_image?: string | null
+          page_name?: string
+          page_slug?: string
+          title?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
         }
         Relationships: []
       }

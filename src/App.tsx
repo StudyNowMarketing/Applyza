@@ -16,6 +16,7 @@ import VisaImmigration from "./pages/VisaImmigration.tsx";
 import StudentCounselling from "./pages/StudentCounselling.tsx";
 import Accommodation from "./pages/Accommodation.tsx";
 import FindACourse from "./pages/FindACourse.tsx";
+import EligibilityCheck from "./pages/EligibilityCheck.tsx";
 import CourseDetail from "./pages/CourseDetail.tsx";
 import BookConsultation from "./pages/BookConsultation.tsx";
 import Scholarships from "./pages/Scholarships.tsx";
@@ -25,6 +26,8 @@ import BlogPost from "./pages/BlogPost.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import TermsConditions from "./pages/TermsConditions.tsx";
 import AntiSlaveryPolicy from "./pages/AntiSlaveryPolicy.tsx";
+import CookiePolicy from "./pages/CookiePolicy.tsx";
+import Accessibility from "./pages/Accessibility.tsx";
 import StudyDestinations from "./pages/StudyDestinations.tsx";
 import DestinationDetail from "./pages/DestinationDetail.tsx";
 import ForInstitutions from "./pages/ForInstitutions.tsx";
@@ -49,8 +52,15 @@ import AdminEvents from "./pages/admin/AdminEvents.tsx";
 import AdminEventForm from "./pages/admin/AdminEventForm.tsx";
 import AdminScholarships from "./pages/admin/AdminScholarships.tsx";
 import AdminScholarshipForm from "./pages/admin/AdminScholarshipForm.tsx";
+import AdminSeo from "./pages/admin/AdminSeo.tsx";
+import AdminContent from "./pages/admin/AdminContent.tsx";
+import AdminTeam from "./pages/admin/AdminTeam.tsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
+import ScrollAnimator from "./components/ScrollAnimator.tsx";
+import { lazy, Suspense } from "react";
+
+const ChatWidget = lazy(() => import("./components/ChatWidget.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -71,6 +81,7 @@ const AnimatedRoutes = () => {
         <Route path="/services/student-counselling" element={<P><StudentCounselling /></P>} />
         <Route path="/services/accommodation" element={<P><Accommodation /></P>} />
         <Route path="/find-a-course" element={<P><FindACourse /></P>} />
+        <Route path="/eligibility-check" element={<P><EligibilityCheck /></P>} />
         <Route path="/find-a-course/:slug" element={<P><CourseDetail /></P>} />
         <Route path="/book-a-consultation" element={<P><BookConsultation /></P>} />
         <Route path="/scholarships" element={<P><Scholarships /></P>} />
@@ -82,6 +93,8 @@ const AnimatedRoutes = () => {
         <Route path="/privacy-policy" element={<P><PrivacyPolicy /></P>} />
         <Route path="/terms-and-conditions" element={<P><TermsConditions /></P>} />
         <Route path="/anti-slavery-policy" element={<P><AntiSlaveryPolicy /></P>} />
+        <Route path="/cookie-policy" element={<P><CookiePolicy /></P>} />
+        <Route path="/accessibility" element={<P><Accessibility /></P>} />
         <Route path="/for-institutions" element={<P><ForInstitutions /></P>} />
         <Route path="/for-partners" element={<P><ForPartners /></P>} />
         <Route path="/contact" element={<P><Contact /></P>} />
@@ -107,6 +120,9 @@ const AnimatedRoutes = () => {
           <Route path="scholarships" element={<AdminScholarships />} />
           <Route path="scholarships/new" element={<AdminScholarshipForm />} />
           <Route path="scholarships/edit/:id" element={<AdminScholarshipForm />} />
+          <Route path="seo" element={<AdminSeo />} />
+          <Route path="content" element={<AdminContent />} />
+          <Route path="team" element={<AdminTeam />} />
         </Route>
 
         <Route path="*" element={<P><NotFound /></P>} />
@@ -125,7 +141,11 @@ const App = () => (
             <Sonner />
             <BrowserRouter>
               <CookieConsent />
+              <ScrollAnimator />
               <AnimatedRoutes />
+              <Suspense fallback={null}>
+                <ChatWidget />
+              </Suspense>
             </BrowserRouter>
           </ErrorBoundary>
         </TooltipProvider>

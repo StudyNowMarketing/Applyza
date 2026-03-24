@@ -1,10 +1,10 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceHero from "@/components/ServiceHero";
 import ServiceCTA from "@/components/ServiceCTA";
 import OtherServices from "@/components/OtherServices";
+import GenuineStudentBanner from "@/components/GenuineStudentBanner";
 import { motion } from "framer-motion";
 import { ClipboardCheck, FileText, Wallet, FileCheck, MessageCircle, HeartHandshake, AlertTriangle } from "lucide-react";
 
@@ -50,15 +50,15 @@ const VisaImmigration = () => (
     />
 
     {/* Important Information */}
-    <section style={{ backgroundColor: "#FFF8E7" }}>
-      <div className="container py-10 md:py-14">
+    <section className="bg-background">
+      <div className="container py-12">
         <div className="max-w-3xl mx-auto">
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
-              <AlertTriangle className="text-amber-600" size={18} />
+          <div className="flex items-start gap-4 bg-amber-50 border border-amber-200 rounded-xl p-5">
+            <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center shrink-0 mt-0.5">
+              <AlertTriangle className="text-amber-600" size={16} />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-primary mb-2">Important Information</h2>
+              <h2 className="text-base font-bold text-foreground mb-1">Important Information</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Applyza only supports visa applications for students who have a genuine intention to study and who meet the academic and financial requirements of their chosen programme. We provide guidance based on publicly available information and our professional experience — we are not immigration lawyers and do not provide legal advice. All visa decisions are made solely by UK Visas and Immigration (UKVI) or the relevant immigration authority.
               </p>
@@ -68,31 +68,35 @@ const VisaImmigration = () => (
       </div>
     </section>
 
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
     {/* Destinations We Cover */}
     <section className="bg-background">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">Destinations We Cover</h2>
-        <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">Destinations We Cover</h2>
+        <div className="flex flex-wrap justify-center gap-2.5 max-w-2xl mx-auto">
           {destinations.map((d) => (
             <motion.span
               key={d.name}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 bg-card rounded-full px-5 py-2.5 shadow-sm text-sm font-semibold text-primary"
+              className="inline-flex items-center gap-2 bg-card rounded-full px-4 py-2 shadow-sm text-sm font-semibold text-foreground border border-border"
             >
-              <span className="text-lg">{d.flag}</span> {d.name}
+              <span className="text-base">{d.flag}</span> {d.name}
             </motion.span>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Our Process */}
-    <section className="bg-card">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-12">Our Process</h2>
-        <div className="max-w-3xl mx-auto space-y-0">
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
+    {/* Our Process — Vertical Timeline */}
+    <section className="bg-background">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">Our Process</h2>
+        <div className="max-w-2xl mx-auto">
           {steps.map((step, i) => (
             <motion.div
               key={step.title}
@@ -100,20 +104,19 @@ const VisaImmigration = () => (
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="flex gap-5 relative"
+              className="flex gap-4 relative"
             >
               <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center shrink-0 z-10 border-2 border-secondary/20">
-                  <step.icon className="text-secondary" size={20} />
+                <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 z-10 text-white text-xs font-bold" style={{ background: "linear-gradient(135deg, hsl(169 63% 47%), hsl(169 63% 40%))" }}>
+                  {i + 1}
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="w-0.5 flex-1 bg-secondary/15 mt-1" />
+                  <div className="w-0.5 flex-1 bg-secondary/20 mt-1" />
                 )}
               </div>
-              <div className="pb-10">
-                <span className="text-xs font-bold text-secondary uppercase tracking-wider">Step {i + 1}</span>
-                <h3 className="font-bold text-primary text-base mt-1">{step.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mt-1">{step.desc}</p>
+              <div className="pb-8">
+                <h3 className="font-bold text-foreground text-base">{step.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mt-0.5">{step.desc}</p>
               </div>
             </motion.div>
           ))}
@@ -121,11 +124,13 @@ const VisaImmigration = () => (
       </div>
     </section>
 
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
     {/* Common Reasons for Refusal */}
     <section className="bg-background">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">Common Reasons for Visa Refusal</h2>
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">Common Reasons for Visa Refusal</h2>
+        <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {refusalReasons.map((r, i) => (
             <motion.div
               key={r.title}
@@ -133,12 +138,12 @@ const VisaImmigration = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card rounded-2xl p-6 shadow-sm border border-destructive/10"
+              className="bg-card rounded-xl p-5 shadow-sm border border-destructive/10 hover:shadow-md transition-all duration-300 card-glow"
             >
-              <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
-                <AlertTriangle className="text-destructive" size={18} />
+              <div className="w-8 h-8 rounded-full bg-destructive/10 flex items-center justify-center mb-3">
+                <AlertTriangle className="text-destructive" size={14} />
               </div>
-              <h3 className="font-bold text-primary text-sm mb-2">{r.title}</h3>
+              <h3 className="font-bold text-foreground text-sm mb-1.5">{r.title}</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}
@@ -147,9 +152,11 @@ const VisaImmigration = () => (
     </section>
 
     <OtherServices currentPath="/services/visa-immigration" />
+    <div className="container max-w-3xl">
+      <GenuineStudentBanner />
+    </div>
     <ServiceCTA label="Book a Free Visa Consultation →" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 

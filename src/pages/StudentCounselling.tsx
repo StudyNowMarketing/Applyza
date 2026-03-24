@@ -1,7 +1,6 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import ServiceHero from "@/components/ServiceHero";
 import ServiceCTA from "@/components/ServiceCTA";
 import OtherServices from "@/components/OtherServices";
@@ -37,9 +36,9 @@ const StudentCounselling = () => (
 
     {/* Who This Is For */}
     <section className="bg-background">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">Who This Is For</h2>
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">Who This Is For</h2>
+        <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
           {whoForCards.map((c, i) => (
             <motion.div
               key={c.title}
@@ -47,12 +46,12 @@ const StudentCounselling = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-card rounded-2xl p-7 shadow-sm hover:shadow-lg transition-shadow duration-300"
+              className="bg-card rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-300 border border-border card-glow"
             >
-              <div className="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center mb-4">
-                <c.icon className="text-secondary" size={22} />
+              <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mb-3">
+                <c.icon className="text-secondary" size={18} />
               </div>
-              <h3 className="font-bold text-primary text-base mb-2">{c.title}</h3>
+              <h3 className="font-bold text-foreground text-base mb-1">{c.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
             </motion.div>
           ))}
@@ -60,11 +59,13 @@ const StudentCounselling = () => (
       </div>
     </section>
 
+    <div className="h-px w-full" style={{ background: "linear-gradient(to right, transparent, hsl(230 25% 90%), transparent)" }} />
+
     {/* What Makes Our Counselling Different */}
-    <section className="bg-card">
-      <div className="container py-12 md:py-20">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary text-center mb-10">What Makes Our Counselling Different</h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    <section className="bg-background">
+      <div className="container py-12">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center mb-8">What Makes Our Counselling Different</h2>
+        <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
           {differentiators.map((d, i) => (
             <motion.div
               key={d.title}
@@ -72,12 +73,12 @@ const StudentCounselling = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="bg-background rounded-2xl p-7 shadow-sm text-center"
+              className="bg-card rounded-xl p-5 shadow-sm text-center border border-border hover:shadow-md transition-all duration-300 card-glow"
             >
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                <d.icon className="text-accent" size={22} />
+              <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mx-auto mb-3">
+                <d.icon className="text-accent" size={18} />
               </div>
-              <h3 className="font-bold text-primary text-sm mb-2">{d.title}</h3>
+              <h3 className="font-bold text-foreground text-sm mb-1">{d.title}</h3>
               <p className="text-xs text-muted-foreground leading-relaxed">{d.desc}</p>
             </motion.div>
           ))}
@@ -88,7 +89,6 @@ const StudentCounselling = () => (
     <OtherServices currentPath="/services/student-counselling" />
     <ServiceCTA label="Book a Free Counselling Session →" />
     <Footer />
-    <WhatsAppButton />
   </div>
 );
 
