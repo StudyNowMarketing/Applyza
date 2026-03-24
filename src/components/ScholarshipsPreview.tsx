@@ -25,13 +25,13 @@ const scholarships = [
 
 const ScholarshipsPreview = () => {
   return (
-    <section style={{ background: "linear-gradient(180deg, hsl(265 40% 97%) 0%, hsl(230 33% 97%) 100%)" }}>
+    <section className="relative">
       <div className="container py-16 md:py-24">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             Scholarships & Funding Opportunities
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-white/50 max-w-2xl mx-auto">
             Studying abroad is an investment — and we want to help you make it more affordable. Browse scholarships from our partner universities, including tuition discounts, merit awards, and country-specific funding.
           </p>
         </div>
@@ -44,14 +44,15 @@ const ScholarshipsPreview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.1 }}
-              className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-white/10"
+              style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
             >
-              <p className="text-xs text-muted-foreground font-medium mb-2">{s.university}</p>
-              <h3 className="text-base font-bold text-primary mb-3">{s.name}</h3>
+              <p className="text-xs text-white/50 font-medium mb-2">{s.university}</p>
+              <h3 className="text-base font-bold text-white mb-3">{s.name}</h3>
               <span className="inline-block bg-secondary/15 text-secondary text-xs font-bold px-3 py-1 rounded-full mb-3">
                 Up to {s.discount} discount
               </span>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.eligibility}</p>
+              <p className="text-sm text-white/50 leading-relaxed mb-4">{s.eligibility}</p>
               <Link to="/scholarships" className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all">
                 View Details →
               </Link>

@@ -36,11 +36,14 @@ const reasons = [
 
 const WhyChooseApplyza = () => {
   return (
-    <section className="bg-card">
+    <section className="relative overflow-hidden">
       <div className="container py-16 md:py-24">
-        <h2 className="text-2xl md:text-4xl font-extrabold text-primary text-center mb-12">
-          Why Students Choose Applyza
-        </h2>
+        <div className="text-center mb-14">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-3">
+            Why Students Choose Applyza
+          </h2>
+          <div className="w-12 h-1 bg-secondary rounded-full mx-auto" />
+        </div>
 
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
           {reasons.map((r, i) => (
@@ -50,13 +53,24 @@ const WhyChooseApplyza = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="text-center"
+              className="rounded-2xl p-6 border-l-4 border-l-secondary/40 hover:border-l-secondary border border-white/10 transition-all duration-300 group"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+              }}
             >
-              <div className="w-14 h-14 rounded-full bg-secondary/15 flex items-center justify-center mx-auto mb-4">
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300"
+                style={{
+                  background: "linear-gradient(135deg, rgba(46,196,182,0.2) 0%, rgba(46,196,182,0.05) 100%)",
+                  border: "1px solid rgba(46,196,182,0.15)",
+                }}
+              >
                 <r.icon className="text-secondary" size={26} />
               </div>
-              <h3 className="text-base font-bold text-primary mb-2">{r.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mx-auto">{r.text}</p>
+              <h3 className="text-base font-bold text-white mb-2">{r.title}</h3>
+              <p className="text-sm text-white/50 leading-relaxed">{r.text}</p>
             </motion.div>
           ))}
         </div>

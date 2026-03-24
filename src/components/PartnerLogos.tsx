@@ -11,9 +11,9 @@ const PartnerLogos = () => {
   const doubled = [...logos, ...logos];
 
   return (
-    <section className="bg-background border-t border-border">
+    <section className="relative border-t border-white/10">
       <div className="container py-12 md:py-20">
-        <h2 className="text-lg md:text-xl font-bold text-primary text-center mb-8">
+        <h2 className="text-lg md:text-xl font-bold text-white text-center mb-8">
           Recognised & Trusted By
         </h2>
       </div>
@@ -23,9 +23,9 @@ const PartnerLogos = () => {
           {doubled.map((name, i) => (
             <div
               key={`${name}-${i}`}
-              className="shrink-0 h-16 px-10 rounded-xl bg-muted flex items-center justify-center"
+              className="shrink-0 h-16 px-10 rounded-xl bg-white/5 flex items-center justify-center"
             >
-              <span className="text-base font-bold text-muted-foreground/80 whitespace-nowrap tracking-wide">
+              <span className="text-base font-bold text-white/60 whitespace-nowrap tracking-wide">
                 {name}
               </span>
             </div>

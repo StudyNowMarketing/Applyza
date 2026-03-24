@@ -22,13 +22,13 @@ const PartnerUniversities = () => {
   const filtered = activeTab === "All" ? universities : universities.filter((u) => u.region === activeTab);
 
   return (
-    <section className="bg-background">
+    <section className="relative">
       <div className="container py-16 md:py-24">
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             Trusted by Leading Institutions Worldwide
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-white/50 max-w-2xl mx-auto">
             We work with 150+ accredited universities and education providers across the UK, Europe, North America, and beyond.
           </p>
         </div>
@@ -41,7 +41,7 @@ const PartnerUniversities = () => {
               className={`px-5 py-2 rounded-full text-sm font-semibold transition-all ${
                 activeTab === tab
                   ? "bg-primary text-primary-foreground"
-                  : "bg-card text-muted-foreground hover:bg-muted"
+                  : "bg-white/10 text-white/60 hover:bg-white/20 border border-white/10"
               }`}
             >
               {tab}
@@ -57,12 +57,13 @@ const PartnerUniversities = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-white/10"
+              style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
             >
               <div className="h-3 bg-gradient-to-r from-primary to-secondary" />
               <div className="p-6">
-                <h3 className="font-bold text-primary text-base mb-1">{uni.name}</h3>
-                <p className="text-xs text-muted-foreground mb-4">{uni.location}</p>
+                <h3 className="font-bold text-white text-base mb-1">{uni.name}</h3>
+                <p className="text-xs text-white/50 mb-4">{uni.location}</p>
                 <Link
                   to={`/find-a-course?university=${encodeURIComponent(uni.name)}`}
                   className="text-secondary text-xs font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
@@ -75,11 +76,11 @@ const PartnerUniversities = () => {
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-muted-foreground py-12">More universities coming soon for this region.</p>
+          <p className="text-center text-white/50 py-12">More universities coming soon for this region.</p>
         )}
 
         <div className="flex justify-center mt-10">
-          <Button variant="outline" size="lg" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground" asChild>
+          <Button variant="outline" size="lg" className="rounded-full border-white/20 text-white hover:bg-white/10" asChild>
             <Link to="/find-a-course">See All 150+ Partners →</Link>
           </Button>
         </div>

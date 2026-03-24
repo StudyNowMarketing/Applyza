@@ -1,22 +1,23 @@
 import { useState } from "react";
-import { Search, Play } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import ScrollRevealText from "@/components/homepage/ScrollRevealText";
 
 const filters = [
-  { emoji: "🇬🇧", label: "UK", country: "United Kingdom" },
-  { emoji: "🇩🇪", label: "Germany", country: "Germany" },
-  { emoji: "🇫🇷", label: "France", country: "France" },
-  { emoji: "🇮🇪", label: "Ireland", country: "Ireland" },
-  { emoji: "🌍", label: "All", country: "" },
+  { emoji: "\u{1F1EC}\u{1F1E7}", label: "UK", country: "United Kingdom" },
+  { emoji: "\u{1F1E9}\u{1F1EA}", label: "Germany", country: "Germany" },
+  { emoji: "\u{1F1EB}\u{1F1F7}", label: "France", country: "France" },
+  { emoji: "\u{1F1EE}\u{1F1EA}", label: "Ireland", country: "Ireland" },
+  { emoji: "\u{1F30D}", label: "All", country: "" },
 ];
 
 const badges = [
-  "✓ AQF Certified Agent",
-  "✓ AI-Powered Matching",
-  "✓ Expert Counsellors",
-  "✓ End-to-End Support",
+  "AQF Certified Agent",
+  "AI-Powered Matching",
+  "Expert Counsellors",
+  "End-to-End Support",
 ];
 
 const Hero = () => {
@@ -30,62 +31,84 @@ const Hero = () => {
   };
 
   return (
-    <section
-      className="relative min-h-[90vh] flex items-center overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #0a0d24 0%, #0f1235 100%)",
-      }}
-    >
-      {/* Teal glow - top right */}
-      <div
-        className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(46,196,182,0.20) 0%, transparent 70%)",
-          filter: "blur(120px)",
-        }}
-      />
-      {/* Purple glow - left */}
-      <div
-        className="absolute top-[20%] left-[-10%] w-[450px] h-[450px] rounded-full pointer-events-none"
-        style={{
-          background: "radial-gradient(circle, rgba(107,63,160,0.30) 0%, transparent 70%)",
-          filter: "blur(100px)",
-        }}
-      />
+    <section className="relative min-h-[95vh] flex items-center overflow-hidden">
+      <div className="container relative z-10 py-24 md:py-32">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Overline */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8"
+          >
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="text-white/70 text-sm font-medium">Trusted by 3,000+ students worldwide</span>
+          </motion.div>
 
-      <div className="container relative z-10 py-20 md:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          {/* LEFT COLUMN */}
-          <div className="flex flex-col gap-6">
-            {/* Video Placeholder */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, #1B2150 0%, #0a0d24 100%)",
-              }}
+          {/* Main headline — scroll reveal */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
+              <span className="text-white">The Smartest Way to</span>
+              <br />
+              <span className="text-gradient">Study Abroad</span>
+            </h1>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+            className="text-white/50 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
+            Discover thousands of courses across 150+ universities. AI-powered matching,
+            expert counselling, and end-to-end visa support.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+          >
+            <Button
+              variant="teal"
+              size="lg"
+              className="rounded-full text-base px-8 py-6 shadow-lg shadow-secondary/20"
+              onClick={() => navigate("/book-a-consultation")}
             >
-              {/* Play button */}
-              <div className="w-[72px] h-[72px] rounded-full bg-white/90 flex items-center justify-center cursor-pointer hover:bg-white transition-colors shadow-lg shadow-white/10">
-                <Play size={28} className="text-[#0a0d24] ml-1" fill="#0a0d24" />
-              </div>
-              <span className="absolute bottom-4 left-0 right-0 text-center text-white/60 text-xs font-medium tracking-wide">
-                Watch: How Applyza Works
-              </span>
-            </motion.div>
+              Book a Free Consultation
+              <ArrowRight className="ml-2" size={18} />
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="rounded-full text-base px-8 py-6 border-white/20 text-white hover:bg-white/10"
+              onClick={() => navigate("/find-a-course")}
+            >
+              <Search className="mr-2" size={18} />
+              Find a Course
+            </Button>
+          </motion.div>
 
-            {/* Search bar - glassmorphism */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex rounded-xl overflow-hidden border border-white/20"
+          {/* Search bar — glass */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="max-w-2xl mx-auto"
+          >
+            <div
+              className="flex rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/20"
               style={{
-                background: "rgba(255,255,255,0.10)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
+                background: "rgba(255,255,255,0.06)",
+                backdropFilter: "blur(20px)",
+                WebkitBackdropFilter: "blur(20px)",
               }}
             >
               <input
@@ -94,20 +117,15 @@ const Hero = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                 placeholder="Search courses, universities, or subjects..."
-                className="flex-1 px-5 py-3.5 text-sm text-white bg-transparent outline-none placeholder:text-white/40 min-w-0"
+                className="flex-1 px-6 py-4 text-sm text-white bg-transparent outline-none placeholder:text-white/30 min-w-0"
               />
-              <Button variant="teal" className="rounded-xl m-1 px-5 shrink-0" onClick={handleSearch}>
+              <Button variant="teal" className="rounded-xl m-1.5 px-6 shrink-0" onClick={handleSearch}>
                 <Search size={18} />
               </Button>
-            </motion.div>
+            </div>
 
             {/* Filter pills */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-2"
-            >
+            <div className="flex flex-wrap gap-2 justify-center mt-4">
               {filters.map((f) => (
                 <button
                   key={f.label}
@@ -118,91 +136,28 @@ const Hero = () => {
                         : "/find-a-course"
                     )
                   }
-                  className="text-white/60 hover:text-white hover:bg-white/20 text-xs font-medium px-3.5 py-1.5 rounded-full transition-all border border-white/10 hover:border-white/20"
+                  className="text-white/40 hover:text-white hover:bg-white/10 text-xs font-medium px-3.5 py-1.5 rounded-full transition-all border border-white/5 hover:border-white/20"
                 >
                   {f.emoji} {f.label}
                 </button>
               ))}
-            </motion.div>
+            </div>
+          </motion.div>
 
-            {/* Trust badges */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-wrap gap-x-4 gap-y-1 mt-2"
-            >
-              {badges.map((b) => (
-                <span key={b} className="text-white/70 text-xs font-medium">
-                  {b}
-                </span>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* RIGHT COLUMN */}
-          <div className="relative hidden md:flex items-center justify-center min-h-[400px]">
-            {/* Decorative concentric circles */}
-            <div className="absolute w-[320px] h-[320px] rounded-full border border-white/5" />
-            <div className="absolute w-[220px] h-[220px] rounded-full border border-white/5" />
-
-            {/* Badge: 99% Visa Success - top */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="absolute top-4 right-4 rounded-xl border border-white/20 px-5 py-3.5"
-              style={{
-                background: "rgba(255,255,255,0.10)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
-                </span>
-                <span className="text-white text-sm font-semibold">99% Visa Success</span>
-              </div>
-            </motion.div>
-
-            {/* Badge: 3,000+ Students Placed - center */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="rounded-xl border border-white/20 px-7 py-5 text-center"
-              style={{
-                background: "rgba(255,255,255,0.10)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-              }}
-            >
-              <div className="text-3xl font-extrabold" style={{ color: "#2EC4B6" }}>
-                3,000+
-              </div>
-              <div className="text-white/70 text-sm font-medium mt-1">Students Placed</div>
-            </motion.div>
-
-            {/* Badge: 150+ Universities - bottom */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.7 }}
-              className="absolute bottom-8 left-4 rounded-xl border border-white/20 px-5 py-3.5"
-              style={{
-                background: "rgba(255,255,255,0.10)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-lg">🎓</span>
-                <span className="text-white text-sm font-semibold">150+ Universities</span>
-              </div>
-            </motion.div>
-          </div>
+          {/* Trust badges */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-wrap gap-x-6 gap-y-2 justify-center mt-12"
+          >
+            {badges.map((b) => (
+              <span key={b} className="text-white/30 text-xs font-medium flex items-center gap-1.5">
+                <span className="w-1 h-1 rounded-full bg-secondary/60" />
+                {b}
+              </span>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

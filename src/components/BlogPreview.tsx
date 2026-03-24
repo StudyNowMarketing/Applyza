@@ -22,10 +22,10 @@ const posts = [
 
 const BlogPreview = () => {
   return (
-    <section className="bg-background">
+    <section className="relative">
       <div className="container py-12 md:py-20">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             Guides, Tips & Insights
           </h2>
         </div>
@@ -38,7 +38,8 @@ const BlogPreview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.1 }}
-              className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-white/10"
+              style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
             >
               <div className="h-40 bg-gradient-to-br from-accent/10 via-secondary/10 to-muted flex items-center justify-center">
                 <BookOpen className="text-accent/20" size={40} />
@@ -47,8 +48,8 @@ const BlogPreview = () => {
                 <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2.5 py-1 rounded-full mb-3">
                   {post.category}
                 </span>
-                <h3 className="font-bold text-primary text-sm leading-snug mb-2">{post.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
+                <h3 className="font-bold text-white text-sm leading-snug mb-2">{post.title}</h3>
+                <p className="text-xs text-white/50 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
                 <Link to="/blog" className="text-secondary text-xs font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all">
                   Read More →
                 </Link>

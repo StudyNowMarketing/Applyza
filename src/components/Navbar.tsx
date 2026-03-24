@@ -36,9 +36,15 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        showSolid ? "bg-primary shadow-lg" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
+        showSolid ? "shadow-lg" : "bg-transparent"
       }`}
+      style={showSolid ? {
+        background: "rgba(10, 13, 36, 0.8)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
+      } : undefined}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="text-primary-foreground text-xl md:text-2xl font-extrabold tracking-tight shrink-0">
@@ -79,7 +85,7 @@ const Navbar = ({ solid = false }: { solid?: boolean }) => {
       </div>
 
       {mobileOpen && (
-        <div className="xl:hidden bg-primary border-t border-primary-foreground/10 pb-6">
+        <div className="xl:hidden border-t border-primary-foreground/10 pb-6" style={{ background: "rgba(10,13,36,0.9)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" }}>
           <div className="container flex flex-col gap-3 pt-4">
             {navLinks.map((link) => (
               <Link

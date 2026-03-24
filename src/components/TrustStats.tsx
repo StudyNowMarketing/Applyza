@@ -59,15 +59,15 @@ const StatItem = ({
   const { count, ref } = useCountUp(value);
   return (
     <div ref={ref} className="flex items-center">
-      <div className="text-center px-4 py-6 flex-1">
-        <div className="text-3xl md:text-5xl font-extrabold text-primary">
+      <div className="text-center px-4 py-8 flex-1">
+        <div className="text-4xl md:text-5xl font-extrabold text-gradient mb-2">
           {count.toLocaleString()}
           {suffix}
         </div>
-        <div className="text-sm text-muted-foreground mt-1">{label}</div>
+        <div className="text-sm text-white/50 font-medium">{label}</div>
       </div>
       {!isLast && (
-        <div className="hidden md:block w-px h-12 bg-border shrink-0" />
+        <div className="hidden md:block w-px h-16 bg-white/10 shrink-0" />
       )}
     </div>
   );
@@ -75,12 +75,21 @@ const StatItem = ({
 
 const TrustStats = () => {
   return (
-    <section className="bg-card">
-      <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {stats.map((s, i) => (
-            <StatItem key={s.label} {...s} isLast={i === stats.length - 1} />
-          ))}
+    <section className="relative overflow-hidden">
+      <div className="container relative z-10 py-12 md:py-16">
+        <div
+          className="rounded-3xl border border-white/10 p-2"
+          style={{
+            background: "rgba(255,255,255,0.04)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+          }}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {stats.map((s, i) => (
+              <StatItem key={s.label} {...s} isLast={i === stats.length - 1} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

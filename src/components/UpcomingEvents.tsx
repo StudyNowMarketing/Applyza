@@ -32,13 +32,13 @@ const events = [
 
 const UpcomingEvents = () => {
   return (
-    <section className="bg-background">
+    <section className="relative">
       <div className="container py-12 md:py-20">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             The Applyza Experience
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-white/50 max-w-2xl mx-auto">
             Join us at our events across the globe. Meet university representatives face-to-face, attend expert panels, and get your questions answered.
           </p>
         </div>
@@ -51,7 +51,8 @@ const UpcomingEvents = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.1 }}
-              className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 flex"
+              className="rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300 flex border border-white/10"
+              style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
             >
               <div className="shrink-0 w-24 flex flex-col items-center justify-center gradient-purple text-accent-foreground">
                 <span className="text-3xl font-extrabold leading-none">{event.day}</span>
@@ -59,11 +60,11 @@ const UpcomingEvents = () => {
               </div>
               <div className="p-5 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="font-bold text-primary text-sm mb-1 leading-snug">{event.title}</h3>
-                  <p className="text-xs text-muted-foreground flex items-center gap-1 mb-2">
+                  <h3 className="font-bold text-white text-sm mb-1 leading-snug">{event.title}</h3>
+                  <p className="text-xs text-white/50 flex items-center gap-1 mb-2">
                     <MapPin size={12} /> {event.location}
                   </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed mb-4">{event.description}</p>
+                  <p className="text-xs text-white/50 leading-relaxed mb-4">{event.description}</p>
                 </div>
                 <Button
                   variant="outline"

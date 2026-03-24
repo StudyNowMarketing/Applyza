@@ -31,13 +31,13 @@ const services = [
 
 const ServicesOverview = () => {
   return (
-    <section className="bg-background">
+    <section className="relative">
       <div className="container py-16 md:py-24">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-primary mb-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-4">
             Honest Guidance for Genuine Students
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <p className="text-white/50 max-w-xl mx-auto">
             From course selection to visa approval — we provide expert, impartial guidance at every stage of your study abroad journey.
           </p>
         </div>
@@ -50,11 +50,16 @@ const ServicesOverview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+              className="rounded-2xl p-6 border border-white/10 hover:border-secondary/30 hover:-translate-y-1 transition-all duration-300 group"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+              }}
             >
-              <s.icon className="text-accent mb-4" size={32} />
-              <h3 className="text-lg font-bold text-primary mb-2">{s.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.text}</p>
+              <s.icon className="text-secondary/70 mb-4 group-hover:text-secondary transition-colors" size={32} />
+              <h3 className="text-lg font-bold text-white mb-2">{s.title}</h3>
+              <p className="text-sm text-white/50 leading-relaxed mb-4">{s.text}</p>
               <Link
                 to={s.to}
                 className="text-secondary text-sm font-semibold inline-flex items-center gap-1 hover:gap-2 transition-all"
