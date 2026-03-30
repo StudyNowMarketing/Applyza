@@ -105,9 +105,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        {/* Carousel */}
-        <div className="relative max-w-2xl mx-auto">
-          {/* Arrows */}
+        <div className="relative max-w-3xl mx-auto">
           <button
             onClick={prev}
             className="absolute -left-4 md:-left-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
@@ -133,71 +131,85 @@ const Testimonials = () => {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="rounded-2xl p-8 md:p-10 border border-white/10 text-center"
+                className="rounded-2xl border border-white/10 overflow-hidden"
                 style={{
                   background: "rgba(255,255,255,0.04)",
                   backdropFilter: "blur(10px)",
                   WebkitBackdropFilter: "blur(10px)",
                 }}
               >
-                {/* Photo */}
-                <div className="relative w-20 h-20 mx-auto mb-5">
-                  <svg
-                    className="absolute inset-0 w-full h-full animate-spin"
-                    style={{ animationDuration: "8s" }}
-                    viewBox="0 0 88 88"
-                  >
-                    <circle
-                      cx="44"
-                      cy="44"
-                      r="41"
-                      fill="none"
-                      stroke={t.color}
-                      strokeWidth="2.5"
-                      strokeDasharray="30 15"
-                      strokeLinecap="round"
-                      opacity={0.6}
-                    />
-                  </svg>
-                  <div
-                    className="absolute inset-2 rounded-full flex items-center justify-center text-xl font-bold text-white"
-                    style={{
-                      background: `linear-gradient(135deg, ${t.color}, ${t.color}88)`,
-                    }}
-                  >
-                    {t.initials}
-                  </div>
-                </div>
-
-                {/* Name & details */}
-                <h3 className="text-lg font-bold text-white">{t.name}</h3>
-                <p className="text-white/40 text-sm mb-6">
-                  {t.country} → {t.university}
-                </p>
-
-                {/* Quote */}
-                <div className="relative max-w-lg mx-auto mb-6">
-                  <Quote size={14} className="text-secondary/20 absolute -top-2 -left-2" />
-                  <p className="italic text-white/70 leading-relaxed text-base">
-                    "{t.quote}"
-                  </p>
-                </div>
-
-                {/* Video thumbnail */}
-                {t.hasVideo && (
-                  <div
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer group transition-all hover:bg-white/5"
-                    style={{ border: `1px solid ${t.color}33` }}
-                  >
-                    <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
-                      style={{ background: `${t.color}22`, border: `1.5px solid ${t.color}55` }}
-                    >
-                      <Play size={12} className="text-white ml-0.5" />
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_220px]">
+                  {/* Left — text content */}
+                  <div className="p-8 md:p-10 flex flex-col justify-center">
+                    {/* Photo + name row */}
+                    <div className="flex items-center gap-4 mb-5">
+                      <div className="relative w-14 h-14 shrink-0">
+                        <svg
+                          className="absolute inset-0 w-full h-full animate-spin"
+                          style={{ animationDuration: "8s" }}
+                          viewBox="0 0 60 60"
+                        >
+                          <circle
+                            cx="30"
+                            cy="30"
+                            r="28"
+                            fill="none"
+                            stroke={t.color}
+                            strokeWidth="2"
+                            strokeDasharray="22 12"
+                            strokeLinecap="round"
+                            opacity={0.6}
+                          />
+                        </svg>
+                        <div
+                          className="absolute inset-1.5 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                          style={{
+                            background: `linear-gradient(135deg, ${t.color}, ${t.color}88)`,
+                          }}
+                        >
+                          {t.initials}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-base font-bold text-white">{t.name}</h3>
+                        <p className="text-white/40 text-sm">
+                          {t.country} → {t.university}
+                        </p>
+                      </div>
                     </div>
-                    <span className="text-xs text-white/40 font-medium">Watch video review</span>
+
+                    {/* Quote */}
+                    <div className="relative">
+                      <Quote size={14} className="text-secondary/20 absolute -top-1 -left-1" />
+                      <p className="italic text-white/70 leading-relaxed text-[15px] pl-5">
+                        "{t.quote}"
+                      </p>
+                    </div>
                   </div>
-                )}
+
+                  {/* Right — video thumbnail */}
+                  {t.hasVideo && (
+                    <div
+                      className="relative flex items-center justify-center cursor-pointer group min-h-[180px] md:min-h-0 border-t md:border-t-0 md:border-l border-white/10"
+                      style={{ background: `${t.color}08` }}
+                    >
+                      <div className="flex flex-col items-center gap-3">
+                        <div
+                          className="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                          style={{
+                            background: `${t.color}22`,
+                            border: `2px solid ${t.color}55`,
+                          }}
+                        >
+                          <Play size={20} className="text-white ml-0.5" />
+                        </div>
+                        <span className="text-[11px] text-white/30 font-medium">
+                          Watch review
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
