@@ -138,31 +138,31 @@ const Testimonials = () => {
                   WebkitBackdropFilter: "blur(10px)",
                 }}
               >
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_220px]">
+                <div className="grid grid-cols-1 md:grid-cols-[1fr_320px]">
                   {/* Left — text content */}
                   <div className="p-8 md:p-10 flex flex-col justify-center">
-                    {/* Photo + name row */}
                     <div className="flex items-center gap-4 mb-5">
-                      <div className="relative w-14 h-14 shrink-0">
+                      {/* Larger photo placeholder */}
+                      <div className="relative w-[72px] h-[72px] shrink-0">
                         <svg
                           className="absolute inset-0 w-full h-full animate-spin"
                           style={{ animationDuration: "8s" }}
-                          viewBox="0 0 60 60"
+                          viewBox="0 0 76 76"
                         >
                           <circle
-                            cx="30"
-                            cy="30"
-                            r="28"
+                            cx="38"
+                            cy="38"
+                            r="36"
                             fill="none"
                             stroke={t.color}
                             strokeWidth="2"
-                            strokeDasharray="22 12"
+                            strokeDasharray="24 14"
                             strokeLinecap="round"
                             opacity={0.6}
                           />
                         </svg>
                         <div
-                          className="absolute inset-1.5 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                          className="absolute inset-[5px] rounded-full flex items-center justify-center text-lg font-bold text-white"
                           style={{
                             background: `linear-gradient(135deg, ${t.color}, ${t.color}88)`,
                           }}
@@ -178,7 +178,6 @@ const Testimonials = () => {
                       </div>
                     </div>
 
-                    {/* Quote */}
                     <div className="relative">
                       <Quote size={14} className="text-secondary/20 absolute -top-1 -left-1" />
                       <p className="italic text-white/70 leading-relaxed text-[15px] pl-5">
@@ -187,25 +186,28 @@ const Testimonials = () => {
                     </div>
                   </div>
 
-                  {/* Right — video thumbnail */}
+                  {/* Right — landscape video thumbnail */}
                   {t.hasVideo && (
                     <div
-                      className="relative flex items-center justify-center cursor-pointer group min-h-[180px] md:min-h-0 border-t md:border-t-0 md:border-l border-white/10"
+                      className="relative cursor-pointer group border-t md:border-t-0 md:border-l border-white/10 aspect-video md:aspect-auto"
                       style={{ background: `${t.color}08` }}
                     >
-                      <div className="flex flex-col items-center gap-3">
-                        <div
-                          className="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
-                          style={{
-                            background: `${t.color}22`,
-                            border: `2px solid ${t.color}55`,
-                          }}
-                        >
-                          <Play size={20} className="text-white ml-0.5" />
+                      {/* 16:9 ratio enforcer for desktop */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="flex flex-col items-center gap-3">
+                          <div
+                            className="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                            style={{
+                              background: `${t.color}22`,
+                              border: `2px solid ${t.color}55`,
+                            }}
+                          >
+                            <Play size={20} className="text-white ml-0.5" />
+                          </div>
+                          <span className="text-[11px] text-white/30 font-medium">
+                            Watch video review
+                          </span>
                         </div>
-                        <span className="text-[11px] text-white/30 font-medium">
-                          Watch review
-                        </span>
                       </div>
                     </div>
                   )}
@@ -214,7 +216,6 @@ const Testimonials = () => {
             </AnimatePresence>
           </div>
 
-          {/* Dots */}
           <div className="flex justify-center gap-3 mt-8">
             {testimonials.map((_, i) => (
               <button
