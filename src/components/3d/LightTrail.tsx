@@ -17,7 +17,7 @@ const LightTrail: React.FC<LightTrailProps> = ({
   lineWidth = 2,
 }) => {
   const dashOffsetRef = useRef(0);
-  const lineRef = useRef<THREE.Line>(null);
+  const lineRef = useRef<any>(null);
 
   // Create a smooth curve from control points
   const curvePoints = useMemo(() => {
