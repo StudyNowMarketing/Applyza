@@ -40,7 +40,7 @@ const LightTrail: React.FC<LightTrailProps> = ({
 
   return (
     <Line
-      ref={lineRef as React.RefObject<THREE.Line>}
+      ref={lineRef}
       points={curvePoints}
       color={color}
       lineWidth={lineWidth}
