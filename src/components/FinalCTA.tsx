@@ -22,8 +22,7 @@ const FinalCTA = () => {
             Your Future Doesn't Have to Wait
           </h2>
           <p className="text-white/60 max-w-xl mx-auto mb-8 text-sm md:text-base">
-            Book a free consultation with one of our expert counsellors and take
-            the first step toward your international education.
+            Find out in minutes if you qualify for your dream programme — completely free, no commitment required.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
@@ -32,7 +31,7 @@ const FinalCTA = () => {
               className="rounded-full font-bold px-8 shadow-lg shadow-secondary/20"
               asChild
             >
-              <Link to="/book-a-consultation">Book a Free Consultation</Link>
+              <Link to="/eligibility-check">Check Your Eligibility</Link>
             </Button>
             <Button
               size="lg"
