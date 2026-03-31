@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const posts = [
@@ -7,16 +6,19 @@ const posts = [
     category: "Study Abroad Guide",
     title: "How to Choose the Right University: A Step-by-Step Guide",
     excerpt: "Choosing a university is one of the biggest decisions you'll make. Here's a practical framework to narrow down your options and find the perfect fit.",
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80",
   },
   {
     category: "Visa Guide",
     title: "UK Student Visa 2026: Everything You Need to Know",
     excerpt: "From documents to timelines, here's your complete guide to the UK student visa process — including recent policy updates for 2026.",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80",
   },
   {
     category: "Budgeting",
     title: "Studying Abroad on a Budget: 5 Countries Where Education Won't Break the Bank",
     excerpt: "You don't need a fortune to get a world-class education. These five destinations offer quality programmes at surprisingly affordable costs.",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=80",
   },
 ];
 
@@ -38,11 +40,15 @@ const BlogPreview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.1 }}
-              className="rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-white/10"
+              className="group rounded-2xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-white/10"
               style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)" }}
             >
-              <div className="h-40 bg-gradient-to-br from-accent/10 via-secondary/10 to-muted flex items-center justify-center">
-                <BookOpen className="text-accent/20" size={40} />
+              <div className="h-44 overflow-hidden">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
               <div className="p-5">
                 <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-secondary bg-secondary/10 px-2.5 py-1 rounded-full mb-3">
