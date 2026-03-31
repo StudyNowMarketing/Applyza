@@ -207,7 +207,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <a href="https://wa.me/447000000000?text=Hi%20Applyza%2C%20I%20have%20a%20question" target="_blank" rel="noopener noreferrer"
+            <a href="https://wa.me/447350394837?text=Hi%20Applyza%2C%20I%20have%20a%20question" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-3 bg-[#25D366] hover:bg-[#20b858] rounded-xl p-4 transition-colors">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                 <MessageCircle size={20} className="text-white" />

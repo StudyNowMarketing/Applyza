@@ -32,9 +32,9 @@ const CARDS: StackCard[] = [
     accent: "from-teal-500/20 to-cyan-500/20",
   },
   {
-    title: "Visa & Immigration",
+    title: "Student Visa Applications",
     description:
-      "Our 99% visa success rate speaks for itself. We guide you through every step of the visa process with expert document preparation, mock interviews, and dedicated support until you receive your approval.",
+      "Our 99% student visa success rate speaks for itself. We guide you through every step of your student visa application — document preparation, financial evidence, mock interviews, and dedicated support until you receive your approval.",
     icon: <Shield className="w-8 h-8" />,
     image: "/glass-passport.png",
     cta: "Learn More",
@@ -140,7 +140,7 @@ const StackingCards = () => {
           </span>
         </h2>
         <p className="text-white/60 max-w-2xl mx-auto text-lg">
-          From course selection to visa approval — expert guidance at every
+          From course selection to student visa approval — expert guidance at every
           stage of your journey.
         </p>
       </div>

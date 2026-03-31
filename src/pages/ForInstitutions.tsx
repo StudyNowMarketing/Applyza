@@ -109,9 +109,18 @@ const ForInstitutions = () => {
     document.getElementById("enquiry-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://applyza.com" },
+      { "@type": "ListItem", "position": 2, "name": "For Universities", "item": "https://applyza.com/for-institutions" }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SEO title="Partner With Applyza | Student Recruitment for Universities" description="Reach qualified international students from 10+ countries. Applyza delivers application-ready students through expert counselling and AI-powered matching." path="/for-institutions" />
+      <SEO title="University Recruitment Partner | Reach International Students | Applyza" description="Partner with Applyza to recruit qualified international students from Africa, the Middle East, and beyond. Professionally certified advisors. 3,000+ placements. 99% visa success." path="/for-institutions" jsonLd={breadcrumbSchema} />
       <Navbar solid />
 
       {/* Dark Hero */}
@@ -128,9 +137,9 @@ const ForInstitutions = () => {
               <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">For Institutions</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Partner With Applyza</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Recruit International Students from Africa, the Middle East &amp; Beyond</h1>
           <p className="text-white/50 text-sm max-w-xl">
-            Reach motivated, application-ready students from fast-growing education markets. We connect your institution with the right students — and handle everything from initial engagement to enrolment.
+            Partner with Applyza to access motivated, pre-screened students from 10+ source countries. We manage everything from first contact to enrolment — backed by a 99% visa success rate and 10+ years of international recruitment experience.
           </p>
           <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
             Submit Enquiry

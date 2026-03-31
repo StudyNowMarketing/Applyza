@@ -2,7 +2,7 @@ import SEO from "@/components/SEO";
 import { SparklesCore } from "@/components/ui/SparklesCore";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows } from "lucide-react";
+import { Search, SlidersHorizontal, X, BookOpen, ChevronDown, MapPin, Clock, Sparkles, GitCompareArrows, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 
 import { Link, useSearchParams } from "react-router-dom";
 import { MovingBorderButton } from "@/components/ui/MovingBorder";
@@ -280,6 +280,8 @@ const FindACourse = () => {
   const [feeRange, setFeeRange] = useState([0, 30000]);
   const [scholarshipOnly, setScholarshipOnly] = useState(false);
   const [sortBy, setSortBy] = useState("relevance");
+  const [pageSize, setPageSize] = useState(20);
+  const [currentPage, setCurrentPage] = useState(1);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [showCompareModal, setShowCompareModal] = useState(false);
@@ -290,6 +292,23 @@ const FindACourse = () => {
     );
   };
 
+  // Titles that are not genuine courses (CTAs, nav pages, names, guides, forms, etc.)
+  const JUNK_TITLES = [
+    "Dan Martyr",
+    "Our statement of service",
+    "Courses",
+    "SQE Newsletter",
+    "SIGN UP FOR OPEN DAY",
+    "Sign up for postgraduate Distance Learning updates",
+    "Register your interest in Law (Graduate Entry) LLB",
+    "Postgraduate Guide 2025/26",
+    "Undergraduate mini guide",
+    "Short courses application form",
+    "About the short courses offer",
+    "Module choices for exchanges and Study Abroad students",
+    "Sound Engineering Abroad",
+  ];
+
   const { data: courses = [], isLoading } = useQuery({
     queryKey: ["courses"],
     queryFn: async () => {
@@ -297,7 +316,47 @@ const FindACourse = () => {
         .from("courses")
         .select(
           "id, title, slug, university_name, country, city, subject_area, study_level, duration, tuition_fee, intake_dates, description, scholarship_available, featured, entry_requirements, english_requirements"
-        );
+        )
+        .not("title", "in", `(${JUNK_TITLES.map((t) => `"${t}"`).join(",")})`)
+        .not("title", "ilike", "%sign up%")
+        .not("title", "ilike", "%register your interest%")
+        .not("title", "ilike", "%open day%")
+        .not("title", "ilike", "%newsletter%")
+        .not("title", "ilike", "%brochure%")
+        .not("title", "ilike", "%statement of service%")
+        .not("title", "ilike", "%application form%")
+        .not("title", "ilike", "% guide %")
+        .not("title", "ilike", "% guide")
+        .not("title", "ilike", "% guides")
+        .not("title", "ilike", "guide %")
+        .not("title", "ilike", "%mini guide%")
+        .not("title", "ilike", "%module choices%")
+        .not("title", "ilike", "%short courses offer%")
+        .not("title", "ilike", "%expression of interest%")
+        .not("title", "ilike", "%thank you for your%")
+        .not("title", "ilike", "%facilities%")
+        .not("title", "ilike", "%abroad%")
+        .not("title", "ilike", "%prospectus%")
+        .not("title", "ilike", "%portfolio%")
+        .not("title", "ilike", "%applicant day%")
+        .not("title", "ilike", "%portfolio guidance%")
+        .not("title", "ilike", "%digital portfolio%")
+        .not("title", "ilike", "%part-time courses%")
+        .not("title", "ilike", "%distance learning courses%")
+        .not("title", "ilike", "%january courses%")
+        .not("title", "ilike", "%foundation courses%")
+        .not("title", "ilike", "%postgraduate courses at%")
+        .not("title", "ilike", "%undergraduate courses at%")
+        .not("title", "ilike", "%what our students say%")
+        .not("title", "ilike", "%return to study%")
+        .not("title", "ilike", "%apprenticeship%")
+        .not("title", "ilike", "%frequently asked%")
+        .not("title", "ilike", "%programmes%")
+        .not("title", "ilike", "%your learning%")
+        .not("title", "ilike", "%how to apply%")
+        // Only show courses with genuine international fees (> £10,000)
+        // UK home fee cap is £9,535 — anything ≤ £10,000 is a home fee or data error
+        .gt("tuition_fee", 10000);
       if (error) throw error;
       return data as Course[];
     },
@@ -380,6 +439,15 @@ const FindACourse = () => {
     scholarshipOnly,
     sortBy,
   ]);
+
+  // Reset to page 1 whenever filters or sort change
+  useEffect(() => { setCurrentPage(1); }, [filtered]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  const paginatedResults = filtered.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   const toggleFilter = (
     arr: string[],
@@ -584,9 +652,18 @@ const FindACourse = () => {
     </div>
   );
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://applyza.com" },
+      { "@type": "ListItem", "position": 2, "name": "Find a Course", "item": "https://applyza.com/find-a-course" }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Find a Course | Search Study Abroad Programmes | Applyza" description="Browse courses across the UK, Europe, and beyond. Filter by country, subject, fees, and study level. Expert guidance from AQF certified counsellors." path="/find-a-course" />
+      <SEO title="Find a Course | Search Study Abroad Programmes | Applyza" description="Browse courses across the UK, Europe, and beyond. Filter by country, subject, fees, and study level. Expert guidance from certified international education counsellors." path="/find-a-course" jsonLd={breadcrumbSchema} />
       <Navbar solid />
 
       {/* Hero */}
@@ -743,27 +820,47 @@ const FindACourse = () => {
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
               <p className="text-sm text-gray-500">
-                Showing{" "}
-                <span className="font-semibold text-foreground">
-                  {filtered.length}
-                </span>{" "}
-                courses
+                {filtered.length === 0 ? (
+                  <>Showing <span className="font-semibold text-foreground">0</span> courses</>
+                ) : (
+                  <>
+                    Showing{" "}
+                    <span className="font-semibold text-foreground">
+                      {(currentPage - 1) * pageSize + 1}–{Math.min(currentPage * pageSize, filtered.length)}
+                    </span>{" "}
+                    of{" "}
+                    <span className="font-semibold text-foreground">{filtered.length}</span>{" "}
+                    courses
+                  </>
+                )}
               </p>
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-48 rounded-lg border-gray-200 text-sm h-9">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="relevance">Relevance</SelectItem>
-                  <SelectItem value="fee-asc">
-                    Tuition (Low to High)
-                  </SelectItem>
-                  <SelectItem value="fee-desc">
-                    Tuition (High to Low)
-                  </SelectItem>
-                  <SelectItem value="university">University (A-Z)</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs text-gray-400 whitespace-nowrap hidden sm:inline">Per page:</span>
+                  <Select value={String(pageSize)} onValueChange={(v) => { setPageSize(Number(v)); setCurrentPage(1); }}>
+                    <SelectTrigger className="w-[70px] rounded-lg border-gray-200 text-sm h-9">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="10">10</SelectItem>
+                      <SelectItem value="20">20</SelectItem>
+                      <SelectItem value="50">50</SelectItem>
+                      <SelectItem value="100">100</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-48 rounded-lg border-gray-200 text-sm h-9">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="relevance">Relevance</SelectItem>
+                    <SelectItem value="fee-asc">Tuition (Low to High)</SelectItem>
+                    <SelectItem value="fee-desc">Tuition (High to Low)</SelectItem>
+                    <SelectItem value="university">University (A-Z)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             {isLoading ? (
@@ -810,11 +907,98 @@ const FindACourse = () => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filtered.map((course) => (
-                  <CourseCard key={course.id} course={course} isCompared={compareIds.includes(course.id)} onToggleCompare={() => toggleCompare(course.id)} compareDisabled={compareIds.length >= 3 && !compareIds.includes(course.id)} />
-                ))}
-              </div>
+              <>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {paginatedResults.map((course) => (
+                    <CourseCard key={course.id} course={course} isCompared={compareIds.includes(course.id)} onToggleCompare={() => toggleCompare(course.id)} compareDisabled={compareIds.length >= 3 && !compareIds.includes(course.id)} />
+                  ))}
+                </div>
+
+                {/* ── Pagination bar ── */}
+                {totalPages > 1 && (
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-gray-100">
+                    {/* Page info */}
+                    <p className="text-sm text-gray-400 order-2 sm:order-1">
+                      Page <span className="font-semibold text-foreground">{currentPage}</span> of{" "}
+                      <span className="font-semibold text-foreground">{totalPages}</span>
+                    </p>
+
+                    {/* Controls */}
+                    <div className="flex items-center gap-1 order-1 sm:order-2">
+                      {/* First */}
+                      <button
+                        onClick={() => setCurrentPage(1)}
+                        disabled={currentPage === 1}
+                        className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-400 hover:text-secondary hover:bg-secondary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        aria-label="First page"
+                      >
+                        <ChevronsLeft size={15} />
+                      </button>
+
+                      {/* Previous */}
+                      <button
+                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                        disabled={currentPage === 1}
+                        className="flex items-center gap-1 h-8 px-2.5 rounded-lg text-sm text-gray-500 hover:text-secondary hover:bg-secondary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors font-medium"
+                        aria-label="Previous page"
+                      >
+                        <ChevronLeft size={14} /> Previous
+                      </button>
+
+                      {/* Page numbers */}
+                      <div className="flex items-center gap-1 mx-1">
+                        {Array.from({ length: totalPages }, (_, i) => i + 1)
+                          .filter((p) => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1)
+                          .reduce<(number | "…")[]>((acc, p, idx, arr) => {
+                            if (idx > 0 && p - (arr[idx - 1] as number) > 1) acc.push("…");
+                            acc.push(p);
+                            return acc;
+                          }, [])
+                          .map((p, i) =>
+                            p === "…" ? (
+                              <span key={`ellipsis-${i}`} className="w-8 text-center text-gray-300 text-sm select-none">…</span>
+                            ) : (
+                              <button
+                                key={p}
+                                onClick={() => setCurrentPage(p as number)}
+                                className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                                  currentPage === p
+                                    ? "text-white"
+                                    : "text-gray-500 hover:text-secondary hover:bg-secondary/10"
+                                }`}
+                                style={currentPage === p ? { background: "#2EC4B6" } : undefined}
+                                aria-label={`Page ${p}`}
+                                aria-current={currentPage === p ? "page" : undefined}
+                              >
+                                {p}
+                              </button>
+                            )
+                          )}
+                      </div>
+
+                      {/* Next */}
+                      <button
+                        onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                        disabled={currentPage === totalPages}
+                        className="flex items-center gap-1 h-8 px-2.5 rounded-lg text-sm text-gray-500 hover:text-secondary hover:bg-secondary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors font-medium"
+                        aria-label="Next page"
+                      >
+                        Next <ChevronRight size={14} />
+                      </button>
+
+                      {/* Last */}
+                      <button
+                        onClick={() => setCurrentPage(totalPages)}
+                        disabled={currentPage === totalPages}
+                        className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-400 hover:text-secondary hover:bg-secondary/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        aria-label="Last page"
+                      >
+                        <ChevronsRight size={15} />
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

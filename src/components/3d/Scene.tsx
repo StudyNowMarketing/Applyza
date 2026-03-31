@@ -5,7 +5,16 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import SceneController from './SceneController';
 import ParticleField from './ParticleField';
 
+// Skip WebGL canvas during static pre-render.
+// scripts/prerender.mjs injects window.__PRERENDER__ = true before page load,
+// preventing Three.js from attempting to create a WebGL context in a headless
+// browser that may not have full GPU support.
+const isPrerender =
+  typeof window !== 'undefined' && (window as unknown as { __PRERENDER__?: boolean }).__PRERENDER__ === true;
+
 const Scene: React.FC = () => {
+  if (isPrerender) return null;
+
   return (
     <Canvas
       style={{

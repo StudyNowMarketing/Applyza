@@ -13,7 +13,7 @@ const allServices = [
   },
   {
     icon: Shield,
-    title: "Visa & Immigration",
+    title: "Student Visa Applications",
     to: "/services/visa-immigration",
     gradient: "linear-gradient(135deg, #2EC4B6, #20A89A)",
     iconBg: "rgba(46,196,182,0.12)",

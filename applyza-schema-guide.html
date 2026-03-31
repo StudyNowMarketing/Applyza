@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applyza — Schema Markup Implementation Guide</title>
+<style>
+  :root {
+    --navy: #0f1e3c; --navy-mid: #1a3160; --teal: #0ea5e9; --teal-light: #38bdf8;
+    --teal-pale: #e0f2fe; --gold: #f59e0b; --gold-pale: #fef3c7; --green: #10b981;
+    --green-pale: #d1fae5; --red: #ef4444; --red-pale: #fee2e2; --purple: #8b5cf6;
+    --purple-pale: #ede9fe; --orange: #f97316; --orange-pale: #ffedd5;
+    --slate: #64748b; --slate-light: #94a3b8; --bg: #f8fafc; --white: #ffffff;
+    --text: #1e293b; --border: #e2e8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .doc-header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e4080 100%); color: white; padding: 48px; }
+  .header-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 12px; }
+  .doc-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .doc-subtitle { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+  .header-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+  .meta-item { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 6px; }
+  .meta-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal-light); }
+
+  .content { padding: 32px 48px; max-width: 1100px; }
+
+  .section { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 28px; margin-bottom: 24px; }
+  .section-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--bg); }
+  .section-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .section-title { font-size: 17px; font-weight: 700; color: var(--navy); }
+  .section-sub { font-size: 12px; color: var(--slate); margin-top: 2px; }
+
+  .schema-block { margin-bottom: 28px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .schema-header { background: var(--bg); padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+  .schema-title { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .schema-pages { font-size: 11px; color: var(--slate); margin-top: 2px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-red { background: var(--red-pale); color: #991b1b; }
+  .badge-gold { background: var(--gold-pale); color: #92400e; }
+  .badge-green { background: var(--green-pale); color: #065f46; }
+  .badge-teal { background: var(--teal-pale); color: #0369a1; }
+  .badge-exists { background: #dcfce7; color: #166534; }
+
+  .schema-body { padding: 18px; }
+  .schema-note { font-size: 13px; color: var(--slate); margin-bottom: 14px; line-height: 1.6; }
+
+  pre { background: #0f172a; border-radius: 8px; padding: 18px; overflow-x: auto; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; line-height: 1.6; color: #e2e8f0; margin-bottom: 14px; }
+  .kw { color: #7dd3fc; }
+  .val { color: #a5f3fc; }
+  .str { color: #86efac; }
+  .num { color: #fde68a; }
+  .comment { color: #64748b; font-style: italic; }
+
+  .impl-note { background: var(--bg); border-left: 3px solid var(--teal); padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; color: var(--slate); margin-top: 10px; }
+  .impl-note strong { color: var(--navy); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
+  th { background: var(--navy); color: white; padding: 9px 13px; text-align: left; font-weight: 600; font-size: 12px; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px; }
+
+  .tip { border-radius: 8px; padding: 12px 16px; font-size: 13px; margin-bottom: 16px; display: flex; gap: 10px; }
+  .tip-yellow { background: var(--gold-pale); color: #78350f; }
+  .tip-blue { background: var(--teal-pale); color: #0c4a6e; }
+  .tip-green { background: var(--green-pale); color: #064e3b; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="header-label">🏗️ Technical Reference · Applyza · 2026</div>
+  <div class="doc-title">Schema Markup Implementation Guide</div>
+  <div class="doc-subtitle">Complete JSON-LD code for all 9 missing schema types — ready to implement in the React codebase</div>
+  <div class="header-meta">
+    <div class="meta-item"><div class="meta-dot"></div>Tech stack: React 18 + react-helmet-async</div>
+    <div class="meta-item"><div class="meta-dot"></div>Existing: Organization, WebSite, SearchAction, FAQPage</div>
+    <div class="meta-item"><div class="meta-dot"></div>Missing: 9 types across 12 page types</div>
+    <div class="meta-item"><div class="meta-dot"></div>Rich results unlocked: FAQ, Breadcrumb, HowTo, Article, Event, Sitelinks</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- STATUS TABLE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#dbeafe;">📊</div>
+      <div>
+        <div class="section-title">Current Schema Status</div>
+        <div class="section-sub">What exists, what's missing, and expected rich result gain</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Schema Type</th><th>Pages</th><th>Status</th><th>Rich Result Potential</th><th>Priority</th></tr>
+      <tr><td>Organization</td><td>Homepage</td><td><span class="badge badge-exists">✅ EXISTS</span></td><td>Knowledge Panel, Sitelinks</td><td>—</td></tr>
+      <tr><td>WebSite + SearchAction</td><td>Homepage</td><td><span class="badge badge-exists">✅ EXISTS</span></td><td>Sitelinks Search Box</td><td>—</td></tr>
+      <tr><td>FAQPage</td><td>/faq</td><td><span class="badge badge-exists">✅ EXISTS</span></td><td>FAQ rich snippet (currently only on /faq)</td><td>—</td></tr>
+      <tr><td><strong>BreadcrumbList</strong></td><td>All inner pages</td><td><span class="badge badge-red">❌ MISSING</span></td><td>Breadcrumb trail in SERP — higher CTR</td><td><span class="badge badge-red">CRITICAL</span></td></tr>
+      <tr><td><strong>Service</strong></td><td>4 service pages</td><td><span class="badge badge-red">❌ MISSING</span></td><td>Service name/description in results</td><td><span class="badge badge-red">HIGH</span></td></tr>
+      <tr><td><strong>FAQPage (service pages)</strong></td><td>Visa, Applications, Counselling</td><td><span class="badge badge-red">❌ MISSING</span></td><td>FAQ snippet on service pages = huge CTR boost</td><td><span class="badge badge-red">HIGH</span></td></tr>
+      <tr><td><strong>Article / BlogPosting</strong></td><td>All blog posts</td><td><span class="badge badge-red">❌ MISSING</span></td><td>Article rich result, author name in SERP</td><td><span class="badge badge-red">HIGH</span></td></tr>
+      <tr><td><strong>HowTo</strong></td><td>Visa guide, application guide</td><td><span class="badge badge-red">❌ MISSING</span></td><td>HowTo rich snippet with steps</td><td><span class="badge badge-gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Event</strong></td><td>/events + individual event pages</td><td><span class="badge badge-red">❌ MISSING</span></td><td>Event rich result in SERP (date, location)</td><td><span class="badge badge-gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Person (authors)</strong></td><td>Blog posts, About page</td><td><span class="badge badge-red">❌ MISSING</span></td><td>E-E-A-T signal — author credibility</td><td><span class="badge badge-gold">MEDIUM</span></td></tr>
+      <tr><td><strong>LocalBusiness</strong></td><td>/contact, /about, source market pages</td><td><span class="badge badge-red">❌ MISSING</span></td><td>Local pack, Google Maps, office knowledge panel</td><td><span class="badge badge-gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Organization (expanded)</strong></td><td>Homepage (update existing)</td><td><span class="badge badge-gold">⚠️ INCOMPLETE</span></td><td>Logo in knowledge panel, correct sameAs URLs</td><td><span class="badge badge-red">HIGH</span></td></tr>
+    </table>
+  </div>
+
+  <!-- SCHEMA 1: BREADCRUMBLIST -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#e0f2fe;">🍞</div>
+      <div>
+        <div class="section-title">1. BreadcrumbList — All Inner Pages</div>
+        <div class="section-sub">Priority: CRITICAL — adds breadcrumb trail to SERP snippets, increasing CTR by 10–20%</div>
+      </div>
+    </div>
+
+    <div class="tip tip-blue">
+      <div>ℹ️</div>
+      <div><strong>Implementation approach:</strong> The SEO component already accepts a <code>jsonLd</code> prop. Pass the BreadcrumbList schema alongside any existing jsonLd as an array. In React, pass an array: <code>jsonLd={[existingSchema, breadcrumbSchema]}</code> — the SEO component handles arrays correctly.</div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">BreadcrumbList JSON-LD — Template</div>
+          <div class="schema-pages">Pages: All inner pages. Adapt itemListElement per page.</div>
+        </div>
+        <span class="badge badge-red" style="margin-left:auto;">CRITICAL</span>
+      </div>
+      <div class="schema-body">
+        <p class="schema-note">Replace the <code>itemListElement</code> array with the actual breadcrumbs for each page. Every item needs a <code>position</code>, <code>name</code>, and <code>item</code> (URL). The last breadcrumb does NOT need an <code>item</code> URL.</p>
+        <pre><span class="comment">// Example: /services/visa-immigration</span>
+<span class="kw">const</span> breadcrumbSchema = {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"BreadcrumbList"</span>,
+  <span class="str">"itemListElement"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"ListItem"</span>,
+      <span class="str">"position"</span>: <span class="num">1</span>,
+      <span class="str">"name"</span>: <span class="str">"Home"</span>,
+      <span class="str">"item"</span>: <span class="str">"https://applyza.com"</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"ListItem"</span>,
+      <span class="str">"position"</span>: <span class="num">2</span>,
+      <span class="str">"name"</span>: <span class="str">"Services"</span>,
+      <span class="str">"item"</span>: <span class="str">"https://applyza.com/services"</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"ListItem"</span>,
+      <span class="str">"position"</span>: <span class="num">3</span>,
+      <span class="str">"name"</span>: <span class="str">"Visa &amp; Immigration Support"</span>
+      <span class="comment">// No "item" for the current/last page</span>
+    }
+  ]
+};</pre>
+
+        <p class="schema-note" style="margin-top:4px;"><strong>In React, pass to SEO component:</strong></p>
+        <pre><span class="comment">// In VisaImmigration.tsx</span>
+&lt;SEO
+  title=<span class="str">"Student Visa Support | 99% Success Rate | Free Help | Applyza"</span>
+  description=<span class="str">"..."</span>
+  path=<span class="str">"/services/visa-immigration"</span>
+  jsonLd={breadcrumbSchema}
+/&gt;</pre>
+
+        <div class="impl-note"><strong>Quick fix for ALL pages:</strong> The SEO component renders a single <code>&lt;script&gt;</code> tag. To pass multiple schemas, wrap them in an array or use the <code>@graph</code> pattern. The current component handles arrays via <code>JSON.stringify(jsonLd)</code> — so pass an array of schema objects and they'll all render in one script tag.</div>
+      </div>
+    </div>
+
+    <h4 style="font-size:13px; font-weight:700; color:var(--navy); margin-bottom:10px;">Breadcrumb Data for Each Page</h4>
+    <table>
+      <tr><th>Page</th><th>Breadcrumb Path</th></tr>
+      <tr><td>/about</td><td>Home → About Applyza</td></tr>
+      <tr><td>/services</td><td>Home → Services</td></tr>
+      <tr><td>/services/university-applications</td><td>Home → Services → University Applications</td></tr>
+      <tr><td>/services/visa-immigration</td><td>Home → Services → Visa & Immigration</td></tr>
+      <tr><td>/services/student-counselling</td><td>Home → Services → Student Counselling</td></tr>
+      <tr><td>/services/accommodation</td><td>Home → Services → Accommodation Support</td></tr>
+      <tr><td>/scholarships</td><td>Home → Scholarships</td></tr>
+      <tr><td>/events</td><td>Home → Study Abroad Events</td></tr>
+      <tr><td>/blog</td><td>Home → Study Abroad Guides</td></tr>
+      <tr><td>/blog/:slug</td><td>Home → Guides → [Post Title]</td></tr>
+      <tr><td>/faq</td><td>Home → FAQ</td></tr>
+      <tr><td>/for-institutions</td><td>Home → For Universities</td></tr>
+      <tr><td>/for-partners</td><td>Home → For Education Agents</td></tr>
+      <tr><td>/study-destinations/:slug</td><td>Home → Study Destinations → [Country Name]</td></tr>
+    </table>
+  </div>
+
+  <!-- SCHEMA 2: SERVICE -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#f0fdf4;">🛠️</div>
+      <div>
+        <div class="section-title">2. Service Schema — Service Detail Pages</div>
+        <div class="section-sub">Priority: HIGH — helps Google understand what each page offers; enables service-type entity recognition</div>
+      </div>
+    </div>
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">Service JSON-LD — Visa & Immigration page</div>
+          <div class="schema-pages">Pages: /services/visa-immigration, /services/university-applications, /services/student-counselling, /services/accommodation</div>
+        </div>
+        <span class="badge badge-red" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="comment">// /services/visa-immigration</span>
+<span class="kw">const</span> visaServiceSchema = {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@graph"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"Service"</span>,
+      <span class="str">"name"</span>: <span class="str">"Student Visa Application Support"</span>,
+      <span class="str">"serviceType"</span>: <span class="str">"Student Visa Consultancy"</span>,
+      <span class="str">"description"</span>: <span class="str">"Expert student visa application support with a 99% success rate. We handle document preparation, financial evidence guidance, application submission, and mock interview coaching."</span>,
+      <span class="str">"provider"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Organization"</span>,
+        <span class="str">"name"</span>: <span class="str">"Applyza"</span>,
+        <span class="str">"url"</span>: <span class="str">"https://applyza.com"</span>
+      },
+      <span class="str">"areaServed"</span>: [
+        <span class="str">"Nigeria"</span>, <span class="str">"Ghana"</span>, <span class="str">"Kenya"</span>,
+        <span class="str">"Egypt"</span>, <span class="str">"Morocco"</span>, <span class="str">"Turkey"</span>,
+        <span class="str">"UAE"</span>, <span class="str">"Kuwait"</span>
+      ],
+      <span class="str">"offers"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Offer"</span>,
+        <span class="str">"price"</span>: <span class="str">"0"</span>,
+        <span class="str">"priceCurrency"</span>: <span class="str">"GBP"</span>,
+        <span class="str">"description"</span>: <span class="str">"Completely free for students"</span>
+      },
+      <span class="str">"url"</span>: <span class="str">"https://applyza.com/services/visa-immigration"</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"BreadcrumbList"</span>,
+      <span class="str">"itemListElement"</span>: [
+        { <span class="str">"@type"</span>: <span class="str">"ListItem"</span>, <span class="str">"position"</span>: <span class="num">1</span>, <span class="str">"name"</span>: <span class="str">"Home"</span>, <span class="str">"item"</span>: <span class="str">"https://applyza.com"</span> },
+        { <span class="str">"@type"</span>: <span class="str">"ListItem"</span>, <span class="str">"position"</span>: <span class="num">2</span>, <span class="str">"name"</span>: <span class="str">"Services"</span>, <span class="str">"item"</span>: <span class="str">"https://applyza.com/services"</span> },
+        { <span class="str">"@type"</span>: <span class="str">"ListItem"</span>, <span class="str">"position"</span>: <span class="num">3</span>, <span class="str">"name"</span>: <span class="str">"Visa &amp; Immigration Support"</span> }
+      ]
+    }
+  ]
+};</pre>
+
+        <p class="schema-note">Adapt <code>name</code>, <code>serviceType</code>, <code>description</code>, and <code>url</code> for each service page. The <code>@graph</code> wrapper allows combining Service + BreadcrumbList in one script tag.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 3: FAQPage on Service Pages -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#fef3c7;">❓</div>
+      <div>
+        <div class="section-title">3. FAQPage — Service Pages (adds FAQ rich snippets to service search results)</div>
+        <div class="section-sub">Priority: HIGH — FAQ snippets on service pages dramatically increase SERP real estate</div>
+      </div>
+    </div>
+
+    <div class="tip tip-yellow">
+      <div>⚠️</div>
+      <div><strong>Important:</strong> The FAQ questions must match content visibly on the page. Don't mark up FAQs that aren't displayed. Each service page needs to either already have a FAQ section, or one should be added visually before adding this schema.</div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">FAQPage JSON-LD — Visa & Immigration</div>
+          <div class="schema-pages">Pages: /services/visa-immigration (add visible FAQ section first)</div>
+        </div>
+        <span class="badge badge-red" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="kw">const</span> visaFAQSchema = {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"FAQPage"</span>,
+  <span class="str">"mainEntity"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"What documents do I need for a UK student visa?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"You will typically need: a valid passport, a Confirmation of Acceptance for Studies (CAS) from your university, proof of English language proficiency (IELTS/TOEFL), proof of financial funds to cover tuition and living costs, academic transcripts, and a recent passport photo. Additional documents may be required depending on your country of origin."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"How long does a UK student visa application take?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Standard UK student visa applications are typically processed within 3 weeks when applied from outside the UK. Priority processing (where available) can reduce this to 5 business days. Applyza helps ensure your application is submitted well before your course start date."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"What is Applyza's visa success rate?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"Applyza has a 99% student visa success rate. Our compliance team has extensive experience preparing applications for students from Nigeria, Ghana, Kenya, Egypt, Morocco, UAE, Kuwait, Turkey, and other source markets."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"Does Applyza charge for visa support?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"No. Applyza's visa application support is completely free for students. This includes document preparation, financial guidance, application form assistance, and interview preparation."</span>
+      }
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"Question"</span>,
+      <span class="str">"name"</span>: <span class="str">"What happens if my student visa application is refused?"</span>,
+      <span class="str">"acceptedAnswer"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Answer"</span>,
+        <span class="str">"text"</span>: <span class="str">"While visa refusals are rare with Applyza (our success rate is 99%), our team will review the refusal reasons with you, advise on whether to appeal or reapply, and help strengthen any weak elements of the application before resubmission."</span>
+      }
+    }
+  ]
+};</pre>
+        <div class="impl-note"><strong>University Applications FAQ:</strong> Create similar schema for /services/university-applications covering: "What documents do I need to apply to a UK university?", "How long does the application process take?", "Can Applyza help with my personal statement?", "Is university application support really free?"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 4: Article/BlogPosting -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#ede9fe;">📝</div>
+      <div>
+        <div class="section-title">4. Article / BlogPosting — Blog Posts</div>
+        <div class="section-sub">Priority: HIGH — Article schema enables author bylines in Google, rich snippets, and Google Discover cards</div>
+      </div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">BlogPosting JSON-LD — Dynamic (based on Supabase post data)</div>
+          <div class="schema-pages">Pages: /blog/:slug — add to BlogPost.tsx</div>
+        </div>
+        <span class="badge badge-red" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="schema-body">
+        <p class="schema-note">The BlogPost.tsx page already fetches post data from Supabase. Use that data to populate the schema dynamically. Add the following <code>jsonLd</code> prop to the SEO component in BlogPost.tsx:</p>
+        <pre><span class="comment">// In BlogPost.tsx — add after post data is loaded</span>
+<span class="kw">const</span> blogPostSchema = post ? {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@graph"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"BlogPosting"</span>,
+      <span class="str">"headline"</span>: post.title,
+      <span class="str">"description"</span>: post.excerpt || post.content.substring(<span class="num">0</span>, <span class="num">155</span>),
+      <span class="str">"image"</span>: post.cover_image_url || <span class="str">"https://applyza.com/og-default.png"</span>,
+      <span class="str">"datePublished"</span>: post.published_at || post.created_at,
+      <span class="str">"dateModified"</span>: post.updated_at || post.created_at,
+      <span class="str">"author"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Person"</span>,
+        <span class="str">"name"</span>: post.author_name || <span class="str">"Applyza Editorial Team"</span>,
+        <span class="comment">// Add author URL once author profile pages exist</span>
+        <span class="comment">// "url": `https://applyza.com/team/${post.author_slug}`</span>
+      },
+      <span class="str">"publisher"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"Organization"</span>,
+        <span class="str">"name"</span>: <span class="str">"Applyza"</span>,
+        <span class="str">"url"</span>: <span class="str">"https://applyza.com"</span>,
+        <span class="str">"logo"</span>: {
+          <span class="str">"@type"</span>: <span class="str">"ImageObject"</span>,
+          <span class="str">"url"</span>: <span class="str">"https://applyza.com/logo.png"</span>
+        }
+      },
+      <span class="str">"mainEntityOfPage"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"WebPage"</span>,
+        <span class="str">"@id"</span>: `https://applyza.com/blog/${post.slug}`
+      },
+      <span class="str">"url"</span>: `https://applyza.com/blog/${post.slug}`,
+      <span class="str">"inLanguage"</span>: <span class="str">"en-GB"</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"BreadcrumbList"</span>,
+      <span class="str">"itemListElement"</span>: [
+        { <span class="str">"@type"</span>: <span class="str">"ListItem"</span>, <span class="str">"position"</span>: <span class="num">1</span>, <span class="str">"name"</span>: <span class="str">"Home"</span>, <span class="str">"item"</span>: <span class="str">"https://applyza.com"</span> },
+        { <span class="str">"@type"</span>: <span class="str">"ListItem"</span>, <span class="str">"position"</span>: <span class="num">2</span>, <span class="str">"name"</span>: <span class="str">"Study Abroad Guides"</span>, <span class="str">"item"</span>: <span class="str">"https://applyza.com/blog"</span> },
+        { <span class="str">"@type"</span>: <span class="str">"ListItem"</span>, <span class="str">"position"</span>: <span class="num">3</span>, <span class="str">"name"</span>: post.title }
+      ]
+    }
+  ]
+} : null;</pre>
+
+        <div class="impl-note"><strong>Important:</strong> The <code>blog_posts</code> Supabase table needs an <code>author_name</code> column (or author ID linking to a team table) for named authorship to work. Currently all posts default to "Applyza Team" — this must change for E-E-A-T compliance. See Section 6 (Person schema) for author page requirements.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 5: Event -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#ffedd5;">🎫</div>
+      <div>
+        <div class="section-title">5. Event Schema — Events Page</div>
+        <div class="section-sub">Priority: MEDIUM — Event rich results show date, location, and registration in SERP</div>
+      </div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">Event JSON-LD — Dynamic (from Supabase events table)</div>
+          <div class="schema-pages">Pages: /events — add to Events.tsx</div>
+        </div>
+        <span class="badge badge-gold" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="comment">// In Events.tsx — generate from the `upcoming` array</span>
+<span class="kw">const</span> eventsSchema = upcoming.length > <span class="num">0</span> ? {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@graph"</span>: upcoming.map(event => ({
+    <span class="str">"@type"</span>: <span class="str">"Event"</span>,
+    <span class="str">"name"</span>: event.title,
+    <span class="str">"description"</span>: event.description || <span class="str">"Study abroad event hosted by Applyza"</span>,
+    <span class="str">"startDate"</span>: event.date,
+    <span class="str">"endDate"</span>: event.end_date || event.date,
+    <span class="str">"eventStatus"</span>: <span class="str">"https://schema.org/EventScheduled"</span>,
+    <span class="str">"eventAttendanceMode"</span>: event.location?.toLowerCase().includes(<span class="str">"virtual"</span>) || event.location?.toLowerCase().includes(<span class="str">"online"</span>)
+      ? <span class="str">"https://schema.org/OnlineEventAttendanceMode"</span>
+      : <span class="str">"https://schema.org/OfflineEventAttendanceMode"</span>,
+    <span class="str">"location"</span>: event.location?.toLowerCase().includes(<span class="str">"virtual"</span>)
+      ? { <span class="str">"@type"</span>: <span class="str">"VirtualLocation"</span>, <span class="str">"url"</span>: <span class="str">"https://applyza.com/events"</span> }
+      : { <span class="str">"@type"</span>: <span class="str">"Place"</span>, <span class="str">"name"</span>: event.location },
+    <span class="str">"organizer"</span>: {
+      <span class="str">"@type"</span>: <span class="str">"Organization"</span>,
+      <span class="str">"name"</span>: <span class="str">"Applyza"</span>,
+      <span class="str">"url"</span>: <span class="str">"https://applyza.com"</span>
+    },
+    <span class="str">"url"</span>: <span class="str">"https://applyza.com/events"</span>,
+    <span class="str">"isAccessibleForFree"</span>: <span class="kw">true</span>
+  }))
+} : null;</pre>
+
+        <div class="impl-note"><strong>Note:</strong> Pass <code>eventsSchema</code> as the <code>jsonLd</code> prop to the SEO component. If <code>eventsSchema</code> is null (no upcoming events), the SEO component will safely skip rendering the script tag.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 6: HowTo -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#d1fae5;">📋</div>
+      <div>
+        <div class="section-title">6. HowTo Schema — Visa & University Application Pages</div>
+        <div class="section-sub">Priority: MEDIUM — HowTo rich snippets show step-by-step in SERP, dominating screen real estate</div>
+      </div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">HowTo JSON-LD — UK Student Visa Application Process</div>
+          <div class="schema-pages">Pages: /services/visa-immigration</div>
+        </div>
+        <span class="badge badge-gold" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="kw">const</span> visaHowToSchema = {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"HowTo"</span>,
+  <span class="str">"name"</span>: <span class="str">"How to Apply for a UK Student Visa with Applyza"</span>,
+  <span class="str">"description"</span>: <span class="str">"Step-by-step guide to applying for a UK Student visa with expert support from Applyza's compliance team."</span>,
+  <span class="str">"totalTime"</span>: <span class="str">"P3W"</span>, <span class="comment">// ISO 8601 duration — approximately 3 weeks</span>
+  <span class="str">"estimatedCost"</span>: { <span class="str">"@type"</span>: <span class="str">"MonetaryAmount"</span>, <span class="str">"currency"</span>: <span class="str">"GBP"</span>, <span class="str">"value"</span>: <span class="str">"0"</span> },
+  <span class="str">"step"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>,
+      <span class="str">"position"</span>: <span class="num">1</span>,
+      <span class="str">"name"</span>: <span class="str">"Eligibility Check"</span>,
+      <span class="str">"text"</span>: <span class="str">"We assess your academic profile and chosen university to confirm you meet all visa eligibility requirements before you begin your application."</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>,
+      <span class="str">"position"</span>: <span class="num">2</span>,
+      <span class="str">"name"</span>: <span class="str">"Document Preparation"</span>,
+      <span class="str">"text"</span>: <span class="str">"We provide a complete document checklist and guide you through gathering every required document — from bank statements to your university offer letter (CAS)."</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>,
+      <span class="str">"position"</span>: <span class="num">3</span>,
+      <span class="str">"name"</span>: <span class="str">"Financial Evidence Guidance"</span>,
+      <span class="str">"text"</span>: <span class="str">"We advise on the exact financial requirements for your destination and help you present funding evidence in the format UKVI expects."</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>,
+      <span class="str">"position"</span>: <span class="num">4</span>,
+      <span class="str">"name"</span>: <span class="str">"Application Submission"</span>,
+      <span class="str">"text"</span>: <span class="str">"We prepare your online visa application with precision, review every section, and submit it with all supporting documents."</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>,
+      <span class="str">"position"</span>: <span class="num">5</span>,
+      <span class="str">"name"</span>: <span class="str">"Interview Preparation"</span>,
+      <span class="str">"text"</span>: <span class="str">"Where a visa interview is required, we coach you with mock questions and help you present confidently and consistently."</span>
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"HowToStep"</span>,
+      <span class="str">"position"</span>: <span class="num">6</span>,
+      <span class="str">"name"</span>: <span class="str">"Decision Support"</span>,
+      <span class="str">"text"</span>: <span class="str">"Whether your visa is approved or refused, we guide you through next steps — including appeals, reapplications, or alternative paths."</span>
+    }
+  ]
+};</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 7: Person -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#dbeafe;">👤</div>
+      <div>
+        <div class="section-title">7. Person Schema — Author Pages & Blog Posts</div>
+        <div class="section-sub">Priority: MEDIUM — Named authorship is a critical E-E-A-T signal for YMYL content</div>
+      </div>
+    </div>
+    <div class="tip tip-yellow">
+      <div>⚠️</div>
+      <div><strong>Prerequisite:</strong> Author profile pages must exist at URLs like <code>/team/[author-slug]</code> before this schema can point to them. Currently the site has no team member pages. Create these pages first, then add Person schema to both the author profile page AND reference it from blog post BlogPosting schema.</div>
+    </div>
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">Person JSON-LD — Author Profile Template</div>
+          <div class="schema-pages">Pages: /team/[counsellor-slug] (pages to be created)</div>
+        </div>
+        <span class="badge badge-gold" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="kw">const</span> authorSchema = {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"Person"</span>,
+  <span class="str">"name"</span>: <span class="str">"[Counsellor Name]"</span>,
+  <span class="str">"jobTitle"</span>: <span class="str">"[Job Title e.g. Senior Visa Consultant]"</span>,
+  <span class="str">"description"</span>: <span class="str">"[Brief bio — qualifications, years of experience, specialist areas]"</span>,
+  <span class="str">"url"</span>: <span class="str">"https://applyza.com/team/[counsellor-slug]"</span>,
+  <span class="str">"image"</span>: <span class="str">"https://applyza.com/team/[counsellor-photo.jpg]"</span>,
+  <span class="str">"worksFor"</span>: {
+    <span class="str">"@type"</span>: <span class="str">"Organization"</span>,
+    <span class="str">"name"</span>: <span class="str">"Applyza"</span>,
+    <span class="str">"url"</span>: <span class="str">"https://applyza.com"</span>
+  },
+  <span class="str">"knowsAbout"</span>: [
+    <span class="str">"UK Student Visa Applications"</span>,
+    <span class="str">"International Student Counselling"</span>,
+    <span class="str">"University Admissions"</span>
+  ],
+  <span class="str">"sameAs"</span>: [
+    <span class="comment">// Add LinkedIn URL if available</span>
+  ]
+};</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 8: LocalBusiness -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#fce7f3;">📍</div>
+      <div>
+        <div class="section-title">8. LocalBusiness — Contact & About Pages (for each office)</div>
+        <div class="section-sub">Priority: MEDIUM — Critical for local SEO and appearing in Google Maps for source market keywords like "study abroad consultants Lagos"</div>
+      </div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">LocalBusiness JSON-LD — HQ + Offices</div>
+          <div class="schema-pages">Pages: /contact, /about, /study-abroad/nigeria (Lagos office)</div>
+        </div>
+        <span class="badge badge-gold" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="comment">// Add to /contact and /about pages — one entry per office</span>
+<span class="comment">// IMPORTANT: Replace placeholder addresses with actual street addresses</span>
+<span class="kw">const</span> localBusinessSchema = {
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@graph"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"EducationalOrganization"</span>,
+      <span class="str">"name"</span>: <span class="str">"Applyza — Nicosia HQ"</span>,
+      <span class="str">"url"</span>: <span class="str">"https://applyza.com"</span>,
+      <span class="str">"telephone"</span>: <span class="str">"[+357 XXXX XXXX]"</span>,
+      <span class="str">"email"</span>: <span class="str">"info@applyza.com"</span>,
+      <span class="str">"address"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"PostalAddress"</span>,
+        <span class="str">"streetAddress"</span>: <span class="str">"[Street Address]"</span>,
+        <span class="str">"addressLocality"</span>: <span class="str">"Nicosia"</span>,
+        <span class="str">"addressCountry"</span>: <span class="str">"CY"</span>
+      },
+      <span class="str">"priceRange"</span>: <span class="str">"Free"</span>,
+      <span class="str">"openingHoursSpecification"</span>: [
+        { <span class="str">"@type"</span>: <span class="str">"OpeningHoursSpecification"</span>, <span class="str">"dayOfWeek"</span>: [<span class="str">"Monday"</span>,<span class="str">"Tuesday"</span>,<span class="str">"Wednesday"</span>,<span class="str">"Thursday"</span>,<span class="str">"Friday"</span>], <span class="str">"opens"</span>: <span class="str">"09:00"</span>, <span class="str">"closes"</span>: <span class="str">"18:00"</span> }
+      ]
+    },
+    {
+      <span class="str">"@type"</span>: <span class="str">"EducationalOrganization"</span>,
+      <span class="str">"name"</span>: <span class="str">"Applyza Lagos Office"</span>,
+      <span class="str">"url"</span>: <span class="str">"https://applyza.com/study-abroad/nigeria"</span>,
+      <span class="str">"address"</span>: {
+        <span class="str">"@type"</span>: <span class="str">"PostalAddress"</span>,
+        <span class="str">"streetAddress"</span>: <span class="str">"[Street Address, Lagos]"</span>,
+        <span class="str">"addressLocality"</span>: <span class="str">"Lagos"</span>,
+        <span class="str">"addressCountry"</span>: <span class="str">"NG"</span>
+      }
+    },
+    <span class="comment">// Repeat pattern for: Accra, Nairobi, Doha, Istanbul</span>
+  ]
+};</pre>
+        <div class="impl-note"><strong>Action required:</strong> Real street addresses are needed to implement this schema. Add them to the product-marketing-context.md file and to the About and Contact pages. Google verifies LocalBusiness schema against the visible address on the page.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEMA 9: Organization (expanded) -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#e0f2fe;">🏢</div>
+      <div>
+        <div class="section-title">9. Organization Schema Update — Homepage (expand existing)</div>
+        <div class="section-sub">Priority: HIGH — Add logo, telephone, founding year, and fix sameAs handles</div>
+      </div>
+    </div>
+
+    <div class="schema-block">
+      <div class="schema-header">
+        <div>
+          <div class="schema-title">Organization JSON-LD — Expanded (replace existing in Index.tsx)</div>
+          <div class="schema-pages">Pages: / (homepage) — update homepageJsonLd in Index.tsx</div>
+        </div>
+        <span class="badge badge-red" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="schema-body">
+        <pre><span class="comment">// Replace the existing Organization object in Index.tsx homepageJsonLd</span>
+{
+  <span class="str">"@context"</span>: <span class="str">"https://schema.org"</span>,
+  <span class="str">"@type"</span>: <span class="str">"EducationalOrganization"</span>,
+  <span class="str">"name"</span>: <span class="str">"Applyza"</span>,
+  <span class="str">"url"</span>: <span class="str">"https://applyza.com"</span>,
+  <span class="str">"logo"</span>: {
+    <span class="str">"@type"</span>: <span class="str">"ImageObject"</span>,
+    <span class="str">"url"</span>: <span class="str">"https://applyza.com/logo.png"</span>,
+    <span class="str">"width"</span>: <span class="num">200</span>,
+    <span class="str">"height"</span>: <span class="num">60</span>
+  },
+  <span class="str">"description"</span>: <span class="str">"Applyza is a free AQF-certified international education consultancy helping students from Africa, the Middle East, and beyond access world-class universities in the UK and Europe. AI-powered course matching, expert counselling, and 99% visa success rate."</span>,
+  <span class="str">"foundingDate"</span>: <span class="str">"2014"</span>,
+  <span class="str">"email"</span>: <span class="str">"info@applyza.com"</span>,
+  <span class="str">"telephone"</span>: <span class="str">"[+357 XXXX XXXX]"</span>,
+  <span class="str">"address"</span>: {
+    <span class="str">"@type"</span>: <span class="str">"PostalAddress"</span>,
+    <span class="str">"addressLocality"</span>: <span class="str">"Nicosia"</span>,
+    <span class="str">"addressCountry"</span>: <span class="str">"CY"</span>
+  },
+  <span class="str">"numberOfEmployees"</span>: { <span class="str">"@type"</span>: <span class="str">"QuantitativeValue"</span>, <span class="str">"minValue"</span>: <span class="num">10</span>, <span class="str">"maxValue"</span>: <span class="num">50</span> },
+  <span class="str">"contactPoint"</span>: [
+    {
+      <span class="str">"@type"</span>: <span class="str">"ContactPoint"</span>,
+      <span class="str">"contactType"</span>: <span class="str">"customer support"</span>,
+      <span class="str">"email"</span>: <span class="str">"info@applyza.com"</span>,
+      <span class="str">"availableLanguage"</span>: [<span class="str">"English"</span>, <span class="str">"Arabic"</span>]
+    }
+  ],
+  <span class="str">"sameAs"</span>: [
+    <span class="str">"https://www.instagram.com/applyzahq"</span>,
+    <span class="str">"https://www.facebook.com/applyzahq"</span>,
+    <span class="str">"https://www.linkedin.com/company/applyzahq"</span>,
+    <span class="str">"https://twitter.com/applyzahq"</span>,
+    <span class="str">"https://www.tiktok.com/@applyzahq"</span>
+  ]
+}</pre>
+        <div class="impl-note"><strong>Note:</strong> Using <code>"@type": "EducationalOrganization"</code> (which extends Organization) is more semantically accurate and preferred by Google for education companies. Also add <code>hasCredential</code> or <code>memberOf</code> once AQF certification markup is determined.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEO Component Improvements -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#fce7f3;">🔧</div>
+      <div>
+        <div class="section-title">10. SEO Component Improvements</div>
+        <div class="section-sub">Missing meta tags in the current SEO.tsx component</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--slate); margin-bottom:16px;">The existing SEO component is missing several standard tags. These can be added globally in one edit to <code>src/components/SEO.tsx</code>:</p>
+    <pre><span class="comment">// Add inside the &lt;Helmet&gt; block in SEO.tsx</span>
+
+<span class="comment">// Robots — explicit indexing instruction</span>
+&lt;meta name=<span class="str">"robots"</span> content=<span class="str">"index, follow, max-image-preview:large, max-snippet:-1"</span> /&gt;
+
+<span class="comment">// Open Graph locale + image dimensions</span>
+&lt;meta property=<span class="str">"og:locale"</span> content=<span class="str">"en_GB"</span> /&gt;
+&lt;meta property=<span class="str">"og:image:width"</span> content=<span class="str">"1200"</span> /&gt;
+&lt;meta property=<span class="str">"og:image:height"</span> content=<span class="str">"630"</span> /&gt;
+&lt;meta property=<span class="str">"og:image:type"</span> content=<span class="str">"image/png"</span> /&gt;
+
+<span class="comment">// Twitter site handle</span>
+&lt;meta name=<span class="str">"twitter:site"</span> content=<span class="str">"@applyzahq"</span> /&gt;
+&lt;meta name=<span class="str">"twitter:creator"</span> content=<span class="str">"@applyzahq"</span> /&gt;</pre>
+  </div>
+
+  <!-- Validation checklist -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#d1fae5;">✅</div>
+      <div>
+        <div class="section-title">Validation Checklist</div>
+        <div class="section-sub">Test every schema implementation before deploying</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Tool</th><th>URL</th><th>What to check</th></tr>
+      <tr><td>Google Rich Results Test</td><td>search.google.com/test/rich-results</td><td>FAQPage, HowTo, Article, Event, BreadcrumbList, Organization</td></tr>
+      <tr><td>Schema.org Validator</td><td>validator.schema.org</td><td>No structural errors in any schema type</td></tr>
+      <tr><td>Google Search Console</td><td>Enhancements report</td><td>Monitor after deployment for errors and rich result counts</td></tr>
+      <tr><td>LinkedIn Inspector</td><td>linkedin.com/post-inspector</td><td>OG image + title renders correctly when shared</td></tr>
+      <tr><td>OpenGraph.xyz</td><td>opengraph.xyz</td><td>OG preview for social sharing on key pages</td></tr>
+    </table>
+  </div>
+
+  <div style="text-align:center; padding:20px; color:var(--slate-light); font-size:12px; border-top:1px solid var(--border); margin-top:8px;">
+    Applyza Schema Markup Implementation Guide — March 2026 · CONFIDENTIAL
+  </div>
+
+</div>
+</body>
+</html>

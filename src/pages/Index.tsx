@@ -9,14 +9,12 @@ import StackingCards from "@/components/StackingCards";
 import StudyDestinations from "@/components/StudyDestinations";
 import PartnerUniversities from "@/components/PartnerUniversities";
 import WhyChooseApplyza from "@/components/WhyChooseApplyza";
-import ScholarshipsPreview from "@/components/ScholarshipsPreview";
 import UpcomingEvents from "@/components/UpcomingEvents";
 import Testimonials from "@/components/Testimonials";
 import BlogPreview from "@/components/BlogPreview";
 import PartnerLogos from "@/components/PartnerLogos";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import HomepageLayout from "@/components/homepage/HomepageLayout";
 
 const homepageJsonLd = [
@@ -25,13 +23,18 @@ const homepageJsonLd = [
     "@type": "Organization",
     name: "Applyza",
     url: "https://applyza.com",
-    description: "Applyza helps international students study abroad with AI-powered course matching, expert counselling, and visa support.",
+    description: "Applyza helps international students study abroad with AI-powered course matching, expert counselling, and student visa application support.",
     sameAs: [
-      "https://www.instagram.com/applyza",
-      "https://www.facebook.com/applyza",
-      "https://www.linkedin.com/company/applyza",
-      "https://twitter.com/applyza",
+      "https://www.instagram.com/applyzahq",
+      "https://www.facebook.com/applyzahq",
+      "https://www.linkedin.com/company/applyzahq",
+      "https://twitter.com/applyzahq",
+      "https://www.tiktok.com/@applyzahq",
+      "https://www.youtube.com/@applyzahq",
     ],
+    foundingDate: "2014",
+    areaServed: ["Nigeria", "Ghana", "Kenya", "Egypt", "Morocco", "UAE", "Kuwait", "Turkey", "Eastern Europe"],
+    slogan: "The Smartest Way to Study Abroad",
   },
   {
     "@context": "https://schema.org",
@@ -50,8 +53,8 @@ const Index = () => {
   return (
     <HomepageLayout>
       <SEO
-        title="Applyza | Study Abroad Made Smarter — Free Course Search & Expert Guidance"
-        description="Discover thousands of courses at 150+ universities worldwide. Applyza offers AI-powered course matching, expert counselling, and visa support for genuine students."
+        title="Applyza | Free Study Abroad Consultancy | AI Course Matching & Student Visa Support"
+        description="Free study abroad consultancy for international students. AI-powered course matching, expert counselling, and 99% student visa success rate. 150+ partner universities."
         path="/"
         jsonLd={homepageJsonLd}
       />
@@ -77,10 +80,7 @@ const Index = () => {
       <div className="scroll-section" data-section="why-choose">
         <WhyChooseApplyza />
       </div>
-      <div className="scroll-section" data-section="scholarships">
-        <ScholarshipsPreview />
-      </div>
-      <div className="scroll-section" data-section="events">
+<div className="scroll-section" data-section="events">
         <UpcomingEvents />
       </div>
       <div className="scroll-section" data-section="testimonials">
@@ -96,7 +96,6 @@ const Index = () => {
         <FinalCTA />
       </div>
       <Footer />
-      <WhatsAppButton />
     </HomepageLayout>
   );
 };

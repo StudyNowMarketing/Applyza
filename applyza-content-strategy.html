@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applyza — Content Strategy & Programmatic SEO Plan 2026</title>
+<style>
+  :root {
+    --navy: #0f1e3c;
+    --navy-mid: #1a3160;
+    --teal: #0ea5e9;
+    --teal-light: #38bdf8;
+    --teal-pale: #e0f2fe;
+    --gold: #f59e0b;
+    --gold-pale: #fef3c7;
+    --green: #10b981;
+    --green-pale: #d1fae5;
+    --red: #ef4444;
+    --red-pale: #fee2e2;
+    --purple: #8b5cf6;
+    --purple-pale: #ede9fe;
+    --orange: #f97316;
+    --orange-pale: #ffedd5;
+    --slate: #64748b;
+    --slate-light: #94a3b8;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --text: #1e293b;
+    --border: #e2e8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  /* Header */
+  .doc-header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e4080 100%); color: white; padding: 48px 48px 40px; position: relative; overflow: hidden; }
+  .doc-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: rgba(14, 165, 233, 0.12); }
+  .doc-header::after { content: ''; position: absolute; bottom: -60px; left: 200px; width: 200px; height: 200px; border-radius: 50%; background: rgba(14, 165, 233, 0.08); }
+  .header-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 12px; }
+  .doc-title { font-size: 32px; font-weight: 800; line-height: 1.2; margin-bottom: 8px; position: relative; z-index: 1; }
+  .doc-subtitle { font-size: 16px; color: rgba(255,255,255,0.7); margin-bottom: 24px; }
+  .header-meta { display: flex; gap: 24px; flex-wrap: wrap; }
+  .meta-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.75); }
+  .meta-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal-light); }
+
+  /* Layout */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .content-wrap { padding: 40px 48px; }
+
+  /* Executive Summary */
+  .exec-summary { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 32px; margin-bottom: 32px; }
+  .exec-summary h2 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+  .exec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .exec-stat { background: var(--bg); border-radius: 8px; padding: 16px; text-align: center; }
+  .exec-stat .num { font-size: 28px; font-weight: 800; color: var(--teal); line-height: 1; }
+  .exec-stat .lbl { font-size: 12px; color: var(--slate); margin-top: 4px; }
+  .exec-summary p { color: var(--slate); font-size: 14px; line-height: 1.8; }
+
+  /* Section */
+  .section { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 32px; margin-bottom: 24px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--bg); }
+  .section-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .section-title { font-size: 18px; font-weight: 700; color: var(--navy); }
+  .section-subtitle { font-size: 13px; color: var(--slate); margin-top: 2px; }
+
+  /* Pillar cards */
+  .pillars-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .pillar-card { border-radius: 10px; padding: 20px; border: 2px solid; }
+  .pillar-card .pillar-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.6; margin-bottom: 8px; }
+  .pillar-card .pillar-name { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .pillar-card .pillar-desc { font-size: 12px; opacity: 0.75; line-height: 1.5; margin-bottom: 10px; }
+  .pillar-card .pillar-pages { font-size: 11px; font-weight: 600; opacity: 0.8; }
+  .p1 { border-color: #0ea5e9; background: #f0f9ff; color: #0c4a6e; }
+  .p2 { border-color: #10b981; background: #f0fdf4; color: #064e3b; }
+  .p3 { border-color: #8b5cf6; background: #f5f3ff; color: #3b0764; }
+  .p4 { border-color: #f59e0b; background: #fffbeb; color: #78350f; }
+  .p5 { border-color: #f97316; background: #fff7ed; color: #7c2d12; }
+
+  /* Programmatic SEO table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--navy); color: white; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.3px; }
+  th:first-child { border-radius: 6px 0 0 0; }
+  th:last-child { border-radius: 0 6px 0 0; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg); }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-teal { background: var(--teal-pale); color: #0369a1; }
+  .badge-green { background: var(--green-pale); color: #065f46; }
+  .badge-purple { background: var(--purple-pale); color: #5b21b6; }
+  .badge-gold { background: var(--gold-pale); color: #92400e; }
+  .badge-red { background: var(--red-pale); color: #991b1b; }
+  .badge-orange { background: var(--orange-pale); color: #9a3412; }
+  .badge-navy { background: #dbeafe; color: #1e3a8a; }
+  .badge-slate { background: #f1f5f9; color: #475569; }
+  .priority-high { color: var(--red); font-weight: 700; }
+  .priority-med { color: var(--gold); font-weight: 700; }
+  .priority-low { color: var(--green); font-weight: 700; }
+
+  /* Cluster blocks */
+  .cluster-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .cluster-block { border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+  .cluster-head { padding: 12px 16px; font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+  .cluster-body { padding: 12px 16px; }
+  .cluster-body ul { list-style: none; }
+  .cluster-body li { font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--bg); display: flex; align-items: flex-start; gap: 8px; color: var(--text); }
+  .cluster-body li:last-child { border-bottom: none; }
+  .cluster-body li::before { content: '→'; color: var(--slate-light); font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+  .cluster-kw { font-size: 11px; color: var(--slate-light); display: block; }
+  .c-teal .cluster-head { background: var(--teal-pale); color: #0369a1; }
+  .c-green .cluster-head { background: var(--green-pale); color: #065f46; }
+  .c-purple .cluster-head { background: var(--purple-pale); color: #5b21b6; }
+  .c-gold .cluster-head { background: var(--gold-pale); color: #92400e; }
+  .c-orange .cluster-head { background: var(--orange-pale); color: #9a3412; }
+  .c-navy .cluster-head { background: #dbeafe; color: #1e3a8a; }
+
+  /* URL pattern boxes */
+  .url-block { background: #0f172a; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+  .url-block .url-label { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 12px; }
+  .url-block code { display: block; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; color: #94d2bd; margin-bottom: 4px; }
+  .url-block .url-example { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 6px; font-style: italic; }
+  .url-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+  /* Template spec */
+  .template-section { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+  .template-header { background: var(--bg); padding: 12px 16px; font-weight: 700; font-size: 13px; color: var(--navy); display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); }
+  .template-body { padding: 16px; }
+  .template-row { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--bg); font-size: 13px; }
+  .template-row:last-child { border-bottom: none; }
+  .template-field { width: 140px; font-weight: 600; color: var(--slate); font-size: 12px; flex-shrink: 0; padding-top: 2px; }
+  .template-val { flex: 1; color: var(--text); font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; background: #f8fafc; padding: 4px 8px; border-radius: 4px; }
+
+  /* Blog calendar */
+  .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .cal-month { border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+  .cal-month-head { padding: 10px 14px; font-weight: 700; font-size: 12px; letter-spacing: 0.5px; }
+  .cal-month-body { padding: 10px 14px; }
+  .cal-post { font-size: 12px; padding: 6px 0; border-bottom: 1px solid var(--bg); }
+  .cal-post:last-child { border-bottom: none; }
+  .cal-post .post-title { color: var(--text); display: block; font-weight: 500; }
+  .cal-post .post-meta { color: var(--slate-light); font-size: 11px; }
+  .m-jan .cal-month-head { background: var(--teal-pale); color: #0369a1; }
+  .m-feb .cal-month-head { background: var(--green-pale); color: #065f46; }
+  .m-mar .cal-month-head { background: var(--purple-pale); color: #5b21b6; }
+  .m-apr .cal-month-head { background: var(--gold-pale); color: #92400e; }
+  .m-may .cal-month-head { background: var(--orange-pale); color: #9a3412; }
+  .m-jun .cal-month-head { background: #fce7f3; color: #831843; }
+
+  /* Internal linking diagram */
+  .link-arch { background: #0f172a; border-radius: 10px; padding: 28px; }
+  .link-arch .la-title { font-size: 13px; font-weight: 700; color: var(--teal-light); text-align: center; margin-bottom: 20px; letter-spacing: 1px; }
+  .la-tier { display: flex; justify-content: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .la-tier-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center; margin-bottom: 8px; }
+  .la-node { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 8px 14px; font-size: 12px; color: rgba(255,255,255,0.8); white-space: nowrap; }
+  .la-node.home { background: rgba(14,165,233,0.2); border-color: var(--teal); color: white; font-weight: 700; }
+  .la-node.pillar { background: rgba(14,165,233,0.1); border-color: rgba(14,165,233,0.4); }
+  .la-node.spoke { font-size: 11px; }
+  .la-arrow { text-align: center; color: rgba(14,165,233,0.5); font-size: 16px; margin: 4px 0; }
+
+  /* KW table rows */
+  .kw-cluster { background: #f8fafc; }
+  .kw-cluster td { font-weight: 700; color: var(--navy); font-size: 12px; padding: 8px 14px; }
+
+  /* Quick win */
+  .qw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .qw-item { border-radius: 8px; padding: 16px; border: 1px solid var(--border); }
+  .qw-num { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; background: var(--teal); margin-bottom: 10px; }
+  .qw-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .qw-desc { font-size: 12px; color: var(--slate); line-height: 1.5; }
+  .qw-url { font-size: 11px; color: var(--teal); font-family: monospace; margin-top: 6px; display: block; }
+  .qw-volume { font-size: 11px; margin-top: 4px; font-weight: 600; }
+
+  /* Tip box */
+  .tip { border-radius: 8px; padding: 14px 18px; font-size: 13px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .tip-blue { background: var(--teal-pale); color: #0c4a6e; }
+  .tip-yellow { background: var(--gold-pale); color: #78350f; }
+  .tip-green { background: var(--green-pale); color: #064e3b; }
+
+  /* TOC */
+  .toc { background: white; border-radius: 10px; border: 1px solid var(--border); padding: 20px 24px; margin-bottom: 24px; }
+  .toc h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { font-size: 13px; padding: 3px 0; color: var(--teal); }
+  .toc li span { color: var(--slate); }
+
+  /* Misc */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .tag { display: inline-block; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; font-size: 11px; color: var(--slate); margin: 2px; }
+  .vol-high { color: var(--green); font-weight: 700; }
+  .vol-med { color: var(--gold); font-weight: 700; }
+  .vol-low { color: var(--slate); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="doc-header">
+  <div class="header-label">📋 Strategy Document · Applyza · 2026</div>
+  <div class="doc-title">Content Strategy & Programmatic SEO Plan</div>
+  <div class="doc-subtitle">Full roadmap — content pillars, topic clusters, programmatic page architecture, keyword targets, internal linking, and editorial calendar</div>
+  <div class="header-meta">
+    <div class="meta-item"><div class="meta-dot"></div>Prepared: March 2026</div>
+    <div class="meta-item"><div class="meta-dot"></div>Target: 300+ indexed pages by Q4 2026</div>
+    <div class="meta-item"><div class="meta-dot"></div>Primary market: Africa · Middle East · Eastern Europe</div>
+    <div class="meta-item"><div class="meta-dot"></div>Goal: Rank #1–3 for 50+ high-intent keywords by year-end</div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><span>Executive Summary & Opportunity Size</span></li>
+      <li><span>5 Content Pillars</span></li>
+      <li><span>Programmatic SEO Page Architecture (4 page types, 200+ pages)</span></li>
+      <li><span>Keyword Target Map — by market and buyer stage</span></li>
+      <li><span>Topic Cluster Maps — blog & pillar content</span></li>
+      <li><span>Page Templates — URL, title, meta, content outline</span></li>
+      <li><span>Internal Linking Architecture</span></li>
+      <li><span>Editorial Calendar — Q2–Q3 2026 (18 posts)</span></li>
+      <li><span>Quick Wins — 9 pages to publish in 30 days</span></li>
+      <li><span>E-E-A-T & Author Strategy</span></li>
+    </ol>
+  </div>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec-summary">
+    <h2>Executive Summary</h2>
+    <div class="exec-grid">
+      <div class="exec-stat"><div class="num">5</div><div class="lbl">Content Pillars</div></div>
+      <div class="exec-stat"><div class="num">200+</div><div class="lbl">Programmatic Pages</div></div>
+      <div class="exec-stat"><div class="num">18</div><div class="lbl">Priority Blog Posts</div></div>
+      <div class="exec-stat"><div class="num">50+</div><div class="lbl">Target Keywords</div></div>
+    </div>
+    <p>Applyza competes in a high-intent, high-stakes search category — international students actively searching for help will become enrolled students. The SEO opportunity is enormous and largely unclaimed at the source-market level: keywords like <strong>"study abroad consultants Nigeria"</strong>, <strong>"how to study in UK from Kenya"</strong>, and <strong>"UK student visa Morocco"</strong> have significant volume with weak competition from established players who focus on English-speaking markets. This strategy maps a clear path from the current ~28 public pages to over 300 indexed, search-optimised pages through a combination of destination landing pages, source-market pages, course-category pages, and a structured blog programme. Every page category is tied to the primary conversion: booking a free consultation.</p>
+  </div>
+
+  <!-- SECTION 1: CONTENT PILLARS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e0f2fe;">🏛️</div>
+      <div>
+        <div class="section-title">1. Content Pillars</div>
+        <div class="section-subtitle">Five thematic areas Applyza will own organically</div>
+      </div>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card p1">
+        <div class="pillar-num">Pillar 01</div>
+        <div class="pillar-name">Study Destinations</div>
+        <div class="pillar-desc">Country & city guides for every destination Applyza places students. Targets high-volume "study in [country]" head terms and destination-specific long-tail queries.</div>
+        <div class="pillar-pages">🗂 30–50 pages</div>
+      </div>
+      <div class="pillar-card p2">
+        <div class="pillar-num">Pillar 02</div>
+        <div class="pillar-name">Visas & Immigration</div>
+        <div class="pillar-desc">Authoritative visa guides by destination and source country. Directly addresses the #1 student fear — visa rejection — and positions Applyza's 99% success rate.</div>
+        <div class="pillar-pages">🗂 40–60 pages</div>
+      </div>
+      <div class="pillar-card p3">
+        <div class="pillar-num">Pillar 03</div>
+        <div class="pillar-name">University Applications</div>
+        <div class="pillar-desc">End-to-end application guides, personal statement help, document checklists, and eligibility resources. High-intent; maps directly to core service offering.</div>
+        <div class="pillar-pages">🗂 20–30 pages</div>
+      </div>
+      <div class="pillar-card p4">
+        <div class="pillar-num">Pillar 04</div>
+        <div class="pillar-name">Source Market Guides</div>
+        <div class="pillar-desc">Dedicated pages for every source country — Nigeria, Ghana, Kenya, Egypt, Morocco, Kuwait, UAE, Turkey etc. The most underserved keyword space in the category.</div>
+        <div class="pillar-pages">🗂 30–40 pages</div>
+      </div>
+      <div class="pillar-card p5">
+        <div class="pillar-num">Pillar 05</div>
+        <div class="pillar-name">Student Life Abroad</div>
+        <div class="pillar-desc">Cost of living, accommodation, scholarships, part-time work rights, student communities. Attracts early-stage students before they've chosen an agent.</div>
+        <div class="pillar-pages">🗂 25–40 pages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PROGRAMMATIC SEO ARCHITECTURE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f0fdf4;">⚡</div>
+      <div>
+        <div class="section-title">2. Programmatic SEO Architecture</div>
+        <div class="section-subtitle">Four page types to scale from 28 pages to 200+ indexed pages</div>
+      </div>
+    </div>
+
+    <div class="tip tip-yellow">
+      <div class="tip-icon">⚠️</div>
+      <div><strong>CSR Note:</strong> Because Applyza is a React SPA (client-side rendered), programmatic pages will need either (a) an SSR migration to Next.js, or (b) pre-rendering via a tool like react-snap or a Vercel Edge function. Without server-side rendering, Googlebot may not see unique content on each programmatic page. This is the single highest-priority technical prerequisite before scaling to 200+ pages.</div>
+    </div>
+
+    <!-- Page Type 1: Destination Pages -->
+    <div style="margin-bottom: 28px;">
+      <h3 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border);">📍 Page Type 1 — Study Destination Pages</h3>
+      <div class="url-grid">
+        <div>
+          <div class="url-block">
+            <div class="url-label">URL Structure</div>
+            <code>/study-in/[country]</code>
+            <code>/study-in/[country]/[city]</code>
+            <div class="url-example">e.g. /study-in/uk &nbsp;·&nbsp; /study-in/uk/london &nbsp;·&nbsp; /study-in/germany</div>
+          </div>
+          <div class="url-block">
+            <div class="url-label">Title Template</div>
+            <code>Study in [Country]: [Year] Guide for International Students</code>
+            <div class="url-example">e.g. "Study in the UK: 2026 Guide for International Students"</div>
+          </div>
+        </div>
+        <div>
+          <table>
+            <tr><th>Country</th><th>Search Volume</th><th>Competition</th><th>Priority</th></tr>
+            <tr><td>United Kingdom</td><td class="vol-high">High (40k+/mo)</td><td>Medium</td><td class="priority-high">P1</td></tr>
+            <tr><td>Germany</td><td class="vol-high">High (20k+/mo)</td><td>Low–Medium</td><td class="priority-high">P1</td></tr>
+            <tr><td>France</td><td class="vol-med">Medium (12k/mo)</td><td>Low</td><td class="priority-high">P1</td></tr>
+            <tr><td>Ireland</td><td class="vol-med">Medium (8k/mo)</td><td>Low</td><td class="priority-high">P1</td></tr>
+            <tr><td>Netherlands</td><td class="vol-med">Medium (6k/mo)</td><td>Low</td><td class="priority-med">P2</td></tr>
+            <tr><td>Canada</td><td class="vol-high">Very High</td><td>High</td><td class="priority-med">P2</td></tr>
+            <tr><td>Australia</td><td class="vol-high">Very High</td><td>High</td><td class="priority-low">P3</td></tr>
+          </table>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--slate); margin-top:12px;">Pages to build: <strong>7 country pages + 12 city pages = 19 pages</strong>. Each must have unique intro paragraphs, tuition fee ranges, top universities list, visa summary, and living costs pulled from the Supabase <code>study_destinations</code> table. Cross-link to source market pages and visa guide pages.</p>
+    </div>
+
+    <!-- Page Type 2: Source Market Pages -->
+    <div style="margin-bottom: 28px;">
+      <h3 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border);">🌍 Page Type 2 — Source Market Pages</h3>
+      <div class="tip tip-green">
+        <div class="tip-icon">💡</div>
+        <div><strong>Biggest Opportunity:</strong> Source market pages target the exact searches students type when they first start researching — before they've picked a destination or agent. These pages have high intent and very low competitive density from established players like IDP, SI-UK, and AHZ who rarely create country-specific content for African/MENA markets.</div>
+      </div>
+      <div class="url-grid">
+        <div>
+          <div class="url-block">
+            <div class="url-label">URL Structure</div>
+            <code>/study-abroad/[source-country]</code>
+            <code>/study-abroad/[source-country]/[destination]</code>
+            <div class="url-example">e.g. /study-abroad/nigeria &nbsp;·&nbsp; /study-abroad/nigeria/uk &nbsp;·&nbsp; /study-abroad/kenya</div>
+          </div>
+        </div>
+        <div>
+          <div class="url-block">
+            <div class="url-label">Title Templates</div>
+            <code>Study Abroad from [Country]: Free Expert Guidance | Applyza</code>
+            <code>How to Study in [Destination] from [Source]: [Year] Guide</code>
+            <div class="url-example">e.g. "How to Study in the UK from Nigeria: Complete 2026 Guide"</div>
+          </div>
+        </div>
+      </div>
+      <table style="margin-top:12px;">
+        <tr><th>Source Market</th><th>Key Queries</th><th>Volume Est.</th><th>Applyza Office</th><th>Priority</th></tr>
+        <tr><td><strong>Nigeria</strong></td><td>"study abroad consultants Nigeria", "how to study in UK from Nigeria", "UK student visa Nigeria"</td><td class="vol-high">High</td><td>✅ Lagos</td><td class="priority-high">P1</td></tr>
+        <tr><td><strong>Ghana</strong></td><td>"study abroad consultants Ghana", "how to apply to UK university from Ghana", "UK visa Ghana"</td><td class="vol-med">Medium</td><td>✅ Accra</td><td class="priority-high">P1</td></tr>
+        <tr><td><strong>Kenya</strong></td><td>"study abroad consultants Kenya", "study in UK from Kenya", "UK student visa Kenya"</td><td class="vol-med">Medium</td><td>✅ Nairobi</td><td class="priority-high">P1</td></tr>
+        <tr><td><strong>Egypt</strong></td><td>"study abroad Egypt", "study in UK from Egypt", "international student consultants Egypt"</td><td class="vol-med">Medium</td><td>— (remote)</td><td class="priority-high">P1</td></tr>
+        <tr><td><strong>Morocco</strong></td><td>"study abroad Morocco", "study in Europe from Morocco", "university consultants Morocco"</td><td class="vol-med">Medium</td><td>— (remote)</td><td class="priority-high">P1</td></tr>
+        <tr><td><strong>Turkey</strong></td><td>"study in UK from Turkey", "university application support Turkey"</td><td class="vol-med">Medium</td><td>✅ Istanbul</td><td class="priority-med">P2</td></tr>
+        <tr><td><strong>UAE</strong></td><td>"study abroad consultants UAE", "UK university application UAE"</td><td class="vol-med">Medium</td><td>✅ Doha (nearby)</td><td class="priority-med">P2</td></tr>
+        <tr><td><strong>Kuwait</strong></td><td>"study abroad Kuwait", "UK student visa Kuwait"</td><td class="vol-low">Low–Med</td><td>— (remote)</td><td class="priority-med">P2</td></tr>
+        <tr><td><strong>Eastern Europe</strong></td><td>"study in UK from [country]" per nation</td><td class="vol-low">Low</td><td>— (remote)</td><td class="priority-low">P3</td></tr>
+      </table>
+      <p style="font-size:13px; color:var(--slate); margin-top:12px;">Cross-pages to build per source market: <strong>1 hub page + 3–5 destination spokes = ~35–40 source market pages total</strong>. Hub pages should include office address + map for markets with a physical presence (trust signal + local SEO).</p>
+    </div>
+
+    <!-- Page Type 3: Course Category Pages -->
+    <div style="margin-bottom: 28px;">
+      <h3 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border);">📚 Page Type 3 — Course Category Pages</h3>
+      <div class="url-grid">
+        <div>
+          <div class="url-block">
+            <div class="url-label">URL Structure</div>
+            <code>/courses/[subject-area]</code>
+            <code>/courses/[subject-area]/[destination]</code>
+            <div class="url-example">e.g. /courses/business-management &nbsp;·&nbsp; /courses/nursing/uk</div>
+          </div>
+        </div>
+        <div>
+          <div class="url-block">
+            <div class="url-label">Title Templates</div>
+            <code>[Subject] Courses in [Destination] for International Students | Applyza</code>
+            <div class="url-example">e.g. "Business Management Courses in the UK for International Students"</div>
+          </div>
+        </div>
+      </div>
+      <table style="margin-top:12px;">
+        <tr><th>Subject Area</th><th>Search Pattern</th><th>Volume</th><th>Priority</th></tr>
+        <tr><td>Business & Management</td><td>"study business in UK", "MBA UK international student"</td><td class="vol-high">High</td><td class="priority-high">P1</td></tr>
+        <tr><td>Computer Science & IT</td><td>"study computer science UK", "IT courses UK international"</td><td class="vol-high">High</td><td class="priority-high">P1</td></tr>
+        <tr><td>Nursing & Healthcare</td><td>"study nursing in UK", "healthcare courses UK"</td><td class="vol-high">High</td><td class="priority-high">P1</td></tr>
+        <tr><td>Engineering</td><td>"engineering courses UK international student"</td><td class="vol-med">Medium</td><td class="priority-high">P1</td></tr>
+        <tr><td>Law</td><td>"study law in UK", "LLM UK international"</td><td class="vol-med">Medium</td><td class="priority-med">P2</td></tr>
+        <tr><td>Accounting & Finance</td><td>"accounting courses UK", "finance degree UK"</td><td class="vol-med">Medium</td><td class="priority-med">P2</td></tr>
+        <tr><td>Education / PGCE</td><td>"study education UK", "teacher training UK"</td><td class="vol-low">Low–Med</td><td class="priority-med">P2</td></tr>
+        <tr><td>Media & Communication</td><td>"media studies UK international", "journalism UK"</td><td class="vol-low">Low</td><td class="priority-low">P3</td></tr>
+      </table>
+      <p style="font-size:13px; color:var(--slate); margin-top:12px;">These pages pull dynamically from the <code>courses</code> Supabase table and should display real course listings, university names, and entry requirements. Target ~16–24 category pages at launch, each linking back to the course finder and to the book-a-consultation CTA.</p>
+    </div>
+
+    <!-- Page Type 4: Competitor / Alternative Pages -->
+    <div>
+      <h3 style="font-size:15px; font-weight:700; color:var(--navy); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border);">⚔️ Page Type 4 — Competitor Comparison Pages</h3>
+      <div class="tip tip-blue">
+        <div class="tip-icon">ℹ️</div>
+        <div>Students who are already aware of IDP, AHZ, or SI-UK and searching for alternatives are <strong>high-intent, decision-stage leads</strong>. These pages convert extremely well because the searcher is actively comparing. Frame these as "Applyza vs X" or "X Alternative" rather than attacks — lead with benefits, be factual, let the comparison do the selling.</div>
+      </div>
+      <div class="url-block" style="margin-bottom:12px;">
+        <div class="url-label">URL Structure</div>
+        <code>/vs/[competitor-name]</code>
+        <code>/alternatives/[competitor-name]</code>
+        <div class="url-example">e.g. /vs/idp-education &nbsp;·&nbsp; /vs/ahz-associates &nbsp;·&nbsp; /vs/si-uk &nbsp;·&nbsp; /alternatives/applyboard</div>
+      </div>
+      <table>
+        <tr><th>Competitor</th><th>Target Keyword</th><th>Differentiation Angle</th><th>Priority</th></tr>
+        <tr><td>IDP Education</td><td>"IDP alternative", "IDP Education review"</td><td>Applyza is free + personalised vs. IDP's high-volume transactional model</td><td class="priority-high">P1</td></tr>
+        <tr><td>SI-UK / SI-Global</td><td>"SI-UK alternative", "SI-UK review"</td><td>Applyza is free vs. SI-UK's paid premium service</td><td class="priority-high">P1</td></tr>
+        <tr><td>AHZ Associates</td><td>"AHZ Associates alternative"</td><td>Applyza has AI matching + broader market presence</td><td class="priority-med">P2</td></tr>
+        <tr><td>Applyboard</td><td>"Applyboard alternative"</td><td>Applyza is direct-to-student + has local offices vs. Applyboard's B2B-only model</td><td class="priority-med">P2</td></tr>
+        <tr><td>Aims Education</td><td>"Aims Education alternative"</td><td>Applyza has broader course catalogue + AI matching</td><td class="priority-low">P3</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 3: KEYWORD MAP -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#ede9fe;">🔑</div>
+      <div>
+        <div class="section-title">3. Keyword Target Map</div>
+        <div class="section-subtitle">Priority keywords by market, buyer stage, and content type</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>Keyword</th><th>Market</th><th>Buyer Stage</th><th>Volume</th><th>Type</th><th>Target URL</th></tr>
+
+      <!-- Head terms -->
+      <tr class="kw-cluster"><td colspan="6">🌐 HEAD TERMS — BRAND & CATEGORY</td></tr>
+      <tr><td>free study abroad consultants</td><td>Universal</td><td>Decision</td><td class="vol-high">High</td><td><span class="badge badge-teal">Homepage</span></td><td>/</td></tr>
+      <tr><td>study abroad consultants</td><td>Universal</td><td>Awareness/Decision</td><td class="vol-high">High</td><td><span class="badge badge-teal">Homepage</span></td><td>/</td></tr>
+      <tr><td>AQF registered education agent</td><td>Universal</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-teal">Homepage/About</span></td><td>/ or /about</td></tr>
+      <tr><td>university application support international students</td><td>Universal</td><td>Decision</td><td class="vol-high">High</td><td><span class="badge badge-purple">Service</span></td><td>/services/university-applications</td></tr>
+      <tr><td>UK student visa consultants</td><td>Universal</td><td>Decision</td><td class="vol-high">High</td><td><span class="badge badge-purple">Service</span></td><td>/services/visa-immigration</td></tr>
+
+      <!-- Nigeria -->
+      <tr class="kw-cluster"><td colspan="6">🇳🇬 NIGERIA — Source Market</td></tr>
+      <tr><td>study abroad consultants Nigeria</td><td>Nigeria</td><td>Decision</td><td class="vol-high">High</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/nigeria</td></tr>
+      <tr><td>study in UK from Nigeria</td><td>Nigeria</td><td>Awareness</td><td class="vol-high">High</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/nigeria/uk</td></tr>
+      <tr><td>UK student visa Nigeria</td><td>Nigeria</td><td>Decision</td><td class="vol-high">High</td><td><span class="badge badge-green">Visa</span></td><td>/visas/uk-student-visa/nigeria</td></tr>
+      <tr><td>how to apply to UK university from Nigeria</td><td>Nigeria</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-navy">Blog</span></td><td>/blog/apply-uk-university-from-nigeria</td></tr>
+      <tr><td>university consultants Lagos</td><td>Nigeria</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/nigeria#lagos-office</td></tr>
+
+      <!-- Ghana -->
+      <tr class="kw-cluster"><td colspan="6">🇬🇭 GHANA — Source Market</td></tr>
+      <tr><td>study abroad consultants Ghana</td><td>Ghana</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/ghana</td></tr>
+      <tr><td>study in UK from Ghana</td><td>Ghana</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/ghana/uk</td></tr>
+      <tr><td>UK student visa Ghana</td><td>Ghana</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-green">Visa</span></td><td>/visas/uk-student-visa/ghana</td></tr>
+
+      <!-- Kenya -->
+      <tr class="kw-cluster"><td colspan="6">🇰🇪 KENYA — Source Market</td></tr>
+      <tr><td>study abroad consultants Kenya</td><td>Kenya</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/kenya</td></tr>
+      <tr><td>how to study in UK from Kenya</td><td>Kenya</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/kenya/uk</td></tr>
+      <tr><td>international student visa Kenya</td><td>Kenya</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-green">Visa</span></td><td>/visas/uk-student-visa/kenya</td></tr>
+
+      <!-- Egypt / Morocco -->
+      <tr class="kw-cluster"><td colspan="6">🇪🇬🇲🇦 NORTH AFRICA — Source Markets</td></tr>
+      <tr><td>study abroad Egypt</td><td>Egypt</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/egypt</td></tr>
+      <tr><td>study in UK from Egypt</td><td>Egypt</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/egypt/uk</td></tr>
+      <tr><td>university consultants Morocco</td><td>Morocco</td><td>Decision</td><td class="vol-low">Low–Med</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/morocco</td></tr>
+      <tr><td>study in Europe from Morocco</td><td>Morocco</td><td>Awareness</td><td class="vol-low">Low–Med</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/morocco/europe</td></tr>
+
+      <!-- Middle East -->
+      <tr class="kw-cluster"><td colspan="6">🇦🇪🇰🇼 MIDDLE EAST — Source Markets</td></tr>
+      <tr><td>study abroad consultants UAE</td><td>UAE</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/uae</td></tr>
+      <tr><td>UK university application UAE</td><td>UAE</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/uae/uk</td></tr>
+      <tr><td>study abroad Kuwait</td><td>Kuwait</td><td>Awareness</td><td class="vol-low">Low–Med</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/kuwait</td></tr>
+
+      <!-- Turkey -->
+      <tr class="kw-cluster"><td colspan="6">🇹🇷 TÜRKIYE — Source Market</td></tr>
+      <tr><td>study in UK from Turkey</td><td>Turkey</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/turkey/uk</td></tr>
+      <tr><td>university application support Turkey</td><td>Turkey</td><td>Decision</td><td class="vol-low">Low–Med</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/turkey</td></tr>
+
+      <!-- Destinations -->
+      <tr class="kw-cluster"><td colspan="6">🏛️ DESTINATION PAGES</td></tr>
+      <tr><td>study in the UK international student</td><td>Universal</td><td>Awareness</td><td class="vol-high">High</td><td><span class="badge badge-teal">Destination</span></td><td>/study-in/uk</td></tr>
+      <tr><td>study in Germany for free</td><td>Universal</td><td>Awareness</td><td class="vol-high">High</td><td><span class="badge badge-teal">Destination</span></td><td>/study-in/germany</td></tr>
+      <tr><td>study in France international student</td><td>Universal</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-teal">Destination</span></td><td>/study-in/france</td></tr>
+      <tr><td>study in Ireland international student</td><td>Universal</td><td>Awareness</td><td class="vol-med">Medium</td><td><span class="badge badge-teal">Destination</span></td><td>/study-in/ireland</td></tr>
+
+      <!-- Competitor -->
+      <tr class="kw-cluster"><td colspan="6">⚔️ COMPETITOR CONQUEST</td></tr>
+      <tr><td>IDP Education alternative</td><td>Universal</td><td>Decision</td><td class="vol-med">Medium</td><td><span class="badge badge-red">Competitor</span></td><td>/vs/idp-education</td></tr>
+      <tr><td>SI-UK alternative</td><td>Universal</td><td>Decision</td><td class="vol-low">Low–Med</td><td><span class="badge badge-red">Competitor</span></td><td>/vs/si-uk</td></tr>
+      <tr><td>best study abroad consultants Nigeria</td><td>Nigeria</td><td>Decision</td><td class="vol-high">High</td><td><span class="badge badge-gold">Source Market</span></td><td>/study-abroad/nigeria</td></tr>
+    </table>
+  </div>
+
+  <!-- SECTION 4: TOPIC CLUSTER MAPS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fef3c7;">🗺️</div>
+      <div>
+        <div class="section-title">4. Topic Cluster Maps</div>
+        <div class="section-subtitle">Blog & pillar content organised into 5 thematic clusters</div>
+      </div>
+    </div>
+
+    <div class="cluster-grid">
+      <!-- Cluster 1 -->
+      <div class="cluster-block c-teal">
+        <div class="cluster-head">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Cluster 1 — Studying in the UK <span style="margin-left:auto; font-size:11px; opacity:0.7; font-weight:400;">[Pillar: /study-in/uk]</span></div>
+        <div class="cluster-body">
+          <ul>
+            <li><span><strong>Pillar Page:</strong> The Complete Guide to Studying in the UK (2026)<span class="cluster-kw">study in UK international student</span></span></li>
+            <li><span>How to Apply to a UK University: Step-by-Step<span class="cluster-kw">how to apply UK university</span></span></li>
+            <li><span>UK University Rankings 2026: What They Don't Tell You<span class="cluster-kw">UK university rankings 2026</span></span></li>
+            <li><span>UK Student Visa: The Complete Application Guide<span class="cluster-kw">UK student visa guide</span></span></li>
+            <li><span>Cost of Living in the UK for International Students<span class="cluster-kw">cost of living UK student</span></span></li>
+            <li><span>Best Cities to Study in the UK: London vs Manchester vs Birmingham<span class="cluster-kw">best city to study UK</span></span></li>
+            <li><span>UK University Personal Statement Guide (with Examples)<span class="cluster-kw">personal statement UK university</span></span></li>
+            <li><span>Can International Students Work in the UK?<span class="cluster-kw">international student work rights UK</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cluster 2 -->
+      <div class="cluster-block c-green">
+        <div class="cluster-head">🛂 Cluster 2 — UK Student Visa <span style="margin-left:auto; font-size:11px; opacity:0.7; font-weight:400;">[Pillar: /services/visa-immigration]</span></div>
+        <div class="cluster-body">
+          <ul>
+            <li><span><strong>Pillar Page:</strong> UK Student Visa: Everything You Need to Know<span class="cluster-kw">UK student visa</span></span></li>
+            <li><span>UK Student Visa Requirements: Full Document Checklist 2026<span class="cluster-kw">UK student visa requirements documents</span></span></li>
+            <li><span>Why UK Visa Applications Get Refused (and How to Avoid It)<span class="cluster-kw">UK visa refusal reasons students</span></span></li>
+            <li><span>How Long Does a UK Student Visa Take to Process?<span class="cluster-kw">UK student visa processing time</span></span></li>
+            <li><span>UK Student Visa from Nigeria: Step-by-Step Guide 2026<span class="cluster-kw">UK student visa Nigeria</span></span></li>
+            <li><span>UK Student Visa from Ghana: Step-by-Step Guide 2026<span class="cluster-kw">UK student visa Ghana</span></span></li>
+            <li><span>UK Student Visa from Kenya: Step-by-Step Guide 2026<span class="cluster-kw">UK student visa Kenya</span></span></li>
+            <li><span>What is a CAS Number and How Do You Get One?<span class="cluster-kw">what is CAS number UK visa</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cluster 3 -->
+      <div class="cluster-block c-purple">
+        <div class="cluster-head">📝 Cluster 3 — University Applications <span style="margin-left:auto; font-size:11px; opacity:0.7; font-weight:400;">[Pillar: /services/university-applications]</span></div>
+        <div class="cluster-body">
+          <ul>
+            <li><span><strong>Pillar Page:</strong> How to Apply to UK Universities: The Definitive Guide<span class="cluster-kw">how to apply UK university</span></span></li>
+            <li><span>UCAS Application Guide for International Students 2026<span class="cluster-kw">UCAS application international student</span></span></li>
+            <li><span>How to Write a Winning Personal Statement (International Students)<span class="cluster-kw">personal statement university international student</span></span></li>
+            <li><span>University Application Documents: What You Need and Why<span class="cluster-kw">university application documents list</span></span></li>
+            <li><span>What GPA Do You Need for a UK University?<span class="cluster-kw">GPA required UK university</span></span></li>
+            <li><span>Direct Entry vs UCAS: Which Is Right for You?<span class="cluster-kw">direct entry UK university vs UCAS</span></span></li>
+            <li><span>How to Spot a Fake Education Agent (and Protect Yourself)<span class="cluster-kw">fake education agent scam</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cluster 4 -->
+      <div class="cluster-block c-gold">
+        <div class="cluster-head">🌍 Cluster 4 — Study Abroad from Nigeria <span style="margin-left:auto; font-size:11px; opacity:0.7; font-weight:400;">[Pillar: /study-abroad/nigeria]</span></div>
+        <div class="cluster-body">
+          <ul>
+            <li><span><strong>Pillar Page:</strong> How to Study Abroad from Nigeria: Complete 2026 Guide<span class="cluster-kw">study abroad from Nigeria</span></span></li>
+            <li><span>Best UK Universities Accepting Nigerian Students 2026<span class="cluster-kw">UK universities Nigerian students</span></span></li>
+            <li><span>UK Student Visa for Nigerians: Full Guide & Document Checklist<span class="cluster-kw">UK student visa Nigeria</span></span></li>
+            <li><span>Scholarships for Nigerian Students to Study in the UK<span class="cluster-kw">scholarships Nigerian students UK</span></span></li>
+            <li><span>How to Write a UK University Personal Statement as a Nigerian Student<span class="cluster-kw">personal statement Nigeria UK university</span></span></li>
+            <li><span>Waec/Neco Results: Which UK Universities Accept Them?<span class="cluster-kw">WAEC NECO UK university accepted</span></span></li>
+            <li><span>Fake Education Agents in Nigeria: Red Flags and How to Avoid Them<span class="cluster-kw">fake education agent Nigeria</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cluster 5 -->
+      <div class="cluster-block c-orange">
+        <div class="cluster-head">💰 Cluster 5 — Scholarships & Funding <span style="margin-left:auto; font-size:11px; opacity:0.7; font-weight:400;">[Pillar: /scholarships]</span></div>
+        <div class="cluster-body">
+          <ul>
+            <li><span><strong>Pillar Page:</strong> Scholarships for International Students: Complete Guide 2026<span class="cluster-kw">scholarships international students 2026</span></span></li>
+            <li><span>Chevening Scholarship: How to Apply (African Students Guide)<span class="cluster-kw">Chevening scholarship application</span></span></li>
+            <li><span>Commonwealth Scholarships: Full Application Guide 2026<span class="cluster-kw">Commonwealth scholarship 2026</span></span></li>
+            <li><span>UK University Scholarships for Nigerian Students 2026<span class="cluster-kw">UK scholarships Nigerian students</span></span></li>
+            <li><span>Fully Funded Scholarships to Study in Germany (African Students)<span class="cluster-kw">scholarships study Germany Africa</span></span></li>
+            <li><span>DAAD Scholarship Guide: Eligibility, Application, Deadlines<span class="cluster-kw">DAAD scholarship guide</span></span></li>
+            <li><span>How to Fund Your Studies Abroad Without a Scholarship<span class="cluster-kw">fund studies abroad no scholarship</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cluster 6 -->
+      <div class="cluster-block c-navy">
+        <div class="cluster-head">🏠 Cluster 6 — Student Life & Accommodation <span style="margin-left:auto; font-size:11px; opacity:0.7; font-weight:400;">[Pillar: /services/accommodation]</span></div>
+        <div class="cluster-body">
+          <ul>
+            <li><span><strong>Pillar Page:</strong> Student Accommodation in the UK: A Complete Guide<span class="cluster-kw">student accommodation UK international</span></span></li>
+            <li><span>How Much Does It Cost to Live in London as a Student?<span class="cluster-kw">cost of living London student 2026</span></span></li>
+            <li><span>Student Accommodation in Manchester: Best Options & Prices<span class="cluster-kw">student accommodation Manchester</span></span></li>
+            <li><span>University Halls vs Private Student Accommodation: Pros and Cons<span class="cluster-kw">university halls vs private accommodation</span></span></li>
+            <li><span>Part-Time Jobs for International Students in the UK<span class="cluster-kw">part-time jobs international students UK</span></span></li>
+            <li><span>Opening a UK Bank Account as an International Student<span class="cluster-kw">bank account international student UK</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: PAGE TEMPLATES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#f0fdf4;">📐</div>
+      <div>
+        <div class="section-title">5. Page Templates</div>
+        <div class="section-subtitle">URL, title, meta description, H1, and content structure for each programmatic page type</div>
+      </div>
+    </div>
+
+    <!-- Template A: Source Market Hub -->
+    <div class="template-section" style="margin-bottom:20px;">
+      <div class="template-header">🌍 Template A — Source Market Hub Page (e.g. /study-abroad/nigeria)</div>
+      <div class="template-body">
+        <div class="template-row"><div class="template-field">URL Pattern</div><div class="template-val">/study-abroad/{country-slug}</div></div>
+        <div class="template-row"><div class="template-field">Title Tag</div><div class="template-val">Study Abroad from {Country}: Free Expert Guidance | Applyza — max 60 chars</div></div>
+        <div class="template-row"><div class="template-field">Meta Description</div><div class="template-val">Expert-guided, completely free study abroad consultancy for students from {Country}. AI course matching, 99% visa success rate, local office in {City}. Start your application today.</div></div>
+        <div class="template-row"><div class="template-field">H1</div><div class="template-val">Study Abroad from {Country}: Your Free Expert Guide</div></div>
+        <div class="template-row"><div class="template-field">Schema Markup</div><div class="template-val">Organization + BreadcrumbList + FAQPage (country-specific questions)</div></div>
+        <div class="template-row"><div class="template-field">Canonical</div><div class="template-val">Self-referencing canonical on each page</div></div>
+        <div class="template-row"><div class="template-field">Content Sections</div><div class="template-val">
+          1. Intro paragraph with country name + key stat (e.g. "1 in 4 of our Nigerian students got Chevening scholarship support")
+          · 2. Why study abroad from {Country} (2–3 bullet pain points addressed)
+          · 3. Top destinations from {Country} (UK, Germany, France etc. — linked cards)
+          · 4. What Applyza does for {Country} students (services list)
+          · 5. Local office section (if physical office exists — address + map embed + counsellor name)
+          · 6. Country-specific FAQ (5 questions)
+          · 7. Testimonial from a student from that country
+          · 8. CTA: "Book your free consultation from {Country}"
+        </div></div>
+        <div class="template-row"><div class="template-field">Internal Links</div><div class="template-val">→ /study-abroad/{country}/uk · → /visas/uk-student-visa/{country} · → /book-a-consultation · → /find-a-course</div></div>
+        <div class="template-row"><div class="template-field">CTA</div><div class="template-val">Primary: Book a Free Consultation · Secondary: Start Eligibility Check</div></div>
+      </div>
+    </div>
+
+    <!-- Template B: Destination Page -->
+    <div class="template-section" style="margin-bottom:20px;">
+      <div class="template-header">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Template B — Study Destination Page (e.g. /study-in/uk)</div>
+      <div class="template-body">
+        <div class="template-row"><div class="template-field">URL Pattern</div><div class="template-val">/study-in/{country-slug}</div></div>
+        <div class="template-row"><div class="template-field">Title Tag</div><div class="template-val">Study in {Country}: Complete Guide for International Students {Year} | Applyza</div></div>
+        <div class="template-row"><div class="template-field">H1</div><div class="template-val">Study in {Country}: Everything International Students Need to Know</div></div>
+        <div class="template-row"><div class="template-field">Content Sections</div><div class="template-val">
+          1. Why study in {Country} (3–4 reasons + stats)
+          · 2. Top universities in {Country} (pulled from DB, name + rank + link)
+          · 3. Tuition fees for international students (ranges by subject)
+          · 4. Cost of living overview (monthly budget ranges)
+          · 5. Visa requirements summary + link to full visa guide
+          · 6. Popular courses at {Country} universities (linked to course category pages)
+          · 7. Entry requirements overview (English language tests etc.)
+          · 8. Life in {Country} as an international student
+          · 9. FAQ (5–7 questions)
+          · 10. CTA: "Find your course in {Country}"
+        </div></div>
+        <div class="template-row"><div class="template-field">Schema</div><div class="template-val">BreadcrumbList + FAQPage + ItemList (universities)</div></div>
+        <div class="template-row"><div class="template-field">Internal Links</div><div class="template-val">→ /courses/[subject]/[country] · → /visas/{country}-student-visa · → /study-abroad/[source-market]/{country} · → /scholarships</div></div>
+      </div>
+    </div>
+
+    <!-- Template C: Visa Guide -->
+    <div class="template-section">
+      <div class="template-header">🛂 Template C — Country-Specific Visa Guide (e.g. /visas/uk-student-visa/nigeria)</div>
+      <div class="template-body">
+        <div class="template-row"><div class="template-field">URL Pattern</div><div class="template-val">/visas/{destination}-student-visa/{source-country}</div></div>
+        <div class="template-row"><div class="template-field">Title Tag</div><div class="template-val">UK Student Visa from {Country}: Requirements & Application Guide {Year} | Applyza</div></div>
+        <div class="template-row"><div class="template-field">H1</div><div class="template-val">UK Student Visa for {Country} Applicants: Step-by-Step Guide ({Year})</div></div>
+        <div class="template-row"><div class="template-field">Content Sections</div><div class="template-val">
+          1. Overview — who needs this visa, what it allows
+          · 2. Eligibility criteria
+          · 3. Required documents (checklist format — good for schema)
+          · 4. How to apply — step-by-step numbered guide
+          · 5. Processing time + how to track status
+          · 6. Common reasons for refusal (directly from Applyza counsellor experience)
+          · 7. How Applyza helps — service pitch
+          · 8. FAQ (5–7 visa-specific questions)
+          · 9. Success story from a student from {Country}
+          · 10. CTA: "Get expert visa support — it's free"
+        </div></div>
+        <div class="template-row"><div class="template-field">Schema</div><div class="template-val">HowTo + FAQPage + BreadcrumbList</div></div>
+        <div class="template-row"><div class="template-field">Note</div><div class="template-val">⚠️ Keep this content current — UKVI rules change. Add a "Last updated: [date]" tag for E-E-A-T freshness signal.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: INTERNAL LINKING -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#dbeafe;">🔗</div>
+      <div>
+        <div class="section-title">6. Internal Linking Architecture</div>
+        <div class="section-subtitle">How pages pass authority and guide users toward conversion</div>
+      </div>
+    </div>
+    <div class="link-arch">
+      <div class="la-title">APPLYZA INTERNAL LINK FLOW</div>
+      <div class="la-tier-label">TIER 1 — HOMEPAGE</div>
+      <div class="la-tier"><div class="la-node home">Homepage (/)</div></div>
+      <div class="la-arrow">↓</div>
+      <div class="la-tier-label">TIER 2 — PILLAR HUBS</div>
+      <div class="la-tier">
+        <div class="la-node pillar">Study Destinations<br><small>/study-in/[country]</small></div>
+        <div class="la-node pillar">Visas & Immigration<br><small>/services/visa-immigration</small></div>
+        <div class="la-node pillar">University Applications<br><small>/services/university-applications</small></div>
+        <div class="la-node pillar">Source Markets<br><small>/study-abroad/[country]</small></div>
+        <div class="la-node pillar">Scholarships<br><small>/scholarships</small></div>
+      </div>
+      <div class="la-arrow">↓</div>
+      <div class="la-tier-label">TIER 3 — PROGRAMMATIC SPOKES</div>
+      <div class="la-tier">
+        <div class="la-node spoke">/study-in/uk/london</div>
+        <div class="la-node spoke">/study-abroad/nigeria/uk</div>
+        <div class="la-node spoke">/visas/uk-student-visa/nigeria</div>
+        <div class="la-node spoke">/courses/business/uk</div>
+        <div class="la-node spoke">/vs/idp-education</div>
+        <div class="la-node spoke">/blog/[post-slug]</div>
+      </div>
+      <div class="la-arrow">↓</div>
+      <div class="la-tier-label">CONVERSION — ALL SPOKES LINK TO THESE</div>
+      <div class="la-tier">
+        <div class="la-node home">/book-a-consultation</div>
+        <div class="la-node home">/find-a-course</div>
+        <div class="la-node home">/eligibility-check</div>
+      </div>
+    </div>
+    <div style="margin-top:20px;">
+      <h4 style="font-size:13px; font-weight:700; color:var(--navy); margin-bottom:12px;">Navigation Updates Required</h4>
+      <table>
+        <tr><th>Location</th><th>Current State</th><th>Recommended Change</th></tr>
+        <tr><td>Main Nav</td><td>Blog not linked from nav</td><td>Add "Guides" to nav (blog + destination guides)</td></tr>
+        <tr><td>Main Nav</td><td>No Services dropdown</td><td>Add dropdown: University Applications, Visa Support, Counselling, Accommodation</td></tr>
+        <tr><td>Footer</td><td>No destination links</td><td>Add "Study Destinations" column: UK, Germany, France, Ireland</td></tr>
+        <tr><td>Footer</td><td>No source market links</td><td>Add "Our Markets" column: Nigeria, Ghana, Kenya, Egypt, Turkey</td></tr>
+        <tr><td>Study Destinations page</td><td>Cards link to /study-destinations/[slug]</td><td>Repoint links to new /study-in/[country] pillar pages</td></tr>
+        <tr><td>Services pages</td><td>No cross-links to destination/visa pages</td><td>Add contextual links: "Visa guide for Nigerian students →"</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 7: EDITORIAL CALENDAR -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fce7f3;">📅</div>
+      <div>
+        <div class="section-title">7. Editorial Calendar — Q2–Q3 2026</div>
+        <div class="section-subtitle">18 priority blog posts across 6 months, mapped to content clusters and target keywords</div>
+      </div>
+    </div>
+
+    <div class="tip tip-blue" style="margin-bottom:20px;">
+      <div class="tip-icon">ℹ️</div>
+      <div><strong>Publishing cadence:</strong> Aim for <strong>3 posts per month minimum</strong>. Prioritise depth over frequency — one outstanding 2,000-word post outperforms five thin 400-word posts. Each post must have a named author with credentials (see E-E-A-T section). Posts should link to at least 2 internal pages and target one specific primary keyword.</div>
+    </div>
+
+    <div class="cal-grid">
+      <div class="cal-month m-jan">
+        <div class="cal-month-head">April 2026</div>
+        <div class="cal-month-body">
+          <div class="cal-post"><span class="post-title">How to Study in the UK from Nigeria (2026 Guide)</span><span class="post-meta">Keyword: study in UK from Nigeria · Cluster 4</span></div>
+          <div class="cal-post"><span class="post-title">UK Student Visa: Complete Application Guide</span><span class="post-meta">Keyword: UK student visa guide · Cluster 2</span></div>
+          <div class="cal-post"><span class="post-title">How to Write a UK University Personal Statement</span><span class="post-meta">Keyword: personal statement UK university · Cluster 3</span></div>
+        </div>
+      </div>
+      <div class="cal-month m-feb">
+        <div class="cal-month-head">May 2026</div>
+        <div class="cal-month-body">
+          <div class="cal-post"><span class="post-title">Why UK Visa Applications Get Refused (and How to Avoid It)</span><span class="post-meta">Keyword: UK visa refusal reasons students · Cluster 2</span></div>
+          <div class="cal-post"><span class="post-title">Scholarships for Nigerian Students to Study in the UK 2026</span><span class="post-meta">Keyword: UK scholarships Nigerian students · Cluster 5</span></div>
+          <div class="cal-post"><span class="post-title">Best UK Universities Accepting Ghanaian Students 2026</span><span class="post-meta">Keyword: UK universities Ghanaian students · Cluster 4</span></div>
+        </div>
+      </div>
+      <div class="cal-month m-mar">
+        <div class="cal-month-head">June 2026</div>
+        <div class="cal-month-body">
+          <div class="cal-post"><span class="post-title">Cost of Living in the UK for International Students 2026</span><span class="post-meta">Keyword: cost of living UK international student · Cluster 1</span></div>
+          <div class="cal-post"><span class="post-title">UCAS Application Guide for International Students</span><span class="post-meta">Keyword: UCAS application international student · Cluster 3</span></div>
+          <div class="cal-post"><span class="post-title">How to Study Abroad from Kenya: Complete Guide 2026</span><span class="post-meta">Keyword: study abroad from Kenya · Cluster 4</span></div>
+        </div>
+      </div>
+      <div class="cal-month m-apr">
+        <div class="cal-month-head">July 2026</div>
+        <div class="cal-month-body">
+          <div class="cal-post"><span class="post-title">Fake Education Agents: Red Flags & How to Protect Yourself</span><span class="post-meta">Keyword: fake education agent scam · Cluster 3 — SHAREABLE</span></div>
+          <div class="cal-post"><span class="post-title">Chevening Scholarship Application Guide (African Students)</span><span class="post-meta">Keyword: Chevening scholarship application · Cluster 5</span></div>
+          <div class="cal-post"><span class="post-title">UK Student Visa from Ghana: Full Document Checklist</span><span class="post-meta">Keyword: UK student visa Ghana · Cluster 2</span></div>
+        </div>
+      </div>
+      <div class="cal-month m-may">
+        <div class="cal-month-head">August 2026</div>
+        <div class="cal-month-body">
+          <div class="cal-post"><span class="post-title">WAEC & NECO Results: Which UK Universities Accept Them?</span><span class="post-meta">Keyword: WAEC NECO UK university · Cluster 4 — HIGH VALUE</span></div>
+          <div class="cal-post"><span class="post-title">Student Accommodation in the UK: Complete Guide for Internationals</span><span class="post-meta">Keyword: student accommodation UK international · Cluster 6</span></div>
+          <div class="cal-post"><span class="post-title">How to Study Abroad from Egypt: 2026 University Guide</span><span class="post-meta">Keyword: study abroad Egypt · Cluster 4</span></div>
+        </div>
+      </div>
+      <div class="cal-month m-jun">
+        <div class="cal-month-head">September 2026</div>
+        <div class="cal-month-body">
+          <div class="cal-post"><span class="post-title">Study in Germany Free: What International Students Need to Know</span><span class="post-meta">Keyword: study in Germany free international · Cluster 1</span></div>
+          <div class="cal-post"><span class="post-title">UK Student Visa from Nigeria: Step-by-Step 2026</span><span class="post-meta">Keyword: UK student visa Nigeria step by step · Cluster 2</span></div>
+          <div class="cal-post"><span class="post-title">Can International Students Work in the UK? (Part-Time Guide)</span><span class="post-meta">Keyword: international student work rights UK · Cluster 1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: QUICK WINS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#d1fae5;">⚡</div>
+      <div>
+        <div class="section-title">8. Quick Wins — Publish in the Next 30 Days</div>
+        <div class="section-subtitle">9 pages that can be built immediately with high SEO ROI</div>
+      </div>
+    </div>
+    <div class="qw-grid">
+      <div class="qw-item">
+        <div class="qw-num">1</div>
+        <div class="qw-title">Study Abroad Nigeria Hub</div>
+        <div class="qw-desc">The #1 source market. High volume, weak competition. Applyza has an office in Lagos — massive local SEO trust advantage.</div>
+        <span class="qw-url">/study-abroad/nigeria</span>
+        <div class="qw-volume" style="color:var(--green);">Volume: HIGH · Competition: LOW</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">2</div>
+        <div class="qw-title">Study in UK Landing Page</div>
+        <div class="qw-desc">The highest-volume destination term. Existing /study-destinations/uk should become a fully content-rich /study-in/uk pillar page.</div>
+        <span class="qw-url">/study-in/uk</span>
+        <div class="qw-volume" style="color:var(--green);">Volume: VERY HIGH · Competition: MEDIUM</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">3</div>
+        <div class="qw-title">UK Student Visa Nigeria</div>
+        <div class="qw-desc">Directly addresses the #1 fear of the #1 source market. Highly specific, high intent, easy to rank with good content.</div>
+        <span class="qw-url">/visas/uk-student-visa/nigeria</span>
+        <div class="qw-volume" style="color:var(--green);">Volume: HIGH · Competition: LOW</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">4</div>
+        <div class="qw-title">Study Abroad Ghana Hub</div>
+        <div class="qw-desc">Applyza has an Accra office. Strong search volume from students in Ghana who distrust local unregulated agents.</div>
+        <span class="qw-url">/study-abroad/ghana</span>
+        <div class="qw-volume" style="color:var(--gold);">Volume: MEDIUM · Competition: LOW</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">5</div>
+        <div class="qw-title">Study in Germany Page</div>
+        <div class="qw-desc">"Study in Germany for free" is one of the most-searched destination queries globally. Easy differentiation — most consultant pages are thin.</div>
+        <span class="qw-url">/study-in/germany</span>
+        <div class="qw-volume" style="color:var(--green);">Volume: HIGH · Competition: LOW</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">6</div>
+        <div class="qw-title">Fake Education Agent Guide</div>
+        <div class="qw-desc">High shareability. Builds trust, addresses the #1 anxiety, naturally positions Applyza as the trustworthy alternative. Designed for WhatsApp sharing.</div>
+        <span class="qw-url">/blog/how-to-spot-fake-education-agent</span>
+        <div class="qw-volume" style="color:var(--gold);">Volume: MEDIUM · Shareability: VERY HIGH</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">7</div>
+        <div class="qw-title">Study Abroad Kenya Hub</div>
+        <div class="qw-desc">Applyza has a Nairobi office. East Africa market is underserved by UK-focused consultants. Good long-tail keyword density.</div>
+        <span class="qw-url">/study-abroad/kenya</span>
+        <div class="qw-volume" style="color:var(--gold);">Volume: MEDIUM · Competition: LOW</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">8</div>
+        <div class="qw-title">WAEC/NECO + UK Universities</div>
+        <div class="qw-desc">Extremely specific, zero-competition query. Any Nigerian student researching UK universities will search this. Converts directly to consultation bookings.</div>
+        <span class="qw-url">/blog/waec-neco-uk-universities</span>
+        <div class="qw-volume" style="color:var(--green);">Volume: MEDIUM · Competition: VERY LOW</div>
+      </div>
+      <div class="qw-item">
+        <div class="qw-num">9</div>
+        <div class="qw-title">IDP Education Alternative</div>
+        <div class="qw-desc">Targets decision-stage searchers who already know IDP and are comparing. High conversion intent. Applyza's free service is a compelling differentiator.</div>
+        <span class="qw-url">/vs/idp-education</span>
+        <div class="qw-volume" style="color:var(--gold);">Volume: MEDIUM · Intent: VERY HIGH</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: E-E-A-T STRATEGY -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#ede9fe;">🏅</div>
+      <div>
+        <div class="section-title">9. E-E-A-T & Author Strategy</div>
+        <div class="section-subtitle">How to build trust signals for a YMYL (Your Money or Your Life) site</div>
+      </div>
+    </div>
+
+    <div class="tip tip-yellow" style="margin-bottom:20px;">
+      <div class="tip-icon">⚠️</div>
+      <div><strong>YMYL Category:</strong> Study abroad advice is classified by Google as YMYL content (it can significantly impact a person's life and finances). This means E-E-A-T signals are weighted heavily. "Applyza Team" bylines on blog posts are a significant trust risk — named counsellors with credentials are required.</div>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h4 style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:12px;">Author Pages to Create</h4>
+        <table>
+          <tr><th>Author Role</th><th>Content to Own</th><th>Credentials to Display</th></tr>
+          <tr><td>Head of Visa Services</td><td>All visa guides, UK immigration posts</td><td>Years of OISC/immigration experience, success rate data</td></tr>
+          <tr><td>Senior Counsellor (Nigeria/West Africa)</td><td>Nigeria/Ghana source market content</td><td>University placements, years in Lagos office</td></tr>
+          <tr><td>Senior Counsellor (East Africa)</td><td>Kenya/East Africa source market content</td><td>Nairobi office tenure, placements data</td></tr>
+          <tr><td>University Partnerships Lead</td><td>University application guides, UCAS content</td><td>Years working with UK universities</td></tr>
+          <tr><td>Student Scholarships Advisor</td><td>All scholarships content</td><td>Scholarship success stories, funding expertise</td></tr>
+        </table>
+      </div>
+      <div>
+        <h4 style="font-size:14px; font-weight:700; color:var(--navy); margin-bottom:12px;">E-E-A-T Signals to Add Across Site</h4>
+        <table>
+          <tr><th>Signal</th><th>Where</th><th>Implementation</th></tr>
+          <tr><td>AQF Certification badge</td><td>Homepage, all service pages, footer</td><td>Link to official UK Gov AQF page</td></tr>
+          <tr><td>Physical office addresses</td><td>About page, source market pages</td><td>Google Maps embeds + LocalBusiness schema</td></tr>
+          <tr><td>Named counsellors</td><td>Blog posts, About page, counselling page</td><td>Author profiles with photos + credentials</td></tr>
+          <tr><td>Student testimonials</td><td>Homepage, source market pages, service pages</td><td>Named, country of origin, university placed at</td></tr>
+          <tr><td>"Last updated" dates</td><td>All visa guides, country guides</td><td>Visible date + regular review schedule</td></tr>
+          <tr><td>Editorial review note</td><td>Visa & immigration content</td><td>"Reviewed by [Name], Visa Specialist, [Date]"</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: TECHNICAL PREREQUISITES -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fee2e2;">⚙️</div>
+      <div>
+        <div class="section-title">10. Technical Prerequisites</div>
+        <div class="section-subtitle">What the engineering team needs to deliver before programmatic SEO can scale</div>
+      </div>
+    </div>
+    <table>
+      <tr><th>#</th><th>Requirement</th><th>Reason</th><th>Urgency</th></tr>
+      <tr><td>1</td><td><strong>Server-Side Rendering (SSR) or Pre-rendering</strong> — React SPA is currently CSR-only. Migrate to Next.js or add pre-rendering via Vercel Edge Functions for all programmatic pages.</td><td>Without SSR, Googlebot may not index unique content on programmatic pages. All 200+ programmatic pages will be wasted effort if this isn't solved first.</td><td class="priority-high">CRITICAL</td></tr>
+      <tr><td>2</td><td><strong>Dynamic Supabase Routes</strong> — Add routes for /study-abroad/[country], /study-in/[country], /visas/[visa]/[country] that pull data from Supabase</td><td>Enables programmatic page generation at scale without manual page creation</td><td class="priority-high">HIGH</td></tr>
+      <tr><td>3</td><td><strong>XML Sitemap updates</strong> — The existing Supabase edge function sitemap must be extended to include all new programmatic pages</td><td>Google won't discover new pages without sitemap inclusion</td><td class="priority-high">HIGH</td></tr>
+      <tr><td>4</td><td><strong>Canonical tags on all pages</strong> — Especially critical on FindACourse with URL params like ?country=UK&subject=Business</td><td>Prevents duplicate content penalties from URL parameter variations</td><td class="priority-high">HIGH</td></tr>
+      <tr><td>5</td><td><strong>Dynamic schema injection</strong> — BreadcrumbList and FAQPage schema need to be generated dynamically per programmatic page</td><td>Rich results (FAQ snippets, breadcrumbs) drive higher CTR from search</td><td class="priority-med">MEDIUM</td></tr>
+      <tr><td>6</td><td><strong>Image alt text for country flags/images</strong> — All destination and source market images need descriptive alt text</td><td>SEO + accessibility requirement</td><td class="priority-med">MEDIUM</td></tr>
+      <tr><td>7</td><td><strong>robots meta tag</strong> — Add explicit `<meta name="robots" content="index, follow">` to public pages via the SEO component</td><td>Currently absent; belt-and-suspenders protection against accidental noindex</td><td class="priority-med">MEDIUM</td></tr>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center; padding:24px; color:var(--slate-light); font-size:12px; border-top:1px solid var(--border); margin-top:8px;">
+    Applyza Content Strategy & Programmatic SEO Plan — March 2026 · Prepared by Study Now Marketing · CONFIDENTIAL
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -34,6 +34,8 @@ import ForInstitutions from "./pages/ForInstitutions.tsx";
 import ForPartners from "./pages/ForPartners.tsx";
 import Contact from "./pages/Contact.tsx";
 import FAQ from "./pages/FAQ.tsx";
+import HowToChooseConsultancy from "./pages/HowToChooseConsultancy.tsx";
+import FreeVsPaidConsultancies from "./pages/FreeVsPaidConsultancies.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 // Admin
@@ -58,6 +60,7 @@ import AdminTeam from "./pages/admin/AdminTeam.tsx";
 import ProtectedRoute from "./components/admin/ProtectedRoute.tsx";
 import CookieConsent from "./components/CookieConsent.tsx";
 import ScrollAnimator from "./components/ScrollAnimator.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 import { lazy, Suspense } from "react";
 
 const ChatWidget = lazy(() => import("./components/ChatWidget.tsx"));
@@ -99,6 +102,9 @@ const AnimatedRoutes = () => {
         <Route path="/for-partners" element={<P><ForPartners /></P>} />
         <Route path="/contact" element={<P><Contact /></P>} />
         <Route path="/faq" element={<P><FAQ /></P>} />
+        <Route path="/how-to-choose-a-study-abroad-consultancy" element={<P><HowToChooseConsultancy /></P>} />
+        <Route path="/free-vs-paid-study-abroad-consultancies" element={<P><FreeVsPaidConsultancies /></P>} />
+        <Route path="/aqf-certified-education-agent" element={<Navigate to="/how-to-choose-a-study-abroad-consultancy" replace />} />
 
         {/* Admin */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -140,6 +146,7 @@ const App = () => (
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              <ScrollToTop />
               <CookieConsent />
               <ScrollAnimator />
               <AnimatedRoutes />

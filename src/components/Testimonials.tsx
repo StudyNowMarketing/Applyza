@@ -1,236 +1,494 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Play, Quote } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, X, Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Ella I.",
-    country: "Nigeria",
-    university: "York St. John University",
-    initials: "EI",
-    color: "#2EC4B6",
     quote:
       "Applyza made the whole process feel effortless. From choosing my course to getting my visa — I never felt lost.",
-    hasVideo: true,
+    name: "Ella I.",
+    country: "Nigeria",
+    countryFlag: "🇳🇬",
+    university: "York St. John University",
+    destFlag: "🇬🇧",
+    programme: "Business Management",
+    year: "2025",
+    rating: 5,
+    photo: "/Student_review_headshot.png",
+    videoUrl: "https://www.youtube.com/embed/7sM4WPCsgnQ?si=EWmEPwaN5LRjN6ZX" as string | null,
   },
   {
-    name: "Fausat O.",
-    country: "Nigeria",
-    university: "York St. John University",
-    initials: "FO",
-    color: "#6B3FA0",
     quote:
       "I was overwhelmed by all the options. My counsellor helped me find the perfect programme and I got accepted within weeks.",
-    hasVideo: true,
+    name: "Fausat O.",
+    country: "Nigeria",
+    countryFlag: "🇳🇬",
+    university: "York St. John University",
+    destFlag: "🇬🇧",
+    programme: "International Relations",
+    year: "2025",
+    rating: 5,
+    photo: "/Student_review_headshot.png",
+    videoUrl: "https://www.youtube.com/embed/7sM4WPCsgnQ?si=EWmEPwaN5LRjN6ZX" as string | null,
   },
   {
-    name: "David A.",
-    country: "Ghana",
-    university: "University of Sunderland",
-    initials: "DA",
-    color: "#E67E22",
     quote:
       "The visa process was the part I was most nervous about. Applyza handled everything and I got approved on the first try.",
-    hasVideo: true,
+    name: "David A.",
+    country: "Ghana",
+    countryFlag: "🇬🇭",
+    university: "University of Sunderland",
+    destFlag: "🇬🇧",
+    programme: "Computer Science",
+    year: "2024",
+    rating: 5,
+    photo: "/Student_review_headshot.png",
+    videoUrl: "https://www.youtube.com/embed/7sM4WPCsgnQ?si=EWmEPwaN5LRjN6ZX" as string | null,
   },
 ];
+
+const StarRating = ({ count }: { count: number }) => (
+  <div className="flex gap-0.5">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <Star
+        key={i}
+        size={11}
+        style={{
+          color: i < count ? "#f59e0b" : "rgba(255,255,255,0.15)",
+          fill: i < count ? "#f59e0b" : "transparent",
+        }}
+      />
+    ))}
+  </div>
+);
+
+const slideVariants = {
+  enter: (dir: number) => ({ x: dir > 0 ? 56 : -56, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? -56 : 56, opacity: 0 }),
+};
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  const startTimer = useCallback(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setDirection(1);
-      setCurrent((prev) => (prev + 1) % testimonials.length);
-    }, 8000);
+  // Autoplay when section scrolls into view; pause when it leaves
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setPlaying(true);
+        } else {
+          setPlaying(false);
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    startTimer();
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [startTimer]);
-
-  const goTo = (idx: number) => {
-    setDirection(idx > current ? 1 : -1);
-    setCurrent(idx);
-    startTimer();
+  const navigate = (dir: number) => {
+    setDirection(dir);
+    setCurrent((c) => (c + dir + testimonials.length) % testimonials.length);
+    setPlaying(false);
   };
 
-  const prev = () => {
-    setDirection(-1);
-    setCurrent((p) => (p - 1 + testimonials.length) % testimonials.length);
-    startTimer();
-  };
-
-  const next = () => {
-    setDirection(1);
-    setCurrent((p) => (p + 1) % testimonials.length);
-    startTimer();
+  const goTo = (i: number) => {
+    setDirection(i > current ? 1 : -1);
+    setCurrent(i);
+    setPlaying(false);
   };
 
   const t = testimonials[current];
+  const initials = t.name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 
-  const variants = {
-    enter: (d: number) => ({ x: d > 0 ? 200 : -200, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (d: number) => ({ x: d > 0 ? -200 : 200, opacity: 0 }),
-  };
+  const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-24" style={{ background: "transparent" }}>
+    <section ref={sectionRef} className="relative overflow-hidden py-16 md:py-24">
+      {/* Ambient glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] rounded-full pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse, rgba(46,196,182,0.06) 0%, transparent 70%)",
-          filter: "blur(40px)",
+          background: "radial-gradient(ellipse, rgba(46,196,182,0.07) 0%, transparent 65%)",
+          filter: "blur(80px)",
         }}
       />
 
       <div className="container relative z-10">
-        <div className="text-center mb-14">
-          <p className="text-secondary/60 uppercase tracking-[0.2em] text-xs font-semibold mb-3">
-            Student Journeys
-          </p>
-          <h2 className="text-2xl md:text-4xl font-extrabold text-white mb-3">
-            Their Dream Became Reality
-          </h2>
-          <div className="w-12 h-1 bg-secondary rounded-full mx-auto mb-4" />
-          <p className="text-white/40 max-w-xl mx-auto text-sm">
-            Real students. Real transformations. See how they broke out of the loop.
-          </p>
+        {/* Header */}
+        <div className="flex items-end justify-between mb-10 md:mb-14">
+          <div>
+            <p
+              className="text-xs font-bold tracking-[0.25em] uppercase mb-2"
+              style={{ color: "#2EC4B6" }}
+            >
+              Student Stories
+            </p>
+            <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight">
+              Real Stories.
+              <br />
+              Real Results.
+            </h2>
+          </div>
+          <div className="hidden sm:flex items-baseline gap-1 select-none">
+            <span className="text-5xl font-extrabold leading-none text-white/90">
+              {pad(current + 1)}
+            </span>
+            <span className="text-lg font-light text-white/20">
+              /{pad(testimonials.length)}
+            </span>
+          </div>
         </div>
 
-        <div className="relative max-w-3xl mx-auto">
+        {/* Slider */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Prev */}
           <button
-            onClick={prev}
-            className="absolute -left-4 md:-left-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
+            onClick={() => navigate(-1)}
             aria-label="Previous testimonial"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+            style={{
+              background: "rgba(10,15,30,0.8)",
+              border: "1px solid rgba(255,255,255,0.12)",
+              backdropFilter: "blur(8px)",
+              color: "rgba(255,255,255,0.5)",
+            }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.9)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.5)")}
           >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            onClick={next}
-            className="absolute -right-4 md:-right-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight size={20} />
+            <ChevronLeft size={16} />
           </button>
 
-          <div className="overflow-hidden">
-            <AnimatePresence mode="wait" custom={direction}>
-              <motion.div
-                key={current}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="rounded-2xl border border-white/10 overflow-hidden"
-                style={{
-                  background: "rgba(255,255,255,0.04)",
-                  backdropFilter: "blur(10px)",
-                  WebkitBackdropFilter: "blur(10px)",
-                }}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-[1fr_320px]">
-                  {/* Left — text content */}
-                  <div className="p-8 md:p-10 flex flex-col justify-center">
-                    <div className="flex items-center gap-4 mb-5">
-                      {/* Larger photo placeholder */}
-                      <div className="relative w-[72px] h-[72px] shrink-0">
-                        <svg
-                          className="absolute inset-0 w-full h-full animate-spin"
-                          style={{ animationDuration: "8s" }}
-                          viewBox="0 0 76 76"
-                        >
-                          <circle
-                            cx="38"
-                            cy="38"
-                            r="36"
-                            fill="none"
-                            stroke={t.color}
-                            strokeWidth="2"
-                            strokeDasharray="24 14"
-                            strokeLinecap="round"
-                            opacity={0.6}
-                          />
-                        </svg>
+          {/* Card */}
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={current}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-2xl overflow-hidden"
+              style={{
+                background: "linear-gradient(160deg, rgba(22,38,50,0.97) 0%, rgba(12,20,30,0.99) 100%)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow:
+                  "0 0 0 1px rgba(46,196,182,0.06), 0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04)",
+              }}
+            >
+              <div className="flex flex-col md:flex-row">
+
+                {/* ── Left: Quote + identity ── */}
+                <div className="flex-1 relative p-8 md:p-10 lg:p-12 overflow-hidden">
+                  {/* Decorative opener */}
+                  <div
+                    className="absolute -top-4 -left-2 select-none pointer-events-none font-bold"
+                    style={{
+                      fontSize: "180px",
+                      lineHeight: 1,
+                      color: "rgba(46,196,182,0.06)",
+                      fontFamily: "Georgia, serif",
+                    }}
+                    aria-hidden
+                  >
+                    &ldquo;
+                  </div>
+
+                  <div className="relative z-10 mb-5">
+                    <StarRating count={t.rating} />
+                  </div>
+
+                  <blockquote
+                    className="relative z-10 mb-8 leading-relaxed"
+                    style={{
+                      color: "rgba(255,255,255,0.82)",
+                      fontSize: "clamp(1rem, 2.2vw, 1.175rem)",
+                      fontStyle: "italic",
+                      fontFamily: "Georgia, 'Times New Roman', serif",
+                      letterSpacing: "0.012em",
+                    }}
+                  >
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+
+                  {/* Identity */}
+                  <div className="flex items-center gap-4 relative z-10">
+                    {/*
+                      Container: 80×80px
+                      Image: inset 3px → 74px diameter, radius 37 from center
+                      Ring:  r=38, strokeWidth=1.5 → inner stroke edge at 37.25px
+                             Gap between photo edge (37px) and ring inner edge (37.25px) = 0.25px
+                             Ring sits flush just outside the photo — no dark halo, tight hug
+                    */}
+                    <div className="relative shrink-0" style={{ width: 80, height: 80 }}>
+                      {t.photo ? (
+                        <img
+                          src={t.photo}
+                          alt={t.name}
+                          className="absolute rounded-full object-cover object-top"
+                          style={{ inset: 3 }}
+                        />
+                      ) : (
                         <div
-                          className="absolute inset-[5px] rounded-full flex items-center justify-center text-lg font-bold text-white"
+                          className="absolute rounded-full flex items-center justify-center font-bold text-white text-sm"
                           style={{
-                            background: `linear-gradient(135deg, ${t.color}, ${t.color}88)`,
+                            inset: 3,
+                            background: "linear-gradient(135deg, #2EC4B6 0%, #1a8a80 100%)",
                           }}
                         >
-                          {t.initials}
+                          {initials}
                         </div>
-                      </div>
-                      <div>
-                        <h3 className="text-base font-bold text-white">{t.name}</h3>
-                        <p className="text-white/40 text-sm">
-                          {t.country} → {t.university}
-                        </p>
-                      </div>
+                      )}
+                      {/*
+                        Static SVG — no rotation transform, no transform-origin issues.
+                        Dashes flow along the path via strokeDashoffset animation instead.
+                        r=38, strokeWidth=2 → inner stroke edge at r=37 = photo edge (inset 3, radius 37).
+                        Ring sits flush just outside the photo circle.
+                        Circumference = 2π×38 ≈ 238.76px
+                      */}
+                      <svg
+                        className="absolute inset-0 w-full h-full"
+                        viewBox="0 0 80 80"
+                        fill="none"
+                        style={{
+                          filter:
+                            "drop-shadow(0 0 4px #2EC4B6) drop-shadow(0 0 8px rgba(46,196,182,0.55))",
+                        }}
+                      >
+                        <motion.circle
+                          cx="40"
+                          cy="40"
+                          r="38"
+                          stroke="#2EC4B6"
+                          strokeWidth="2"
+                          strokeDasharray="5 4"
+                          strokeLinecap="round"
+                          opacity="0.85"
+                          initial={{ strokeDashoffset: 0 }}
+                          animate={{ strokeDashoffset: -239 }}
+                          transition={{ duration: 14, ease: "linear", repeat: Infinity }}
+                        />
+                      </svg>
                     </div>
-
-                    <div className="relative">
-                      <Quote size={14} className="text-secondary/20 absolute -top-1 -left-1" />
-                      <p className="italic text-white/70 leading-relaxed text-[15px] pl-5">
-                        "{t.quote}"
+                    <div className="min-w-0">
+                      <p className="font-bold text-white text-sm leading-tight">{t.name}</p>
+                      <p className="text-xs mt-0.5 flex flex-wrap items-center gap-x-1.5" style={{ color: "rgba(255,255,255,0.38)" }}>
+                        <span>{t.countryFlag} {t.country}</span>
+                        <span style={{ color: "rgba(255,255,255,0.2)" }}>→</span>
+                        <span>{t.destFlag} {t.university}</span>
+                      </p>
+                      <p className="text-xs mt-1 font-medium" style={{ color: "rgba(46,196,182,0.55)" }}>
+                        {t.programme} · {t.year}
                       </p>
                     </div>
                   </div>
+                </div>
 
-                  {/* Right — landscape video thumbnail */}
-                  {t.hasVideo && (
-                    <div
-                      className="relative cursor-pointer group border-t md:border-t-0 md:border-l border-white/10 aspect-video md:aspect-auto"
-                      style={{ background: `${t.color}08` }}
-                    >
-                      {/* 16:9 ratio enforcer for desktop */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex flex-col items-center gap-3">
+                {/* Gradient divider */}
+                <div
+                  className="hidden md:block shrink-0"
+                  style={{
+                    width: 1,
+                    margin: "28px 0",
+                    background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent)",
+                  }}
+                />
+                <div
+                  className="md:hidden shrink-0"
+                  style={{
+                    height: 1,
+                    margin: "0 28px",
+                    background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.08) 70%, transparent)",
+                  }}
+                />
+
+                {/* ── Right: Inline video panel ── */}
+                <div className="relative md:w-56 overflow-hidden" style={{ minHeight: 200 }}>
+                  <AnimatePresence mode="wait">
+                    {playing && t.videoUrl ? (
+                      /* ── Playing state: iframe fills the panel ── */
+                      <motion.div
+                        key="video"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="absolute inset-0"
+                      >
+                        <iframe
+                          src={`${t.videoUrl}&autoplay=1`}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title={`${t.name} video review`}
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            width: "100%",
+                            height: "100%",
+                            border: "none",
+                          }}
+                        />
+                        {/* Stop button */}
+                        <button
+                          onClick={() => setPlaying(false)}
+                          aria-label="Stop video"
+                          className="absolute top-2 right-2 w-7 h-7 rounded-full flex items-center justify-center transition-colors z-10"
+                          style={{ background: "rgba(0,0,0,0.65)", color: "rgba(255,255,255,0.8)" }}
+                          onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.9)")}
+                          onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "rgba(0,0,0,0.65)")}
+                        >
+                          <X size={12} />
+                        </button>
+                      </motion.div>
+                    ) : (
+                      /* ── Idle state: play button ── */
+                      <motion.div
+                        key="idle"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute inset-0 flex items-center justify-center p-8"
+                      >
+                        {/* Scanline texture */}
+                        <div
+                          className="absolute inset-0 pointer-events-none"
+                          style={{
+                            backgroundImage:
+                              "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.008) 3px, rgba(255,255,255,0.008) 4px)",
+                          }}
+                        />
+                        {/* Corner brackets */}
+                        {(
+                          [
+                            ["top-3 left-3", "top left"],
+                            ["top-3 right-3", "top right"],
+                            ["bottom-3 left-3", "bottom left"],
+                            ["bottom-3 right-3", "bottom right"],
+                          ] as const
+                        ).map(([pos, corner]) => (
                           <div
-                            className="w-14 h-14 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
+                            key={corner}
+                            className={`absolute ${pos} w-3.5 h-3.5 pointer-events-none`}
                             style={{
-                              background: `${t.color}22`,
-                              border: `2px solid ${t.color}55`,
+                              borderTop: corner.includes("top") ? "1px solid rgba(255,255,255,0.12)" : undefined,
+                              borderBottom: corner.includes("bottom") ? "1px solid rgba(255,255,255,0.12)" : undefined,
+                              borderLeft: corner.includes("left") ? "1px solid rgba(255,255,255,0.12)" : undefined,
+                              borderRight: corner.includes("right") ? "1px solid rgba(255,255,255,0.12)" : undefined,
+                            }}
+                          />
+                        ))}
+
+                        <div className="relative z-10 text-center">
+                          <button
+                            onClick={() => t.videoUrl && setPlaying(true)}
+                            aria-label={t.videoUrl ? "Watch video review" : "Video coming soon"}
+                            className="relative flex items-center justify-center mx-auto mb-3.5 transition-all duration-300"
+                            style={{
+                              width: 60,
+                              height: 60,
+                              borderRadius: "50%",
+                              background: t.videoUrl ? "rgba(46,196,182,0.12)" : "rgba(255,255,255,0.04)",
+                              border: `1.5px solid ${t.videoUrl ? "rgba(46,196,182,0.45)" : "rgba(255,255,255,0.1)"}`,
+                              cursor: t.videoUrl ? "pointer" : "default",
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!t.videoUrl) return;
+                              const btn = e.currentTarget as HTMLButtonElement;
+                              btn.style.background = "rgba(46,196,182,0.22)";
+                              btn.style.boxShadow = "0 0 28px rgba(46,196,182,0.35)";
+                              btn.style.transform = "scale(1.08)";
+                            }}
+                            onMouseLeave={(e) => {
+                              const btn = e.currentTarget as HTMLButtonElement;
+                              btn.style.background = t.videoUrl ? "rgba(46,196,182,0.12)" : "rgba(255,255,255,0.04)";
+                              btn.style.boxShadow = "none";
+                              btn.style.transform = "scale(1)";
                             }}
                           >
-                            <Play size={20} className="text-white ml-0.5" />
-                          </div>
-                          <span className="text-[11px] text-white/30 font-medium">
-                            Watch video review
-                          </span>
+                            <Play
+                              size={18}
+                              className="ml-0.5"
+                              style={{
+                                color: t.videoUrl ? "#2EC4B6" : "rgba(255,255,255,0.25)",
+                                fill: t.videoUrl ? "#2EC4B6" : "rgba(255,255,255,0.25)",
+                              }}
+                            />
+                          </button>
+                          <p
+                            className="font-medium tracking-widest uppercase"
+                            style={{
+                              fontSize: "9px",
+                              color: t.videoUrl ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.2)",
+                              letterSpacing: "0.18em",
+                            }}
+                          >
+                            {t.videoUrl ? "Watch story" : "Coming soon"}
+                          </p>
                         </div>
-                      </div>
-                    </div>
-                  )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
 
-          <div className="flex justify-center gap-3 mt-8">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  i === current ? "scale-125" : "bg-white/15 hover:bg-white/25"
-                }`}
-                style={i === current ? { background: t.color } : undefined}
-                aria-label={`Go to testimonial ${i + 1}`}
-              />
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Next */}
+          <button
+            onClick={() => navigate(1)}
+            aria-label="Next testimonial"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
+            style={{
+              background: "rgba(10,15,30,0.8)",
+              border: "1px solid rgba(255,255,255,0.12)",
+              backdropFilter: "blur(8px)",
+              color: "rgba(255,255,255,0.5)",
+            }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.9)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.5)")}
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+
+        {/* Progress pills */}
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Go to testimonial ${i + 1}`}
+              className="transition-all duration-300"
+              style={{
+                height: 6,
+                width: i === current ? 28 : 6,
+                borderRadius: 3,
+                background:
+                  i === current
+                    ? "#2EC4B6"
+                    : i < current
+                    ? "rgba(46,196,182,0.3)"
+                    : "rgba(255,255,255,0.15)",
+              }}
+            />
+          ))}
         </div>
       </div>
+
     </section>
   );
 };

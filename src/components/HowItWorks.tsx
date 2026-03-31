@@ -25,7 +25,7 @@ const steps = [
     number: "03",
     title: "Apply",
     description:
-      "We take care of the heavy lifting. From preparing your documents and submitting applications to navigating the visa process — our team handles it all.",
+      "We take care of the heavy lifting. From preparing your documents and submitting university applications to guiding you through your student visa application — our team handles it all.",
     accent: "#2EC4B6",
   },
   {

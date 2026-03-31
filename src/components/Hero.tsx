@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { Search, ArrowRight } from "lucide-react";
+import { Search, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import ScrollRevealText from "@/components/homepage/ScrollRevealText";
-
 const filters = [
   { emoji: "\u{1F1EC}\u{1F1E7}", label: "UK", country: "United Kingdom" },
   { emoji: "\u{1F1E9}\u{1F1EA}", label: "Germany", country: "Germany" },
@@ -14,7 +13,6 @@ const filters = [
 ];
 
 const badges = [
-  "AQF Certified Agent",
   "AI-Powered Matching",
   "Expert Counsellors",
   "End-to-End Support",
@@ -52,9 +50,9 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] tracking-tight mb-6">
-              <span className="text-white">The Smartest Way to</span>
+              <span className="text-white">Speed to</span>
               <br />
-              <span className="text-gradient">Study Abroad</span>
+              <span className="text-gradient">your dreams</span>
             </h1>
           </motion.div>
 
@@ -65,8 +63,8 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-white/50 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Discover thousands of courses across 150+ universities. AI-powered matching,
-            expert counselling, and end-to-end visa support.
+            Discover thousands of courses across 150+ universities — completely free.
+            AI-powered matching, expert counselling, and end-to-end student visa application support.
           </motion.p>
 
           {/* CTA buttons */}
@@ -88,11 +86,11 @@ const Hero = () => {
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full text-base px-8 py-6 border-white/20 text-white hover:bg-white/10"
-              onClick={() => navigate("/find-a-course")}
+              className="rounded-full text-base px-8 py-6 border-white/20 text-white bg-transparent hover:bg-white/10"
+              onClick={() => navigate("/eligibility-check")}
             >
-              <Search className="mr-2" size={18} />
-              Find a Course
+              <Sparkles className="mr-2" size={18} />
+              Check Your Eligibility
             </Button>
           </motion.div>
 

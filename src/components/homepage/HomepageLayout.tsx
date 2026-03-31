@@ -20,83 +20,29 @@ interface FloatingObject {
 
 const OBJECTS: FloatingObject[] = [
   { id: "globe", image: "/glass-globe.png", size: 280 },
-  { id: "airplane", image: "/glass-airplane.png", size: 220 },
-  { id: "passport", image: "/glass-passport.png", size: 180 },
-  { id: "university", image: "/glass-university.png", size: 260 },
+  { id: "airplane", image: "/glass-airplane.png", size: 280 },
+  { id: "passport", image: "/glass-passport.png", size: 280 },
+  { id: "university", image: "/glass-university.png", size: 280 },
 ];
 
 /* -------------------------------------------------------------------------- */
-/*  Keyframe map                                                              */
+/*  Wave-following config                                                     */
 /* -------------------------------------------------------------------------- */
 
-interface ObjectKeyframe {
-  x: string;
-  y: string;
-  scale: number;
-  rotation: number;
-  opacity: number;
-}
+// Order: university → airplane → passport → globe (left to right along wave)
+// pathOffset spaced 0.20 apart so objects are well separated across the full path
+// Globe leads the parade (enters left first), university closes it (exits right last)
+// Negative offsets place trailing objects off-screen left at scroll=0
+const OBJECT_WAVE = [
+  { id: "globe",      pathOffset:  0.00, rotations: [5,   0,  -8,  3, 12, -5,   8, 2,  15, 20] },
+  { id: "passport",   pathOffset: -0.14, rotations: [0,   5,  12,  3, -8, 15,  -3, 8,   6, 10] },
+  { id: "airplane",   pathOffset: -0.28, rotations: [-20, -15, -28, 22, -8, 32, -18, 3, -38, -45] },
+  { id: "university", pathOffset: -0.42, rotations: [3,  0, -3,  8, -5,  2, -8,  3,  6,  8] },
+];
 
-type ObjectKeyframes = Record<string, ObjectKeyframe[]>;
-
-const KEYFRAMES: ObjectKeyframes = {
-  globe: [
-    { x: "15vw", y: "30vh", scale: 1.3, rotation: 0, opacity: 0.85 },
-    { x: "5vw", y: "25vh", scale: 0.7, rotation: -10, opacity: 0.6 },
-    { x: "8vw", y: "45vh", scale: 0.6, rotation: -15, opacity: 0.5 },
-    { x: "10vw", y: "55vh", scale: 0.5, rotation: -20, opacity: 0.45 },
-    { x: "70vw", y: "20vh", scale: 0.35, rotation: 10, opacity: 0.35 },
-    { x: "35vw", y: "35vh", scale: 1.2, rotation: 0, opacity: 0.8 },
-    { x: "15vw", y: "60vh", scale: 0.5, rotation: 5, opacity: 0.4 },
-    { x: "20vw", y: "25vh", scale: 0.65, rotation: 0, opacity: 0.55 },
-    { x: "60vw", y: "50vh", scale: 0.5, rotation: 15, opacity: 0.4 },
-    { x: "60vw", y: "55vh", scale: 0.45, rotation: 20, opacity: 0.3 },
-  ],
-  airplane: [
-    { x: "75vw", y: "10vh", scale: 0.7, rotation: -20, opacity: 0.7 },
-    { x: "80vw", y: "15vh", scale: 0.6, rotation: -15, opacity: 0.6 },
-    { x: "10vw", y: "20vh", scale: 0.9, rotation: 10, opacity: 0.75 },
-    { x: "85vw", y: "30vh", scale: 0.5, rotation: 25, opacity: 0.5 },
-    { x: "20vw", y: "65vh", scale: 0.35, rotation: -5, opacity: 0.35 },
-    { x: "55vw", y: "15vh", scale: 0.7, rotation: 30, opacity: 0.65 },
-    { x: "70vw", y: "45vh", scale: 0.4, rotation: -10, opacity: 0.4 },
-    { x: "75vw", y: "25vh", scale: 0.6, rotation: 0, opacity: 0.55 },
-    { x: "40vw", y: "20vh", scale: 1.3, rotation: -35, opacity: 0.9 },
-    { x: "45vw", y: "10vh", scale: 1.4, rotation: -45, opacity: 0.85 },
-  ],
-  passport: [
-    { x: "50vw", y: "80vh", scale: 0, rotation: 0, opacity: 0 },
-    { x: "50vw", y: "80vh", scale: 0, rotation: 0, opacity: 0 },
-    { x: "80vw", y: "70vh", scale: 0.7, rotation: 10, opacity: 0.65 },
-    { x: "75vw", y: "60vh", scale: 0.6, rotation: 5, opacity: 0.55 },
-    { x: "10vw", y: "45vh", scale: 0.35, rotation: -8, opacity: 0.35 },
-    { x: "20vw", y: "65vh", scale: 0.5, rotation: 12, opacity: 0.45 },
-    { x: "60vw", y: "70vh", scale: 0.4, rotation: -5, opacity: 0.35 },
-    { x: "30vw", y: "70vh", scale: 0.6, rotation: 0, opacity: 0.55 },
-    { x: "25vw", y: "55vh", scale: 0.5, rotation: 8, opacity: 0.4 },
-    { x: "25vw", y: "60vh", scale: 0.45, rotation: 10, opacity: 0.3 },
-  ],
-  university: [
-    { x: "85vw", y: "75vh", scale: 0, rotation: 0, opacity: 0 },
-    { x: "85vw", y: "75vh", scale: 0, rotation: 0, opacity: 0 },
-    { x: "85vw", y: "65vh", scale: 0.3, rotation: 0, opacity: 0.25 },
-    { x: "75vw", y: "35vh", scale: 1, rotation: 5, opacity: 0.75 },
-    { x: "55vw", y: "50vh", scale: 0.35, rotation: -3, opacity: 0.35 },
-    { x: "70vw", y: "60vh", scale: 0.5, rotation: 0, opacity: 0.45 },
-    { x: "40vw", y: "30vh", scale: 1, rotation: -5, opacity: 0.8 },
-    { x: "65vw", y: "65vh", scale: 0.65, rotation: 0, opacity: 0.55 },
-    { x: "70vw", y: "70vh", scale: 0.45, rotation: 5, opacity: 0.35 },
-    { x: "72vw", y: "72vh", scale: 0.4, rotation: 8, opacity: 0.25 },
-  ],
-};
-
+// Full path traversal: globe exits right, university ends at right edge
+const WAVE_TRAVEL = 1.42;
 const PROGRESS_STOPS = [0, 0.1, 0.2, 0.35, 0.45, 0.55, 0.65, 0.75, 0.9, 1.0];
-
-function viewportToPx(value: string): number {
-  if (value.endsWith("vw")) return (parseFloat(value) / 100) * window.innerWidth;
-  if (value.endsWith("vh")) return (parseFloat(value) / 100) * window.innerHeight;
-  return parseFloat(value);
-}
 
 const SVG_PATH =
   "M-100,500 C200,200 400,600 600,350 S900,150 1100,400 S1400,600 1600,300 S1850,500 2020,250";
@@ -114,8 +60,6 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({ children }) => {
   const objectRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
-    // NO Lenis — it conflicts with CSS position:sticky used by StackingCards.
-    // Use CSS scroll-behavior: smooth on <html> instead (set below).
     document.documentElement.style.scrollBehavior = "smooth";
 
     // --- Animated gradient background ---
@@ -129,7 +73,7 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({ children }) => {
         trigger: scrollContainerRef.current,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.5, // Higher = smoother
+        scrub: 1.5,
         onUpdate: (self) => {
           const p = self.progress;
           const r1 = Math.round(6 + p * 10);
@@ -183,7 +127,7 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({ children }) => {
       });
     }
 
-    // --- Floating 3D objects ---
+    // --- Floating 3D objects — follow the wave path ---
     const objectTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: scrollContainerRef.current,
@@ -193,41 +137,88 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({ children }) => {
       },
     });
 
-    OBJECTS.forEach((obj) => {
-      const el = objectRefs.current[obj.id];
-      if (!el) return;
-      const keyframes = KEYFRAMES[obj.id];
-      if (!keyframes || keyframes.length === 0) return;
+    const svgPathForObjects = svgPathRef.current;
+    if (svgPathForObjects) {
+      const svgEl = svgPathForObjects.ownerSVGElement;
+      const pathTotalLen = svgPathForObjects.getTotalLength();
 
-      const first = keyframes[0];
-      gsap.set(el, {
-        x: viewportToPx(first.x),
-        y: viewportToPx(first.y),
-        scale: first.scale,
-        rotation: first.rotation,
-        opacity: first.opacity,
+      // Helper: convert an SVG point to screen coords via CTM
+      const toScreen = (svgX: number, svgY: number): { x: number; y: number } => {
+        if (!svgEl) return { x: (svgX / 1920) * window.innerWidth, y: (svgY / 1080) * window.innerHeight };
+        const ctm = svgEl.getScreenCTM();
+        if (!ctm) return { x: (svgX / 1920) * window.innerWidth, y: (svgY / 1080) * window.innerHeight };
+        const sp = svgEl.createSVGPoint();
+        sp.x = svgX; sp.y = svgY;
+        const s = sp.matrixTransform(ctm);
+        return { x: s.x, y: s.y };
+      };
+
+      // Sample tangent direction at each end for extrapolation
+      const delta = pathTotalLen * 0.01;
+      const startPt  = svgPathForObjects.getPointAtLength(0);
+      const startPt2 = svgPathForObjects.getPointAtLength(delta);
+      const startDx = (startPt2.x - startPt.x) / delta;
+      const startDy = (startPt2.y - startPt.y) / delta;
+      const endPt  = svgPathForObjects.getPointAtLength(pathTotalLen);
+      const endPt2 = svgPathForObjects.getPointAtLength(pathTotalLen - delta);
+      const endDx = (endPt.x - endPt2.x) / delta;
+      const endDy = (endPt.y - endPt2.y) / delta;
+
+      const getWavePoint = (t: number): { x: number; y: number } => {
+        if (t < 0) {
+          // Extrapolate backwards from path start along its tangent
+          const dist = t * pathTotalLen; // negative distance
+          return toScreen(startPt.x + dist * startDx, startPt.y + dist * startDy);
+        }
+        if (t > 1) {
+          // Extrapolate forwards from path end along its tangent
+          const dist = (t - 1) * pathTotalLen;
+          return toScreen(endPt.x + dist * endDx, endPt.y + dist * endDy);
+        }
+        const pt = svgPathForObjects.getPointAtLength(t * pathTotalLen);
+        return toScreen(pt.x, pt.y);
+      };
+
+      OBJECTS.forEach((obj) => {
+        const el = objectRefs.current[obj.id];
+        if (!el) return;
+        const cfg = OBJECT_WAVE.find((c) => c.id === obj.id);
+        if (!cfg) return;
+
+        const getKF = (scrollStop: number, rotIdx: number) => {
+          const t = cfg.pathOffset + scrollStop * WAVE_TRAVEL;
+          const { x, y } = getWavePoint(t);
+          const yNorm = Math.max(0, Math.min(1, y / window.innerHeight));
+          const half = obj.size / 2;
+          const fadeZone = obj.size * 0.6;
+          const rightEdge = x + half;
+          const leftEdge  = x - half;
+          let xOpacity = 1;
+          if (rightEdge < 0) xOpacity = 0;
+          else if (leftEdge < 0) xOpacity = Math.min(1, rightEdge / fadeZone);
+          else if (leftEdge > window.innerWidth) xOpacity = 0;
+          else if (rightEdge > window.innerWidth) xOpacity = Math.min(1, (window.innerWidth - leftEdge) / fadeZone);
+          return {
+            x: leftEdge,
+            y: y - half,
+            scale: 0.55 + yNorm * 0.65,
+            opacity: xOpacity * (0.45 + yNorm * 0.50),
+            rotation: cfg.rotations[rotIdx],
+          };
+        };
+
+        const first = getKF(0, 0);
+        gsap.set(el, { x: first.x, y: first.y, scale: first.scale, rotation: first.rotation, opacity: first.opacity });
+
+        for (let i = 1; i < PROGRESS_STOPS.length; i++) {
+          const kf = getKF(PROGRESS_STOPS[i], i);
+          const duration = PROGRESS_STOPS[i] - PROGRESS_STOPS[i - 1];
+          objectTimeline.to(el, { x: kf.x, y: kf.y, scale: kf.scale, rotation: kf.rotation, opacity: kf.opacity, duration, ease: "power1.inOut" }, PROGRESS_STOPS[i - 1]);
+        }
       });
+    }
 
-      for (let i = 1; i < keyframes.length; i++) {
-        const kf = keyframes[i];
-        const duration = PROGRESS_STOPS[i] - PROGRESS_STOPS[i - 1];
-        objectTimeline.to(
-          el,
-          {
-            x: viewportToPx(kf.x),
-            y: viewportToPx(kf.y),
-            scale: kf.scale,
-            rotation: kf.rotation,
-            opacity: kf.opacity,
-            duration,
-            ease: "power1.inOut",
-          },
-          PROGRESS_STOPS[i - 1]
-        );
-      }
-    });
-
-    // --- Section reveals (simple fade-in, no scrub jitter) ---
+    // --- Section reveals ---
     const sections = scrollContainerRef.current?.querySelectorAll(".scroll-section");
     if (sections) {
       sections.forEach((section, index) => {
@@ -235,14 +226,11 @@ const HomepageLayout: React.FC<HomepageLayoutProps> = ({ children }) => {
           gsap.set(section, { opacity: 1, y: 0 });
           return;
         }
-        // Skip sections that have their own GSAP pin animations
         const sectionName = section.getAttribute("data-section");
         if (sectionName === "services" || sectionName === "how-it-works") {
           gsap.set(section, { opacity: 1, y: 0 });
           return;
         }
-
-        // Simple toggleActions reveal — no scrub, just play once
         gsap.fromTo(
           section,
           { opacity: 0, y: 30 },

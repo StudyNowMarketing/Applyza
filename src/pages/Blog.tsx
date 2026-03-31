@@ -40,33 +40,68 @@ const BlogCard = ({ post, featured = false, index = 0 }: { post: any; featured?:
     >
       <Link
         to={`/blog/${post.slug}`}
-        className={`group relative block ${height} rounded-[20px] overflow-hidden card-glow`}
-        style={{ transition: "transform 0.3s ease" }}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(0.98)")}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        className={`group relative block ${height} rounded-[20px] overflow-hidden`}
+        style={{
+          transition: "transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.38s ease",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-6px) scale(1.02)";
+          e.currentTarget.style.boxShadow = "0 24px 60px rgba(46,196,182,0.22), 0 12px 32px rgba(0,0,0,0.45)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0) scale(1)";
+          e.currentTarget.style.boxShadow = "0 4px 20px rgba(0,0,0,0.3)";
+        }}
       >
-        {/* Background image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+        {/* Background image with Ken Burns zoom */}
+        <motion.div
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: post.featured_image_url
               ? `url(${post.featured_image_url})`
               : "linear-gradient(135deg, rgba(46,196,182,0.2), rgba(107,63,160,0.2), hsl(230 33% 20%))",
           }}
+          animate={{ scale: [1.05, 1.13] }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+            delay: index * 1.2,
+          }}
+          whileHover={{ scale: 1.18, transition: { duration: 0.5, ease: "easeOut" } }}
         />
 
-        {/* Gradient overlay */}
+        {/* Base vignette overlay */}
         <div
-          className="absolute inset-0 transition-all duration-300"
+          className="absolute inset-0"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%)",
+            background: "linear-gradient(180deg, rgba(6,9,24,0.15) 0%, rgba(6,9,24,0.45) 45%, rgba(6,9,24,0.88) 100%)",
           }}
         />
-        {/* Hover: gradient expands */}
+
+        {/* Teal glow on hover */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
-            background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%)",
+            background: "linear-gradient(180deg, transparent 40%, rgba(46,196,182,0.22) 100%)",
+          }}
+        />
+
+        {/* Teal border glow on hover */}
+        <div
+          className="absolute inset-0 rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          style={{
+            boxShadow: "inset 0 0 0 1px rgba(46,196,182,0.35)",
+          }}
+        />
+
+        {/* Hover: darken top slightly */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          style={{
+            background: "linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 60%)",
           }}
         />
 
@@ -134,9 +169,26 @@ const Blog = () => {
   });
 
   const allPosts = posts && posts.length > 0 ? posts : placeholderPosts;
-  const filtered = activeCategory === "All" ? allPosts : allPosts?.filter((p) => p.category === activeCategory);
+
+  // Derive unique categories from actual posts, preserving insertion order
+  const derivedCategories = allPosts
+    ? ["All", ...Array.from(new Set(allPosts.map((p) => p.category).filter(Boolean)))]
+    : ["All"];
+
+  const filtered = activeCategory === "All"
+    ? allPosts
+    : allPosts?.filter((p) => p.category === activeCategory);
   const featured = filtered?.[0];
   const rest = filtered?.slice(1);
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://applyza.com" },
+      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://applyza.com/blog" }
+    ]
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -144,6 +196,7 @@ const Blog = () => {
         title="Blog | Study Abroad Guides, Visa Tips & Insights | Applyza"
         description="Expert guides on university applications, visa processes, scholarships, and student life abroad."
         path="/blog"
+        jsonLd={breadcrumbSchema}
       />
       <Navbar solid />
 
@@ -196,7 +249,7 @@ const Blog = () => {
       {/* Category Filters */}
       <div className="bg-card border-b border-border">
         <div className="container py-3 flex gap-2 overflow-x-auto">
-          {categories.map((cat) => (
+          {derivedCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}

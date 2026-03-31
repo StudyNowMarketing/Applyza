@@ -1,6 +1,5 @@
 import { Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
-
 const XIcon = ({ size = 14 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -51,12 +50,12 @@ const Footer = () => {
       {/* Gradient divider */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary/30 to-transparent" />
       <div className="container py-14 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Col 1 */}
           <div>
             <h3 className="text-primary-foreground text-xl font-extrabold mb-3">Applyza</h3>
             <p className="text-primary-foreground/50 text-sm mb-5 leading-relaxed">The smartest way to study abroad.</p>
-            <div className="flex gap-3">
+            <div className="flex gap-3 mb-5">
               {socials.map(({ icon: Icon, href }) => (
                 <a
                   key={href}
@@ -110,6 +109,23 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Col 5 — Guides & Advice */}
+          <div>
+            <h4 className="text-primary-foreground font-bold text-sm mb-4">Guides &amp; Advice</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link to="/how-to-choose-a-study-abroad-consultancy" className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
+                  How to Choose a Consultancy
+                </Link>
+              </li>
+              <li>
+                <Link to="/free-vs-paid-study-abroad-consultancies" className="text-primary-foreground/50 hover:text-primary-foreground text-sm transition-colors">
+                  Free vs Paid Consultancies
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

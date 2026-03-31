@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applyza — Marketing Psychology & CRO Playbook</title>
+<style>
+  :root {
+    --navy: #0f1e3c; --navy-mid: #1a3160; --teal: #0ea5e9; --teal-light: #38bdf8;
+    --teal-pale: #e0f2fe; --gold: #f59e0b; --gold-pale: #fef3c7; --green: #10b981;
+    --green-pale: #d1fae5; --red: #ef4444; --red-pale: #fee2e2; --purple: #8b5cf6;
+    --purple-pale: #ede9fe; --orange: #f97316; --orange-pale: #ffedd5;
+    --slate: #64748b; --slate-light: #94a3b8; --bg: #f8fafc;
+    --white: #ffffff; --text: #1e293b; --border: #e2e8f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  .doc-header { background: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0f1e3c 100%); color: white; padding: 48px; }
+  .header-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #c084fc; margin-bottom: 12px; }
+  .doc-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+  .doc-subtitle { font-size: 15px; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+  .header-meta { display: flex; gap: 20px; flex-wrap: wrap; }
+  .meta-item { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 6px; }
+  .meta-dot { width: 5px; height: 5px; border-radius: 50%; background: #c084fc; }
+
+  .content { padding: 32px 48px; }
+
+  .section { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 28px; margin-bottom: 24px; }
+  .section-head { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--bg); }
+  .section-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .section-title { font-size: 17px; font-weight: 700; color: var(--navy); }
+  .section-sub { font-size: 12px; color: var(--slate); margin-top: 2px; }
+
+  .principle-card { border-radius: 10px; border: 1px solid var(--border); margin-bottom: 20px; overflow: hidden; }
+  .principle-head { padding: 14px 18px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid var(--border); }
+  .principle-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .principle-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .principle-def { font-size: 12px; color: var(--slate); margin-top: 2px; line-height: 1.5; }
+  .principle-body { padding: 16px 18px; }
+  .principle-body h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--slate); margin-bottom: 10px; }
+
+  .impl-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--bg); align-items: flex-start; }
+  .impl-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .impl-page { width: 110px; flex-shrink: 0; }
+  .impl-page span { display: inline-block; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; padding: 2px 7px; font-size: 10px; font-weight: 600; color: var(--slate); font-family: monospace; }
+  .impl-action { flex: 1; font-size: 13px; color: var(--text); }
+  .impl-copy { background: var(--bg); border-left: 3px solid var(--teal); padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 12px; color: var(--navy); margin-top: 6px; font-style: italic; }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-high { background: var(--red-pale); color: #991b1b; }
+  .badge-med { background: var(--gold-pale); color: #92400e; }
+  .badge-low { background: var(--green-pale); color: #065f46; }
+  .badge-new { background: var(--purple-pale); color: #5b21b6; }
+  .badge-fix { background: var(--orange-pale); color: #9a3412; }
+
+  .journey-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-bottom: 20px; }
+  .journey-step { padding: 16px 14px; text-align: center; position: relative; }
+  .journey-step::after { content: '→'; position: absolute; right: -8px; top: 50%; transform: translateY(-50%); color: var(--slate-light); font-size: 16px; }
+  .journey-step:last-child::after { display: none; }
+  .js-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: white; background: var(--navy); margin: 0 auto 8px; }
+  .js-name { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .js-emotion { font-size: 11px; color: var(--slate); line-height: 1.4; }
+  .js-fear { font-size: 11px; color: var(--red); margin-top: 4px; }
+
+  .quick-wins { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .qw { border-radius: 8px; border: 1px solid var(--border); padding: 16px; }
+  .qw-num { width: 22px; height: 22px; border-radius: 50%; background: var(--purple); color: white; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .qw-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
+  .qw-desc { font-size: 12px; color: var(--slate); line-height: 1.5; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--navy); color: white; padding: 9px 13px; text-align: left; font-weight: 600; font-size: 12px; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .tip { border-radius: 8px; padding: 12px 16px; font-size: 13px; margin-bottom: 16px; display: flex; gap: 10px; }
+  .tip-purple { background: var(--purple-pale); color: #5b21b6; }
+  .tip-yellow { background: var(--gold-pale); color: #78350f; }
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="header-label">🧠 Strategy Document · Applyza · 2026</div>
+  <div class="doc-title">Marketing Psychology & CRO Playbook</div>
+  <div class="doc-subtitle">12 psychological principles applied to the Applyza website — with specific copy and design recommendations for each page</div>
+  <div class="header-meta">
+    <div class="meta-item"><div class="meta-dot"></div>Audience: International students from Africa, Middle East & Eastern Europe</div>
+    <div class="meta-item"><div class="meta-dot"></div>Primary goal: Drive consultation bookings</div>
+    <div class="meta-item"><div class="meta-dot"></div>Core barrier: Trust deficit + agency scam context</div>
+    <div class="meta-item"><div class="meta-dot"></div>Key differentiator: Genuinely free</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- STUDENT PSYCHOLOGY MAP -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#ede9fe;">🗺️</div>
+      <div>
+        <div class="section-title">The Student's Psychological Journey</div>
+        <div class="section-sub">Understand the emotional state at each stage before applying any tactic</div>
+      </div>
+    </div>
+    <div class="journey-grid">
+      <div class="journey-step">
+        <div class="js-num">1</div>
+        <div class="js-name">Dream Stage</div>
+        <div class="js-emotion">Excited about studying abroad. Research mode. Not committed yet.</div>
+        <div class="js-fear">🔍 "Where do I even start?"</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">2</div>
+        <div class="js-name">Confusion Stage</div>
+        <div class="js-emotion">Overwhelmed by options, requirements, costs. Fear of making wrong choice.</div>
+        <div class="js-fear">😰 "I might pick the wrong course"</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">3</div>
+        <div class="js-name">Distrust Stage</div>
+        <div class="js-emotion">Has heard scam stories. Worried any agent might be fake or self-serving.</div>
+        <div class="js-fear">😨 "What if this is a scam?"</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">4</div>
+        <div class="js-name">Decision Stage</div>
+        <div class="js-emotion">Comparing options. Price-sensitive. Needs reassurance. Can be influenced.</div>
+        <div class="js-fear">💭 "Who do I actually trust?"</div>
+      </div>
+      <div class="journey-step">
+        <div class="js-num">5</div>
+        <div class="js-name">Commitment Stage</div>
+        <div class="js-emotion">Ready to act. Needs a clear, low-friction path to take the next step.</div>
+        <div class="js-fear">⚡ "Just tell me what to do"</div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--slate); line-height:1.7;"><strong>Key insight:</strong> Unlike most SaaS or e-commerce customers, Applyza's students enter the funnel with <strong>elevated distrust</strong> baked in. The agency scam context in West Africa, East Africa, and MENA means every psychological principle must be filtered through the question: "Does this increase or decrease perceived legitimacy?" Tactics that work elsewhere (urgency, scarcity, persuasive selling language) can backfire here and feel like a scam. The winning psychology is <strong>quiet authority, radical transparency, and social proof from people who look like the student</strong>.</p>
+  </div>
+
+  <!-- PRINCIPLE 1: TRUST & AUTHORITY -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#e0f2fe;">🏅</div>
+      <div>
+        <div class="section-title">Trust Architecture — The #1 Priority</div>
+        <div class="section-sub">Authority Bias · Liking/Similarity Bias · Mere Exposure Effect</div>
+      </div>
+    </div>
+
+    <div class="tip tip-purple">
+      <div>🧠</div>
+      <div><strong>Psychology:</strong> In the scam-saturated education agent market in Nigeria, Ghana and Kenya, the student's primary cognitive task is <em>scam detection</em>. Every element of the website is being filtered through this lens. Authority signals (AQF certification, official logos, named counsellors, physical offices) directly counter the scam mental model. Without these signals, no amount of persuasion copy will overcome the distrust barrier.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#e0f2fe;">🏆</div>
+        <div>
+          <div class="principle-name">Authority Bias — Use AQF Certification as a Trust Anchor</div>
+          <div class="principle-def">People defer to recognised authority figures and credentials. An official badge from a government-recognised body is a powerful scam-detector bypass.</div>
+        </div>
+        <span class="badge badge-high" style="margin-left:auto;">CRITICAL</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span> <span>/services/*</span></div>
+          <div class="impl-action">
+            Move the AQF badge to be immediately visible — ideally in the hero section just below the H1, not buried in trust stats. Add a link to the official UK gov AQF register page. Make it look official, not decorative.
+            <div class="impl-copy">"✓ AQF Certified Agent — registered on the UK Government's official Agent Quality Framework register"</div>
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/about</span></div>
+          <div class="impl-action">
+            Add the AQF seal prominently near the About hero. Include a statement: "Applyza is one of a select group of education consultancies accredited under the UK Agent Quality Framework — the official standard for ethical education agents recognised by the UK Government and British Council."
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/book-a-consultation</span></div>
+          <div class="impl-action">
+            Add trust seals immediately adjacent to the form. Students are most anxious about legitimacy at the moment they're about to submit personal details.
+            <div class="impl-copy">✓ AQF Certified &nbsp; ✓ 10+ Years Experience &nbsp; ✓ 3,000+ Students Placed &nbsp; ✓ 100% Free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#d1fae5;">🤝</div>
+        <div>
+          <div class="principle-name">Liking / Similarity Bias — Student Testimonials by Country</div>
+          <div class="principle-def">People trust people who are similar to them. A Nigerian student trusts a testimonial from another Nigerian student far more than a generic "I loved it!" quote.</div>
+        </div>
+        <span class="badge badge-high" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span> <span>/study-abroad/*</span></div>
+          <div class="impl-action">
+            Replace generic testimonials with country-specific testimonials. For each source market page, feature 1–2 testimonials from students from that specific country. Format: Name, Country, University placed at, Year.
+            <div class="impl-copy">"I was worried about getting scammed — I'd heard so many stories. But Applyza had a real office in Lagos I could walk into. My visa was approved in 3 weeks. — Adaeze O., Lagos → University of Hertfordshire, 2025"</div>
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span></div>
+          <div class="impl-action">
+            In the homepage testimonial section, add a source country flag next to each testimonial. Make it easy for a Nigerian student to scroll and find "someone like me". The flag is a 1-second trust signal.
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/about</span></div>
+          <div class="impl-action">
+            Add a team section with named counsellors, photos, and their source market experience. "Kwame — Senior Counsellor, West Africa. 8 years placing students from Ghana and Nigeria." Local faces build local trust.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 2: ZERO PRICE EFFECT -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#fef3c7;">🆓</div>
+      <div>
+        <div class="section-title">Zero-Price Effect — "Free" Must Be Explained and Defended</div>
+        <div class="section-sub">Zero-Price Effect · Reciprocity Principle · Objection Pre-emption</div>
+      </div>
+    </div>
+
+    <div class="tip tip-yellow">
+      <div>⚠️</div>
+      <div><strong>Counterintuitive tension:</strong> "Free" is Applyza's #1 differentiator — but in a scam-heavy market, "free" can also <em>increase</em> suspicion. "Why is it free? What's the catch? Is this really free?" The psychology requires two simultaneous moves: (1) lead with "free" loudly, and (2) immediately explain <em>why</em> it's free in a transparent, specific way.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#fef3c7;">💡</div>
+        <div>
+          <div class="principle-name">Zero-Price Effect — Amplify "Free" While Defusing Suspicion</div>
+          <div class="principle-def">The psychological power of zero pricing is immense — but only when accompanied by a believable explanation of the business model.</div>
+        </div>
+        <span class="badge badge-high" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span></div>
+          <div class="impl-action">
+            Add an explicit "Why is it free?" micro-section near the hero. Don't hide it in the FAQ. Students will think it before they scroll.
+            <div class="impl-copy">"Why is Applyza free? — We're funded by the universities we place students at, not by the students themselves. This is how regulated education agents work worldwide. You will still need to pay your own tuition fees and living costs — but our guidance, your application, and your visa support? That's on us."</div>
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/services</span></div>
+          <div class="impl-action">
+            The current "Why Free?" section is already on Services.tsx — this is good. Ensure it appears early on the page (above the fold on mobile) rather than near the bottom.
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>Global</span></div>
+          <div class="impl-action">
+            Wherever "free" appears in copy, follow it with a qualifier: "completely free — no consultancy fees, no application charges, no hidden costs". The repetition of what's included builds trust through specificity.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 3: LOSS AVERSION -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#fee2e2;">⚠️</div>
+      <div>
+        <div class="section-title">Loss Aversion — Frame Around What They'll Lose, Not Gain</div>
+        <div class="section-sub">Loss Aversion · Prospect Theory · Regret Aversion</div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#fee2e2;">📉</div>
+        <div>
+          <div class="principle-name">Loss Aversion — Connect to Real Costs of Going Without Help</div>
+          <div class="principle-def">Losses feel twice as painful as equivalent gains. For Applyza's students, the real "losses" are a rejected visa, a year of their life wasted, and £500–£1,000+ in wasted application fees.</div>
+        </div>
+        <span class="badge badge-med" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/services/visa-immigration</span></div>
+          <div class="impl-action">
+            Add a section above the fold (or in the hero subtext) that names the cost of visa refusal.
+            <div class="impl-copy">"A UK visa refusal doesn't just delay your studies — it can ban you from reapplying for months, cost you your university place, and mean restarting from scratch. Our 99% success rate exists because we eliminate the mistakes that cause refusals."</div>
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/services/university-applications</span></div>
+          <div class="impl-action">
+            Reference the cost of a wrong course choice without expert help.
+            <div class="impl-copy">"Applying to the wrong course — one you're not eligible for or that doesn't fit your career — costs you a year of your life and potentially thousands in wasted fees. Our AI course matching means you only apply where you have a genuine chance."</div>
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/blog</span></div>
+          <div class="impl-action">
+            The blog post "How to Spot a Fake Education Agent" is a high-loss-aversion content piece. Make it prominent — it's the most shareable and most trust-building piece in the content plan.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 4: SOCIAL PROOF -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#d1fae5;">👥</div>
+      <div>
+        <div class="section-title">Social Proof — Numbers, Names, and Faces</div>
+        <div class="section-sub">Bandwagon Effect · Availability Heuristic · Mimetic Desire</div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#d1fae5;">📊</div>
+        <div>
+          <div class="principle-name">Make Social Proof Specific and Localised</div>
+          <div class="principle-def">Generic "3,000+ students" is weaker than "847 Nigerian students placed in UK universities." Specificity makes numbers credible and relatable.</div>
+        </div>
+        <span class="badge badge-high" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span> <span>/study-abroad/nigeria</span></div>
+          <div class="impl-action">
+            On source market pages, localise the student placement stat. "800+ Nigerian students placed" is far more persuasive to a Nigerian student than "3,000+ worldwide."
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span></div>
+          <div class="impl-action">
+            Add a live or recently-updated counter widget or scroll: "Recently placed: Ahmed M. → University of Manchester · Fatima A. → Coventry University · Daniel O. → Birmingham City University". Names + universities create vivid, specific social proof. (Ensure consent from students for name use.)
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/for-institutions</span></div>
+          <div class="impl-action">
+            Add logos of partner universities the same way SaaS companies add customer logos. Even 8–10 recognisable UK university logos dramatically increase institutional credibility for B2B visitors.
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/book-a-consultation</span></div>
+          <div class="impl-action">
+            Add a counter or message: "23 students booked consultations this week" or "Join 3,000+ students who've trusted Applyza with their study abroad journey." Active numbers create social momentum.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 5: COMMITMENT & CONSISTENCY -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#ede9fe;">🎯</div>
+      <div>
+        <div class="section-title">Commitment & Consistency — Build Micro-Commitments</div>
+        <div class="section-sub">Foot-in-the-Door · Goal-Gradient Effect · Zeigarnik Effect</div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#ede9fe;">🪜</div>
+        <div>
+          <div class="principle-name">Create a Commitment Ladder — Small Steps Leading to Consultation</div>
+          <div class="principle-def">People who take one small step (eligibility check) are significantly more likely to take the next (consultation booking). Each step builds psychological commitment.</div>
+        </div>
+        <span class="badge badge-high" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="principle-body">
+        <h4>The Applyza Commitment Ladder</h4>
+        <table style="margin-bottom:12px;">
+          <tr><th>Step</th><th>Action</th><th>Psychological Effect</th><th>Where to Drive This</th></tr>
+          <tr><td>1 (lowest)</td><td>Read a blog post / destination guide</td><td>Awareness → mild association with Applyza</td><td>Blog, Google organic</td></tr>
+          <tr><td>2</td><td>Browse the Find a Course tool</td><td>Engagement → "Applyza helps me"</td><td>Homepage CTA #2</td></tr>
+          <tr><td>3</td><td>Complete the Eligibility Check</td><td>Investment → "I've told Applyza about myself"</td><td>Every service page</td></tr>
+          <tr><td>4</td><td>Save or shortlist a course</td><td>Ownership → Endowment Effect activates</td><td>Find a Course page</td></tr>
+          <tr><td>5 (goal)</td><td>Book a Free Consultation</td><td>Full commitment — now expects counsellor follow-up</td><td>All pages</td></tr>
+        </table>
+        <div class="impl-item" style="border:none; padding-top:0;">
+          <div class="impl-page"><span>/eligibility-check</span></div>
+          <div class="impl-action">
+            Add a progress bar to the eligibility check ("Question 2 of 5"). Goal-gradient effect: users who can see they're nearly done will complete. At the end, show results + "Book a consultation to discuss your results — free."
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/find-a-course</span></div>
+          <div class="impl-action">
+            Add a "Save course" feature or "Shortlist" function. Even if it's just a WhatsApp link or email trigger, students who save courses are more committed. The act of saving creates ownership.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 6: FRAMING & ANCHORING -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#fef3c7;">⚓</div>
+      <div>
+        <div class="section-title">Anchoring & Framing — Make Free Feel Extraordinary</div>
+        <div class="section-sub">Anchoring Effect · Contrast Effect · Framing Effect</div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#fef3c7;">📐</div>
+        <div>
+          <div class="principle-name">Anchor Against Competitor Fees to Make Free More Powerful</div>
+          <div class="principle-def">Without an anchor, "free" means little. With an anchor ("competitors charge £500–£1,000 for what we do for free"), the value of free becomes visceral.</div>
+        </div>
+        <span class="badge badge-med" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/vs/si-uk</span> <span>/vs/idp</span></div>
+          <div class="impl-action">
+            Competitor pages should prominently anchor against competitor fees: "SI-UK charges £699 for their premium service. Applyza charges nothing — and covers the same services: applications, personal statement, visa support, and post-offer guidance."
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/services</span></div>
+          <div class="impl-action">
+            Consider adding: "Other consultancies charge between £200 and £1,500 for what we provide for free. We believe that shouldn't be the barrier between a student and a life-changing education."
+            <div class="impl-copy">"Other agencies charge: University Application support — £250–£800 · Visa Support — £300–£600 · Personal Statement — £150–£400. Applyza charges: £0 for all of the above."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 7: SCARCITY & URGENCY -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#ffedd5;">⏰</div>
+      <div>
+        <div class="section-title">Genuine Urgency — Use Real Deadlines, Not Fake Timers</div>
+        <div class="section-sub">Scarcity Heuristic · Hyperbolic Discounting · Zeigarnik Effect</div>
+      </div>
+    </div>
+
+    <div class="tip tip-yellow">
+      <div>⚠️</div>
+      <div><strong>Warning:</strong> Fake urgency (countdown timers, "limited spots" without basis) will immediately trigger scam detectors in this audience. Use ONLY real, verifiable urgency — university intake deadlines, visa processing times, counsellor availability. Fake urgency destroys trust permanently in this market.</div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#ffedd5;">📅</div>
+        <div>
+          <div class="principle-name">Real Intake Deadlines as Urgency Drivers</div>
+          <div class="principle-def">UK and EU universities have intake deadlines in January (for September entry) and September (for January entry). These are real, verifiable urgency drivers.</div>
+        </div>
+        <span class="badge badge-med" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span> <span>Global</span></div>
+          <div class="impl-action">
+            Add a dynamic intake banner: "September 2026 intake — most UK universities close applications in June. Start your application now to avoid missing your preferred course."
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/find-a-course</span></div>
+          <div class="impl-action">
+            Show "Application closing soon" badges on course cards where the intake is within 90 days. This creates real, course-specific urgency that is verifiable and trustworthy.
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/services/visa-immigration</span></div>
+          <div class="impl-action">
+            Add visa processing time context: "UK student visas typically take 3 weeks to process. If your course starts in September, you should be applying for your visa by July at the latest." This creates natural urgency without fake tactics.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 8: HICK'S LAW & FRICTION REDUCTION -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#d1fae5;">⚡</div>
+      <div>
+        <div class="section-title">Reduce Friction — Hick's Law & Activation Energy</div>
+        <div class="section-sub">Hick's Law · Activation Energy · BJ Fogg Behavior Model</div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#d1fae5;">🏃</div>
+        <div>
+          <div class="principle-name">Make the First Step Trivially Easy</div>
+          <div class="principle-def">Every extra field, every extra click, every moment of uncertainty reduces the probability of conversion. The consultation form must feel effortless.</div>
+        </div>
+        <span class="badge badge-high" style="margin-left:auto;">HIGH</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/book-a-consultation</span></div>
+          <div class="impl-action">
+            The consultation form should ask <strong>only what's needed to make the first call useful</strong>: Name, Email, Country of origin, What you want to study (optional). Everything else can be gathered on the call. More fields = fewer completions.
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/book-a-consultation</span></div>
+          <div class="impl-action">
+            Fix the WhatsApp placeholder number (currently 447000000000 — live in production). Add WhatsApp as an alternative to form submission — many target-market students prefer WhatsApp to email. "Or message us on WhatsApp →" with a real number.
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>Global</span></div>
+          <div class="impl-action">
+            Add a floating "Book a free consultation" button that persists on scroll (a WhatsApp floating button would be especially effective given that WhatsApp is the primary communication app in Nigeria, Ghana, and Kenya).
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/eligibility-check</span></div>
+          <div class="impl-action">
+            Consider adding a "Skip to consultation" option at any point in the eligibility check flow — for students who are already ready to commit, don't force them through the full funnel.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE 9: PRATFALL & TRANSPARENCY -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#e0f2fe;">🪟</div>
+      <div>
+        <div class="section-title">Radical Transparency — The Pratfall Effect & Anti-Scam Positioning</div>
+        <div class="section-sub">Pratfall Effect · Confirmation Bias · Trust Building</div>
+      </div>
+    </div>
+
+    <div class="principle-card">
+      <div class="principle-head">
+        <div class="principle-icon" style="background:#e0f2fe;">🔍</div>
+        <div>
+          <div class="principle-name">Admitting Limitations Builds Trust in a Low-Trust Market</div>
+          <div class="principle-def">In a market where every agent claims to be perfect, admitting what you don't do (guaranteed admissions, guaranteed visas) actually increases trust by signalling you're honest.</div>
+        </div>
+        <span class="badge badge-med" style="margin-left:auto;">MEDIUM</span>
+      </div>
+      <div class="principle-body">
+        <h4>Implementation</h4>
+        <div class="impl-item">
+          <div class="impl-page"><span>/</span> <span>/services/*</span></div>
+          <div class="impl-action">
+            Add a "What we don't promise" section to the About page or FAQ. This is counterintuitive but works powerfully in this market.
+            <div class="impl-copy">"We don't promise guaranteed admissions — no ethical agent can. We promise genuine, professional guidance that gives your application the strongest possible chance. We don't promise your tuition will be paid — you'll still need to fund your own education. We do promise to guide you honestly, for free, every step of the way."</div>
+          </div>
+        </div>
+        <div class="impl-item">
+          <div class="impl-page"><span>/faq</span></div>
+          <div class="impl-action">
+            The FAQ already handles the "Is this a scam?" objection well. Make this FAQ visible on the homepage — not just at /faq. A "Common Questions" accordion on the homepage, featuring the most trust-building questions, increases first-impression credibility.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK WINS SUMMARY -->
+  <div class="section">
+    <div class="section-head">
+      <div class="section-icon" style="background:#d1fae5;">⚡</div>
+      <div>
+        <div class="section-title">12 Psychology-Driven Quick Wins — Implement This Week</div>
+        <div class="section-sub">Changes with the highest trust-and-conversion ROI for the least development effort</div>
+      </div>
+    </div>
+    <div class="quick-wins">
+      <div class="qw"><div class="qw-num">1</div><div class="qw-title">Fix WhatsApp number</div><div class="qw-desc">Replace placeholder 447000000000 with real number in BookConsultation.tsx. Zero effort, currently broken for every user.</div></div>
+      <div class="qw"><div class="qw-num">2</div><div class="qw-title">AQF badge with UK Gov link</div><div class="qw-desc">Make AQF certification link to the official UK Government AQF register page. A real government link is the most powerful scam-buster.</div></div>
+      <div class="qw"><div class="qw-num">3</div><div class="qw-title">Country flags on testimonials</div><div class="qw-desc">Add country of origin to every testimonial. A 5-minute copy change that makes social proof 3× more relevant to each visitor.</div></div>
+      <div class="qw"><div class="qw-num">4</div><div class="qw-title">"Why free?" near the hero</div><div class="qw-desc">Move the business model explanation above the fold. Students form their trust verdict in the first 5 seconds — answer the scepticism before they leave.</div></div>
+      <div class="qw"><div class="qw-num">5</div><div class="qw-title">Trust signals on book page</div><div class="qw-desc">Add AQF badge, "3,000+ students placed", and "100% free — no hidden charges" in the sidebar of the consultation form.</div></div>
+      <div class="qw"><div class="qw-num">6</div><div class="qw-title">Named counsellors on About</div><div class="qw-desc">Replace "Applyza Team" with 3–5 named counsellors with photos, title, source market expertise, and a 2-sentence bio. Realness = trust.</div></div>
+      <div class="qw"><div class="qw-num">7</div><div class="qw-title">University logos on /for-institutions</div><div class="qw-desc">Add the logos of 10+ recognised UK universities. A student seeing "University of Manchester" and "King's College London" logos stops questioning legitimacy.</div></div>
+      <div class="qw"><div class="qw-num">8</div><div class="qw-title">Intake urgency on homepage</div><div class="qw-desc">Add a single line under the hero CTA: "September 2026 intake closes for most UK universities in June — start your application now."</div></div>
+      <div class="qw"><div class="qw-num">9</div><div class="qw-title">FAQ accordion on homepage</div><div class="qw-desc">Add 3–4 FAQ items on the homepage answering "Is this a scam?", "Why is it free?", "What's the visa success rate?" — the 3 most critical trust questions.</div></div>
+      <div class="qw"><div class="qw-num">10</div><div class="qw-title">Local office address on source market pages</div><div class="qw-desc">On /study-abroad/nigeria, show the Lagos office address and a Google Maps embed. A physical address is the #1 legitimacy signal in this market.</div></div>
+      <div class="qw"><div class="qw-num">11</div><div class="qw-title">Progress bar on eligibility check</div><div class="qw-desc">Goal-gradient effect: add "Step 2 of 5" progress tracking. Users who see progress complete at higher rates.</div></div>
+      <div class="qw"><div class="qw-num">12</div><div class="qw-title">Blog post: "Fake Education Agents" guide</div><div class="qw-desc">The most shareable piece in the content plan. A guide on spotting scam agents positions Applyza as the antidote — and circulates on WhatsApp in source markets.</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:20px; color:var(--slate-light); font-size:12px; border-top:1px solid var(--border); margin-top:8px;">
+    Applyza Marketing Psychology & CRO Playbook — March 2026 · CONFIDENTIAL
+  </div>
+
+</div>
+</body>
+</html>

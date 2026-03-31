@@ -11,12 +11,12 @@ const faqData = [
   {
     category: "General",
     items: [
-      { q: "Is Applyza really free for students?", a: "Yes, completely. We never charge students for our services — not for consultations, applications, or visa support. Our services are funded by our university partners." },
+      { q: "Is Applyza really free for students?", a: "Yes, completely. We never charge students for our services — not for consultations, applications, or visa support. Our service is completely free for every student, at every stage — no exceptions.", link: { text: "Read: Free vs paid study abroad consultancies →", to: "/free-vs-paid-study-abroad-consultancies" } },
       { q: "Who is Applyza?", a: "Applyza is a global education consultancy that helps international students access world-class universities. With 150+ partner universities, a 99% visa success rate, and offices in 6 countries, we combine expert counselling with AI technology to make studying abroad simpler, smarter, and free." },
       { q: "What countries can I study in through Applyza?", a: "We support students applying to universities in the United Kingdom, Germany, France, Ireland, Malta, the Netherlands, Canada, the USA, and more. Our course database is constantly growing." },
-      { q: "Which countries do you support students from?", a: "We work with students from Nigeria, Ghana, Kenya, Türkiye, Qatar, and many other countries. If you're unsure whether we can help, just reach out." },
+      { q: "Which countries do you support students from?", a: "We work with students from across the globe, with a strong presence in West Africa (Nigeria and Ghana), East Africa (Kenya), North Africa (Egypt and Morocco), the Middle East (UAE and Kuwait), and Europe (Türkiye and Eastern Europe). We also support students from many other emerging markets. If you're unsure whether we can help students from your country, please reach out — we likely can." },
       { q: "How is Applyza different from other education consultancies?", a: "We combine the personal touch of an experienced consultancy with AI-powered technology. Our course matcher helps you find programmes you're eligible for instantly. Our counsellors provide real, human guidance. And everything is free." },
-      { q: "Is Applyza a regulated education agent?", a: "Yes. Applyza operates within the UK Agent Quality Framework (AQF) and adheres to the National Code of Ethical Practice for Education Agents, established by leading international education bodies. Our counsellors are trained and certified through recognized professional programmes." },
+      { q: "Is Applyza a regulated education agent?", a: "Yes. Applyza adheres to the National Code of Ethical Practice for Education Agents, established by leading international education bodies including the British Council and Universities UK International. Our counsellors hold professional certifications in international student advising and are trained through recognised professional development programmes." },
     ],
   },
   {
@@ -47,23 +47,34 @@ const faqData = [
 ];
 
 const FAQ = () => {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqData.flatMap((group) =>
+      group.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      }))
+    ),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://applyza.com" },
+      { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://applyza.com/faq" }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <SEO
         title="FAQ | Frequently Asked Questions | Applyza"
         description="Find answers to common questions about studying abroad, visa applications, course selection, and Applyza's free services."
         path="/faq"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqData.flatMap((group) =>
-            group.items.map((item) => ({
-              "@type": "Question",
-              name: item.q,
-              acceptedAnswer: { "@type": "Answer", text: item.a },
-            }))
-          ),
-        }}
+        jsonLd={[faqSchema, breadcrumbSchema]}
       />
       <Navbar solid />
 
@@ -107,6 +118,11 @@ const FAQ = () => {
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground text-sm leading-relaxed pb-3.5">
                       {item.a}
+                      {item.link && (
+                        <Link to={item.link.to} className="block mt-2 text-secondary font-semibold hover:underline text-sm">
+                          {item.link.text}
+                        </Link>
+                      )}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
@@ -125,7 +141,7 @@ const FAQ = () => {
             <Button size="lg" className="rounded-full bg-white text-primary hover:bg-white/90 font-semibold px-8" asChild>
               <Link to="/book-a-consultation">Book a Free Consultation</Link>
             </Button>
-            <Button size="lg" variant="outline" className="rounded-full border-white/30 text-white hover:bg-white/10 px-8" asChild>
+            <Button size="lg" variant="outline" className="rounded-full border-white/30 text-white bg-transparent hover:bg-white/10 px-8" asChild>
               <Link to="/contact">Contact Us</Link>
             </Button>
           </div>

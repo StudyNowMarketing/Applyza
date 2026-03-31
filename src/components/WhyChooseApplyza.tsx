@@ -15,7 +15,7 @@ const reasons = [
   {
     icon: ShieldCheck,
     title: "99% Visa Success Rate",
-    text: "Our experienced compliance team has helped thousands of students secure their visas. We know what immigration officers look for — and we make sure your application ticks every box.",
+    text: "Our experienced compliance team has helped thousands of students secure their student visas. We know exactly what visa caseworkers look for — and we make sure your application ticks every box.",
   },
   {
     icon: Heart,

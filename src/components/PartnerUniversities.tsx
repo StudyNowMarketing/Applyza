@@ -80,7 +80,7 @@ const PartnerUniversities = () => {
         )}
 
         <div className="flex justify-center mt-10">
-          <Button variant="outline" size="lg" className="rounded-full border-white/20 text-white hover:bg-white/10" asChild>
+          <Button variant="outline" size="lg" className="rounded-full border-white/20 text-white bg-transparent hover:bg-white/10" asChild>
             <Link to="/find-a-course">See All 150+ Partners →</Link>
           </Button>
         </div>

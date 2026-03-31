@@ -23,48 +23,53 @@ interface ObjectKeyframes {
 
 const keyframeStages: { threshold: number; state: ObjectKeyframes }[] = [
   {
+    // All 4 visible, flat horizontal band, uniform Z and Y
     threshold: 0.0,
     state: {
-      globe: { position: [0, 0, 0], scale: 1 },
-      passport: { position: [6, 0, -1], scale: 0 },
-      airplane: { position: [0, 6, -1], scale: 0 },
-      university: { position: [2, -6, -2], scale: 0 },
+      globe:      { position: [-4.5, 0.2, -1],  scale: 1.0 },
+      passport:   { position: [-1.5, 0.2, -1],  scale: 1.0 },
+      airplane:   { position: [1.5,  0.2, -1],  scale: 1.0 },
+      university: { position: [4.5,  0.2, -1],  scale: 1.0 },
     },
   },
   {
-    threshold: 0.15,
+    // University exits downward; globe/passport/airplane stay flat
+    threshold: 0.25,
     state: {
-      globe: { position: [-3, 1, -2], scale: 0.8 },
-      passport: { position: [3, 0, -1], scale: 1 },
-      airplane: { position: [0, 6, -1], scale: 0 },
-      university: { position: [2, -6, -2], scale: 0 },
+      globe:      { position: [-4.2, 0.2, -1],  scale: 1.0 },
+      passport:   { position: [-1.5, 0.2, -1],  scale: 1.0 },
+      airplane:   { position: [1.5,  0.2, -1],  scale: 1.0 },
+      university: { position: [4.5, -6,   -1],  scale: 0   },
     },
   },
   {
-    threshold: 0.3,
+    // Airplane exits; globe/passport flat
+    threshold: 0.45,
     state: {
-      globe: { position: [-3, 1, -2], scale: 0.7 },
-      passport: { position: [3, -1, -1], scale: 0.8 },
-      airplane: { position: [0, 2, -1], scale: 1 },
-      university: { position: [2, -6, -2], scale: 0 },
+      globe:      { position: [-3.5, 0.2, -1],  scale: 1.1 },
+      passport:   { position: [-1.0, 0.2, -1],  scale: 1.1 },
+      airplane:   { position: [6,    0.2, -1],  scale: 0   },
+      university: { position: [4.5, -6,   -1],  scale: 0   },
     },
   },
   {
-    threshold: 0.5,
+    // Passport exits; globe only, flat
+    threshold: 0.65,
     state: {
-      globe: { position: [-3, 1.5, -3], scale: 0.6 },
-      passport: { position: [3.5, -1, -2], scale: 0.7 },
-      airplane: { position: [1.5, 2.5, -1], scale: 0.8 },
-      university: { position: [2, -1, -2], scale: 1 },
+      globe:      { position: [-2.5, 0.2, -1],  scale: 1.2 },
+      passport:   { position: [-6,   0.2, -1],  scale: 0   },
+      airplane:   { position: [6,    0.2, -1],  scale: 0   },
+      university: { position: [4.5, -6,   -1],  scale: 0   },
     },
   },
   {
-    threshold: 0.7,
+    // Globe centred, alone
+    threshold: 0.9,
     state: {
-      globe: { position: [-4, 2, -3], scale: 0.6 },
-      passport: { position: [4, -2, -3], scale: 0.6 },
-      airplane: { position: [2, 3, -2], scale: 0.7 },
-      university: { position: [0, -2, -3], scale: 0.8 },
+      globe:      { position: [0,    0.2, -1],  scale: 1.4 },
+      passport:   { position: [-6,   0.2, -1],  scale: 0   },
+      airplane:   { position: [6,    0.2, -1],  scale: 0   },
+      university: { position: [4.5, -6,   -1],  scale: 0   },
     },
   },
 ];
@@ -191,15 +196,15 @@ const SceneController: React.FC = () => {
         <GlassGlobe />
       </group>
 
-      <group ref={passportGroupRef} position={[6, 0, -1]} scale={0}>
+      <group ref={passportGroupRef} position={[-6, 0, -1]} scale={0}>
         <GlassPassport />
       </group>
 
-      <group ref={airplaneGroupRef} position={[0, 6, -1]} scale={0}>
+      <group ref={airplaneGroupRef} position={[6, 0, -1]} scale={0}>
         <GlassAirplane />
       </group>
 
-      <group ref={universityGroupRef} position={[2, -6, -2]} scale={0}>
+      <group ref={universityGroupRef} position={[0, -6, -2]} scale={0}>
         <GlassUniversity />
       </group>
 

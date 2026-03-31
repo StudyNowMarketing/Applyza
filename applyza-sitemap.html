@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Applyza — Site Architecture Map</title>
+<style>
+  :root {
+    --bg: #07091f;
+    --surface: #0d1033;
+    --surface2: #131840;
+    --border: rgba(255,255,255,0.07);
+    --primary: #6c63ff;
+    --teal: #0fd6c2;
+    --amber: #f9c74f;
+    --rose: #f94f6c;
+    --green: #4ade80;
+    --muted: rgba(255,255,255,0.45);
+    --text: rgba(255,255,255,0.92);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    max-width: 1200px;
+    margin: 0 auto 48px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .page-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .page-header h1 span { color: var(--teal); }
+  .page-header p { color: var(--muted); font-size: 14px; margin-top: 6px; }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── Grid ── */
+  .grid { max-width: 1200px; margin: 0 auto; display: grid; gap: 20px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-header .icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .card-header h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--muted); }
+  .card-header .count { margin-left: auto; font-size: 11px; color: var(--muted); background: var(--surface2); padding: 2px 8px; border-radius: 99px; }
+  .card-body { padding: 16px 20px; }
+
+  /* ── Page Items ── */
+  .page-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .page-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .page-item:hover { background: var(--surface2); }
+  .page-item .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .page-item .label { font-size: 13px; font-weight: 500; flex: 1; }
+  .page-item .url { font-size: 11px; color: var(--muted); font-family: 'Courier New', monospace; }
+  .page-item .tag {
+    font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 99px;
+    letter-spacing: 0.3px; flex-shrink: 0;
+  }
+
+  /* child indent */
+  .page-item.child { margin-left: 20px; }
+  .page-item.child .dot { opacity: 0.5; }
+  .connector { width: 1px; height: 12px; background: var(--border); margin-left: 23px; }
+
+  /* ── Colour system ── */
+  .c-teal   { background: rgba(15,214,194,0.12); color: var(--teal); }
+  .c-purple { background: rgba(108,99,255,0.12); color: var(--primary); }
+  .c-amber  { background: rgba(249,199,79,0.12);  color: var(--amber); }
+  .c-rose   { background: rgba(249,79,108,0.12);  color: var(--rose); }
+  .c-green  { background: rgba(74,222,128,0.12);  color: var(--green); }
+  .c-slate  { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+  /* ── Nav zone section ── */
+  .section-label {
+    max-width: 1200px;
+    margin: 40px auto 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── Hero card ── */
+  .hero-card {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #0d1a3a 0%, #0d1033 50%, #0a1a20 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-card .home-node {
+    background: linear-gradient(135deg, var(--teal), var(--primary));
+    border-radius: 14px;
+    padding: 20px 32px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .hero-card .home-node .label { font-size: 18px; font-weight: 800; color: #fff; }
+  .hero-card .home-node .url   { font-size: 12px; color: rgba(255,255,255,0.7); font-family: monospace; margin-top: 2px; }
+  .hero-card .stats {
+    flex: 1;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .number { font-size: 28px; font-weight: 800; }
+  .stat .desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Observations panel ── */
+  .observations {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .obs-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .obs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  @media (max-width: 700px) { .obs-grid { grid-template-columns: 1fr; } }
+  .obs-col { padding: 24px; }
+  .obs-col:first-child { border-right: 1px solid var(--border); }
+  .obs-col h3 { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+  .obs-col h3.good  { color: var(--green); }
+  .obs-col h3.gap   { color: var(--amber); }
+  .obs-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 12px; font-size: 13px; line-height: 1.5;
+  }
+  .obs-item .obs-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+  .obs-item .obs-text { color: rgba(255,255,255,0.75); }
+  .obs-item .obs-text strong { color: var(--text); }
+
+  /* ── Nav spec ── */
+  .nav-spec {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 700px) { .nav-spec { grid-template-columns: 1fr; } }
+  .nav-zone { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 24px; }
+  .nav-zone h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 14px; }
+  .nav-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .nav-row:last-child { border-bottom: none; }
+  .nav-row .order { width: 20px; height: 20px; border-radius: 50%; background: var(--surface2); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--muted); }
+  .nav-row .link  { flex: 1; }
+  .nav-row .url   { font-size: 10px; color: var(--muted); font-family: monospace; }
+  .cta-row { background: rgba(15,214,194,0.08); border-radius: 8px; padding: 8px 12px; margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+  .cta-label { font-size: 12px; font-weight: 600; color: var(--teal); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     PAGE HEADER
+═══════════════════════════════════════════ -->
+<div class="page-header">
+  <div>
+    <h1>Applyza — <span>Site Architecture Map</span></h1>
+    <p>Full page hierarchy · URL structure · Navigation zones · SEO observations</p>
+  </div>
+  <div class="legend">
+    <span class="badge c-teal"><span class="badge-dot" style="background:var(--teal)"></span>Public / Core</span>
+    <span class="badge c-purple"><span class="badge-dot" style="background:var(--primary)"></span>Services</span>
+    <span class="badge c-amber"><span class="badge-dot" style="background:var(--amber)"></span>Content / SEO</span>
+    <span class="badge c-green"><span class="badge-dot" style="background:var(--green)"></span>Conversion</span>
+    <span class="badge c-rose"><span class="badge-dot" style="background:var(--rose)"></span>B2B</span>
+    <span class="badge c-slate"><span class="badge-dot" style="background:var(--muted)"></span>Legal / Support</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HOMEPAGE HERO NODE + STATS
+═══════════════════════════════════════════ -->
+<div class="hero-card">
+  <div class="home-node">
+    <div class="label">🏠 Homepage</div>
+    <div class="url">/</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="number" style="color:var(--teal)">28</div><div class="desc">Public Pages</div></div>
+    <div class="stat"><div class="number" style="color:var(--primary)">17</div><div class="desc">Admin Pages</div></div>
+    <div class="stat"><div class="number" style="color:var(--amber)">4</div><div class="desc">Service Sub-pages</div></div>
+    <div class="stat"><div class="number" style="color:var(--rose)">2</div><div class="desc">B2B Pages</div></div>
+    <div class="stat"><div class="number" style="color:var(--green)">6</div><div class="desc">Conversion CTAs</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — CORE PUBLIC PAGES
+═══════════════════════════════════════════ -->
+<div class="section-label">Core Public Pages</div>
+<div class="grid grid-4">
+
+  <!-- FIND A COURSE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-teal">🎓</div>
+      <h2>Courses</h2>
+      <span class="count">2 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="label">Find a Course</span>
+          <span class="url">/find-a-course</span>
+          <span class="tag c-teal">Header</span>
+        </li>
+        <div class="connector"></div>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="label">Course Detail</span>
+          <span class="url">/find-a-course/:slug</span>
+          <span class="tag c-slate">Dynamic</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STUDY DESTINATIONS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-teal">🌍</div>
+      <h2>Destinations</h2>
+      <span class="count">2 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="label">Study Destinations</span>
+          <span class="url">/study-destinations</span>
+          <span class="tag c-teal">Header</span>
+        </li>
+        <div class="connector"></div>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="label">Destination Detail</span>
+          <span class="url">/study-destinations/:slug</span>
+          <span class="tag c-slate">Dynamic</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SCHOLARSHIPS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-amber">💰</div>
+      <h2>Scholarships</h2>
+      <span class="count">1 URL</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--amber)"></span>
+          <span class="label">Scholarships</span>
+          <span class="url">/scholarships</span>
+          <span class="tag c-teal">Header</span>
+        </li>
+        <li class="page-item" style="margin-top:8px; padding: 8px 10px; background: rgba(249,199,79,0.05); border-radius:8px; border: 1px dashed rgba(249,199,79,0.2);">
+          <span class="dot" style="background:var(--amber); opacity:0.4;"></span>
+          <span class="label" style="font-size:11px; color: var(--amber); opacity:0.7">⚠ Missing: /scholarships/:slug</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-purple">📅</div>
+      <h2>Events</h2>
+      <span class="count">1 URL</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--primary)"></span>
+          <span class="label">Events</span>
+          <span class="url">/events</span>
+          <span class="tag c-teal">Header</span>
+        </li>
+        <li class="page-item" style="margin-top:8px; padding: 8px 10px; background: rgba(108,99,255,0.05); border-radius:8px; border: 1px dashed rgba(108,99,255,0.2);">
+          <span class="dot" style="background:var(--primary); opacity:0.4;"></span>
+          <span class="label" style="font-size:11px; color: var(--primary); opacity:0.7">⚠ Missing: /events/:slug</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — SERVICES
+═══════════════════════════════════════════ -->
+<div class="section-label">Services</div>
+<div class="grid grid-2">
+
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-purple">⚙️</div>
+      <h2>Services Hub</h2>
+      <span class="count">5 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--primary)"></span>
+          <span class="label">Services Overview</span>
+          <span class="url">/services</span>
+          <span class="tag c-teal">Header</span>
+        </li>
+        <div class="connector"></div>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--primary)"></span>
+          <span class="label">University Applications</span>
+          <span class="url">/services/university-applications</span>
+        </li>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--primary)"></span>
+          <span class="label">Visa & Immigration</span>
+          <span class="url">/services/visa-immigration</span>
+        </li>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--primary)"></span>
+          <span class="label">Student Counselling</span>
+          <span class="url">/services/student-counselling</span>
+        </li>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--primary)"></span>
+          <span class="label">Accommodation</span>
+          <span class="url">/services/accommodation</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-green">✅</div>
+      <h2>Conversion Pages</h2>
+      <span class="count">3 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--green)"></span>
+          <span class="label">Book a Consultation</span>
+          <span class="url">/book-a-consultation</span>
+          <span class="tag c-green">Primary CTA</span>
+        </li>
+        <li class="page-item">
+          <span class="dot" style="background:var(--green)"></span>
+          <span class="label">Eligibility Check</span>
+          <span class="url">/eligibility-check</span>
+          <span class="tag c-green">Lead Gen</span>
+        </li>
+        <li class="page-item">
+          <span class="dot" style="background:var(--green)"></span>
+          <span class="label">FAQ</span>
+          <span class="url">/faq</span>
+          <span class="tag c-slate">Support</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — CONTENT & SEO
+═══════════════════════════════════════════ -->
+<div class="section-label">Content & SEO</div>
+<div class="grid grid-3">
+
+  <!-- BLOG -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-amber">✍️</div>
+      <h2>Blog</h2>
+      <span class="count">2 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--amber)"></span>
+          <span class="label">Blog Index</span>
+          <span class="url">/blog</span>
+        </li>
+        <div class="connector"></div>
+        <li class="page-item child">
+          <span class="dot" style="background:var(--amber)"></span>
+          <span class="label">Blog Post</span>
+          <span class="url">/blog/:slug</span>
+          <span class="tag c-slate">Dynamic</span>
+        </li>
+        <li class="page-item" style="margin-top:8px; padding: 8px 10px; background: rgba(249,199,79,0.05); border-radius:8px; border: 1px dashed rgba(249,199,79,0.2);">
+          <span class="dot" style="background:var(--amber); opacity:0.4;"></span>
+          <span class="label" style="font-size:11px; color: var(--amber); opacity:0.7">⚠ Missing: /blog/category/:slug</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- COMPANY -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-teal">🏢</div>
+      <h2>Company</h2>
+      <span class="count">3 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="label">About</span>
+          <span class="url">/about</span>
+          <span class="tag c-teal">Header</span>
+        </li>
+        <li class="page-item">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="label">Contact</span>
+          <span class="url">/contact</span>
+        </li>
+        <li class="page-item" style="margin-top:8px; padding: 8px 10px; background: rgba(15,214,194,0.05); border-radius:8px; border: 1px dashed rgba(15,214,194,0.2);">
+          <span class="dot" style="background:var(--teal); opacity:0.4;"></span>
+          <span class="label" style="font-size:11px; color: var(--teal); opacity:0.7">⚠ Missing: /about/team</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- B2B -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon c-rose">🤝</div>
+      <h2>B2B / Partners</h2>
+      <span class="count">2 URLs</span>
+    </div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item">
+          <span class="dot" style="background:var(--rose)"></span>
+          <span class="label">For Institutions</span>
+          <span class="url">/for-institutions</span>
+          <span class="tag c-rose">B2B</span>
+        </li>
+        <li class="page-item">
+          <span class="dot" style="background:var(--rose)"></span>
+          <span class="label">For Partners</span>
+          <span class="url">/for-partners</span>
+          <span class="tag c-rose">B2B</span>
+        </li>
+        <li class="page-item" style="margin-top:8px; padding: 8px 10px; background: rgba(249,79,108,0.05); border-radius:8px; border: 1px dashed rgba(249,79,108,0.2);">
+          <span class="dot" style="background:var(--rose); opacity:0.4;"></span>
+          <span class="label" style="font-size:11px; color: var(--rose); opacity:0.7">⚠ Missing: /partner-portal (login)</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — LEGAL & SUPPORT
+═══════════════════════════════════════════ -->
+<div class="section-label">Legal & Support</div>
+<div class="grid grid-4">
+
+  <div class="card">
+    <div class="card-header"><div class="icon c-slate">🔒</div><h2>Privacy</h2></div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item"><span class="dot" style="background:var(--muted)"></span><span class="label">Privacy Policy</span><span class="url">/privacy-policy</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="icon c-slate">📋</div><h2>Terms</h2></div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item"><span class="dot" style="background:var(--muted)"></span><span class="label">Terms & Conditions</span><span class="url">/terms-and-conditions</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="icon c-slate">📜</div><h2>Policies</h2></div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item"><span class="dot" style="background:var(--muted)"></span><span class="label">Anti-Slavery Policy</span><span class="url">/anti-slavery-policy</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--muted)"></span><span class="label">Cookie Policy</span><span class="url">/cookie-policy</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="icon c-slate">♿</div><h2>Accessibility</h2></div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item"><span class="dot" style="background:var(--muted)"></span><span class="label">Accessibility Statement</span><span class="url">/accessibility</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — ADMIN
+═══════════════════════════════════════════ -->
+<div class="section-label">Admin (Protected — /admin/*)</div>
+<div class="grid grid-2">
+
+  <div class="card">
+    <div class="card-header"><div class="icon c-purple">🛡</div><h2>Admin — Content Management</h2><span class="count">10 pages</span></div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Dashboard</span><span class="url">/admin</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Courses (List + Form)</span><span class="url">/admin/courses</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Blog Posts (List + Form)</span><span class="url">/admin/blog</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Events (List + Form)</span><span class="url">/admin/events</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Scholarships (List + Form)</span><span class="url">/admin/scholarships</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">SEO Settings</span><span class="url">/admin/seo</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Content</span><span class="url">/admin/content</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--primary)"></span><span class="label">Team</span><span class="url">/admin/team</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="icon c-rose">📬</div><h2>Admin — Enquiries & Auth</h2><span class="count">7 pages</span></div>
+    <div class="card-body">
+      <ul class="page-list">
+        <li class="page-item"><span class="dot" style="background:var(--rose)"></span><span class="label">Admin Login</span><span class="url">/admin/login</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--rose)"></span><span class="label">Consultations</span><span class="url">/admin/consultations</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--rose)"></span><span class="label">Contact Messages</span><span class="url">/admin/contact-messages</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--rose)"></span><span class="label">Institution Enquiries</span><span class="url">/admin/institution-enquiries</span></li>
+        <li class="page-item"><span class="dot" style="background:var(--rose)"></span><span class="label">Partner Enquiries</span><span class="url">/admin/partner-enquiries</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION SPEC
+═══════════════════════════════════════════ -->
+<div class="section-label">Current Navigation Zones</div>
+<div class="nav-spec">
+
+  <div class="nav-zone">
+    <h3>🔗 Header Nav (Current)</h3>
+    <div class="nav-row"><span class="order">1</span><span class="link">Find a Course</span><span class="url">/find-a-course</span></div>
+    <div class="nav-row"><span class="order">2</span><span class="link">Study Destinations</span><span class="url">/study-destinations</span></div>
+    <div class="nav-row"><span class="order">3</span><span class="link">Services</span><span class="url">/services</span></div>
+    <div class="nav-row"><span class="order">4</span><span class="link">Scholarships</span><span class="url">/scholarships</span></div>
+    <div class="nav-row"><span class="order">5</span><span class="link">Events</span><span class="url">/events</span></div>
+    <div class="nav-row"><span class="order">6</span><span class="link">About</span><span class="url">/about</span></div>
+    <div class="cta-row"><span class="cta-label">✦ CTA → Book a Free Consultation</span><span class="url" style="margin-left:auto">/book-a-consultation</span></div>
+  </div>
+
+  <div class="nav-zone">
+    <h3>📌 Footer Nav (3 Columns)</h3>
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; font-size:12px;">
+      <div>
+        <div style="font-weight:700; color:var(--muted); margin-bottom:8px;">For Students</div>
+        <div style="color:rgba(255,255,255,0.6); line-height:2">Find a Course<br>Study Destinations<br>Scholarships<br>Book a Consultation<br>FAQ</div>
+      </div>
+      <div>
+        <div style="font-weight:700; color:var(--muted); margin-bottom:8px;">Company</div>
+        <div style="color:rgba(255,255,255,0.6); line-height:2">About<br>Our Offices<br>Testimonials<br>Blog<br>Events<br>Contact</div>
+      </div>
+      <div>
+        <div style="font-weight:700; color:var(--muted); margin-bottom:8px;">Partners</div>
+        <div style="color:rgba(255,255,255,0.6); line-height:2">For Institutions<br>For Recruitment Partners<br>Partner Universities</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     OBSERVATIONS
+═══════════════════════════════════════════ -->
+<div class="observations">
+  <div class="obs-header">🔍 Architecture Observations & SEO Opportunities</div>
+  <div class="obs-grid">
+    <div class="obs-col">
+      <h3 class="good">✅ What's Working</h3>
+      <div class="obs-item"><span class="obs-icon">✓</span><div class="obs-text"><strong>Clean URL patterns</strong> — slugs for courses, destinations, blog posts. Human-readable and SEO-friendly.</div></div>
+      <div class="obs-item"><span class="obs-icon">✓</span><div class="obs-text"><strong>Strong service sub-pages</strong> — each service has its own URL, enabling individual keyword targeting.</div></div>
+      <div class="obs-item"><span class="obs-icon">✓</span><div class="obs-text"><strong>Dedicated B2B section</strong> — /for-institutions and /for-partners separate the audience journeys.</div></div>
+      <div class="obs-item"><span class="obs-icon">✓</span><div class="obs-text"><strong>Schema JSON-LD on homepage</strong> — Organisation + WebSite + SearchAction already implemented.</div></div>
+      <div class="obs-item"><span class="obs-icon">✓</span><div class="obs-text"><strong>Legal compliance pages</strong> — Anti-slavery, accessibility, cookie policy — signals trustworthiness.</div></div>
+      <div class="obs-item"><span class="obs-icon">✓</span><div class="obs-text"><strong>Sitemap edge function</strong> — auto-generated XML sitemap via Supabase edge function.</div></div>
+    </div>
+    <div class="obs-col">
+      <h3 class="gap">⚠ Gaps & Opportunities</h3>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>No blog categories</strong> — /blog/category/:slug missing. Kills SEO clustering and pillar page strategy.</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>No scholarship detail pages</strong> — /scholarships/:slug would allow targeting "scholarship for Nigerian students in UK" etc.</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>No event detail pages</strong> — /events/:slug missing, events aren't indexable individually.</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>Blog not in header nav</strong> — a major content asset is buried; doesn't signal content authority.</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>No /about/team page</strong> — E-E-A-T signal. Faces = trust for YMYL (study abroad = financial + life decisions).</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>No country-specific landing pages</strong> — e.g. /study-in-uk, /study-in-canada. High-volume, low-competition opportunity.</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>No /resources hub</strong> — guides, checklists, visa info all siloed. A /resources section would build topical authority.</div></div>
+      <div class="obs-item"><span class="obs-icon">⚠</span><div class="obs-text"><strong>Services missing dropdown nav</strong> — 4 sub-services aren't visible from the nav. Users and crawlers miss them.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- footer spacer -->
+<div style="max-width:1200px; margin: 40px auto 0; text-align:center; font-size:11px; color: rgba(255,255,255,0.2); padding-bottom: 20px;">
+  Applyza Site Architecture Map · Generated March 2026 · applyza.com
+</div>
+
+</body>
+</html>

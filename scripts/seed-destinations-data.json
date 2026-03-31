@@ -1,0 +1,218 @@
+[
+  {
+    "country": "Japan",
+    "slug": "japan",
+    "overview": "Japan blends world-class research universities with a rich cultural experience unlike anywhere else on earth, making it one of Asia's most sought-after study destinations. Home to cutting-edge technology, ancient traditions, and some of the safest cities globally, international students thrive academically and personally. With government-backed scholarships and a growing number of English-taught programmes, Japan is increasingly accessible to students from all backgrounds.",
+    "language": "Japanese (primary); English-taught programmes widely available at national and private universities",
+    "degree_duration": "Bachelor's: 4 years | Master's: 2 years | Doctoral: 3 years",
+    "tuition_range": "National universities: ¥535,800–¥700,000/year (~USD $3,600–$4,700) | Private universities: ¥1,100,000–¥3,200,000/year (~USD $7,400–$21,500)",
+    "post_study_visa": "J-Find Visa (Designated Activities – Future Creation Individual) | Duration: Up to 2 years (issued in 6–12 month increments) | For graduates of top-100 QS/THE/ARWU universities within the past 5 years | Part-time work permitted while job-seeking",
+    "top_cities": "Tokyo, Kyoto, Osaka, Fukuoka, Nagoya",
+    "why_study_here_1_title": "World-Ranked Research Universities",
+    "why_study_here_1_desc": "Tokyo (#32 QS 2025) and Kyoto (#55) consistently rank among the world's best institutions.",
+    "why_study_here_2_title": "Affordable National University Tuition",
+    "why_study_here_2_desc": "Government-set fees at national universities keep annual costs well under USD $5,000.",
+    "why_study_here_3_title": "Safe, Modern, and Student-Friendly Cities",
+    "why_study_here_3_desc": "Japan's cities are renowned for safety, public transit, and vibrant student communities.",
+    "why_study_here_4_title": "MEXT Fully Funded Government Scholarships",
+    "why_study_here_4_desc": "MEXT covers tuition, return airfare, and a monthly stipend of up to ¥145,000.",
+    "visa_requirements": "Step 1: Receive admission letter and Certificate of Eligibility (COE) from your Japanese institution (takes 1–3 months). Step 2: Submit COE + valid passport (18+ months validity) + completed visa application form + one passport photo + financial proof to the nearest Japanese embassy or consulate. Step 3: Processing takes 5–10 business days. You must enter Japan within 3 months of the date on the COE. Upon arrival, register at the local ward office and obtain your Residence Card.",
+    "visa_fee": "¥3,000 (~USD $20) for single-entry | ¥6,000 (~USD $40) for multiple-entry",
+    "visa_work_rights": "Up to 28 hours per week during term; unlimited during official university holidays. A 'Permission to Engage in Activity Other Than That Permitted' card must be obtained from immigration.",
+    "cost_city_1": "Tokyo: ¥130,000–¥200,000/month (~USD $870–$1,340)",
+    "cost_city_2": "Osaka: ¥100,000–¥160,000/month (~USD $670–$1,070)",
+    "cost_city_3": "Fukuoka: ¥80,000–¥130,000/month (~USD $535–$870)",
+    "top_universities": [
+      { "name": "University of Tokyo", "note": "QS World Ranking #32 (2025); Japan's leading research university" },
+      { "name": "Kyoto University", "note": "QS World Ranking #55 (2025); Japan's second-oldest national university" },
+      { "name": "Osaka University", "note": "QS top 100; 2,000+ international students across four campuses" },
+      { "name": "Tohoku University", "note": "#1 in THE Japan University Rankings 2025 for five consecutive years" },
+      { "name": "Waseda University", "note": "QS #196; Japan's top private university with 8,000+ international students" }
+    ],
+    "scholarships": [
+      {
+        "name": "MEXT Japanese Government Scholarship",
+        "desc": "Covers full tuition, return airfare, and a monthly stipend of ¥117,000–¥145,000 (~USD $780–$970). Apply via Japanese embassy or through a nominated university. Deadline: typically April–June annually.",
+        "type": "Fully Funded"
+      },
+      {
+        "name": "JASSO Honors Scholarship for Privately Financed International Students",
+        "desc": "Monthly stipend of ¥48,000 (~USD $320) for degree students at Japanese universities. Does not cover tuition or travel. Awarded through the enrolled institution.",
+        "type": "Partial"
+      },
+      {
+        "name": "University-Based Entrance Scholarships",
+        "desc": "Most national and private universities (including Waseda, Keio, and Ritsumeikan) offer merit-based tuition waivers of 50–100% for high-achieving international applicants. Awarded at admission.",
+        "type": "Partial"
+      }
+    ],
+    "student_life": [
+      "Active 'bukatsu' club culture — join sports, music, martial arts, calligraphy, or film circles to make friends fast",
+      "Annual campus festivals (gakuensai) are major events with food stalls, performances, and open labs",
+      "Affordable university dormitories (¥30,000–¥80,000/month) with built-in international student communities",
+      "Tokyo, Osaka, and Kyoto offer world-class museums, night markets, anime districts, and natural parks within easy reach"
+    ]
+  },
+  {
+    "country": "China",
+    "slug": "china",
+    "overview": "China hosts over 500,000 international students annually and offers some of the most affordable high-quality education in the world, with top institutions now ranked firmly in the global top 20. From the tech-driven campuses of Beijing and Shanghai to the relaxed cultural hubs of Chengdu and Xi'an, studying in China means immersion in the world's most dynamic economy. Generous government scholarships and a rapidly expanding English-taught programme catalogue make China a compelling choice for ambitious international students.",
+    "language": "Mandarin Chinese (primary); 2,000+ English-taught degree programmes available at key universities",
+    "degree_duration": "Bachelor's: 4 years | Master's: 2–3 years | Doctoral: 3–4 years",
+    "tuition_range": "CNY 20,000–50,000/year (~USD $2,750–$6,900) | Medical/Engineering specialisms: up to CNY 60,000/year (~USD $8,250)",
+    "post_study_visa": "Z Work Visa (work permit required) | Master's/PhD graduates from Chinese universities may apply directly without the standard 2-year work experience requirement in cities like Beijing and Shanghai | New K Visa (from Oct 2025): for STEM graduates of recognised institutions — offers flexible multi-entry stay for early-career professionals",
+    "top_cities": "Beijing, Shanghai, Chengdu, Wuhan, Xi'an",
+    "why_study_here_1_title": "Top 20 Global Universities at Low Cost",
+    "why_study_here_1_desc": "Tsinghua (#14 QS) and Peking University (#17) rival the world's best at a fraction of Western fees.",
+    "why_study_here_2_title": "China Scholarship Council (CSC) Generosity",
+    "why_study_here_2_desc": "50,000+ students currently study in China on government scholarships covering full tuition and living costs.",
+    "why_study_here_3_title": "Mandarin Immersion and Global Career Edge",
+    "why_study_here_3_desc": "Daily Mandarin immersion gives graduates a rare advantage in the world's largest trading economy.",
+    "why_study_here_4_title": "Ultra-Affordable Living Outside Tier-1 Cities",
+    "why_study_here_4_desc": "Cities like Chengdu or Wuhan offer a full student lifestyle for under USD $600/month.",
+    "visa_requirements": "Step 1: Obtain Admission Notice and JW201/JW202 form from your Chinese university. Step 2: Complete the Chinese Visa Application Form (available at visaforchina.cn) with a white-background photo. Step 3: Submit — valid passport (6+ months, 2 blank pages), Admission Notice (original + copy), JW201 or JW202 form, bank statement showing sufficient funds (~USD $5,000–$10,000), and medical examination form — to the nearest Chinese embassy, consulate, or CVASC. Processing: 4 business days standard. Step 4: Within 30 days of arrival in China, register at the local Public Security Bureau (PSB) and convert your X1 visa to a Residence Permit for Study.",
+    "visa_fee": "Varies by nationality; approximately USD $48–$140. US citizens: USD $140 | Most other nationalities: USD $48–$80. Check your nearest Chinese embassy for the exact fee.",
+    "visa_work_rights": "International students on X1/X2 visas are not permitted to work off-campus. On-campus internships and research assistantships are possible with university approval. Some cities have pilot programmes permitting limited off-campus internships for master's/PhD students.",
+    "cost_city_1": "Beijing: CNY 5,000–9,000/month (~USD $690–$1,240)",
+    "cost_city_2": "Shanghai: CNY 4,500–8,000/month (~USD $620–$1,100)",
+    "cost_city_3": "Chengdu: CNY 2,500–4,500/month (~USD $345–$620)",
+    "top_universities": [
+      { "name": "Tsinghua University", "note": "QS World Ranking #14 (2025); global leader in engineering and technology" },
+      { "name": "Peking University", "note": "QS World Ranking #17 (2025); China's top institution for humanities and sciences" },
+      { "name": "Fudan University", "note": "QS top 50; leading comprehensive university in Shanghai" },
+      { "name": "Shanghai Jiao Tong University", "note": "QS top 50; renowned for engineering, medicine, and business" },
+      { "name": "Zhejiang University", "note": "QS top 50; major research hub in Hangzhou with strong STEM programmes" }
+    ],
+    "scholarships": [
+      {
+        "name": "Chinese Government Scholarship (CSC)",
+        "desc": "Covers full tuition, on-campus accommodation, comprehensive health insurance, and a monthly stipend of CNY 2,500 (undergraduate), CNY 3,000 (master's), or CNY 3,500 (PhD) (~USD $345–$480). Apply via csc.edu.cn or your home country's Ministry of Education. Deadline: typically March–April annually.",
+        "type": "Fully Funded"
+      },
+      {
+        "name": "Confucius Institute Scholarship",
+        "desc": "Covers tuition, on-campus housing, health insurance, and a monthly stipend of CNY 2,500–3,000 (~USD $345–$415) for students studying Chinese language or MTCSOL programmes. Administered through Hanban/CLEC. Applications open 1 March annually at cis.chinese.cn.",
+        "type": "Fully Funded"
+      },
+      {
+        "name": "University-Level Excellence Scholarships",
+        "desc": "Most top Chinese universities (Tsinghua, Fudan, SJTU, Zhejiang) offer 50–100% tuition waivers for academically outstanding international applicants, awarded at admission. Apply directly through the university admissions portal.",
+        "type": "Partial"
+      }
+    ],
+    "student_life": [
+      "Campuses are self-contained communities with cafeterias, gyms, libraries, and on-campus dormitories — all within walking distance",
+      "Hundreds of student clubs range from mountain climbing and robotics to traditional Chinese instruments and calligraphy",
+      "Major cities offer affordable hot-pot restaurants, KTV nights, weekend hiking, and night markets for CNY 50 or less",
+      "International student associations at every university help newcomers settle in, find language partners, and navigate daily life"
+    ]
+  },
+  {
+    "country": "Russia",
+    "slug": "russia",
+    "overview": "Russia is one of the world's largest higher education destinations, offering internationally recognised degrees — especially in medicine, engineering, physics, and mathematics — at some of the most affordable tuition rates globally. With over 300,000 international students enrolled across 741+ universities in 82 regions, Russia provides genuine academic breadth from world-ranked Moscow institutions to dynamic regional cities. The Russian Government Quota Scholarship programme funds nearly 30,000 international students each year, making fully-funded study a realistic goal.",
+    "language": "Russian (primary); growing number of English-taught programmes at major universities including HSE, MIPT, and MSU",
+    "degree_duration": "Bachelor's (Bakalavr): 4 years | Specialist (integrated): 5–6 years | Master's (Magistr): 2 years | Doctoral (PhD/Aspirantura): 3–4 years",
+    "tuition_range": "RUB 140,000–450,000/year (~USD $1,500–$5,000) | Medicine/Specialist programmes: RUB 250,000–600,000/year (~USD $2,700–$6,600) | Top Moscow/St. Petersburg universities: up to RUB 700,000/year (~USD $7,700)",
+    "post_study_visa": "Temporary Residence Permit (Временное проживание / RVPO) | Duration: 3 years, renewable | Graduates of state-accredited Russian universities can apply without the standard quota | Holders of a Red Diploma (honours degree) from a Russian institution can apply directly for Permanent Residence, skipping the temporary permit stage",
+    "top_cities": "Moscow, Saint Petersburg, Novosibirsk, Kazan, Tomsk",
+    "why_study_here_1_title": "Globally Recognised Science and Medicine Degrees",
+    "why_study_here_1_desc": "Russian medical and STEM degrees are recognised in 100+ countries and cost a fraction of Western equivalents.",
+    "why_study_here_2_title": "Government Quota: 30,000 Funded Places Annually",
+    "why_study_here_2_desc": "The Russian Government Scholarship covers tuition and dorm costs for students from 170+ countries.",
+    "why_study_here_3_title": "Extraordinarily Low Cost of Living",
+    "why_study_here_3_desc": "Regional cities like Kazan and Tomsk allow a comfortable student life for under USD $300/month all-in.",
+    "why_study_here_4_title": "Cultural and Geographic Diversity",
+    "why_study_here_4_desc": "Study across 11 time zones — from European Moscow to Siberian research hubs with world-class facilities.",
+    "visa_requirements": "Step 1: Receive an official Invitation Letter from your Russian university (arranged by the university's international office after admission). Step 2: Apply no earlier than 45 days before arrival at a Russian Embassy or VFS Global centre. Submit: completed electronic application form (signed printout from visa.kdmid.ru), valid passport (18+ months remaining validity), one recent passport photo, original Invitation Letter, original HIV-negative test certificate (not older than 3 months), valid international health insurance, and proof of funds. Step 3: Processing takes 2–5 weeks (expedited: 1–3 business days at extra cost). Step 4: Visa is initially valid for 90 days; your university's international office extends it annually for the full duration of your programme. Register with local authorities within 7 days of arrival.",
+    "visa_fee": "USD $80 for standard processing | USD $160 for expedited processing | Plus VFS Global service charge of ~USD $38",
+    "visa_work_rights": "International students may work part-time at their enrolled institution or its affiliated organisations. Work must be in the occupation category listed on the visa and within the geographic region of study. Working outside these boundaries without a separate work permit is not permitted.",
+    "cost_city_1": "Moscow: RUB 38,000–60,000/month (~USD $420–$660)",
+    "cost_city_2": "Saint Petersburg: RUB 30,000–50,000/month (~USD $330–$550)",
+    "cost_city_3": "Kazan / Novosibirsk: RUB 15,000–30,000/month (~USD $165–$330)",
+    "top_universities": [
+      { "name": "Lomonosov Moscow State University (MSU)", "note": "QS World Ranking #94 (2025); Russia's oldest and most prestigious university" },
+      { "name": "HSE University (Moscow)", "note": "Top-ranked for Economics, Political Science, and Computer Science; strong English-medium offering" },
+      { "name": "Moscow Institute of Physics and Technology (MIPT)", "note": "QS top 300; world-class physics and mathematics; dubbed 'Russia's MIT'" },
+      { "name": "Saint Petersburg State University (SPbU)", "note": "QS top 250; Russia's second-oldest university; strong in sciences, law, and humanities" },
+      { "name": "Kazan Federal University", "note": "QS top 400; one of Russia's oldest universities; strong medicine, chemistry, and IT programmes" }
+    ],
+    "scholarships": [
+      {
+        "name": "Russian Government Quota Scholarship",
+        "desc": "~30,000 places/year across 741+ universities. Covers full tuition and university dormitory. Monthly stipend of RUB 1,700–3,000 (~USD $19–$33). Apply via the Russian Embassy in your country or the official portal russia.study. Open to students from 170+ countries.",
+        "type": "Fully Funded"
+      },
+      {
+        "name": "Open Doors: Russian Scholarship Project",
+        "desc": "International academic competition run by the Global Universities Association with support from Russia's Ministry of Science and Education. Winners gain free early admission to top Russian universities (MSU, HSE, MIPT, SPbU, etc.) without entrance exams, with full tuition covered. Registration: September–November annually. Competition stages: November–February.",
+        "type": "Fully Funded"
+      },
+      {
+        "name": "University Merit Scholarships",
+        "desc": "Major universities including MSU, HSE, and MIPT offer their own partial tuition waivers (25–100%) for outstanding international applicants, assessed on academic records and entrance test performance. Apply directly through university admissions portals.",
+        "type": "Partial"
+      }
+    ],
+    "student_life": [
+      "University dormitories cost as little as RUB 1,000–5,000/month (~USD $11–$55), providing built-in social communities and are located on or near campus",
+      "Student unions offer 40+ sports sections, dance clubs, theatre workshops, mountaineering, and volunteering programmes at virtually every major university",
+      "Moscow and Saint Petersburg offer world-class ballet, museums, art galleries, and nightlife — with student discounts on most cultural venues",
+      "International student clubs at every major university organise cultural evenings, language exchange, and mentoring programmes for new arrivals"
+    ]
+  },
+  {
+    "country": "Hungary",
+    "slug": "hungary",
+    "overview": "Hungary is one of Europe's most welcoming study destinations for international students, combining a central EU location, high-quality English-taught programmes, and living costs far below Western European capitals. Budapest, a city famed for its thermal baths, baroque architecture, and thriving student scene, is consistently ranked among Europe's best student cities. Hungary's Stipendium Hungaricum programme — one of the most comprehensive scholarships in Europe — brings over 5,000 fully-funded students from 70+ countries to Hungarian universities each year.",
+    "language": "Hungarian (official); 800+ degree programmes taught entirely in English, particularly in medicine, business, and engineering",
+    "degree_duration": "Bachelor's: 3–4 years | Master's: 1.5–2 years | Medicine/Dentistry/Pharmacy (integrated): 5–6 years | Doctoral: 3–4 years",
+    "tuition_range": "Public universities: EUR 1,500–5,000/year (~USD $1,650–$5,500) | Medicine/Dentistry at University of Debrecen or Semmelweis: EUR 10,000–16,000/year (~USD $11,000–$17,600) | Private universities: EUR 5,000–12,000/year (~USD $5,500–$13,200)",
+    "post_study_visa": "Study-to-Work Residence Permit (Post-Study Work Permit) | Duration: 9 months | Available to all graduates of accredited Hungarian institutions | Must apply before current student permit expires (no later than 15 days before expiry) | Permits job-seeking or company formation; converts to a work/entrepreneur residence permit once employment is secured",
+    "top_cities": "Budapest, Debrecen, Pécs, Szeged, Miskolc",
+    "why_study_here_1_title": "EU Location with Affordable Living Costs",
+    "why_study_here_1_desc": "An EU degree hub where monthly living costs of EUR 500–700 are 40–60% below Western Europe.",
+    "why_study_here_2_title": "Stipendium Hungaricum: Europe's Top Fully Funded Scholarship",
+    "why_study_here_2_desc": "5,000+ scholarships per year covering tuition, housing, stipend, and health insurance for 70+ partner countries.",
+    "why_study_here_3_title": "World-Renowned Medical and Health Science Programmes",
+    "why_study_here_3_desc": "Semmelweis and the University of Debrecen are globally respected for medicine, dentistry, and pharmacy.",
+    "why_study_here_4_title": "Budapest: One of Europe's Best Student Cities",
+    "why_study_here_4_desc": "Vibrant Erasmus community, thermal baths, cultural festivals, and student transport for EUR 2.50/month.",
+    "visa_requirements": "Step 1: Receive official Letter of Acceptance from a recognised Hungarian institution. Step 2: Book an appointment at the nearest Hungarian Embassy or Consulate no more than 3 months before your programme start date. Submit: completed D-type visa application form, valid passport (valid throughout stay + 3 months), two passport photos, Letter of Acceptance, proof of accommodation (university dorm confirmation or rental agreement), proof of sufficient funds (bank statement showing ~EUR 700/month), valid travel insurance (min. EUR 30,000 medical coverage), and proof of tuition fee payment or exemption certificate. Processing: 15–60 days. Step 3: Within 30 days of arrival in Hungary, register your address and apply for a Residence Permit for Study at the regional NDGAP (National Directorate-General for Aliens Policing) office.",
+    "visa_fee": "D-type visa application fee: EUR 60–80 (varies by consulate) | Residence permit application fee upon arrival: EUR 110 administrative service fee",
+    "visa_work_rights": "Students may work up to 24 hours per week during term time and full-time during official university holidays, without needing a separate work permit. After completing 2 semesters, the weekly limit is lifted entirely for on-campus and legally contracted employment.",
+    "cost_city_1": "Budapest: EUR 550–900/month (~USD $600–$990)",
+    "cost_city_2": "Debrecen: EUR 380–620/month (~USD $415–$680)",
+    "cost_city_3": "Miskolc / Pécs: EUR 300–500/month (~USD $330–$550)",
+    "top_universities": [
+      { "name": "University of Debrecen", "note": "QS World Ranking #563 (2026); Hungary's top-ranked university; 8,000+ international students" },
+      { "name": "Eötvös Loránd University (ELTE)", "note": "QS World Ranking #584 (2026); Hungary's leading research university; strong in STEM and humanities" },
+      { "name": "Semmelweis University", "note": "Europe's most international medical university by student ratio; top-ranked for medicine and health sciences" },
+      { "name": "Budapest University of Technology and Economics (BME)", "note": "Central Europe's oldest technical university; highly ranked for engineering and computer science" },
+      { "name": "Corvinus University of Budapest", "note": "Hungary's leading business and social sciences university; triple-accredited business school (AACSB, AMBA, EQUIS)" }
+    ],
+    "scholarships": [
+      {
+        "name": "Stipendium Hungaricum Scholarship",
+        "desc": "Hungary's flagship government scholarship programme. Covers full tuition, on-campus housing or HUF 40,000/month housing allowance (~EUR 100), monthly stipend of HUF 43,700 (~EUR 110) for Bachelor's/Master's or HUF 140,000 (~EUR 350) for PhD students, and annual health insurance up to HUF 65,000. Over 5,000 places per year from 70+ partner countries. Apply via your home country's sending organisation. Deadline: typically mid-January annually.",
+        "type": "Fully Funded"
+      },
+      {
+        "name": "Hungarian State Scholarship (Balassi Institute)",
+        "desc": "Partial scholarship for postgraduate and doctoral students from countries with bilateral educational agreements with Hungary. Covers tuition and a monthly allowance. Applications managed through the Balassi Institute or home country cultural ministry.",
+        "type": "Partial"
+      },
+      {
+        "name": "Corvinus University Pannonia Scholarship",
+        "desc": "Semester-based mobility scholarship at Corvinus University of Budapest for international students at partner universities. Covers partial tuition and a monthly contribution toward living costs for one semester. Open to Bachelor's, Master's, and PhD students in good academic standing.",
+        "type": "Partial"
+      }
+    ],
+    "student_life": [
+      "Budapest's Erasmus Student Network (ESN) is one of Europe's most active, organising city trips, cultural events, and parties year-round",
+      "University student cards unlock Budapest's entire public transport network (metro, trams, buses) for just EUR 2.50/month",
+      "Hungarian universities host multicultural international weeks, language exchange evenings, and volunteering programmes every semester",
+      "Budapest's thermal baths, ruin bars, and riverside promenades make after-study relaxation an institution in itself"
+    ]
+  }
+]

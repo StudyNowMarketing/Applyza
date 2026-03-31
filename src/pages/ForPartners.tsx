@@ -101,9 +101,18 @@ const ForPartners = () => {
     document.getElementById("partner-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://applyza.com" },
+      { "@type": "ListItem", "position": 2, "name": "For Partners", "item": "https://applyza.com/for-partners" }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SEO title="Recruitment Partners | Join the Applyza Network" description="Join Applyza's recruitment partner network. Refer students, earn commissions, and access our course database." path="/for-partners" />
+      <SEO title="Education Agent Partner Programme | Earn Commissions | Applyza" description="Join Applyza's education agent network. Access 150+ universities, earn placement commissions, and use our AI matching tools to serve your students better." path="/for-partners" jsonLd={breadcrumbSchema} />
       <Navbar solid />
 
       {/* Dark Hero */}
@@ -120,9 +129,9 @@ const ForPartners = () => {
               <BreadcrumbItem><BreadcrumbPage className="text-white/60 text-sm">For Partners</BreadcrumbPage></BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Join Our Agent Network</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-2">Join Applyza's Education Agent Network — Earn More, Place Better</h1>
           <p className="text-white/50 text-sm max-w-xl">
-            Are you an education agent or recruitment partner? Join our growing network to refer students, earn commissions, and access our full course database.
+            Access 150+ partner universities, use our AI-powered course matching tools, and earn reliable placement commissions. Whether you're an independent agent or an agency, we give you the platform and support to grow your business.
           </p>
           <MovingBorderButton onClick={scrollToForm} className="mt-4 px-6 py-2 text-xs">
             Register Interest
@@ -190,9 +199,9 @@ const ForPartners = () => {
       {/* Partner Portal Teaser */}
       <section className="bg-background py-10">
         <div className="container max-w-2xl text-center">
-          <h2 className="text-lg font-bold text-primary mb-2">Partner Portal — Coming Soon</h2>
+          <h2 className="text-lg font-bold text-primary mb-2">Partner Portal — Launching Soon</h2>
           <p className="text-xs text-muted-foreground mb-6">
-            A dedicated portal where you can refer students, track applications, view commission statements, and access marketing materials.
+            We're building a dedicated partner portal so you can refer students, track your pipeline, view commission statements, and access marketing materials — all in one place. Register your interest now and be first to access it.
           </p>
           <div className="rounded-xl p-6 border border-border" style={{ background: "#0a0d24" }}>
             <div className="space-y-2">

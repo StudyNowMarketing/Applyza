@@ -134,9 +134,18 @@ const BookConsultation = () => {
   const update = (field: string, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://applyza.com" },
+      { "@type": "ListItem", "position": 2, "name": "Book a Free Consultation", "item": "https://applyza.com/book-a-consultation" }
+    ]
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SEO title="Book a Free Consultation | Applyza" description="Book a free consultation with an Applyza counsellor. University applications, visa support, and student guidance." path="/book-a-consultation" />
+      <SEO title="Book a Free Consultation | Applyza" description="Book a free consultation with an Applyza counsellor. University applications, visa support, and student guidance." path="/book-a-consultation" jsonLd={breadcrumbSchema} />
       <Navbar solid />
 
       {/* Dark Hero */}
@@ -284,7 +293,7 @@ const BookConsultation = () => {
                 <Mail size={14} /> info@applyza.com
               </a>
               <a
-                href={`https://wa.me/447000000000?text=${encodeURIComponent("Hi, I'd like to book a consultation with Applyza")}`}
+                href={`https://wa.me/447350394837?text=${encodeURIComponent("Hi, I'd like to book a consultation with Applyza")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-secondary font-semibold hover:underline"

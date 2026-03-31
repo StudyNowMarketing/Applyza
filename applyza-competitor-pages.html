@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applyza — Competitor Comparison Pages Brief</title>
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --blue: #1a56db;
+    --blue-light: #e8f0fe;
+    --teal: #0891b2;
+    --teal-light: #e0f7fa;
+    --green: #059669;
+    --green-light: #d1fae5;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-400: #9ca3af;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-900);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3a6e 60%, var(--blue) 100%);
+    color: white;
+    padding: 72px 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 20%, rgba(26,86,219,0.4) 0%, transparent 60%);
+  }
+  .cover-inner { position: relative; max-width: 860px; }
+  .cover-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 6px 16px; font-size: 12px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,0.85);
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 40px; font-weight: 800; line-height: 1.15; margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .cover h1 span { color: #60a5fa; }
+  .cover-sub {
+    font-size: 17px; color: rgba(255,255,255,0.75); max-width: 620px; margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .cover-meta {
+    display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .cover-meta-item { display: flex; flex-direction: column; }
+  .cover-meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .cover-meta-value { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 940px; margin: 0 auto; padding: 48px 32px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 28px; padding-bottom: 20px;
+    border-bottom: 2px solid var(--gray-200);
+  }
+  .section-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0; margin-top: 2px;
+  }
+  .section-header h2 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+  .section-header p { font-size: 14px; color: var(--gray-600); }
+
+  /* ── CARDS ── */
+  .card {
+    background: white; border: 1px solid var(--gray-200);
+    border-radius: 12px; padding: 24px; margin-bottom: 16px;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .card h3 { font-size: 16px; font-weight: 700; color: var(--navy); }
+  .card p { font-size: 14px; color: var(--gray-700); line-height: 1.65; }
+
+  /* ── COMPETITOR PAGES ── */
+  .competitor-block {
+    background: white; border: 1px solid var(--gray-200);
+    border-radius: 16px; overflow: hidden; margin-bottom: 40px;
+  }
+  .competitor-header {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .competitor-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .competitor-header h2 { font-size: 26px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .competitor-header .url-pill {
+    display: inline-block; background: var(--gray-100); border: 1px solid var(--gray-200);
+    border-radius: 6px; padding: 4px 10px; font-size: 13px; font-family: monospace;
+    color: var(--blue); font-weight: 600;
+  }
+  .competitor-body { padding: 28px 32px; }
+
+  /* ── META GRID ── */
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 28px;
+  }
+  .meta-item {
+    background: var(--gray-50); border: 1px solid var(--gray-200);
+    border-radius: 10px; padding: 14px 16px;
+  }
+  .meta-item-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--gray-400); font-weight: 600; margin-bottom: 6px;
+  }
+  .meta-item-value { font-size: 14px; color: var(--gray-900); font-weight: 500; line-height: 1.5; }
+  .meta-item-value.keywords { font-family: monospace; font-size: 13px; color: var(--blue); }
+
+  /* ── COPY BLOCKS ── */
+  .copy-block {
+    background: var(--blue-light); border: 1px solid #bfdbfe;
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;
+  }
+  .copy-block-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+    font-weight: 700; color: var(--blue); margin-bottom: 8px;
+  }
+  .copy-block p { font-size: 14px; color: var(--navy); line-height: 1.7; }
+  .copy-block p strong { font-weight: 700; }
+
+  .copy-block.green { background: var(--green-light); border-color: #6ee7b7; }
+  .copy-block.green .copy-block-label { color: var(--green); }
+  .copy-block.green p { color: #064e3b; }
+
+  .copy-block.amber { background: var(--amber-light); border-color: #fcd34d; }
+  .copy-block.amber .copy-block-label { color: var(--amber); }
+  .copy-block.amber p { color: #78350f; }
+
+  .copy-block.purple { background: var(--purple-light); border-color: #c4b5fd; }
+  .copy-block.purple .copy-block-label { color: var(--purple); }
+  .copy-block.purple p { color: #3b0764; }
+
+  /* ── COMPARISON TABLE ── */
+  .comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .comp-table thead tr { background: var(--navy); color: white; }
+  .comp-table th { padding: 12px 16px; text-align: left; font-weight: 600; font-size: 13px; }
+  .comp-table th:first-child { border-radius: 8px 0 0 0; }
+  .comp-table th:last-child { border-radius: 0 8px 0 0; }
+  .comp-table td { padding: 11px 16px; border-bottom: 1px solid var(--gray-200); vertical-align: top; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table tr:nth-child(even) td { background: var(--gray-50); }
+  .comp-table .win { color: var(--green); font-weight: 600; }
+  .comp-table .lose { color: var(--red); }
+  .comp-table .neutral { color: var(--amber); }
+  .comp-table .col-us { background: #f0f7ff !important; }
+
+  /* ── PAGE STRUCTURE ── */
+  .page-structure { margin: 20px 0; }
+  .structure-step {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px solid var(--gray-100);
+  }
+  .structure-step:last-child { border-bottom: none; }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--navy); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .step-content h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .step-content p { font-size: 13px; color: var(--gray-600); line-height: 1.55; }
+
+  /* ── WHO ITS FOR ── */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .who-box { border-radius: 10px; padding: 16px; }
+  .who-box.applyza { background: var(--green-light); border: 1px solid #6ee7b7; }
+  .who-box.competitor { background: var(--gray-100); border: 1px solid var(--gray-200); }
+  .who-box h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .who-box.applyza h4 { color: var(--green); }
+  .who-box.competitor h4 { color: var(--gray-600); }
+  .who-box ul { padding-left: 16px; }
+  .who-box li { font-size: 13px; color: var(--gray-700); margin-bottom: 5px; line-height: 1.5; }
+
+  /* ── KEYWORDS GRID ── */
+  .kw-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .kw-pill {
+    background: var(--blue-light); border: 1px solid #bfdbfe;
+    border-radius: 20px; padding: 4px 12px; font-size: 12px;
+    color: #1d4ed8; font-weight: 500;
+  }
+  .kw-pill.high { background: var(--green-light); border-color: #6ee7b7; color: var(--green); }
+  .kw-pill.medium { background: var(--amber-light); border-color: #fcd34d; color: var(--amber); }
+
+  /* ── SUB-SECTIONS ── */
+  .sub-section { margin: 24px 0; }
+  .sub-section h3 {
+    font-size: 16px; font-weight: 700; color: var(--navy);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .sub-section h3::before {
+    content: ''; display: inline-block; width: 4px; height: 18px;
+    background: var(--blue); border-radius: 2px;
+  }
+
+  /* ── FAQ SCHEMA PREVIEW ── */
+  .schema-block {
+    background: #1e293b; border-radius: 10px; padding: 16px 20px;
+    margin: 16px 0; font-family: monospace; font-size: 12.5px;
+    color: #94a3b8; line-height: 1.7; overflow-x: auto;
+  }
+  .schema-block .k { color: #7dd3fc; }
+  .schema-block .v { color: #86efac; }
+  .schema-block .s { color: #fde68a; }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    border-radius: 20px; padding: 3px 10px; font-size: 12px; font-weight: 600;
+  }
+  .badge.priority-high { background: var(--red-light); color: var(--red); }
+  .badge.priority-med { background: var(--amber-light); color: var(--amber); }
+  .badge.priority-low { background: var(--green-light); color: var(--green); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    display: flex; gap: 14px; padding: 16px 20px;
+    border-radius: 10px; margin: 16px 0;
+  }
+  .callout.warn { background: var(--amber-light); border-left: 4px solid var(--amber); }
+  .callout.info { background: var(--blue-light); border-left: 4px solid var(--blue); }
+  .callout.success { background: var(--green-light); border-left: 4px solid var(--green); }
+  .callout-icon { font-size: 18px; margin-top: 1px; flex-shrink: 0; }
+  .callout-text { font-size: 14px; line-height: 1.65; color: var(--gray-800); }
+  .callout-text strong { font-weight: 700; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--gray-200); margin: 40px 0; }
+
+  /* ── HUB PAGE ── */
+  .hub-block {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e8f5e9 100%);
+    border: 2px solid var(--blue); border-radius: 16px; padding: 32px;
+    margin-bottom: 40px;
+  }
+  .hub-block h2 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+
+  /* ── INTERNAL LINKING ── */
+  .link-map {
+    background: white; border: 1px solid var(--gray-200);
+    border-radius: 12px; padding: 24px; margin: 16px 0;
+  }
+  .link-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--gray-100); font-size: 14px;
+  }
+  .link-row:last-child { border-bottom: none; }
+  .link-from { flex: 1; font-family: monospace; color: var(--blue); font-size: 13px; }
+  .link-arrow { color: var(--gray-400); font-size: 16px; }
+  .link-to { flex: 1; font-family: monospace; color: var(--navy); font-size: 13px; }
+  .link-anchor { flex: 1.5; color: var(--gray-600); font-size: 13px; }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; gap: 12px; padding: 8px 0;
+    border-bottom: 1px solid var(--gray-100); font-size: 14px; color: var(--gray-700);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '□'; font-size: 16px; color: var(--gray-400); flex-shrink: 0;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: white; border: 1px solid var(--gray-200);
+    border-radius: 12px; padding: 24px; margin-bottom: 40px;
+  }
+  .toc h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 16px; text-transform: uppercase; letter-spacing: .06em; }
+  .toc-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .toc-list li a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: 8px; text-decoration: none;
+    font-size: 14px; color: var(--gray-700); transition: background .15s;
+  }
+  .toc-list li a:hover { background: var(--blue-light); color: var(--blue); }
+  .toc-list li a .toc-num {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--navy);
+    color: white; font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+
+  /* ── PRIORITY TABLE ── */
+  .priority-row { display: flex; align-items: center; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--gray-100); }
+  .priority-row:last-child { border-bottom: none; }
+  .pr-url { font-family: monospace; font-size: 13px; color: var(--blue); flex: 2; }
+  .pr-comp { font-size: 14px; color: var(--gray-700); flex: 2; }
+  .pr-kv { font-size: 13px; color: var(--gray-500); flex: 2; }
+
+  /* ── RESP ── */
+  @media (max-width: 680px) {
+    .cover { padding: 48px 24px 40px; }
+    .cover h1 { font-size: 28px; }
+    .container { padding: 32px 20px; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr; }
+    .toc-list { grid-template-columns: 1fr; }
+    .competitor-body, .competitor-header { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">⚔️ SEO &amp; Content Strategy — Document 7 of 7</div>
+    <h1>Competitor Comparison<br><span>Pages Brief</span></h1>
+    <p class="cover-sub">Full copy, structure, SEO specs, and differentiation strategy for Applyza's competitor comparison pages. Five competitor profiles covering IDP Education, SI-UK, AHZ Associates, Applyboard, and Aims Education — plus a comparison hub page.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Prepared for</span>
+        <span class="cover-meta-value">Applyza (applyza.com)</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Date</span>
+        <span class="cover-meta-value">March 2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Pages covered</span>
+        <span class="cover-meta-value">6 pages (5 vs + 1 hub)</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Priority</span>
+        <span class="cover-meta-value">High — competitor conquest SEO</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTAINER ═══ -->
+<div class="container">
+
+  <!-- ── TABLE OF CONTENTS ── -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ul class="toc-list">
+      <li><a href="#strategy"><span class="toc-num">1</span> Strategy Overview</a></li>
+      <li><a href="#hub"><span class="toc-num">2</span> Comparison Hub Page</a></li>
+      <li><a href="#idp"><span class="toc-num">3</span> vs IDP Education</a></li>
+      <li><a href="#siuk"><span class="toc-num">4</span> vs SI-UK</a></li>
+      <li><a href="#ahz"><span class="toc-num">5</span> vs AHZ Associates</a></li>
+      <li><a href="#applyboard"><span class="toc-num">6</span> vs Applyboard</a></li>
+      <li><a href="#aims"><span class="toc-num">7</span> vs Aims Education</a></li>
+      <li><a href="#linking"><span class="toc-num">8</span> Internal Linking &amp; Schema</a></li>
+      <li><a href="#checklist"><span class="toc-num">9</span> Implementation Checklist</a></li>
+    </ul>
+  </div>
+
+
+  <!-- ═══ 1. STRATEGY OVERVIEW ═══ -->
+  <div id="strategy">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e8f0fe;">🎯</div>
+      <div>
+        <h2>Strategy Overview</h2>
+        <p>Why competitor comparison pages work — and how to do them right in the education market</p>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text">
+        <strong>The core opportunity:</strong> Students searching for "[Competitor] review", "[Competitor] alternative", or "Applyza vs [Competitor]" are at high intent — they're actively researching which consultancy to trust with a life-defining decision. These pages capture bottom-of-funnel traffic that has very high conversion potential, while establishing Applyza as a confident, knowledgeable authority in the market.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:#fef3c7;">⚠️</div>
+        <h3>Critical: How Education Comparison Pages Differ From SaaS</h3>
+      </div>
+      <p>Standard SaaS comparison pages lead with feature tables and pricing. Education comparison pages require a different approach because the decision is not transactional — it is <strong>deeply emotional and high-stakes</strong>. Students are not choosing a productivity tool; they are choosing who will guide a once-in-a-lifetime decision that affects their family, their finances, and years of their life.</p>
+      <br>
+      <p>In Applyza's source markets (Nigeria, Ghana, Kenya, Egypt, UAE), <strong>trust is the primary conversion factor</strong> — not features. Students and parents have heard scam stories. They have been burned. They are actively looking for reasons to distrust you, not reasons to trust you.</p>
+      <br>
+      <p><strong>This changes the tone of comparison pages significantly:</strong></p>
+      <ul style="padding-left: 20px; margin-top: 10px; font-size: 14px; color: var(--gray-700); line-height: 1.9;">
+        <li>Acknowledge competitor strengths genuinely — don't dismiss them</li>
+        <li>Position Applyza's advantages as facts, not claims: certifications, statistics, free service</li>
+        <li>Be explicit about who each option is <em>actually</em> best for — even if that's occasionally the competitor</li>
+        <li>Never use pushy urgency language ("Sign up before it's too late!") — it signals scam</li>
+        <li>Use quiet authority over aggressive persuasion</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:#d1fae5;">📈</div>
+        <h3>Page Priority &amp; Opportunity Ranking</h3>
+      </div>
+      <div style="margin-top: 4px;">
+        <div class="priority-row">
+          <div style="font-size:12px;font-weight:700;color:var(--gray-400);flex:0 0 24px">#</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gray-400);flex:2">URL</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gray-400);flex:2">Competitor</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gray-400);flex:2">Target Market(s)</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gray-400);flex:1">Priority</div>
+        </div>
+        <div class="priority-row">
+          <div style="flex:0 0 24px;font-weight:700;color:var(--navy)">1</div>
+          <div class="pr-url">/vs/idp-education</div>
+          <div class="pr-comp">IDP Education</div>
+          <div class="pr-kv">All source markets</div>
+          <div><span class="badge priority-high">🔴 High</span></div>
+        </div>
+        <div class="priority-row">
+          <div style="flex:0 0 24px;font-weight:700;color:var(--navy)">2</div>
+          <div class="pr-url">/vs/si-uk</div>
+          <div class="pr-comp">SI-UK / SI-Global</div>
+          <div class="pr-kv">West &amp; East Africa</div>
+          <div><span class="badge priority-high">🔴 High</span></div>
+        </div>
+        <div class="priority-row">
+          <div style="flex:0 0 24px;font-weight:700;color:var(--navy)">3</div>
+          <div class="pr-url">/vs/applyboard</div>
+          <div class="pr-comp">Applyboard</div>
+          <div class="pr-kv">Tech-savvy students globally</div>
+          <div><span class="badge priority-med">🟡 Medium</span></div>
+        </div>
+        <div class="priority-row">
+          <div style="flex:0 0 24px;font-weight:700;color:var(--navy)">4</div>
+          <div class="pr-url">/vs/ahz-associates</div>
+          <div class="pr-comp">AHZ Associates</div>
+          <div class="pr-kv">Africa-focused students</div>
+          <div><span class="badge priority-med">🟡 Medium</span></div>
+        </div>
+        <div class="priority-row">
+          <div style="flex:0 0 24px;font-weight:700;color:var(--navy)">5</div>
+          <div class="pr-url">/vs/aims-education</div>
+          <div class="pr-comp">Aims Education</div>
+          <div class="pr-kv">Middle East, North Africa</div>
+          <div><span class="badge priority-low">🟢 Lower</span></div>
+        </div>
+        <div class="priority-row">
+          <div style="flex:0 0 24px;font-weight:700;color:var(--navy)">+</div>
+          <div class="pr-url">/alternatives</div>
+          <div class="pr-comp">Hub: All Alternatives</div>
+          <div class="pr-kv">All source markets</div>
+          <div><span class="badge priority-high">🔴 High</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:#ede9fe;">🔑</div>
+        <h3>Applyza's Consistent Advantages Across All Comparison Pages</h3>
+      </div>
+      <p style="margin-bottom: 12px;">These five differentiators apply on every competitor page and should be woven naturally into each one:</p>
+      <table class="comp-table" style="margin-top: 0;">
+        <thead>
+          <tr>
+            <th>Differentiator</th>
+            <th>Evidence / Proof Point</th>
+            <th>Which competitor this beats hardest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>100% free for students</strong></td>
+            <td>No fees at any stage — application, visa, counselling, accommodation</td>
+            <td>SI-UK (£699+ fees), IDP (variable fees)</td>
+          </tr>
+          <tr>
+            <td><strong>AQF Certified</strong></td>
+            <td>UK Agent Quality Framework — government-recognised quality standard</td>
+            <td>Local agents, AHZ, Aims</td>
+          </tr>
+          <tr>
+            <td><strong>99% visa success rate</strong></td>
+            <td>Headline stat — directly addresses #1 student fear</td>
+            <td>All competitors (none publish this stat)</td>
+          </tr>
+          <tr>
+            <td><strong>Local offices in source markets</strong></td>
+            <td>Lagos, Accra, Nairobi, Doha, Istanbul, Nicosia</td>
+            <td>Applyboard (B2B only, no local offices), IDP (centralised offices)</td>
+          </tr>
+          <tr>
+            <td><strong>AI-powered course matching</strong></td>
+            <td>Eligibility-based — not just a directory browse</td>
+            <td>AHZ, Aims, SI-UK (no comparable AI tool)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 2. HUB PAGE ═══ -->
+  <div id="hub">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e8f0fe;">🏛️</div>
+      <div>
+        <h2>Comparison Hub Page</h2>
+        <p>The master alternatives page that links to all competitor pages and captures early-funnel research queries</p>
+      </div>
+    </div>
+
+    <div class="hub-block">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <span style="background:var(--blue);color:white;border-radius:6px;padding:4px 10px;font-size:13px;font-family:monospace;font-weight:700">/alternatives</span>
+        <span class="badge priority-high">🔴 Build First</span>
+      </div>
+      <h2>Applyza vs. The Alternatives — Which Study Abroad Consultancy Is Right for You?</h2>
+      <p style="font-size:14px;color:var(--gray-600);margin-bottom:20px;">This hub page ranks for "[consultancy name] alternatives", "best study abroad consultancies", and "IDP vs Applyza" type queries. It serves as a linking hub and trust signal — showing Applyza is confident enough to name competitors publicly.</p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-item-label">SEO Title</div>
+          <div class="meta-item-value">Applyza vs. Other Study Abroad Consultancies — Honest Comparison</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-item-label">Meta Description</div>
+          <div class="meta-item-value">Comparing Applyza with IDP Education, SI-UK, AHZ Associates, Applyboard and Aims Education? Here's an honest breakdown to help you choose.</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-item-label">Primary Keywords</div>
+          <div class="meta-item-value keywords">study abroad consultancy comparison, best study abroad consultants, IDP alternative, SI-UK alternative</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-item-label">Word Count Target</div>
+          <div class="meta-item-value">1,800–2,400 words</div>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <h3>Page Structure</h3>
+        <div class="page-structure">
+          <div class="structure-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Hero — Validate the Search</h4>
+              <p>Acknowledge they're doing smart research. Headline: "Choosing the Right Study Abroad Consultancy Is One of the Most Important Decisions You'll Make — Here's How the Main Options Compare."</p>
+            </div>
+          </div>
+          <div class="structure-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>At-a-Glance Master Comparison Table</h4>
+              <p>One table comparing Applyza vs all 5 competitors across: free/paid, AQF certified, visa support, AI matching, local offices, source market presence. Applyza column highlighted.</p>
+            </div>
+          </div>
+          <div class="structure-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Per-Competitor Summary Cards</h4>
+              <p>One card per competitor. 3–4 sentences on who they are, their strengths, their limitations, who should use them. Each card links to the dedicated /vs/ page.</p>
+            </div>
+          </div>
+          <div class="structure-step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Key Decision Factors for Students</h4>
+              <p>What should you actually evaluate when choosing a consultancy? (Cost, AQF status, visa success rates, local presence, transparency). This section positions Applyza as the knowledgeable guide, not just a self-promoter.</p>
+            </div>
+          </div>
+          <div class="structure-step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h4>CTA — Book a Free Consultation</h4>
+              <p>"Still not sure which is right for you? Book a free 30-minute consultation — no commitment, no fees. Ask us anything, including how we compare to other options."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-label">📝 Hero Copy Draft</div>
+        <p>Choosing a study abroad consultancy is not a small decision. The right partner can mean the difference between a visa approval and a refusal, between a course that launches your career and one you regret, between trusting your future to someone qualified and someone who isn't. With so many names in the market — IDP Education, SI-UK, AHZ Associates, Applyboard, and many others — it can be difficult to know where to start. This page gives you an honest comparison, because we believe you deserve complete information, not a sales pitch.</p>
+      </div>
+
+      <div class="copy-block green">
+        <div class="copy-block-label">📝 CTA Copy Draft</div>
+        <p><strong>Still weighing up your options?</strong> Our consultants are happy to answer questions honestly — including how we compare to other consultancies. There's no commitment and no charge. Just a conversation with someone who knows the market inside out.<br><br><strong>→ Book Your Free Consultation</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 3. IDP EDUCATION ═══ -->
+  <div id="idp">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fee2e2;">🔴</div>
+      <div>
+        <h2>vs IDP Education</h2>
+        <p>The largest global competitor — brand awareness is high, but personalisation is not</p>
+      </div>
+    </div>
+
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-tag" style="background:#fee2e2;color:var(--red);">🔴 Priority 1 — Build First</div>
+        <h2>Applyza vs. IDP Education</h2>
+        <span class="url-pill">/vs/idp-education</span>
+        <div style="margin-top: 12px; font-size: 14px; color: var(--gray-600); max-width: 600px; line-height: 1.65;">IDP is the most recognised name students encounter during research. This page captures those students at a critical decision point and shows why Applyza offers more personalised, more transparent service at zero cost.</div>
+      </div>
+
+      <div class="competitor-body">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">SEO Title (≤60 chars)</div>
+            <div class="meta-item-value">Applyza vs IDP Education — Free Expert Alternative</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Meta Description (≤155 chars)</div>
+            <div class="meta-item-value">Comparing Applyza and IDP Education? We break down cost, counselling quality, visa support and results so you can choose with confidence.</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">H1</div>
+            <div class="meta-item-value">Applyza vs. IDP Education: Which Study Abroad Consultancy Should You Choose?</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Word Count Target</div>
+            <div class="meta-item-value">2,200–3,000 words</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Target Keywords</h3>
+          <div class="kw-grid">
+            <span class="kw-pill high">IDP Education alternative</span>
+            <span class="kw-pill high">Applyza vs IDP</span>
+            <span class="kw-pill high">IDP Education review Nigeria</span>
+            <span class="kw-pill medium">IDP Education fees</span>
+            <span class="kw-pill medium">alternative to IDP Education</span>
+            <span class="kw-pill">IDP Education Ghana</span>
+            <span class="kw-pill">IDP Education Kenya</span>
+            <span class="kw-pill">IDP study abroad consultants</span>
+            <span class="kw-pill">IDP vs other consultants</span>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Competitor Profile: Who is IDP Education?</h3>
+          <div class="card" style="margin-bottom:0;">
+            <p>IDP Education is a large Australian-owned, publicly listed company operating in over 30 countries. They are the co-owner of the IELTS test alongside the British Council and Cambridge Assessment, and they operate a large study abroad placement service. IDP has strong brand recognition — particularly in South Asia — and handles extremely high placement volumes. They have offices across Africa, Asia, and the Middle East. Their scale and marketing budgets are significant.</p>
+            <br>
+            <p><strong>IDP's genuine strengths:</strong> Brand recognition; IELTS integration; wide geographic reach; strong university network; large staffing teams.</p>
+            <br>
+            <p><strong>Where IDP falls short for Applyza's core audience:</strong> IDP is a high-volume operation. Students can feel like a number. Counselling varies greatly by office quality. In some markets, fees are charged. There is no AI-based eligibility matching — students browse a generic catalogue. Visa support quality is inconsistent. IDP is not AQF certified as an agent in the way smaller dedicated consultancies are. The IELTS connection can make it feel like a testing company that also does placements, rather than a genuine student advocate.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>At-a-Glance Comparison Table</h3>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th class="col-us">✅ Applyza</th>
+                <th>IDP Education</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cost to student</strong></td>
+                <td class="win col-us">Completely free — no fees at any stage</td>
+                <td class="neutral">Varies by market; fees may apply for some services</td>
+              </tr>
+              <tr>
+                <td><strong>AQF Certified</strong></td>
+                <td class="win col-us">Yes — UK Agent Quality Framework certified</td>
+                <td class="neutral">IDP operates under its own compliance framework; not AQF-certified as a dedicated agent</td>
+              </tr>
+              <tr>
+                <td><strong>AI course matching</strong></td>
+                <td class="win col-us">Yes — eligibility-based AI matching</td>
+                <td class="lose">Course directory browsing only</td>
+              </tr>
+              <tr>
+                <td><strong>Visa success rate</strong></td>
+                <td class="win col-us">99% published success rate</td>
+                <td class="neutral">Not published publicly</td>
+              </tr>
+              <tr>
+                <td><strong>Local offices in Africa/MENA</strong></td>
+                <td class="win col-us">Lagos, Accra, Nairobi, Doha, Istanbul</td>
+                <td class="neutral">Offices in major cities; variable quality</td>
+              </tr>
+              <tr>
+                <td><strong>Student-to-counsellor ratio</strong></td>
+                <td class="win col-us">Personalised; low caseloads</td>
+                <td class="lose">High-volume; variable counsellor availability</td>
+              </tr>
+              <tr>
+                <td><strong>Accommodation support</strong></td>
+                <td class="win col-us">Yes — end-to-end</td>
+                <td class="neutral">Limited / variable</td>
+              </tr>
+              <tr>
+                <td><strong>10+ years' experience</strong></td>
+                <td class="win col-us">Yes (via Study Now heritage)</td>
+                <td class="win">Yes — established global player</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-section">
+          <h3>TL;DR Summary Copy</h3>
+          <div class="copy-block">
+            <div class="copy-block-label">📝 TL;DR — Place at Top of Page, Below Hero</div>
+            <p><strong>The short version:</strong> IDP Education is one of the world's largest study abroad organisations — well-funded, globally recognised, and connected. Applyza is a specialist consultancy that is completely free for students, AQF certified, and built around personalised guidance rather than volume. If you want a large, familiar brand with offices everywhere, IDP is a reasonable choice. If you want individual attention, AI-powered course matching, a published 99% visa success rate, and zero cost — Applyza is likely the better fit for where you are and what you need.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Hero Copy Draft</h3>
+          <div class="copy-block purple">
+            <div class="copy-block-label">📝 H1 + Subtitle Copy</div>
+            <p><strong>H1:</strong> Applyza vs. IDP Education: Which Study Abroad Consultancy Should You Choose?<br><br>
+            <strong>Subtitle:</strong> If you've been researching study abroad consultancies, you've probably come across both Applyza and IDP Education. This page gives you an honest comparison — no spin — so you can make the right choice for your circumstances.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Key Section Copy Drafts</h3>
+
+          <div class="copy-block">
+            <div class="copy-block-label">📝 Section: Cost — The Biggest Practical Difference</div>
+            <p>Applyza's service is completely free for students — not discounted, not low-cost, but genuinely zero charge from start to finish. That includes your initial consultation, AI course matching, application preparation, personal statement guidance, visa application support, and accommodation assistance. There is no fee to pay, no invoice at the end, no "premium tier" for the good stuff. We earn via commissions from our partner universities, which is the standard model for all UK-regulated education agents worldwide. IDP's pricing varies by market and service. In some regions, IDP does charge consultation or application processing fees. If cost is a significant factor — and for many students in our source markets, it is — this distinction matters.</p>
+          </div>
+
+          <div class="copy-block amber">
+            <div class="copy-block-label">📝 Section: Scale vs. Personalisation</div>
+            <p>IDP processes hundreds of thousands of student applications each year. That scale is genuinely impressive — it means university relationships, consistent processes, and a recognisable brand. It also means that, at a high-volume operation, individual counsellors carry heavy caseloads. Students at IDP offices in Lagos, Nairobi, and Cairo frequently report waiting days for responses and receiving generic advice that doesn't account for their specific academic background. Applyza takes a different approach. We assess your academic profile, your target countries, and your genuine intent before recommending programmes — and we don't take on students we cannot properly serve. Our counsellors are accessible. That trade-off between scale and service quality is worth weighing carefully.</p>
+          </div>
+
+          <div class="copy-block green">
+            <div class="copy-block-label">📝 Section: Visa Support — Where It Matters Most</div>
+            <p>A visa refusal is not just a setback — it can delay your plans by a year, impact future applications, and cost significant money. Applyza's 99% visa success rate is the result of a thorough preparation process: we review every application before submission, prepare students for compliance requirements, and guide document preparation in detail. We publish this rate because we are proud of it and because we believe you have the right to ask any consultancy what their visa success record is before you commit. If a consultancy cannot or will not answer that question, that tells you something important.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Who Should Use Each</h3>
+          <div class="who-grid">
+            <div class="who-box applyza">
+              <h4>✅ Choose Applyza if...</h4>
+              <ul>
+                <li>You want a completely free service</li>
+                <li>You want AI-based course matching by eligibility</li>
+                <li>You want a local office in Lagos, Accra, Nairobi, Doha, or Istanbul</li>
+                <li>You want a published visa success rate</li>
+                <li>You want a dedicated counsellor relationship</li>
+                <li>You need end-to-end support including accommodation</li>
+              </ul>
+            </div>
+            <div class="who-box competitor">
+              <h4>🔷 IDP may suit you if...</h4>
+              <ul>
+                <li>You are also preparing for IELTS and want one provider for both</li>
+                <li>You are in a city/country not covered by Applyza's offices</li>
+                <li>You specifically prefer a large, publicly listed company for added reassurance</li>
+                <li>You are applying to universities in countries outside Applyza's core portfolio (e.g., Canada, Australia)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>FAQ Schema Questions</h3>
+          <div class="schema-block">
+<span class="k">"@type"</span>: <span class="v">"FAQPage"</span>,
+<span class="k">"mainEntity"</span>: [
+  {
+    <span class="k">"name"</span>: <span class="s">"Is IDP Education free for students?"</span>,
+    <span class="k">"acceptedAnswer"</span>: <span class="s">"IDP Education's pricing varies by market and service type. Some services may carry fees. Applyza is completely free for students at every stage — including consultation, application preparation, visa support, and accommodation assistance."</span>
+  },
+  {
+    <span class="k">"name"</span>: <span class="s">"What is the difference between Applyza and IDP Education?"</span>,
+    <span class="k">"acceptedAnswer"</span>: <span class="s">"Applyza is a specialist, AQF-certified study abroad consultancy offering AI-powered course matching, personalised expert counselling, and end-to-end visa support at zero cost to students. IDP Education is a large global organisation primarily known for IELTS testing, which also offers study abroad placement services. Applyza's focus on individual student outcomes and our 99% visa success rate distinguish our approach."</span>
+  },
+  {
+    <span class="k">"name"</span>: <span class="s">"Is Applyza better than IDP?"</span>,
+    <span class="k">"acceptedAnswer"</span>: <span class="s">"The right choice depends on your specific needs. Applyza is likely the better fit if you want a fully free, personalised service with AI course matching, a local office in your country, and a published visa success rate. IDP may suit you better if you also need IELTS preparation or prefer a large, globally recognised brand."</span>
+  }
+]
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 4. SI-UK ═══ -->
+  <div id="siuk">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fee2e2;">🔴</div>
+      <div>
+        <h2>vs SI-UK / SI-Global</h2>
+        <p>The premium-priced UK specialist — Applyza's strongest "free vs paid" case</p>
+      </div>
+    </div>
+
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-tag" style="background:#fee2e2;color:var(--red);">🔴 Priority 2</div>
+        <h2>Applyza vs. SI-UK</h2>
+        <span class="url-pill">/vs/si-uk</span>
+        <div style="margin-top: 12px; font-size: 14px; color: var(--gray-600); max-width: 600px; line-height: 1.65;">SI-UK charges significant fees for services Applyza provides free. This page captures students who have encountered SI-UK's pricing and are looking for a credible free alternative.</div>
+      </div>
+
+      <div class="competitor-body">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">SEO Title (≤60 chars)</div>
+            <div class="meta-item-value">Applyza vs SI-UK — Expert Study Abroad Help for Free</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Meta Description (≤155 chars)</div>
+            <div class="meta-item-value">SI-UK charges £699+ for services Applyza provides completely free. Compare counselling quality, visa support, and results before you pay.</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">H1</div>
+            <div class="meta-item-value">Applyza vs. SI-UK: Why Pay for Study Abroad Guidance When Expert Help Is Free?</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Word Count Target</div>
+            <div class="meta-item-value">2,000–2,800 words</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Target Keywords</h3>
+          <div class="kw-grid">
+            <span class="kw-pill high">SI-UK alternative</span>
+            <span class="kw-pill high">Applyza vs SI-UK</span>
+            <span class="kw-pill high">SI-UK fees cost</span>
+            <span class="kw-pill medium">alternative to SI-UK</span>
+            <span class="kw-pill medium">SI-UK review Nigeria</span>
+            <span class="kw-pill medium">SI-UK review Africa</span>
+            <span class="kw-pill">SI-Global alternative</span>
+            <span class="kw-pill">free study abroad consultant UK</span>
+            <span class="kw-pill">SI-UK worth it</span>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Competitor Profile: Who is SI-UK?</h3>
+          <div class="card" style="margin-bottom:0;">
+            <p>SI-UK (now operating as SI-Global) is a London-based education consultancy focused on UK university applications. They are well-established in the UK and have expanded internationally, with offices in several countries. SI-UK has a strong reputation for UK admissions and operates a tiered paid service model — students pay a fixed fee for access to their full application support, personal statement coaching, and guidance. Their premium tier services can cost £699 or more.</p>
+            <br>
+            <p><strong>SI-UK's genuine strengths:</strong> Deep UK university relationships; strong personal statement coaching; London headquarters adds perceived UK legitimacy; structured premium service experience.</p>
+            <br>
+            <p><strong>Where SI-UK falls short:</strong> The cost creates a significant barrier for students from lower-income source markets. Students pay upfront without a guaranteed outcome. SI-UK has less presence in West and East Africa specifically compared to its South Asia operations. Technology is limited — no AI matching. The fee model can incentivise pushing students toward higher-commission placements rather than best-fit outcomes.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>At-a-Glance Comparison Table</h3>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th class="col-us">✅ Applyza</th>
+                <th>SI-UK</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cost to student</strong></td>
+                <td class="win col-us">Completely free</td>
+                <td class="lose">£699+ for full service; tiered pricing</td>
+              </tr>
+              <tr>
+                <td><strong>AQF Certified</strong></td>
+                <td class="win col-us">Yes</td>
+                <td class="neutral">Operates under own standards; AQF status not confirmed</td>
+              </tr>
+              <tr>
+                <td><strong>AI course matching</strong></td>
+                <td class="win col-us">Yes — eligibility-based</td>
+                <td class="lose">Manual counsellor-led only</td>
+              </tr>
+              <tr>
+                <td><strong>Visa success rate</strong></td>
+                <td class="win col-us">99% published</td>
+                <td class="neutral">Not publicly stated</td>
+              </tr>
+              <tr>
+                <td><strong>Africa/MENA office presence</strong></td>
+                <td class="win col-us">Lagos, Accra, Nairobi, Doha, Istanbul</td>
+                <td class="lose">Limited African presence</td>
+              </tr>
+              <tr>
+                <td><strong>Incentive alignment</strong></td>
+                <td class="win col-us">Revenue from university commissions only — free for students</td>
+                <td class="neutral">Student fees + university commissions — potential conflict of interest</td>
+              </tr>
+              <tr>
+                <td><strong>Accommodation support</strong></td>
+                <td class="win col-us">Yes</td>
+                <td class="neutral">Limited</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-section">
+          <h3>Key Section Copy Drafts</h3>
+
+          <div class="copy-block">
+            <div class="copy-block-label">📝 TL;DR Summary</div>
+            <p><strong>In brief:</strong> SI-UK is a respected UK-focused consultancy that charges students for its services. Applyza provides equivalent or better guidance — including AI course matching, expert counsellors, and visa support — at no cost whatsoever. If you're weighing up these two options, the question worth asking is: given that the regulatory model for study abroad consultants means fees aren't necessary to run a high-quality service, should you pay?</p>
+          </div>
+
+          <div class="copy-block amber">
+            <div class="copy-block-label">📝 Section: Why Some Consultancies Charge Fees — And Why Others Don't</div>
+            <p>The international education consultancy industry is primarily funded through placement commissions paid by universities when a student successfully enrols. This is the standard global model for all AQF-regulated education agents. Under this model, students should never need to pay for guidance. When a consultancy charges students on top of receiving university commissions, it generates double revenue. Some consultancies argue their fees reflect superior service — and that may sometimes be true. But it is worth asking whether the additional cost is genuinely necessary, and whether fee-charging creates any misalignment between the consultant's incentives and your best interests. Applyza operates purely on the commission model. Our guidance is free because it should be.</p>
+          </div>
+
+          <div class="copy-block purple">
+            <div class="copy-block-label">📝 Section: Personal Statement Support</div>
+            <p>One area where SI-UK has historically had a strong reputation is personal statement coaching. This is an important part of a UK university application — and Applyza takes it just as seriously. Our counsellors work with students one-to-one to develop authentic, compelling personal statements that reflect your genuine ambitions and academic background. We do not use templates. We do not churn applications. And we don't charge you for it. If you are concerned about personal statement quality when comparing consultancies, ask to speak with a counsellor at both organisations and form your own view.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Who Should Use Each</h3>
+          <div class="who-grid">
+            <div class="who-box applyza">
+              <h4>✅ Choose Applyza if...</h4>
+              <ul>
+                <li>You want expert UK university application support at zero cost</li>
+                <li>You're based in West Africa, East Africa, or the Middle East and want a local office</li>
+                <li>You want AI-based eligibility matching across 150+ universities</li>
+                <li>You want a published visa success rate</li>
+                <li>You want a consultancy whose financial interest is fully aligned with your successful enrolment — not your upfront payment</li>
+              </ul>
+            </div>
+            <div class="who-box competitor">
+              <h4>🔷 SI-UK may suit you if...</h4>
+              <ul>
+                <li>You are specifically targeting Oxbridge or very competitive UK institutions and want their specific experience</li>
+                <li>Cost is not a significant factor and you prefer a paid premium service model</li>
+                <li>You are primarily based in South/Central Asia where SI-UK has stronger in-market presence</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>FAQ Schema Questions</h3>
+          <div class="schema-block">
+<span class="k">"mainEntity"</span>: [
+  {
+    <span class="k">"name"</span>: <span class="s">"How much does SI-UK charge?"</span>,
+    <span class="k">"acceptedAnswer"</span>: <span class="s">"SI-UK operates a tiered paid service model, with full application support typically costing £699 or more depending on the service package selected. Applyza provides equivalent consultancy services completely free of charge — including AI course matching, application preparation, visa support, and accommodation assistance."</span>
+  },
+  {
+    <span class="k">"name"</span>: <span class="s">"Is there a free alternative to SI-UK?"</span>,
+    <span class="k">"acceptedAnswer"</span>: <span class="s">"Yes. Applyza is an AQF-certified study abroad consultancy offering the same range of services as SI-UK at no cost to students. This includes university application support, personal statement guidance, visa support with a 99% success rate, and accommodation assistance across 150+ partner universities."</span>
+  }
+]
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 5. AHZ ASSOCIATES ═══ -->
+  <div id="ahz">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fef3c7;">🟡</div>
+      <div>
+        <h2>vs AHZ Associates</h2>
+        <p>Africa-focused competitor — Applyza's AI and certification advantages are decisive</p>
+      </div>
+    </div>
+
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-tag" style="background:#fef3c7;color:var(--amber);">🟡 Priority 4</div>
+        <h2>Applyza vs. AHZ Associates</h2>
+        <span class="url-pill">/vs/ahz-associates</span>
+        <div style="margin-top: 12px; font-size: 14px; color: var(--gray-600); max-width: 600px; line-height: 1.65;">AHZ and Applyza compete directly for African students applying to UK universities. This page positions Applyza's technology and AQF certification as the differentiators.</div>
+      </div>
+
+      <div class="competitor-body">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">SEO Title (≤60 chars)</div>
+            <div class="meta-item-value">Applyza vs AHZ Associates — AI Matching & AQF Certified</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Meta Description (≤155 chars)</div>
+            <div class="meta-item-value">Comparing Applyza and AHZ Associates for UK university applications from Africa? See how AI course matching, AQF certification and visa success rates compare.</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">H1</div>
+            <div class="meta-item-value">Applyza vs. AHZ Associates: Which Is the Better Choice for African Students Applying to UK Universities?</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Word Count Target</div>
+            <div class="meta-item-value">1,800–2,400 words</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Target Keywords</h3>
+          <div class="kw-grid">
+            <span class="kw-pill high">AHZ Associates alternative</span>
+            <span class="kw-pill high">Applyza vs AHZ</span>
+            <span class="kw-pill medium">AHZ Associates review</span>
+            <span class="kw-pill medium">AHZ Associates Nigeria</span>
+            <span class="kw-pill medium">AHZ Associates Africa</span>
+            <span class="kw-pill">study abroad consultants Africa UK</span>
+            <span class="kw-pill">AHZ Associates fees</span>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Competitor Profile: Who is AHZ Associates?</h3>
+          <div class="card" style="margin-bottom:0;">
+            <p>AHZ Associates is a UK-based consultancy with offices in several African countries, focused primarily on placing students into UK universities. They are a recognisable name in the Africa-to-UK corridor and have a solid operational history. AHZ's approach is largely counsellor-driven — students work directly with a consultant to identify programmes and prepare applications.</p>
+            <br>
+            <p><strong>AHZ's genuine strengths:</strong> Africa-specific focus; UK university expertise; local office presence in key markets; experienced team.</p>
+            <br>
+            <p><strong>Where AHZ falls short:</strong> Limited technology — no AI-powered course matching or eligibility assessment. Smaller university portfolio compared to Applyza's 150+ partners. Less transparent on visa success data. Technology-gap means matching is slower and more dependent on individual counsellor knowledge, which can vary.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>At-a-Glance Comparison Table</h3>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th class="col-us">✅ Applyza</th>
+                <th>AHZ Associates</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cost to student</strong></td>
+                <td class="win col-us">Completely free</td>
+                <td class="neutral">Typically free; check current terms</td>
+              </tr>
+              <tr>
+                <td><strong>AQF Certified</strong></td>
+                <td class="win col-us">Yes</td>
+                <td class="neutral">Check current certification status</td>
+              </tr>
+              <tr>
+                <td><strong>AI course matching</strong></td>
+                <td class="win col-us">Yes — eligibility-based AI</td>
+                <td class="lose">Manual counsellor-led only</td>
+              </tr>
+              <tr>
+                <td><strong>University partners</strong></td>
+                <td class="win col-us">150+ UK and European universities</td>
+                <td class="neutral">Smaller portfolio, primarily UK</td>
+              </tr>
+              <tr>
+                <td><strong>Visa success rate</strong></td>
+                <td class="win col-us">99% published</td>
+                <td class="neutral">Not publicly stated</td>
+              </tr>
+              <tr>
+                <td><strong>European university options</strong></td>
+                <td class="win col-us">Yes — Germany, France, Ireland, and others</td>
+                <td class="lose">Primarily UK-focused</td>
+              </tr>
+              <tr>
+                <td><strong>Source market offices</strong></td>
+                <td class="win col-us">Lagos, Accra, Nairobi, Doha, Istanbul</td>
+                <td class="neutral">Select African offices</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-section">
+          <h3>Key Section Copy Drafts</h3>
+
+          <div class="copy-block">
+            <div class="copy-block-label">📝 TL;DR Summary</div>
+            <p><strong>In brief:</strong> AHZ Associates and Applyza operate in overlapping territory — both focus on placing African students into UK universities. The difference is technology and breadth. Applyza's AI course matching finds eligible programmes you may not have known about, our portfolio extends to European universities as well as the UK, and our 99% visa success rate is publicly stated. If you're looking for a proven, Africa-focused consultancy with the most current tools and the widest options, Applyza is worth a serious look.</p>
+          </div>
+
+          <div class="copy-block amber">
+            <div class="copy-block-label">📝 Section: Why AI Matching Changes the Outcome</div>
+            <p>In a traditional consultancy, your course options are as good as your individual counsellor's knowledge and memory of the portfolio. If they don't think of a programme, it doesn't make it onto your shortlist. Applyza's AI matching tool changes this. You input your academic background, intended subject, preferred countries, and budget parameters — and the system surfaces every eligible programme across 150+ partner universities, ranked by match quality. You get a broader shortlist, faster. You're less likely to miss a programme that would have been perfect for you, and more likely to apply to courses you'll actually be accepted onto. That's not a gimmick. It's a structural improvement in how course selection works.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Who Should Use Each</h3>
+          <div class="who-grid">
+            <div class="who-box applyza">
+              <h4>✅ Choose Applyza if...</h4>
+              <ul>
+                <li>You want AI-powered eligibility matching across a wider portfolio</li>
+                <li>You want European university options as well as UK</li>
+                <li>You want a published visa success rate</li>
+                <li>You want AQF certification confirmed</li>
+              </ul>
+            </div>
+            <div class="who-box competitor">
+              <h4>🔷 AHZ may suit you if...</h4>
+              <ul>
+                <li>You have a specific prior relationship with an AHZ counsellor</li>
+                <li>You are focused exclusively on UK and an AHZ counsellor has been specifically recommended to you</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 6. APPLYBOARD ═══ -->
+  <div id="applyboard">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fef3c7;">🟡</div>
+      <div>
+        <h2>vs Applyboard</h2>
+        <p>The B2B tech platform — students who find Applyboard discover it's not direct-to-student</p>
+      </div>
+    </div>
+
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-tag" style="background:#fef3c7;color:var(--amber);">🟡 Priority 3</div>
+        <h2>Applyza vs. Applyboard</h2>
+        <span class="url-pill">/vs/applyboard</span>
+        <div style="margin-top: 12px; font-size: 14px; color: var(--gray-600); max-width: 600px; line-height: 1.65;">Students search "Applyboard" expecting a direct service. When they discover it's agent-only, they need a direct-to-student alternative. This page captures that journey.</div>
+      </div>
+
+      <div class="competitor-body">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">SEO Title (≤60 chars)</div>
+            <div class="meta-item-value">Applyza vs Applyboard — Direct Student Support vs B2B</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Meta Description (≤155 chars)</div>
+            <div class="meta-item-value">Applyboard works through agents, not directly with students. Applyza gives you direct access to AI matching, expert counsellors, and visa support — free.</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">H1</div>
+            <div class="meta-item-value">Applyboard vs. Applyza: Why Students Need a Direct Consultancy, Not a B2B Platform</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Word Count Target</div>
+            <div class="meta-item-value">1,600–2,200 words</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Target Keywords</h3>
+          <div class="kw-grid">
+            <span class="kw-pill high">Applyboard alternative for students</span>
+            <span class="kw-pill high">Applyboard vs Applyza</span>
+            <span class="kw-pill medium">Applyboard review</span>
+            <span class="kw-pill medium">Applyboard for students directly</span>
+            <span class="kw-pill">Applyboard Africa</span>
+            <span class="kw-pill">study abroad platform for students</span>
+            <span class="kw-pill">AI study abroad platform</span>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Competitor Profile: Who is Applyboard?</h3>
+          <div class="card" style="margin-bottom:0;">
+            <p>Applyboard is a Canadian-founded technology platform with significant venture capital backing that enables education agents to manage student applications to universities in Canada, the US, the UK, and Australia. It is a B2B product — students cannot use Applyboard directly. To access Applyboard, you need to be referred to a recruitment agent who uses the platform. Applyboard then serves as the agent's workflow tool, not as the student's direct service provider.</p>
+            <br>
+            <p><strong>Applyboard's genuine strengths:</strong> Strong technology for agents; excellent North American university coverage; trusted by many agent networks globally; well-funded and reliably operational.</p>
+            <br>
+            <p><strong>Where Applyboard falls short for students:</strong> It is not a student-facing service. Students cannot book a consultation, speak with a counsellor, or get visa support directly from Applyboard. The quality of guidance a student receives depends entirely on the agent that referred them — Applyboard has no direct accountability to you as a student. There are no Applyboard offices in Africa or the Middle East. No visa success rate is published.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>At-a-Glance Comparison Table</h3>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th class="col-us">✅ Applyza</th>
+                <th>Applyboard</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Direct student access</strong></td>
+                <td class="win col-us">Yes — book directly at applyza.com</td>
+                <td class="lose">No — agent-only B2B platform</td>
+              </tr>
+              <tr>
+                <td><strong>Cost to student</strong></td>
+                <td class="win col-us">Completely free</td>
+                <td class="neutral">Depends on the agent; Applyboard itself is free to agents</td>
+              </tr>
+              <tr>
+                <td><strong>Expert counsellor access</strong></td>
+                <td class="win col-us">Yes — direct relationship with named counsellor</td>
+                <td class="lose">No direct counsellor; dependent on referring agent</td>
+              </tr>
+              <tr>
+                <td><strong>Visa support</strong></td>
+                <td class="win col-us">Yes — 99% success rate published</td>
+                <td class="lose">Not provided — handled by referring agent</td>
+              </tr>
+              <tr>
+                <td><strong>Offices in Africa/MENA</strong></td>
+                <td class="win col-us">Lagos, Accra, Nairobi, Doha, Istanbul</td>
+                <td class="lose">None</td>
+              </tr>
+              <tr>
+                <td><strong>AI course matching</strong></td>
+                <td class="win col-us">Yes — direct eligibility matching for students</td>
+                <td class="neutral">Yes for agents; students access via agent workflow</td>
+              </tr>
+              <tr>
+                <td><strong>UK + European universities</strong></td>
+                <td class="win col-us">Yes — 150+ UK &amp; European partners</td>
+                <td class="neutral">Strong UK, US, Canada, Australia; limited Europe</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-section">
+          <h3>Key Section Copy Drafts</h3>
+
+          <div class="copy-block">
+            <div class="copy-block-label">📝 TL;DR Summary</div>
+            <p><strong>In brief:</strong> Applyboard is a technology platform for education agents — it is not designed for direct student use. If you found Applyboard while searching for a study abroad consultancy, the honest answer is: you need a service like Applyza, where you can speak directly with an expert counsellor, get AI-powered course matching tailored to your profile, and receive visa support backed by a 99% success rate. All at no cost.</p>
+          </div>
+
+          <div class="copy-block amber">
+            <div class="copy-block-label">📝 Section: The B2B vs. Direct Gap — Why It Matters</div>
+            <p>When a platform operates B2B — serving agents rather than students — the quality of your experience depends entirely on the agent standing between you and the technology. A good agent using Applyboard can provide an excellent service. But you have no direct accountability, no direct relationship, and no recourse to the platform if your agent is slow, gives poor advice, or disappears. Applyza removes that middleman. You work directly with our consultants. You have our name, our AQF certification, our contact details, and our track record to hold us to. That accountability is part of what makes the experience different.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Who Should Use Each</h3>
+          <div class="who-grid">
+            <div class="who-box applyza">
+              <h4>✅ Choose Applyza if...</h4>
+              <ul>
+                <li>You want a direct consultancy relationship (not agent-mediated)</li>
+                <li>You want AI course matching you can access yourself</li>
+                <li>You want UK/European universities with direct visa support</li>
+                <li>You have a local office in your city (Lagos, Accra, Nairobi, Doha, Istanbul)</li>
+                <li>You want a published success rate to evaluate before committing</li>
+              </ul>
+            </div>
+            <div class="who-box competitor">
+              <h4>🔷 Applyboard may suit you if...</h4>
+              <ul>
+                <li>You are an education agent (not a student) looking for a platform to manage your caseload</li>
+                <li>You are specifically focused on Canadian or US universities and your local agent uses Applyboard</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 7. AIMS EDUCATION ═══ -->
+  <div id="aims">
+    <div class="section-header">
+      <div class="section-icon" style="background:#d1fae5;">🟢</div>
+      <div>
+        <h2>vs Aims Education</h2>
+        <p>Middle East and North Africa competitor — Applyza's breadth and technology are decisive</p>
+      </div>
+    </div>
+
+    <div class="competitor-block">
+      <div class="competitor-header">
+        <div class="competitor-tag" style="background:#d1fae5;color:var(--green);">🟢 Priority 5</div>
+        <h2>Applyza vs. Aims Education</h2>
+        <span class="url-pill">/vs/aims-education</span>
+        <div style="margin-top: 12px; font-size: 14px; color: var(--gray-600); max-width: 600px; line-height: 1.65;">Aims is active in the Middle East and North Africa — markets where Applyza is expanding. This page captures students in UAE, Kuwait, Egypt, and Morocco who are researching options.</div>
+      </div>
+
+      <div class="competitor-body">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">SEO Title (≤60 chars)</div>
+            <div class="meta-item-value">Applyza vs Aims Education — Broader Choice, Free Service</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Meta Description (≤155 chars)</div>
+            <div class="meta-item-value">Comparing Applyza and Aims Education? See how university breadth, AI course matching, visa success rates, and costs compare for students in the Middle East and Africa.</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">H1</div>
+            <div class="meta-item-value">Applyza vs. Aims Education: More Universities, Better Technology, Completely Free</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">Word Count Target</div>
+            <div class="meta-item-value">1,600–2,200 words</div>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Target Keywords</h3>
+          <div class="kw-grid">
+            <span class="kw-pill high">Aims Education alternative</span>
+            <span class="kw-pill high">Applyza vs Aims Education</span>
+            <span class="kw-pill medium">Aims Education review UAE</span>
+            <span class="kw-pill medium">Aims Education review Kuwait</span>
+            <span class="kw-pill medium">study abroad consultants UAE</span>
+            <span class="kw-pill">Aims Education Egypt Morocco</span>
+            <span class="kw-pill">study in UK from UAE free</span>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Competitor Profile: Who is Aims Education?</h3>
+          <div class="card" style="margin-bottom:0;">
+            <p>Aims Education is a consultancy with a strong presence in the Middle East (particularly UAE and Kuwait) and North Africa. They focus on UK university applications and have been active in the region for several years. Aims has built relationships in Gulf markets and has a reputation within those communities.</p>
+            <br>
+            <p><strong>Aims' genuine strengths:</strong> Established presence in Gulf states; Arabic-speaking support; solid UK university relationships in their network; community trust in UAE/Kuwait market.</p>
+            <br>
+            <p><strong>Where Aims falls short:</strong> Smaller university portfolio — students in some subject areas find limited options. Less technology — no AI eligibility matching. Limited expansion into European destinations (Germany, France, Ireland) which are increasingly popular alternatives for MENA students. Visa success data not published. Technology gap vs Applyza is significant.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>At-a-Glance Comparison Table</h3>
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th class="col-us">✅ Applyza</th>
+                <th>Aims Education</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cost to student</strong></td>
+                <td class="win col-us">Completely free</td>
+                <td class="neutral">Check current pricing with them</td>
+              </tr>
+              <tr>
+                <td><strong>AI course matching</strong></td>
+                <td class="win col-us">Yes — eligibility-based AI across 150+ universities</td>
+                <td class="lose">Manual matching only</td>
+              </tr>
+              <tr>
+                <td><strong>University portfolio breadth</strong></td>
+                <td class="win col-us">150+ UK and European universities</td>
+                <td class="neutral">Smaller portfolio, primarily UK</td>
+              </tr>
+              <tr>
+                <td><strong>AQF Certified</strong></td>
+                <td class="win col-us">Yes</td>
+                <td class="neutral">Check current certification status</td>
+              </tr>
+              <tr>
+                <td><strong>Visa success rate published</strong></td>
+                <td class="win col-us">99% — publicly stated</td>
+                <td class="lose">Not publicly stated</td>
+              </tr>
+              <tr>
+                <td><strong>European university options</strong></td>
+                <td class="win col-us">Yes — Germany, France, Ireland and beyond</td>
+                <td class="lose">Primarily UK</td>
+              </tr>
+              <tr>
+                <td><strong>Doha office (Middle East)</strong></td>
+                <td class="win col-us">Yes</td>
+                <td class="neutral">UAE presence but not all Gulf markets</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sub-section">
+          <h3>Key Section Copy Drafts</h3>
+
+          <div class="copy-block">
+            <div class="copy-block-label">📝 TL;DR Summary</div>
+            <p><strong>In brief:</strong> Aims Education has a solid reputation in Gulf markets and knows the UAE and Kuwait communities well. If you want broader choice — 150+ universities across the UK and Europe, AI-powered eligibility matching, and a published 99% visa success rate, all at zero cost — Applyza gives you more to work with. Both are worth considering. This page helps you understand the specific differences.</p>
+          </div>
+
+          <div class="copy-block purple">
+            <div class="copy-block-label">📝 Section: European Options Beyond the UK</div>
+            <p>More students from the Middle East and North Africa are now considering Germany, France, Ireland, and the Netherlands as destinations alongside the UK. Lower tuition fees, more affordable living costs, and post-study work opportunities make European alternatives genuinely compelling. Aims Education focuses primarily on the UK. Applyza's portfolio spans 150+ institutions across both UK and Europe, meaning our AI matching can show you eligible programmes across multiple destinations simultaneously — giving you a more complete picture of your options before you commit to a single country.</p>
+          </div>
+        </div>
+
+        <div class="sub-section">
+          <h3>Who Should Use Each</h3>
+          <div class="who-grid">
+            <div class="who-box applyza">
+              <h4>✅ Choose Applyza if...</h4>
+              <ul>
+                <li>You want AI-based course matching across a wider portfolio</li>
+                <li>You want European as well as UK university options</li>
+                <li>You want AQF certification and a published visa success rate</li>
+                <li>You want a free service with full support from consultation to accommodation</li>
+              </ul>
+            </div>
+            <div class="who-box competitor">
+              <h4>🔷 Aims may suit you if...</h4>
+              <ul>
+                <li>You have a prior established relationship with an Aims counsellor you trust</li>
+                <li>You are exclusively focused on one specific UK institution and Aims has a prior relationship there</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 8. INTERNAL LINKING & SCHEMA ═══ -->
+  <div id="linking">
+    <div class="section-header">
+      <div class="section-icon" style="background:#ede9fe;">🔗</div>
+      <div>
+        <h2>Internal Linking Architecture &amp; Schema</h2>
+        <p>How competitor pages connect to the rest of the site — and what schema markup to implement</p>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3>Internal Linking Map</h3>
+      <div class="link-map">
+        <div class="link-row" style="background:var(--gray-50);border-radius:8px 8px 0 0;">
+          <div style="font-size:11px;font-weight:700;color:var(--gray-400);flex:1">Link FROM</div>
+          <div class="link-arrow" style="color:transparent;">→</div>
+          <div style="font-size:11px;font-weight:700;color:var(--gray-400);flex:1">Link TO</div>
+          <div style="font-size:11px;font-weight:700;color:var(--gray-400);flex:1.5">Anchor Text</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/alternatives (hub)</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">Each /vs/ page</div>
+          <div class="link-anchor">Competitor name + "Full comparison →"</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">Each /vs/ page</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">/book-a-consultation</div>
+          <div class="link-anchor">"Book a Free Consultation"</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">Each /vs/ page</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">/alternatives (hub)</div>
+          <div class="link-anchor">"Compare all study abroad consultancies"</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/services</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">/alternatives</div>
+          <div class="link-anchor">"See how we compare to other consultancies"</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/about</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">/alternatives</div>
+          <div class="link-anchor">"Why Applyza — comparison with major consultancies"</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">Blog posts on visa/applications</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">Relevant /vs/ page</div>
+          <div class="link-anchor">In-body contextual links where relevant</div>
+        </div>
+        <div class="link-row">
+          <div class="link-from">/vs/idp-education</div>
+          <div class="link-arrow">→</div>
+          <div class="link-to">/vs/si-uk, /vs/applyboard</div>
+          <div class="link-anchor">"Also comparing: SI-UK | Applyboard" footer nav</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3>Schema Markup for All Competitor Pages</h3>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#e8f0fe;">📋</div>
+          <h3>Recommended Schema Types Per Page</h3>
+        </div>
+        <table class="comp-table" style="margin-top:12px;">
+          <thead>
+            <tr>
+              <th>Schema Type</th>
+              <th>Purpose</th>
+              <th>Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FAQPage</strong></td>
+              <td>Eligibility for FAQ rich results — especially "Is X free?" "What's the difference between X and Y?" queries</td>
+              <td class="win">🔴 Must-have</td>
+            </tr>
+            <tr>
+              <td><strong>BreadcrumbList</strong></td>
+              <td>Home → Compare → vs [Competitor] — helps Google understand site structure</td>
+              <td class="win">🔴 Must-have</td>
+            </tr>
+            <tr>
+              <td><strong>WebPage</strong></td>
+              <td>Standard page markup with dateModified — signals freshness to Google</td>
+              <td class="neutral">🟡 Recommended</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="copy-block">
+        <div class="copy-block-label">📝 BreadcrumbList — Universal Template for All /vs/ Pages</div>
+        <p>To implement in the SEO component's jsonLd prop:</p>
+      </div>
+      <div class="schema-block">
+{
+  <span class="k">"@context"</span>: <span class="s">"https://schema.org"</span>,
+  <span class="k">"@type"</span>: <span class="v">"BreadcrumbList"</span>,
+  <span class="k">"itemListElement"</span>: [
+    {
+      <span class="k">"@type"</span>: <span class="v">"ListItem"</span>,
+      <span class="k">"position"</span>: <span class="v">1</span>,
+      <span class="k">"name"</span>: <span class="s">"Home"</span>,
+      <span class="k">"item"</span>: <span class="s">"https://applyza.com"</span>
+    },
+    {
+      <span class="k">"@type"</span>: <span class="v">"ListItem"</span>,
+      <span class="k">"position"</span>: <span class="v">2</span>,
+      <span class="k">"name"</span>: <span class="s">"Compare Consultancies"</span>,
+      <span class="k">"item"</span>: <span class="s">"https://applyza.com/alternatives"</span>
+    },
+    {
+      <span class="k">"@type"</span>: <span class="v">"ListItem"</span>,
+      <span class="k">"position"</span>: <span class="v">3</span>,
+      <span class="k">"name"</span>: <span class="s">"Applyza vs. [Competitor Name]"</span>,
+      <span class="k">"item"</span>: <span class="s">"https://applyza.com/vs/[competitor-slug]"</span>
+    }
+  ]
+}
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3>SEO Maintenance Notes</h3>
+      <div class="callout warn">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-text">
+          <strong>Competitor information changes.</strong> Pricing, certification status, and service offerings at IDP, SI-UK, AHZ, Applyboard, and Aims can change without notice. Each comparison page should include a "Last verified: [Month Year]" line near the comparison table, and these pages should be reviewed quarterly. Any claim about a competitor's fees or certification status should link to the competitor's own published source where possible, or be phrased as "as of [date]" to protect Applyza from misrepresentation.
+        </div>
+      </div>
+
+      <div class="callout info">
+        <div class="callout-icon">💡</div>
+        <div class="callout-text">
+          <strong>Add dateModified to page schema.</strong> Google rewards freshness on comparison content. Updating the dateModified field in the WebPage schema whenever the comparison table is reviewed — even without content changes — signals that the page is being actively maintained.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+
+  <!-- ═══ 9. IMPLEMENTATION CHECKLIST ═══ -->
+  <div id="checklist">
+    <div class="section-header">
+      <div class="section-icon" style="background:#d1fae5;">✅</div>
+      <div>
+        <h2>Implementation Checklist</h2>
+        <p>Actions to complete before and after publishing competitor pages</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:14px;color:var(--navy);">🏗️ Pre-Publish</h3>
+        <ul class="checklist">
+          <li>Create /alternatives hub page with master comparison table</li>
+          <li>Create /vs/idp-education (Priority 1)</li>
+          <li>Create /vs/si-uk (Priority 2)</li>
+          <li>Create /vs/applyboard (Priority 3)</li>
+          <li>Create /vs/ahz-associates (Priority 4)</li>
+          <li>Create /vs/aims-education (Priority 5)</li>
+          <li>Add FAQPage schema to all 6 pages</li>
+          <li>Add BreadcrumbList schema to all 6 pages</li>
+          <li>Add "Last verified: Month Year" line near each comparison table</li>
+          <li>Add /alternatives link to main navigation or footer</li>
+          <li>Link from /services → /alternatives</li>
+          <li>Link from /about → /alternatives</li>
+          <li>Fix WhatsApp number before these pages go live (critical)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:14px;color:var(--navy);">📊 Post-Publish</h3>
+        <ul class="checklist">
+          <li>Submit all 6 URLs to Google Search Console for indexing</li>
+          <li>Monitor impressions for target keywords in Search Console (4–8 week window)</li>
+          <li>Track consultation booking rate from /vs/ traffic in GA4</li>
+          <li>Add competitor page links to relevant blog posts as they are published</li>
+          <li>Quarterly: verify competitor pricing and service information</li>
+          <li>Quarterly: update dateModified in page schema even if content unchanged</li>
+          <li>Monitor for competitor changes — especially SI-UK fee changes</li>
+          <li>Consider adding student testimonials specifically about "switching from IDP" or "choosing over SI-UK" as social proof</li>
+          <li>A/B test CTA copy on /vs/idp-education (highest traffic) to optimise conversion</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout success" style="margin-top: 24px;">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-text">
+        <strong>North Star metric for these pages:</strong> Track the percentage of visitors from competitor comparison pages who book a consultation within 7 days. This is the primary measure of whether the copy and positioning are working. Aim for 3–7% conversion rate on /vs/ traffic — higher than typical top-of-funnel pages because search intent is already comparison-stage.
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── FOOTER ── -->
+  <div style="text-align:center;padding:40px 0 20px;color:var(--gray-400);font-size:13px;border-top:1px solid var(--gray-200);">
+    <div style="font-weight:700;color:var(--navy);font-size:16px;margin-bottom:8px;">Applyza SEO &amp; Marketing Strategy — Document 7 of 7</div>
+    <div style="margin-bottom:4px;">Competitor Comparison Pages Brief · Prepared March 2026</div>
+    <div>For internal use only · Not for external distribution</div>
+  </div>
+
+</div>
+</body>
+</html>

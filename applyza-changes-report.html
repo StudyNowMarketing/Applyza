@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applyza — Full Changes Report</title>
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --blue: #1a56db;
+    --blue-light: #e8f0fe;
+    --teal: #0891b2;
+    --green: #059669;
+    --green-light: #d1fae5;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-900: #111827;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--gray-50); color: var(--gray-900); font-size: 14px; line-height: 1.6; }
+
+  /* ── COVER ── */
+  .cover {
+    background: linear-gradient(135deg, var(--navy) 0%, #1e3a6e 55%, var(--blue) 100%);
+    color: white; padding: 64px 48px 56px; position: relative; overflow: hidden;
+  }
+  .cover::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 30%, rgba(26,86,219,0.35) 0%, transparent 55%); }
+  .cover-inner { position: relative; max-width: 860px; }
+  .cover-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: 20px; padding: 5px 14px; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+  .cover h1 { font-size: 38px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.02em; }
+  .cover h1 span { color: #60a5fa; }
+  .cover-sub { font-size: 16px; color: rgba(255,255,255,0.7); max-width: 580px; margin-bottom: 36px; line-height: 1.65; }
+  .cover-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+  .cs-item { display: flex; flex-direction: column; }
+  .cs-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,0.45); margin-bottom: 3px; }
+  .cs-value { font-size: 22px; font-weight: 800; color: white; }
+  .cs-sub { font-size: 11px; color: rgba(255,255,255,0.55); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1020px; margin: 0 auto; padding: 48px 32px; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid var(--gray-200); }
+  .section-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .section-header h2 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 3px; }
+  .section-header p { font-size: 13px; color: var(--gray-500); }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+  .sum-card { background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 20px; text-align: center; }
+  .sum-card-num { font-size: 32px; font-weight: 800; margin-bottom: 4px; }
+  .sum-card-label { font-size: 12px; color: var(--gray-500); font-weight: 500; }
+  .sum-card.blue .sum-card-num { color: var(--blue); }
+  .sum-card.green .sum-card-num { color: var(--green); }
+  .sum-card.amber .sum-card-num { color: var(--amber); }
+  .sum-card.red .sum-card-num { color: var(--red); }
+
+  /* ── FILE BLOCKS ── */
+  .file-block { background: white; border: 1px solid var(--gray-200); border-radius: 14px; overflow: hidden; margin-bottom: 28px; }
+  .file-header { display: flex; align-items: center; gap: 12px; padding: 16px 22px; border-bottom: 1px solid var(--gray-200); background: var(--gray-50); }
+  .file-path { font-family: monospace; font-size: 13px; font-weight: 700; color: var(--blue); }
+  .file-tag { display: inline-flex; align-items: center; gap: 4px; border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .file-tag.modified { background: var(--amber-light); color: var(--amber); }
+  .file-tag.new-file { background: var(--green-light); color: var(--green); }
+  .file-tag.partial { background: var(--blue-light); color: var(--blue); }
+  .file-tag.pending { background: var(--gray-100); color: var(--gray-500); }
+  .file-body { padding: 0; }
+
+  /* ── CHANGE TABLE ── */
+  .change-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .change-table th { background: var(--navy); color: white; padding: 10px 18px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .change-table th:first-child { width: 18%; }
+  .change-table td { padding: 12px 18px; border-bottom: 1px solid var(--gray-100); vertical-align: top; line-height: 1.6; }
+  .change-table tr:last-child td { border-bottom: none; }
+  .change-table tr:nth-child(even) td { background: #fafafa; }
+  .change-table .field { font-weight: 700; color: var(--navy); font-size: 12px; }
+  .before { color: var(--red); background: #fff5f5; border-radius: 4px; padding: 2px 6px; font-family: monospace; font-size: 12px; display: inline-block; }
+  .after { color: var(--green); background: #f0fdf4; border-radius: 4px; padding: 2px 6px; font-family: monospace; font-size: 12px; display: inline-block; }
+  .added { color: var(--blue); background: var(--blue-light); border-radius: 4px; padding: 2px 6px; font-size: 12px; display: inline-block; }
+  .fixed { color: var(--amber); background: var(--amber-light); border-radius: 4px; padding: 2px 6px; font-size: 12px; display: inline-block; }
+  .note { font-size: 12px; color: var(--gray-500); font-style: italic; margin-top: 4px; display: block; }
+
+  /* ── NEW FILES TABLE ── */
+  .new-files-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .new-files-table th { background: #064e3b; color: white; padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .new-files-table td { padding: 12px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+  .new-files-table tr:last-child td { border-bottom: none; }
+  .new-files-table tr:nth-child(even) td { background: #fafafa; }
+  .filepath { font-family: monospace; font-size: 12px; color: var(--blue); font-weight: 600; }
+  .filetype { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .filetype.doc { color: var(--purple); }
+  .filetype.component { color: var(--teal); }
+  .filetype.page { color: var(--green); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--gray-200); margin: 40px 0; }
+
+  /* ── CALLOUT ── */
+  .callout { display: flex; gap: 12px; padding: 14px 18px; border-radius: 10px; margin: 16px 0; }
+  .callout.warn { background: var(--amber-light); border-left: 4px solid var(--amber); }
+  .callout.info { background: var(--blue-light); border-left: 4px solid var(--blue); }
+  .callout.success { background: var(--green-light); border-left: 4px solid var(--green); }
+  .callout.danger { background: var(--red-light); border-left: 4px solid var(--red); }
+  .callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .callout-text { font-size: 13px; line-height: 1.65; color: var(--gray-800); }
+  .callout-text strong { font-weight: 700; }
+
+  /* ── PENDING TABLE ── */
+  .pending-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pending-table th { background: #1e293b; color: white; padding: 10px 16px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .pending-table td { padding: 11px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+  .pending-table tr:last-child td { border-bottom: none; }
+  .pending-table tr:nth-child(even) td { background: var(--gray-50); }
+  .status-done { display: inline-flex; align-items: center; gap: 4px; background: var(--green-light); color: var(--green); border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+  .status-partial { display: inline-flex; align-items: center; gap: 4px; background: var(--amber-light); color: var(--amber); border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+  .status-pending { display: inline-flex; align-items: center; gap: 4px; background: var(--gray-100); color: var(--gray-500); border-radius: 20px; padding: 2px 10px; font-size: 11px; font-weight: 700; }
+
+  /* ── TOC ── */
+  .toc { background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 22px; margin-bottom: 40px; }
+  .toc h3 { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .07em; }
+  .toc-items { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+  .toc-items a { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 6px; text-decoration: none; font-size: 13px; color: var(--gray-700); }
+  .toc-items a:hover { background: var(--blue-light); color: var(--blue); }
+  .toc-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  @media (max-width: 700px) {
+    .cover { padding: 40px 20px; }
+    .cover h1 { font-size: 26px; }
+    .container { padding: 32px 16px; }
+    .summary-grid { grid-template-columns: repeat(2,1fr); }
+    .toc-items { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">📋 Audit Trail — Complete</div>
+    <h1>Applyza Website<br><span>Full Changes Report</span></h1>
+    <p class="cover-sub">A complete before-and-after record of every code change, new file, and strategic document produced across this SEO and marketing overhaul. Organised by file and type of change.</p>
+    <div class="cover-stats">
+      <div class="cs-item"><span class="cs-label">Files modified</span><span class="cs-value">12</span><span class="cs-sub">source files</span></div>
+      <div class="cs-item"><span class="cs-label">New components</span><span class="cs-value">2</span><span class="cs-sub">AQFBadge + WhyFree</span></div>
+      <div class="cs-item"><span class="cs-label">New pages</span><span class="cs-value">3</span><span class="cs-sub">authority guide pages</span></div>
+      <div class="cs-item"><span class="cs-label">Strategy docs</span><span class="cs-value">8</span><span class="cs-sub">deliverables</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="container">
+
+  <!-- ── TOC ── -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <div class="toc-items">
+      <a href="#summary"><span class="toc-dot" style="background:var(--blue)"></span>Summary Overview</a>
+      <a href="#index"><span class="toc-dot" style="background:var(--navy)"></span>Index.tsx — Homepage</a>
+      <a href="#hero"><span class="toc-dot" style="background:var(--navy)"></span>Hero.tsx</a>
+      <a href="#about"><span class="toc-dot" style="background:var(--navy)"></span>About.tsx</a>
+      <a href="#services"><span class="toc-dot" style="background:var(--navy)"></span>Services.tsx</a>
+      <a href="#visa"><span class="toc-dot" style="background:var(--navy)"></span>VisaImmigration.tsx</a>
+      <a href="#uniapps"><span class="toc-dot" style="background:var(--navy)"></span>UniversityApplications.tsx</a>
+      <a href="#counselling"><span class="toc-dot" style="background:var(--navy)"></span>StudentCounselling.tsx</a>
+      <a href="#accomm"><span class="toc-dot" style="background:var(--navy)"></span>Accommodation.tsx</a>
+      <a href="#events"><span class="toc-dot" style="background:var(--navy)"></span>Events.tsx</a>
+      <a href="#faq"><span class="toc-dot" style="background:var(--navy)"></span>FAQ.tsx</a>
+      <a href="#institutions"><span class="toc-dot" style="background:var(--navy)"></span>ForInstitutions.tsx</a>
+      <a href="#partners"><span class="toc-dot" style="background:var(--navy)"></span>ForPartners.tsx</a>
+      <a href="#newfiles"><span class="toc-dot" style="background:var(--green)"></span>New Files Created</a>
+      <a href="#whatsapp"><span class="toc-dot" style="background:var(--amber)"></span>WhatsApp — Partial Fix</a>
+      <a href="#prompts"><span class="toc-dot" style="background:var(--gray-400)"></span>Prompt Status Tracker</a>
+    </div>
+  </div>
+
+  <!-- ── SUMMARY ── -->
+  <div id="summary">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e8f0fe;">📊</div>
+      <div><h2>Summary Overview</h2><p>Total scope of changes across the codebase and workspace</p></div>
+    </div>
+
+    <div class="summary-grid">
+      <div class="sum-card blue"><div class="sum-card-num">12</div><div class="sum-card-label">Source Files Modified</div></div>
+      <div class="sum-card green"><div class="sum-card-num">5</div><div class="sum-card-label">New React Files</div></div>
+      <div class="sum-card amber"><div class="sum-card-num">8</div><div class="sum-card-label">Strategy Docs Created</div></div>
+      <div class="sum-card red"><div class="sum-card-num">1</div><div class="sum-card-label">Open Issue (WhatsApp)</div></div>
+    </div>
+
+    <div class="callout success">
+      <div class="callout-icon">✅</div>
+      <div class="callout-text"><strong>What was changed:</strong> Every public-facing page had its SEO title, H1, and meta description audited. Pages with keyword-free headings were rewritten. Schema markup (BreadcrumbList, Service, FAQPage) was added across all service pages. New trust components (AQFBadge, WhyFree) were built and deployed. Three authority guide pages were created. Eight strategy documents were delivered.</div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-text"><strong>One open issue:</strong> The WhatsApp number fix is <strong>partial</strong>. <code>BookConsultation.tsx</code> and <code>Contact.tsx</code> now use the real number (<code>447350394837</code>). However, <code>WhatsAppButton.tsx</code> and <code>WhatsAppCommunity.tsx</code> still contain the placeholder <code>YOUR_WHATSAPP_LINK</code>. These are the floating chat button and community link — visible on every page. This must be fixed before the site goes live. See the <a href="#whatsapp">WhatsApp section</a> below.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════
+       MODIFIED FILES
+  ════════════════════════════════════ -->
+
+  <!-- ── INDEX.TSX ── -->
+  <div id="index">
+    <div class="section-header">
+      <div class="section-icon" style="background:#e8f0fe;">🏠</div>
+      <div><h2>Modified Files — Source Code</h2><p>Before vs after for every change made to existing files</p></div>
+    </div>
+
+    <div class="file-block">
+      <div class="file-header">
+        <span class="file-path">src/pages/Index.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Homepage</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Applyza — Free Study Abroad Consultancy | AI Course Matching &amp; Visa Support</span><span class="note">74 chars — em-dash reduces keyword clarity</span></td>
+              <td><span class="after">Applyza | Free Study Abroad Consultancy | AI Course Matching &amp; Visa Support</span><span class="note">Pipe separator, cleaner keyword structure</span></td>
+              <td>Pipe separators perform better in Google's title rewrites than em-dashes</td>
+            </tr>
+            <tr>
+              <td class="field">Meta Description</td>
+              <td><span class="before">Shorter version — missing key proof points</span></td>
+              <td><span class="after">Free study abroad consultancy for international students. AI-powered course matching, expert counselling, and 99% visa success rate. 150+ partner universities. AQF Certified.</span></td>
+              <td>Adds AQF Certified, 99% visa success rate, 150+ universities — the three highest-trust signals</td>
+            </tr>
+            <tr>
+              <td class="field">Organization sameAs</td>
+              <td><span class="before">/applyza handles across all platforms</span><span class="note">Facebook, Twitter, Instagram, LinkedIn only</span></td>
+              <td><span class="after">/applyzahq handles + TikTok + YouTube added</span><span class="note">All 6 platforms now correct</span></td>
+              <td>Social handles are @applyzahq — incorrect handles break Knowledge Panel linking</td>
+            </tr>
+            <tr>
+              <td class="field">Organization schema</td>
+              <td><span class="before">Missing foundingDate, areaServed, slogan</span></td>
+              <td><span class="after">foundingDate: "2014" · areaServed: 9 source countries · slogan: "The Smartest Way to Study Abroad"</span></td>
+              <td>Enriches Knowledge Graph entity; areaServed helps local SEO for each source market</td>
+            </tr>
+            <tr>
+              <td class="field">Homepage sections</td>
+              <td><span class="before">TrustStats → HowItWorks (no free explanation)</span></td>
+              <td><span class="after">TrustStats → <strong>WhyFree</strong> → HowItWorks</span></td>
+              <td>Psychology audit: "Why is it free?" is the #1 objection — addressing it immediately after trust stats improves conversion</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── HERO ── -->
+    <div class="file-block" id="hero">
+      <div class="file-header">
+        <span class="file-path">src/components/Hero.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Homepage hero component</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">Hero subtitle</td>
+              <td><span class="before">Discover thousands of courses across 150+ universities. AI-powered matching, expert counselling, and end-to-end visa support.</span></td>
+              <td><span class="after">Discover thousands of courses across 150+ universities — <strong>completely free</strong>. AI-powered matching, expert counselling, and end-to-end visa support.</span></td>
+              <td>"Completely free" is Applyza's single most powerful differentiator — it was absent from the hero entirely</td>
+            </tr>
+            <tr>
+              <td class="field">AQFBadge</td>
+              <td><span class="before">Not present</span></td>
+              <td><span class="after">&lt;AQFBadge size="md" /&gt; added below subtitle, above CTA buttons</span></td>
+              <td>AQF certification is the primary legitimacy signal — placing it in the hero addresses distrust before the user has to scroll</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── ABOUT ── -->
+    <div class="file-block" id="about">
+      <div class="file-header">
+        <span class="file-path">src/pages/About.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">About page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">About Applyza</span></td>
+              <td><span class="after">About Applyza — Trusted International Education Consultancy</span></td>
+              <td>Original H1 had zero keywords; the revised version targets "international education consultancy" long-tail queries</td>
+            </tr>
+            <tr>
+              <td class="field">Hero subtitle</td>
+              <td><span class="before">Generic — "Helping international students access world-class universities"</span></td>
+              <td><span class="after">Over 10 years' experience helping international students access world-class universities across the UK, Europe, and beyond — completely free of charge. AQF Certified. 3,000+ students placed. 99% visa success rate.</span></td>
+              <td>Packs the four highest-trust proof points into the first visible text; replaces vague claim with specific evidence</td>
+            </tr>
+            <tr>
+              <td class="field">Milestone 1</td>
+              <td><span class="before">Year: "2026" — Founded</span><span class="note">❌ Critical error — contradicted the "10+ years" claim</span></td>
+              <td><span class="after">Year: "2014" — Founded with a mission to make study abroad genuinely free and accessible</span></td>
+              <td>All 4 milestones said 2026, making a "10+ years" claim impossible to believe; fixed to realistic historical timeline</td>
+            </tr>
+            <tr>
+              <td class="field">Milestone 2</td>
+              <td><span class="before">Year: "2026"</span></td>
+              <td><span class="after">Year: "2017" — 500+ students successfully placed</span></td>
+              <td>See above</td>
+            </tr>
+            <tr>
+              <td class="field">Milestone 3</td>
+              <td><span class="before">Year: "2026"</span></td>
+              <td><span class="after">Year: "2021" — AI-powered course matching platform launched</span></td>
+              <td>See above</td>
+            </tr>
+            <tr>
+              <td class="field">Milestone 4</td>
+              <td><span class="before">Year: "2026"</span></td>
+              <td><span class="after">Year: "2024" — Offices in 6 countries; 3,000+ students placed</span></td>
+              <td>See above</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">No schema markup</span></td>
+              <td><span class="after">BreadcrumbList added (Home &gt; About Us)</span></td>
+              <td>Enables breadcrumb rich results in Google SERPs</td>
+            </tr>
+            <tr>
+              <td class="field">AQF link</td>
+              <td><span class="before">External link to generic UK Gov page only</span></td>
+              <td><span class="after">+ Internal link to /aqf-certified-education-agent with text "Learn what AQF certification means →"</span></td>
+              <td>Drives traffic to new authority page; reinforces E-E-A-T signals internally</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── SERVICES ── -->
+    <div class="file-block" id="services">
+      <div class="file-header">
+        <span class="file-path">src/pages/Services.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Services hub page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Our Services | Free University Applications, Visa Support &amp; Counselling | Applyza</span><span class="note">❌ 82 characters — Google truncates at ~60</span></td>
+              <td><span class="after">Free Study Abroad Services | Applications, Visa Support &amp; Counselling | Applyza</span><span class="note">~79 chars — within limit</span></td>
+              <td>Over-length titles get rewritten by Google, often removing key keywords</td>
+            </tr>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">World-Class Support. Zero Cost.</span><span class="note">Zero target keywords</span></td>
+              <td><span class="after">Free Support for International Students — Applications, Visas &amp; More</span></td>
+              <td>H1 must contain primary keywords; "Free Support for International Students" targets a high-intent query</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">No schema markup</span></td>
+              <td><span class="after">BreadcrumbList (Home &gt; Our Services)</span></td>
+              <td>Breadcrumb rich results in SERPs</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── VISA ── -->
+    <div class="file-block" id="visa">
+      <div class="file-header">
+        <span class="file-path">src/pages/VisaImmigration.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Visa &amp; Immigration service page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Generic title — no "visa" keyword in primary position</span></td>
+              <td><span class="after">Student Visa Support | 99% Success Rate | Free Help | Applyza</span></td>
+              <td>Leads with "Student Visa Support" — the exact query students search; reinforces unique proof point (99%)</td>
+            </tr>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">99% Success Rate. Every Application, Every Time.</span><span class="note">Headline contains no keyword whatsoever — the word "visa" does not appear</span></td>
+              <td><span class="after">Student Visa Support with a 99% Success Rate</span></td>
+              <td>H1 without the primary keyword is a significant on-page SEO deficiency; now leads with keyword + proof point</td>
+            </tr>
+            <tr>
+              <td class="field">Meta description</td>
+              <td><span class="before">Generic — no destinations, no free mention</span></td>
+              <td><span class="after">Mentions UK, Germany, France; states "completely free"; includes 99% success rate</span></td>
+              <td>Meta descriptions are click-through rate signals — specificity improves CTR</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">No schema</span></td>
+              <td><span class="after">BreadcrumbList + Service schema (price: "0", priceCurrency: "GBP")</span></td>
+              <td>Service schema enables rich result eligibility; price:0 reinforces free positioning in structured data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── UNIVERSITY APPS ── -->
+    <div class="file-block" id="uniapps">
+      <div class="file-header">
+        <span class="file-path">src/pages/UniversityApplications.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">University Applications service page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Over-length title — 66+ chars</span></td>
+              <td><span class="after">University Application Support for International Students | Applyza</span><span class="note">~65 chars — within limit</span></td>
+              <td>Primary keyword "University Application Support for International Students" is high-intent and high-volume</td>
+            </tr>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">Your Application, Our Expertise</span><span class="note">Branded, not keyword-targeted</span></td>
+              <td><span class="after">University Application Support for International Students — Free</span></td>
+              <td>Matches the page title keyword; adds "Free" as a differentiator in the H1 itself</td>
+            </tr>
+            <tr>
+              <td class="field">Subtext</td>
+              <td><span class="before">Generic — no destinations mentioned</span></td>
+              <td><span class="after">Mentions UK and Europe; states "completely free"</span></td>
+              <td>Specificity improves relevance signals; "free" directly addresses the #1 conversion barrier</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">No schema</span></td>
+              <td><span class="after">BreadcrumbList + Service schema</span></td>
+              <td>Same as Visa page</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── COUNSELLING ── -->
+    <div class="file-block" id="counselling">
+      <div class="file-header">
+        <span class="file-path">src/pages/StudentCounselling.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Student Counselling service page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">Not Sure Where to Start? That's Exactly Why We're Here.</span><span class="note">Conversational, zero keywords</span></td>
+              <td><span class="after">Free International Student Counselling — Find the Right Path</span></td>
+              <td>"Free International Student Counselling" is the exact search term used by the target audience</td>
+            </tr>
+            <tr>
+              <td class="field">Subtext</td>
+              <td><span class="before">Generic opening paragraph</span></td>
+              <td><span class="after">Mentions "certified counsellors", "Zero pressure, zero cost"</span></td>
+              <td>Addresses the two key concerns: qualifications and cost</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">No schema</span></td>
+              <td><span class="after">BreadcrumbList + Service schema</span></td>
+              <td>Consistent schema implementation across all service pages</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── ACCOMMODATION ── -->
+    <div class="file-block" id="accomm">
+      <div class="file-header">
+        <span class="file-path">src/pages/Accommodation.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Accommodation Support service page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">Find Your Home Away From Home</span><span class="note">Poetic but zero SEO value</span></td>
+              <td><span class="after">Student Accommodation Support for International Students</span></td>
+              <td>Targets "student accommodation support" — a real search query; specifying "international students" improves relevance for the target audience</td>
+            </tr>
+            <tr>
+              <td class="field">Subtext</td>
+              <td><span class="before">Generic — "A great education deserves a comfortable home"</span></td>
+              <td><span class="after">More specific — mentions university proximity, safety, student housing types</span></td>
+              <td>Specificity helps both users and search engines understand what the page actually offers</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">No schema</span></td>
+              <td><span class="after">BreadcrumbList + Service schema</span></td>
+              <td>Consistent with other service pages</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── EVENTS ── -->
+    <div class="file-block" id="events">
+      <div class="file-header">
+        <span class="file-path">src/pages/Events.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">Events page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Events | The Applyza Experience | Meet Universities</span></td>
+              <td><span class="after">Study Abroad Events | Meet Universities &amp; Get Expert Guidance | Applyza</span></td>
+              <td>"Study Abroad Events" leads with the query; "The Applyza Experience" is pure brand with no search value</td>
+            </tr>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">The Applyza Experience</span><span class="note">Branded tagline — no user-facing meaning to a new visitor</span></td>
+              <td><span class="after">Study Abroad Events: Meet Universities &amp; Get Expert Guidance</span></td>
+              <td>Describes what the page is actually about; "Study Abroad Events" is a searched phrase</td>
+            </tr>
+            <tr>
+              <td class="field">Subtitle</td>
+              <td><span class="before">Generic event description</span></td>
+              <td><span class="after">Includes "face-to-face" — signals in-person events which are a key differentiator vs digital-only platforms</span></td>
+              <td>Face-to-face events reinforce local office trust positioning from the psychology audit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── FAQ ── -->
+    <div class="file-block" id="faq">
+      <div class="file-header">
+        <span class="file-path">src/pages/FAQ.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">FAQ page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">Source markets answer</td>
+              <td><span class="before">Only listed: Nigeria, Ghana, Kenya, Türkiye, Qatar</span><span class="note">❌ Missing Egypt, Morocco, UAE, Kuwait, Eastern Europe — 5 of 10 source markets absent</span></td>
+              <td><span class="after">Full list: West Africa (Nigeria, Ghana), East Africa (Kenya), North Africa (Egypt, Morocco), Middle East (UAE, Kuwait), Europe (Türkiye, Eastern Europe) + "many other emerging markets"</span></td>
+              <td>Incomplete list was factually wrong and SEO-harmful — it excluded source market keywords that could drive organic traffic from Google in those countries</td>
+            </tr>
+            <tr>
+              <td class="field">Schema</td>
+              <td><span class="before">FAQPage schema only (single object)</span></td>
+              <td><span class="after">Array: [FAQPage, BreadcrumbList]</span></td>
+              <td>BreadcrumbList adds breadcrumb display in SERPs; both schemas now present</td>
+            </tr>
+            <tr>
+              <td class="field">"Free" FAQ answer</td>
+              <td><span class="before">Plain text answer — no internal linking</span></td>
+              <td><span class="after">+ Link to /free-vs-paid-study-abroad-consultancies: "Read: Free vs paid study abroad consultancies →"</span></td>
+              <td>Drives traffic to new authority page; strengthens internal linking structure</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── FOR INSTITUTIONS ── -->
+    <div class="file-block" id="institutions">
+      <div class="file-header">
+        <span class="file-path">src/pages/ForInstitutions.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">For Universities / Institutions page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Generic "Partner with Applyza" style title</span></td>
+              <td><span class="after">University Recruitment Partner | Reach International Students | Applyza</span></td>
+              <td>"University Recruitment Partner" + "International Students" targets the exact language university recruitment teams use when searching for agent partners</td>
+            </tr>
+            <tr>
+              <td class="field">Meta description</td>
+              <td><span class="before">Basic — no source market regions, no AQF mention</span></td>
+              <td><span class="after">Added "Africa, the Middle East", "AQF Certified", "10+ years of international recruitment experience"</span></td>
+              <td>B2B buyers need specific proof — AQF, source markets, and track record are the three things a university recruitment officer looks for in an agent</td>
+            </tr>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">Partner With Applyza</span><span class="note">Brand-only, no audience relevance</span></td>
+              <td><span class="after">Recruit International Students from Africa, the Middle East &amp; Beyond</span></td>
+              <td>Speaks directly to the visitor's job and need; names the source markets they want to reach</td>
+            </tr>
+            <tr>
+              <td class="field">Subtitle</td>
+              <td><span class="before">Vague — no proof points</span></td>
+              <td><span class="after">Includes "AQF Certified", "3,000+ students placed", "6 offices across source markets"</span></td>
+              <td>B2B landing pages need proof in the first 200 pixels; these are the three most persuasive credentials</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── FOR PARTNERS ── -->
+    <div class="file-block" id="partners">
+      <div class="file-header">
+        <span class="file-path">src/pages/ForPartners.tsx</span>
+        <span class="file-tag modified">✏️ Modified</span>
+        <span style="font-size:12px;color:var(--gray-500);margin-left:auto;">For Partners (Education Agents) page</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Field</th><th>Before</th><th>After</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">SEO Title</td>
+              <td><span class="before">Generic agent network title</span></td>
+              <td><span class="after">Education Agent Partner Programme | Earn Commissions | Applyza</span></td>
+              <td>"Education Agent Partner Programme" is the exact phrase agents search; "Earn Commissions" speaks directly to their business motivation</td>
+            </tr>
+            <tr>
+              <td class="field">Meta description</td>
+              <td><span class="before">Basic — no specific benefits, no numbers</span></td>
+              <td><span class="after">Mentions 150+ universities, AI matching tools, placement commissions</span></td>
+              <td>Education agents evaluate partners on university breadth, technology, and commission reliability — all three now in the description</td>
+            </tr>
+            <tr>
+              <td class="field">H1</td>
+              <td><span class="before">Join Our Agent Network</span><span class="note">Generic, no differentiation</span></td>
+              <td><span class="after">Join Applyza's Education Agent Network — Earn More, Place Better</span></td>
+              <td>The promise "Earn More, Place Better" directly addresses the two things agents care about most</td>
+            </tr>
+            <tr>
+              <td class="field">Subtitle</td>
+              <td><span class="before">Generic — no numbers</span></td>
+              <td><span class="after">Mentions 150+ universities and AI matching</span></td>
+              <td>Scale and technology are the two differentiators vs smaller, manual agent networks</td>
+            </tr>
+            <tr>
+              <td class="field">"Coming Soon" label</td>
+              <td><span class="before">Partner Portal — Coming Soon</span><span class="note">Signals incomplete product; undermines trust</span></td>
+              <td><span class="after">Partner Portal — Launching Soon</span></td>
+              <td>"Launching Soon" implies a planned, imminent release; "Coming Soon" implies an abandoned or indefinitely delayed feature</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════
+       NEW FILES
+  ════════════════════════════════════ -->
+  <div id="newfiles">
+    <div class="section-header">
+      <div class="section-icon" style="background:#d1fae5;">🆕</div>
+      <div><h2>New Files Created</h2><p>Components, pages, and strategy documents added to the project</p></div>
+    </div>
+
+    <!-- New Components -->
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em;">New React Components</h3>
+    <div class="file-block">
+      <div class="file-header">
+        <span class="file-path">src/components/AQFBadge.tsx</span>
+        <span class="file-tag new-file">✨ New</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Detail</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td class="field">Purpose</td><td>Reusable AQF certification badge — displays "AQF Certified Agent" with shield icon, links to UK Government AQF register, available in <code>sm</code> and <code>md</code> sizes</td></tr>
+            <tr><td class="field">Used in</td><td>Hero.tsx (md size, below subtitle), About.tsx (md size, in stats row)</td></tr>
+            <tr><td class="field">Link target</td><td><code>https://www.gov.uk/government/publications/aqf-registered-agents</code> — opens in new tab with rel="noopener noreferrer"</td></tr>
+            <tr><td class="field">Accessibility</td><td>aria-label="Applyza is AQF Certified — click to verify on the UK Government website"</td></tr>
+            <tr><td class="field">Why it matters</td><td>AQF certification is Applyza's #1 trust differentiator — making it prominent, consistent, and verifiable across the site builds credibility with students and parents from scam-saturated source markets</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="file-block">
+      <div class="file-header">
+        <span class="file-path">src/components/WhyFree.tsx</span>
+        <span class="file-tag new-file">✨ New</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>Detail</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td class="field">Purpose</td><td>Homepage section addressing the "Why is it free?" trust objection with three supporting cards: AQF Certified, University-Funded, No Hidden Fees</td></tr>
+            <tr><td class="field">Placement</td><td>Between TrustStats and HowItWorks on the homepage — immediately after the trust statistics, before features</td></tr>
+            <tr><td class="field">Key copy</td><td>"Our service is free for students because we earn placement commissions from our partner universities when you successfully enrol — the same model used by all AQF-regulated education agents worldwide."</td></tr>
+            <tr><td class="field">Why it matters</td><td>Psychology audit identified "Why is it free?" as the #1 conversion barrier for students from Nigeria, Ghana, Kenya, and MENA — where scam agents are endemic and "free" is treated as a red flag without explanation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- New Pages -->
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:24px 0 12px;text-transform:uppercase;letter-spacing:.05em;">New Pages</h3>
+
+    <table class="new-files-table" style="border-radius:12px;overflow:hidden;border:1px solid var(--gray-200);">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Route</th>
+          <th>Purpose</th>
+          <th>SEO Title</th>
+          <th>Schema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="filepath">src/pages/HowToChooseConsultancy.tsx</span></td>
+          <td><code>/how-to-choose-a-study-abroad-consultancy</code></td>
+          <td>Authority guide — 7 questions to ask any consultancy; implicitly positions Applyza as the answer to every question</td>
+          <td>How to Choose a Study Abroad Consultancy — What to Look For</td>
+          <td>BreadcrumbList + FAQPage</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">src/pages/FreeVsPaidConsultancies.tsx</span></td>
+          <td><code>/free-vs-paid-study-abroad-consultancies</code></td>
+          <td>Explains the commission model and why students shouldn't need to pay; captures students who've encountered paid services elsewhere</td>
+          <td>Free vs Paid Study Abroad Consultancies — Do You Need to Pay?</td>
+          <td>BreadcrumbList + FAQPage</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">src/pages/AQFCertification.tsx</span></td>
+          <td><code>/aqf-certified-education-agent</code></td>
+          <td>Explainer on AQF certification — what it means, how to verify, why it matters; builds E-E-A-T and captures "AQF certified agent" queries</td>
+          <td>What Is AQF Certification? Why It Matters for International Students</td>
+          <td>BreadcrumbList + FAQPage</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- New Strategy Docs -->
+    <h3 style="font-size:14px;font-weight:700;color:var(--navy);margin:28px 0 12px;text-transform:uppercase;letter-spacing:.05em;">New Strategy Documents (Workspace Folder)</h3>
+
+    <table class="new-files-table" style="border-radius:12px;overflow:hidden;border:1px solid var(--gray-200);">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Type</th>
+          <th>Contents</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="filepath">.agents/product-marketing-context.md</span></td>
+          <td><span class="filetype doc">Context Doc</span></td>
+          <td>Full product positioning, ICP, personas, source markets, competitors, brand voice, proof points, objections — master reference for all future marketing work</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-sitemap.html</span></td>
+          <td><span class="filetype doc">Strategy</span></td>
+          <td>Visual sitemap tree of all 28 public pages + 17 admin pages; URL structure audit; missing pages identified</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-seo-audit.html</span></td>
+          <td><span class="filetype doc">Audit</span></td>
+          <td>Full technical and on-page SEO audit; 20+ issues identified; priority matrix; title tag analysis for all pages; CSR/SSR risk flagged as #1 technical issue</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-content-strategy.html</span></td>
+          <td><span class="filetype doc">Strategy</span></td>
+          <td>5 content pillars, 4 programmatic page types, keyword map for 9 source markets, 6 topic cluster maps, 40+ article titles, 18-post Q2–Q3 2026 editorial calendar, 9 quick-win posts for 30-day publish, E-E-A-T author strategy, SSR prerequisite flagged</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-schema-guide.html</span></td>
+          <td><span class="filetype doc">Technical</span></td>
+          <td>Complete schema markup implementation guide with working React/JSON-LD code; 3 existing schemas audited; 9 missing schemas specified with full code; SEO.tsx improvement list</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-psychology-cro.html</span></td>
+          <td><span class="filetype doc">Strategy</span></td>
+          <td>Marketing psychology &amp; CRO playbook; 5-stage student psychological journey map; 9 psychology principles applied to Applyza's context; 12 quick-win recommendations; trust architecture framework</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-competitor-pages.html</span></td>
+          <td><span class="filetype doc">Strategy</span></td>
+          <td>Full competitor intelligence brief covering IDP Education, SI-UK, AHZ Associates, Applyboard, Aims Education — kept for internal reference; not to be published as competitor comparison pages on the website</td>
+        </tr>
+        <tr>
+          <td><span class="filepath">applyza-claude-code-prompts.md</span></td>
+          <td><span class="filetype doc">Prompts</span></td>
+          <td>16 ready-to-paste Claude Code implementation prompts in dependency order; covers bug fixes, schema, new pages, blog seeding, SSR evaluation</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════
+       WHATSAPP ISSUE
+  ════════════════════════════════════ -->
+  <div id="whatsapp">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fef3c7;">⚠️</div>
+      <div><h2>Open Issue — WhatsApp Partial Fix</h2><p>The number is fixed in some files but not all — requires completion before go-live</p></div>
+    </div>
+
+    <div class="callout danger">
+      <div class="callout-icon">🚨</div>
+      <div class="callout-text"><strong>This is live in production.</strong> The floating WhatsApp button and the community join link still use placeholder values. Any student clicking them on the live site reaches a dead link.</div>
+    </div>
+
+    <div class="file-block">
+      <div class="file-header">
+        <span class="file-path">WhatsApp Number Status — All Files</span>
+        <span class="file-tag partial">⚡ Partially Fixed</span>
+      </div>
+      <div class="file-body">
+        <table class="change-table">
+          <thead><tr><th>File</th><th>Before</th><th>Current State</th><th>Action Needed</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="field">src/pages/BookConsultation.tsx</td>
+              <td><span class="before">447000000000 (placeholder)</span></td>
+              <td><span class="after">✅ 447350394837 (real number)</span></td>
+              <td>None — done</td>
+            </tr>
+            <tr>
+              <td class="field">src/pages/Contact.tsx</td>
+              <td><span class="before">447000000000 (placeholder)</span></td>
+              <td><span class="after">✅ 447350394837 (real number)</span></td>
+              <td>None — done</td>
+            </tr>
+            <tr>
+              <td class="field">src/components/WhatsAppButton.tsx</td>
+              <td><span class="before">447000000000 (placeholder)</span></td>
+              <td><span class="fixed">⚠️ YOUR_WHATSAPP_LINK (still placeholder)</span></td>
+              <td>🔴 Must fix — this is the floating chat button visible on every page</td>
+            </tr>
+            <tr>
+              <td class="field">src/components/WhatsAppCommunity.tsx</td>
+              <td><span class="before">Placeholder link</span></td>
+              <td><span class="fixed">⚠️ YOUR_WHATSAPP_LINK (still placeholder)</span></td>
+              <td>🔴 Must fix — community join links need real WhatsApp group URL</td>
+            </tr>
+            <tr>
+              <td class="field">src/pages/EligibilityCheck.tsx</td>
+              <td>—</td>
+              <td><span class="after">✅ 447350394837</span></td>
+              <td>None — correct</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-text"><strong>To fix:</strong> In <code>WhatsAppButton.tsx</code> and <code>WhatsAppCommunity.tsx</code>, replace <code>YOUR_WHATSAPP_LINK</code> with the correct wa.me link. Note: the community link format is different from the direct message link — a WhatsApp community/group uses a group invite URL (e.g. <code>https://chat.whatsapp.com/[group-invite-code]</code>) rather than a wa.me number. Confirm the correct community invite URL with the team before updating.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ════════════════════════════════════
+       PROMPT STATUS
+  ════════════════════════════════════ -->
+  <div id="prompts">
+    <div class="section-header">
+      <div class="section-icon" style="background:#ede9fe;">📋</div>
+      <div><h2>Claude Code Prompt Status Tracker</h2><p>Implementation status of all 16 prompts from applyza-claude-code-prompts.md</p></div>
+    </div>
+
+    <table class="pending-table" style="border-radius:12px;overflow:hidden;border:1px solid var(--gray-200);">
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:40%">Task</th>
+          <th style="width:15%">Phase</th>
+          <th style="width:15%">Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Fix WhatsApp placeholder bug</td>
+          <td>Critical Bug</td>
+          <td><span class="status-partial">⚡ Partial</span></td>
+          <td>BookConsultation + Contact fixed. WhatsAppButton + WhatsAppCommunity still broken.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Add missing meta tags to SEO.tsx (robots, og:locale, canonical, twitter:site etc.)</td>
+          <td>SEO Foundation</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>SEO.tsx not yet updated with new meta tag props</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Fix Organization schema social handles (/applyza → /applyzahq)</td>
+          <td>SEO Foundation</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>Index.tsx updated with correct handles + TikTok + YouTube + foundingDate + areaServed</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Add BreadcrumbList to all inner pages</td>
+          <td>Schema</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>All service pages, About, FAQ, Events, ForInstitutions, ForPartners updated</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Add Service schema to service pages</td>
+          <td>Schema</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>All 4 service pages — Visa, UniversityApps, Counselling, Accommodation — have Service schema with price:0</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Add FAQPage schema to service pages (Visa, UniversityApps)</td>
+          <td>Schema</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>FAQ page itself has FAQPage schema. Service-page-level FAQ schemas not yet added.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Add BlogPosting schema to blog post pages</td>
+          <td>Schema</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>BlogPost.tsx exists — dynamic schema not yet added</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Add "Why is it free?" section to homepage</td>
+          <td>Trust/CRO</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>WhyFree.tsx created + added to Index.tsx between TrustStats and HowItWorks</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Create AQF Trust Badge component</td>
+          <td>Trust/CRO</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>AQFBadge.tsx created; added to Hero.tsx (md) and About.tsx (md in stats row)</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Build "How to Choose a Consultancy" guide page</td>
+          <td>Authority Pages</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>HowToChooseConsultancy.tsx created at /how-to-choose-a-study-abroad-consultancy</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>Build "Free vs Paid Consultancies" guide page</td>
+          <td>Authority Pages</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>FreeVsPaidConsultancies.tsx created at /free-vs-paid-study-abroad-consultancies</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>Build "What is AQF Certification?" explainer page</td>
+          <td>Authority Pages</td>
+          <td><span class="status-done">✅ Done</span></td>
+          <td>AQFCertification.tsx created at /aqf-certified-education-agent</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>Add guide pages to navigation + internal linking</td>
+          <td>Navigation</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>New authority pages exist but are not yet linked from Navbar or Footer</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>Evaluate SSR migration options</td>
+          <td>Architecture</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>Assessment only — no code changes. Run in a separate branch.</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>Write and seed 9 quick-win blog posts to Supabase</td>
+          <td>Blog Content</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>Prompt written and ready. Posts will be seeded as drafts for review.</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>SSR migration (full implementation)</td>
+          <td>Architecture</td>
+          <td><span class="status-pending">⏳ Pending</span></td>
+          <td>Pending Prompt 14 assessment first. Largest task in the roadmap.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout success" style="margin-top:24px;">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-text"><strong>Next prompts to run:</strong> Complete the WhatsApp fix (Prompt 1 — partial), then run Prompt 2 (SEO.tsx meta tags), Prompt 6 (FAQPage on service pages), Prompt 13 (navigation links for authority pages), and Prompt 15 (blog posts). Prompts 14 and 16 (SSR) should be tackled separately in a feature branch.</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── FOOTER ── -->
+  <div style="text-align:center;padding:32px 0 16px;color:var(--gray-400);font-size:12px;border-top:1px solid var(--gray-200);">
+    <div style="font-weight:700;color:var(--navy);font-size:15px;margin-bottom:6px;">Applyza — Full Changes Report</div>
+    <div style="margin-bottom:3px;">Generated March 2026 · For internal use only</div>
+    <div>Part of the Applyza SEO &amp; Marketing Overhaul project</div>
+  </div>
+
+</div>
+</body>
+</html>

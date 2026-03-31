@@ -11,8 +11,8 @@ const services = [
   },
   {
     icon: Shield,
-    title: "Visa & Immigration",
-    text: "Visa applications can be stressful. Ours don't have to be. With a 99% success rate, our compliance team ensures your documents are accurate, your timelines are met, and your application has the strongest chance of approval.",
+    title: "Student Visa Applications",
+    text: "Your student visa application is one of the most important steps in your study abroad journey. With a 99% success rate, our compliance team handles your documents, financials, and timelines — giving your application the strongest possible chance of approval.",
     to: "/services/visa-immigration",
   },
   {
@@ -38,7 +38,7 @@ const ServicesOverview = () => {
             Honest Guidance for Genuine Students
           </h2>
           <p className="text-white/50 max-w-xl mx-auto">
-            From course selection to visa approval — we provide expert, impartial guidance at every stage of your study abroad journey.
+            From course selection to student visa approval — we provide expert, impartial guidance at every stage of your study abroad journey.
           </p>
         </div>
 

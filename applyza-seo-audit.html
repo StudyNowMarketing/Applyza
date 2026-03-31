@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Applyza — Full SEO & Copy Audit</title>
+<style>
+  :root {
+    --bg: #07091f;
+    --surface: #0d1033;
+    --surface2: #131840;
+    --border: rgba(255,255,255,0.07);
+    --teal: #0fd6c2;
+    --purple: #6c63ff;
+    --amber: #f9c74f;
+    --rose: #f94f6c;
+    --green: #4ade80;
+    --muted: rgba(255,255,255,0.45);
+    --text: rgba(255,255,255,0.92);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); padding: 40px 24px; line-height: 1.6; }
+
+  /* ── Layout ── */
+  .wrap { max-width: 1100px; margin: 0 auto; }
+
+  /* ── Header ── */
+  .page-header { margin-bottom: 48px; }
+  .page-header h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .page-header h1 span { color: var(--teal); }
+  .page-header p { color: var(--muted); font-size: 14px; }
+  .meta-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+  .meta-pill { font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 99px; }
+
+  /* ── Section headers ── */
+  .section { margin: 48px 0 24px; }
+  .section h2 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .section h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── Summary cards ── */
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  @media (max-width: 700px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+  .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+  .summary-card .num { font-size: 32px; font-weight: 800; margin-bottom: 4px; }
+  .summary-card .lbl { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+  /* ── Issue table ── */
+  .issue-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 32px; }
+  .issue-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--surface); }
+  .issue-table td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+  .issue-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .issue-table code { font-family: 'Courier New', monospace; font-size: 11px; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; color: var(--teal); }
+
+  /* ── Severity badges ── */
+  .sev { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+  .sev-critical  { background: rgba(249,79,108,0.15); color: var(--rose); }
+  .sev-high      { background: rgba(249,199,79,0.15); color: var(--amber); }
+  .sev-medium    { background: rgba(108,99,255,0.15); color: var(--purple); }
+  .sev-low       { background: rgba(255,255,255,0.08); color: var(--muted); }
+  .sev-good      { background: rgba(74,222,128,0.12); color: var(--green); }
+
+  /* ── Page-level analysis table ── */
+  .page-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 32px; }
+  .page-table th { text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--surface); }
+  .page-table td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+  .page-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .page-url { font-family: 'Courier New', monospace; font-size: 11px; color: var(--teal); }
+  .char-count { font-size: 10px; }
+  .char-ok { color: var(--green); }
+  .char-warn { color: var(--amber); }
+  .char-bad { color: var(--rose); }
+
+  /* ── Fix block ── */
+  .fix-box { background: rgba(15,214,194,0.06); border: 1px solid rgba(15,214,194,0.15); border-radius: 10px; padding: 12px 16px; margin-top: 6px; font-size: 12px; color: rgba(255,255,255,0.75); }
+  .fix-box strong { color: var(--teal); }
+
+  /* ── Callout ── */
+  .callout { border-radius: 12px; padding: 16px 20px; margin: 24px 0; font-size: 13px; line-height: 1.6; }
+  .callout-critical { background: rgba(249,79,108,0.08); border: 1px solid rgba(249,79,108,0.2); }
+  .callout-amber    { background: rgba(249,199,79,0.08); border: 1px solid rgba(249,199,79,0.2); }
+  .callout-teal     { background: rgba(15,214,194,0.06); border: 1px solid rgba(15,214,194,0.15); }
+  .callout h3 { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .callout-critical h3 { color: var(--rose); }
+  .callout-amber h3    { color: var(--amber); }
+  .callout-teal h3     { color: var(--teal); }
+
+  /* ── Priority action list ── */
+  .priority-list { list-style: none; }
+  .priority-list li { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .priority-list li:last-child { border-bottom: none; }
+  .priority-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+  .priority-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .priority-content p  { font-size: 12px; color: var(--muted); }
+  .p1 { background: rgba(249,79,108,0.2); color: var(--rose); }
+  .p2 { background: rgba(249,199,79,0.2); color: var(--amber); }
+  .p3 { background: rgba(108,99,255,0.2); color: var(--purple); }
+  .p4 { background: rgba(15,214,194,0.15); color: var(--teal); }
+  .p5 { background: rgba(255,255,255,0.08); color: var(--muted); }
+
+  .tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 99px; margin-right: 4px; }
+  .tag-tech   { background: rgba(249,199,79,0.12); color: var(--amber); }
+  .tag-copy   { background: rgba(108,99,255,0.12); color: var(--purple); }
+  .tag-schema { background: rgba(15,214,194,0.10); color: var(--teal); }
+  .tag-eeat   { background: rgba(74,222,128,0.12); color: var(--green); }
+  .tag-quick  { background: rgba(249,79,108,0.12); color: var(--rose); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══════════════════════════════
+     HEADER
+════════════════════════════════ -->
+<div class="page-header">
+  <h1>Applyza — <span>Full SEO & Copy Audit</span></h1>
+  <p>Comprehensive review of all 28 public pages · Technical SEO · On-page optimisation · Copy quality · Schema · E-E-A-T</p>
+  <div class="meta-row">
+    <span class="meta-pill" style="background:rgba(249,79,108,0.15);color:#f94f6c">8 Critical Issues</span>
+    <span class="meta-pill" style="background:rgba(249,199,79,0.15);color:#f9c74f">14 High Priority</span>
+    <span class="meta-pill" style="background:rgba(108,99,255,0.15);color:#6c63ff">11 Medium Priority</span>
+    <span class="meta-pill" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5)">6 Low / Quick Wins</span>
+    <span class="meta-pill" style="background:rgba(74,222,128,0.12);color:#4ade80">7 Already Strong</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════
+     EXECUTIVE SUMMARY
+════════════════════════════════ -->
+<div class="section"><h2>Executive Summary</h2></div>
+
+<div class="summary-grid">
+  <div class="summary-card"><div class="num" style="color:var(--teal)">28</div><div class="lbl">Pages Audited</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--rose)">8</div><div class="lbl">Critical Issues</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--amber)">14</div><div class="lbl">High Priority</div></div>
+  <div class="summary-card"><div class="num" style="color:var(--green)">7</div><div class="lbl">Already Strong</div></div>
+</div>
+
+<div class="callout callout-critical">
+  <h3>🚨 #1 Critical Risk — Client-Side Rendering (CSR)</h3>
+  The entire site is a React SPA with no server-side rendering (SSR) or static pre-rendering. All page titles, meta descriptions, canonical tags, and JSON-LD schema are injected <em>after</em> JavaScript executes via <code>react-helmet-async</code>. While Googlebot can render JavaScript, it does so in a second wave — meaning delays, inconsistencies, and crawl budget inefficiency. For a new domain competing against IDP, SI-UK, and AHZ, this is a structural disadvantage. <strong>Recommendation: implement SSR (Next.js) or a pre-rendering layer (Vite SSR / Prerender.io) as a medium-term priority.</strong>
+</div>
+
+<div class="callout callout-amber">
+  <h3>⚠ Top 5 Priorities Before Any Copy Work</h3>
+  1. Fix the WhatsApp placeholder number (<code>447000000000</code>) on the Book Consultation page — this is live and live users are seeing a fake number.<br>
+  2. Fix the About page milestones — all 4 say "2026", making the company look brand new and contradicting the 10+ years stat.<br>
+  3. Fix the H1 tags on service pages — none contain the target keyword.<br>
+  4. Add BreadcrumbList schema — breadcrumb UI is already in place on most pages; the structured data is missing.<br>
+  5. Add Blog to the header navigation — it's the primary SEO content asset and Google can't find it from the nav.
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 1: TECHNICAL SEO
+════════════════════════════════ -->
+<div class="section"><h2>Technical SEO</h2></div>
+
+<table class="issue-table">
+  <thead>
+    <tr>
+      <th>Issue</th><th>Severity</th><th>Detail</th><th>Fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Client-side rendering (CSR only)</strong></td>
+      <td><span class="sev sev-critical">Critical</span></td>
+      <td>All meta tags, titles, canonicals, and schema are injected by React after JS load. Googlebot crawls in two waves — new sites with no authority budget will be penalised in the first pass.</td>
+      <td>Implement Vite SSR, migrate to Next.js, or use a pre-rendering service (Prerender.io). Minimum: add static HTML shell with key meta in <code>index.html</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>Placeholder WhatsApp number</strong></td>
+      <td><span class="sev sev-critical">Critical</span></td>
+      <td><code>wa.me/447000000000</code> on the Book Consultation page is a placeholder. Live users clicking WhatsApp are reaching a non-existent number. Damages trust and conversions immediately.</td>
+      <td>Replace <code>447000000000</code> with the real WhatsApp business number in <code>BookConsultation.tsx</code>. Also audit <code>WhatsAppButton.tsx</code> for the same issue.</td>
+    </tr>
+    <tr>
+      <td><strong>SEO component missing key tags</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td><code>SEO.tsx</code> is missing: <code>og:locale</code>, <code>og:image:width</code>, <code>og:image:height</code>, <code>twitter:site</code>, <code>twitter:creator</code>. These affect social sharing previews and Open Graph scoring.</td>
+      <td>Add to <code>SEO.tsx</code>: <code>&lt;meta property="og:locale" content="en_GB" /&gt;</code>, image dimensions, and Twitter handles <code>@applyzahq</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>No robots meta tag control</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The <code>SEO</code> component has no <code>robots</code> meta tag parameter. Admin pages at <code>/admin/*</code> rely solely on auth redirect — they could still be indexed if Googlebot skips the JS redirect.</td>
+      <td>Add <code>robots="noindex, nofollow"</code> to the Admin layout's SEO or add a static <code>robots.txt</code> disallowing <code>/admin/</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>FindACourse URL parameters not canonicalised</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td><code>/find-a-course?search=nursing&country=United+Kingdom</code> creates unlimited URL variations. Each is a separate URL without a canonical pointing back to <code>/find-a-course</code>. Causes crawl budget waste and possible duplicate content on large course databases.</td>
+      <td>Add <code>&lt;link rel="canonical" href="https://applyza.com/find-a-course" /&gt;</code> on all <code>/find-a-course</code> variations regardless of params. The current canonical in <code>SEO.tsx</code> uses <code>path</code> prop which won't include query string — confirm this is working correctly.</td>
+    </tr>
+    <tr>
+      <td><strong>No XML sitemap reference confirmed</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The Supabase edge function generates a sitemap. Unclear if it's referenced in <code>robots.txt</code> or submitted to Google Search Console. Dynamic page slugs (courses, destinations, blog posts) need to be in the sitemap.</td>
+      <td>Confirm <code>https://applyza.com/robots.txt</code> contains <code>Sitemap: https://applyza.com/sitemap.xml</code>. Submit sitemap to Google Search Console and Bing Webmaster Tools.</td>
+    </tr>
+    <tr>
+      <td><strong>No hreflang (future consideration)</strong></td>
+      <td><span class="sev sev-low">Low</span></td>
+      <td>Site is English-only. Students from Nigeria, Ghana, Kenya, Egypt, Morocco, Kuwait, UAE, Turkey all search in English primarily — but Arabic and Turkish language versions would significantly expand SEO reach in MENA/Turkey markets.</td>
+      <td>Flag as future roadmap item. When adding Arabic (ar) or Turkish (tr) content, implement <code>hreflang</code> tags and separate URL paths.</td>
+    </tr>
+    <tr>
+      <td><strong>og:default image likely missing</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td><code>SEO.tsx</code> references <code>/og-default.png</code> but this file's existence and quality is unverified. If missing or incorrectly sized, all social shares across the entire site will render broken or blank.</td>
+      <td>Verify <code>/public/og-default.png</code> exists, is 1200×630px, under 1MB, and renders the Applyza brand correctly. Create a branded OG image if not done.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 2: TITLE TAGS
+════════════════════════════════ -->
+<div class="section"><h2>Title Tag Audit — All Public Pages</h2></div>
+<p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Ideal: 50–60 characters. Primary keyword near the start. Unique per page. Brand name at end.</p>
+
+<table class="page-table">
+  <thead>
+    <tr><th>Page</th><th>Current Title</th><th>Chars</th><th>Issues</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="page-url">/</td>
+      <td>Applyza | Study Abroad Made Smarter — Free Course Search & Expert Guidance</td>
+      <td><span class="char-count char-bad">75</span></td>
+      <td><span class="sev sev-high">Too long</span> — will truncate in SERPs. Brand at start wastes keyword opportunity. Move brand to end. Remove "Made Smarter" (brand line, not keyword). Suggested: <em>"Free Study Abroad Consultancy | AI Course Matching & Visa Support | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/about</td>
+      <td>About Applyza | Global Education Platform | AQF Certified</td>
+      <td><span class="char-count char-ok">57</span></td>
+      <td><span class="sev sev-high">Weak keywords</span> — "Global Education Platform" is generic. No "study abroad" or "education consultancy". Suggested: <em>"About Applyza | Certified Study Abroad Consultancy | 10+ Years"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/services</td>
+      <td>Our Services | Free University Applications, Visa Support & Counselling | Applyza</td>
+      <td><span class="char-count char-bad">81</span></td>
+      <td><span class="sev sev-critical">Too long</span> — 81 chars, will truncate badly. "Our Services" is filler. Suggested: <em>"Free University Application & Visa Support | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/services/university-applications</td>
+      <td>University Application Support | Apply with Expert Help | Applyza</td>
+      <td><span class="char-count char-ok">65</span></td>
+      <td><span class="sev sev-medium">Slightly long</span>. "Apply with Expert Help" is generic. Suggested: <em>"University Application Support for International Students | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/services/visa-immigration</td>
+      <td>Visa & Immigration Support | 99% Success Rate | Applyza</td>
+      <td><span class="char-count char-ok">55</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — includes keyword, proof point, brand. Clean.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/services/student-counselling</td>
+      <td>Student Counselling | Free Academic Guidance | Applyza</td>
+      <td><span class="char-count char-ok">54</span></td>
+      <td><span class="sev sev-medium">Generic</span>. "Academic Guidance" is too broad. Suggested: <em>"Free Student Counselling for International Students | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/services/accommodation</td>
+      <td>Accommodation Support | Find Student Housing | Applyza</td>
+      <td><span class="char-count char-ok">53</span></td>
+      <td><span class="sev sev-medium">Missing context</span>. No "abroad" or "international". Suggested: <em>"Student Accommodation Support Abroad | Find University Housing | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/find-a-course</td>
+      <td>(not read — likely set in page component)</td>
+      <td>—</td>
+      <td><span class="sev sev-high">Check needed</span> — should target "find courses to study abroad" and "international student courses UK".</td>
+    </tr>
+    <tr>
+      <td class="page-url">/study-destinations</td>
+      <td>Study Destinations | Where to Study Abroad | Applyza</td>
+      <td><span class="char-count char-ok">51</span></td>
+      <td><span class="sev sev-medium">Acceptable</span> but generic. "Where to Study Abroad" is a question keyword — consider: <em>"Study Abroad Destinations | UK, Europe & More | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/scholarships</td>
+      <td>Scholarships & Funding | Study Abroad Financial Support | Applyza</td>
+      <td><span class="char-count char-ok">65</span></td>
+      <td><span class="sev sev-medium">Slightly long</span> but keywords are good. Trim to: <em>"International Student Scholarships & Funding | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/events</td>
+      <td>Events | The Applyza Experience | Meet Universities</td>
+      <td><span class="char-count char-ok">50</span></td>
+      <td><span class="sev sev-high">Brand-only, no keyword value</span>. "The Applyza Experience" means nothing to Google. Suggested: <em>"Study Abroad Events & University Fairs | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/blog</td>
+      <td>Blog | Study Abroad Guides, Visa Tips & Insights | Applyza</td>
+      <td><span class="char-count char-ok">57</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — keyword-rich secondary text. Clean structure.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/for-institutions</td>
+      <td>Partner With Applyza | Student Recruitment for Universities</td>
+      <td><span class="char-count char-ok">58</span></td>
+      <td><span class="sev sev-medium">Misses "international"</span>. Suggested: <em>"International Student Recruitment | Partner With Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/for-partners</td>
+      <td>Recruitment Partners | Join the Applyza Network</td>
+      <td><span class="char-count char-ok">48</span></td>
+      <td><span class="sev sev-high">Too generic</span>. No "education agent", "commission", or "study abroad". Suggested: <em>"Education Agent Partner Programme | Earn Commissions | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/faq</td>
+      <td>FAQ | Frequently Asked Questions | Applyza</td>
+      <td><span class="char-count char-ok">42</span></td>
+      <td><span class="sev sev-high">Missed opportunity</span>. FAQ pages can rank for specific questions. Suggested: <em>"Study Abroad FAQ | Common Questions Answered | Applyza"</em></td>
+    </tr>
+    <tr>
+      <td class="page-url">/book-a-consultation</td>
+      <td>Book a Free Consultation | Applyza</td>
+      <td><span class="char-count char-ok">35</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — clear CTA. Could add "Study Abroad" for keyword. Acceptable as-is.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/contact</td>
+      <td>(check needed)</td>
+      <td>—</td>
+      <td>Should target "Applyza contact" and "contact education consultancy".</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 3: H1 AUDIT
+════════════════════════════════ -->
+<div class="section"><h2>H1 Tag Audit — Critical Keyword Gaps</h2></div>
+
+<div class="callout callout-critical">
+  <h3>🚨 Major Finding: Service Pages Have Zero Target Keywords in H1</h3>
+  The four service sub-pages use creative taglines as H1s. While compelling for users, they contain no target keywords. Google uses the H1 to understand page topic. These pages will not rank for their primary keywords.
+</div>
+
+<table class="issue-table">
+  <thead>
+    <tr><th>Page</th><th>Current H1</th><th>Verdict</th><th>Recommended H1</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>/</code></td>
+      <td>"The Smartest Way to Study Abroad"</td>
+      <td><span class="sev sev-medium">Acceptable</span></td>
+      <td>Contains "Study Abroad" ✓. Could include "free" or "international students" but brand tagline is defensible here.</td>
+    </tr>
+    <tr>
+      <td><code>/about</code></td>
+      <td>"About Applyza"</td>
+      <td><span class="sev sev-high">Weak</span></td>
+      <td>"About Applyza — Certified International Education Consultancy"</td>
+    </tr>
+    <tr>
+      <td><code>/services</code></td>
+      <td>"World-Class Support. Zero Cost."</td>
+      <td><span class="sev sev-critical">No keywords</span></td>
+      <td>"Free University Application & Visa Support for International Students"</td>
+    </tr>
+    <tr>
+      <td><code>/services/university-applications</code></td>
+      <td>"Your Application, Our Expertise"</td>
+      <td><span class="sev sev-critical">No keywords</span></td>
+      <td>"University Application Support for International Students — Free"</td>
+    </tr>
+    <tr>
+      <td><code>/services/visa-immigration</code></td>
+      <td>"99% Success Rate. Every Application, Every Time."</td>
+      <td><span class="sev sev-high">No "visa" keyword</span></td>
+      <td>"Student Visa Support with a 99% Success Rate"</td>
+    </tr>
+    <tr>
+      <td><code>/services/student-counselling</code></td>
+      <td>"Not Sure Where to Start? That's Exactly Why We're Here."</td>
+      <td><span class="sev sev-critical">No keywords</span></td>
+      <td>"Free Student Counselling — Expert Guidance for Study Abroad"</td>
+    </tr>
+    <tr>
+      <td><code>/services/accommodation</code></td>
+      <td>"Find Your Home Away From Home"</td>
+      <td><span class="sev sev-high">No keywords</span></td>
+      <td>"Student Accommodation Support — Finding Housing Abroad"</td>
+    </tr>
+    <tr>
+      <td><code>/events</code></td>
+      <td>"The Applyza Experience"</td>
+      <td><span class="sev sev-critical">Pure brand name — no keyword</span></td>
+      <td>"Study Abroad Events & University Open Days"</td>
+    </tr>
+    <tr>
+      <td><code>/study-destinations</code></td>
+      <td>"Study Destinations"</td>
+      <td><span class="sev sev-good">Acceptable ✓</span></td>
+      <td>Fine. Could add "Worldwide" for breadth.</td>
+    </tr>
+    <tr>
+      <td><code>/scholarships</code></td>
+      <td>"Scholarships & Funding"</td>
+      <td><span class="sev sev-good">Acceptable ✓</span></td>
+      <td>Fine. Could specify "for International Students".</td>
+    </tr>
+    <tr>
+      <td><code>/blog</code></td>
+      <td>"From the Applyza Blog"</td>
+      <td><span class="sev sev-medium">Weak</span></td>
+      <td>"Study Abroad Blog — Guides, Visa Tips & University Insights"</td>
+    </tr>
+    <tr>
+      <td><code>/for-institutions</code></td>
+      <td>"Partner With Applyza"</td>
+      <td><span class="sev sev-high">No keyword</span></td>
+      <td>"International Student Recruitment — Partner With Applyza"</td>
+    </tr>
+    <tr>
+      <td><code>/for-partners</code></td>
+      <td>"Join Our Agent Network"</td>
+      <td><span class="sev sev-medium">Acceptable</span></td>
+      <td>"Join Applyza's Education Agent Network — Earn Commissions"</td>
+    </tr>
+    <tr>
+      <td><code>/faq</code></td>
+      <td>"Frequently Asked Questions"</td>
+      <td><span class="sev sev-good">Acceptable ✓</span></td>
+      <td>Standard for FAQ pages. Fine.</td>
+    </tr>
+    <tr>
+      <td><code>/book-a-consultation</code></td>
+      <td>"Book a Free Consultation"</td>
+      <td><span class="sev sev-good">Good ✓</span></td>
+      <td>Clear and action-oriented. Keep.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 4: META DESCRIPTIONS
+════════════════════════════════ -->
+<div class="section"><h2>Meta Description Audit</h2></div>
+
+<table class="page-table">
+  <thead>
+    <tr><th>Page</th><th>Current Description</th><th>Chars</th><th>Verdict</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="page-url">/</td>
+      <td>Discover thousands of courses at 150+ universities worldwide. Applyza offers AI-powered course matching, expert counselling, and visa support for genuine students.</td>
+      <td><span class="char-count char-bad">166</span></td>
+      <td><span class="sev sev-high">Too long + missing "free"</span>. The word "free" is your #1 differentiator and it's absent. Trim and add it.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/about</td>
+      <td>Applyza is a global education consultancy helping international students access world-class universities. 150+ partners, 99% visa success rate.</td>
+      <td><span class="char-count char-ok">143</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — proof points are strong. Could add "free" and AQF.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/services</td>
+      <td>Applyza offers free university application support, visa assistance with a 99% success rate, student counselling, and accommodation help.</td>
+      <td><span class="char-count char-ok">138</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — has "free", proof point, key services.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/services/university-applications</td>
+      <td>Get expert help with your university application — completely free. Course matching, document preparation, and application management.</td>
+      <td><span class="char-count char-ok">134</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — "completely free" is prominent. Clear.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/services/visa-immigration</td>
+      <td>Expert visa application support with a 99% success rate. Document preparation, financial guidance, and compliance support.</td>
+      <td><span class="char-count char-ok">122</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — proof point leads. Clean.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/study-destinations</td>
+      <td>Explore 16 study destinations worldwide including the UK, USA, Canada, Germany, France, and more. Compare costs, visas, and universities.</td>
+      <td><span class="char-count char-ok">140</span></td>
+      <td><span class="sev sev-medium">Inaccurate</span> — "Compare costs" is promised but the page doesn't show costs. Change to accurate language: "Explore visa requirements, top universities, and course options."</td>
+    </tr>
+    <tr>
+      <td class="page-url">/events</td>
+      <td>Join Applyza events across the globe. Meet university representatives, attend expert panels, and get personalised guidance.</td>
+      <td><span class="char-count char-ok">123</span></td>
+      <td><span class="sev sev-medium">Generic</span> — no locations, no dates, no urgency. Add specificity: cities where events run, or mention free attendance.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/for-partners</td>
+      <td>Join Applyza's recruitment partner network. Refer students, earn commissions, and access our course database.</td>
+      <td><span class="char-count char-ok">108</span></td>
+      <td><span class="sev sev-medium">Functional but thin</span>. Missing AQF, 150+ universities, 48hr response. Add proof: "150+ university partners, competitive commissions, and 99% visa success to grow your agency."</td>
+    </tr>
+    <tr>
+      <td class="page-url">/faq</td>
+      <td>Find answers to common questions about studying abroad, visa applications, course selection, and Applyza's free services.</td>
+      <td><span class="char-count char-ok">120</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — covers the right topics.</td>
+    </tr>
+    <tr>
+      <td class="page-url">/blog</td>
+      <td>Expert guides on university applications, visa processes, scholarships, and student life abroad.</td>
+      <td><span class="char-count char-ok">93</span></td>
+      <td><span class="sev sev-good">Good ✓</span> — concise and keyword-rich.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 5: CONTENT QUALITY & COPY
+════════════════════════════════ -->
+<div class="section"><h2>Content Quality & Copy Issues</h2></div>
+
+<table class="issue-table">
+  <thead>
+    <tr><th>Page / Element</th><th>Severity</th><th>Issue</th><th>Fix</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>About — Milestones section</strong></td>
+      <td><span class="sev sev-critical">Critical</span></td>
+      <td>All 4 milestones are dated "2026" — the current year. This makes the company look brand new and directly contradicts the "10+ Years of Experience" stat shown in TrustStats. A user reading the About page will see a company founded in 2026 with 10 years of experience — an impossible contradiction that immediately destroys credibility.</td>
+      <td>Update milestone years to reflect actual history. Use the Study Now timeline (attributed to Applyza). E.g. "2014 — Consultancy founded", "2019 — 1,000 students placed", "2024 — AI platform launched", "2026 — Applyza brand launched". Even if the brand is new, the heritage is real.</td>
+    </tr>
+    <tr>
+      <td><strong>About — No team section</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>Study abroad is a YMYL (Your Money or Your Life) category per Google's quality rater guidelines. Decisions about where to study are life-defining. Google heavily weights E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) for YMYL sites. No named counsellors, no photos, no credentials = low E-E-A-T signal.</td>
+      <td>Add a Team section to the About page with at minimum 3–5 counsellor profiles: name, role, photo, brief bio, qualifications. Link from About nav. Add Person schema for each.</td>
+    </tr>
+    <tr>
+      <td><strong>Hero subtitle — "free" is missing</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>Current: "Discover thousands of courses across 150+ universities. AI-powered matching, expert counselling, and end-to-end visa support." The word "free" — the single biggest differentiator vs IDP, AHZ, and every paid agent — appears nowhere in the visible hero text. It only appears in a small trust badge below the CTAs.</td>
+      <td>Rewrite subtitle to lead with free: "Find, apply, and get your visa approved — completely free. AI-powered matching, expert counselling, and end-to-end support across 150+ universities."</td>
+    </tr>
+    <tr>
+      <td><strong>Services — No body copy / SEO text</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>The Services page has very thin content: a "Why Free?" paragraph, four service cards with 2-line descriptions. The page has almost no indexable text around target keywords like "university application support", "visa assistance", "international students". Google can't rank a page without content.</td>
+      <td>Add 150–200 words of SEO body copy per service section. Include keywords naturally: "international students applying to UK universities", "study abroad visa support", etc.</td>
+    </tr>
+    <tr>
+      <td><strong>Study Destinations — No body copy</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>The page is just a grid of cards with a 2-line H1/subtitle. No introductory text, no context about each country's education system, no keywords beyond country names. Compare this to IDP's destination pages which have hundreds of words per destination.</td>
+      <td>Add 100–150 word intro paragraph targeting: "best countries to study abroad", "study abroad destinations for international students". Each destination card should also have a brief description shown or in markup.</td>
+    </tr>
+    <tr>
+      <td><strong>Scholarships — No introductory content</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>The H1 is "Scholarships & Funding" and immediately jumps to filters. No explanation of what types of scholarships are available (merit, need-based, country-specific), who is eligible, or how Applyza helps students find them. No SEO content at all beyond the listing.</td>
+      <td>Add an intro section (150 words) explaining: types of scholarships Applyza lists, eligibility guidance, how to apply. Target keywords: "scholarships for international students", "study abroad funding", "university scholarships Nigeria/Ghana/Kenya".</td>
+    </tr>
+    <tr>
+      <td><strong>Accommodation — Very thin content</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The page has two short paragraphs and a checklist. No context about costs in different countries, no types of housing, no tips on what to look for. The service is underserved compared to other service pages.</td>
+      <td>Expand with a section on: types of accommodation (university halls, private housing, homestays), estimated costs per country, what to look for in a contract. Adds content depth and internal linking opportunities.</td>
+    </tr>
+    <tr>
+      <td><strong>FAQ — Source markets answer incomplete</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The FAQ answer to "Which countries do you support students from?" lists only Nigeria, Ghana, Kenya, Türkiye, Qatar. Egypt, Morocco, Kuwait, and UAE are entirely absent — these are active source markets per the product marketing context.</td>
+      <td>Update FAQ answer to include all active source markets: "We currently work with students from Nigeria, Ghana, Kenya, Egypt, Morocco, Kuwait, UAE, Türkiye, and Eastern Europe, with more markets being added regularly."</td>
+    </tr>
+    <tr>
+      <td><strong>Blog — Placeholder posts in production</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>The Blog page falls back to 6 hardcoded placeholder posts when no real posts exist in Supabase. These have fake "placeholder content" in the content field and placeholder slugs. If live with no real posts, the read time calculation ("1 min read") is based on gibberish text, and any user clicking a post title will get placeholder content or a 404. This also means Google indexes empty/thin blog content.</td>
+      <td>Immediately publish real blog posts via the admin panel to replace placeholders. Priority articles: "UK Student Visa Guide 2026", "How to Study in the UK from Nigeria", "Top Scholarships for African Students". Remove placeholder fallback or ensure it only shows in dev mode.</td>
+    </tr>
+    <tr>
+      <td><strong>Events — H1 "The Applyza Experience" has zero SEO value</strong></td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>This is a brand name for the events series (similar to Study Now's "Xperience"). While great for brand recognition, it communicates nothing to Google or to a first-time visitor who lands on the page from search. The word "Events" doesn't appear in the H1.</td>
+      <td>Consider keeping "The Applyza Experience" as a subtitle/tagline but change the H1 to "Study Abroad Events & University Open Days | The Applyza Experience". Or restructure with H1 targeting the keyword and a visible brand event name below.</td>
+    </tr>
+    <tr>
+      <td><strong>For Institutions — No social proof from universities</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The page asks universities to partner but provides no evidence other than stats. No university logos, no quotes from recruiters, no case studies. A Head of International Recruitment will not sign off on a partnership without seeing who else is already working with Applyza.</td>
+      <td>Add a "Partner Universities" logo section (even 5–8 logos make a huge difference). Add one testimonial from a university partner if available. If not yet available, add a case study describing a successful placement outcome.</td>
+    </tr>
+    <tr>
+      <td><strong>For Partners — "Coming Soon" portal undermines trust</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The page prominently features a "Partner Portal — Coming Soon" section with a skeleton UI wireframe. For agents evaluating Applyza as a network to join, this signals incompleteness. Competitors (IDP, AHZ) have fully functioning partner portals.</td>
+      <td>Either remove this section until the portal launches, or reframe it as a "what's coming" benefit with a clear launch date. Change the skeleton UI to a benefits mockup rather than an empty dashboard. Or replace with a "What you get as a partner" checklist section instead.</td>
+    </tr>
+    <tr>
+      <td><strong>Book Consultation — Thin trust signals on form page</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The consultation form page has no trust signals above the fold or near the form. A student filling in their personal details has no reassurance about who will contact them, when, or how their data is used (beyond the privacy consent checkbox).</td>
+      <td>Add below the hero: "What to expect — within 24 hours, a certified counsellor will contact you to confirm your consultation. We never share your details with third parties." Add 1–2 student testimonial snippets near the form. Add the AQF badge.</td>
+    </tr>
+    <tr>
+      <td><strong>Student Counselling — No content depth</strong></td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>The page has "Who This Is For" cards and "What Makes Our Counselling Different" cards — but no explanation of what a counselling session actually involves, how long it takes, what the counsellor asks, or what the output is. No mention of qualifications. Too surface-level to rank or convert.</td>
+      <td>Add a "What Happens in a Counselling Session" section with a step-by-step breakdown. Add counsellor qualification context. Add a specific FAQ for counselling (e.g. "How many sessions will I need?"). Target keyword: "free student counselling international students".</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 6: SCHEMA MARKUP
+════════════════════════════════ -->
+<div class="section"><h2>Schema Markup Audit</h2></div>
+
+<table class="issue-table">
+  <thead>
+    <tr><th>Schema Type</th><th>Pages That Need It</th><th>Status</th><th>Priority</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Organization</strong></td>
+      <td>Homepage</td>
+      <td><span class="sev sev-good">Implemented ✓</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>WebSite + SearchAction</strong></td>
+      <td>Homepage</td>
+      <td><span class="sev sev-good">Implemented ✓</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>FAQPage</strong></td>
+      <td>/faq</td>
+      <td><span class="sev sev-good">Implemented ✓</span></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td><strong>BreadcrumbList</strong></td>
+      <td>All pages with breadcrumb UI (/about, /services/*, /blog, /blog/:slug, /scholarships, /events, /for-institutions, /for-partners, /faq, /book-a-consultation, /study-destinations, /study-destinations/:slug)</td>
+      <td><span class="sev sev-critical">Missing</span></td>
+      <td><span class="sev sev-critical">Critical</span> — Breadcrumb UI exists but schema is absent. This is the easiest schema win on the entire site. BreadcrumbList enables breadcrumb rich results in SERPs, improves CTR, and helps Google understand site hierarchy.</td>
+    </tr>
+    <tr>
+      <td><strong>Service</strong></td>
+      <td>/services, /services/university-applications, /services/visa-immigration, /services/student-counselling, /services/accommodation</td>
+      <td><span class="sev sev-high">Missing</span></td>
+      <td><span class="sev sev-high">High</span> — Service schema with <code>provider</code>, <code>areaServed</code>, <code>serviceType</code> signals to Google what services Applyza offers and for whom.</td>
+    </tr>
+    <tr>
+      <td><strong>Article / BlogPosting</strong></td>
+      <td>/blog/:slug (all blog post pages)</td>
+      <td><span class="sev sev-high">Missing</span></td>
+      <td><span class="sev sev-high">High</span> — Article schema enables rich results, proper indexing of author/date, and qualifies for Google Discover. Essential for any content strategy.</td>
+    </tr>
+    <tr>
+      <td><strong>Event</strong></td>
+      <td>/events (each event card)</td>
+      <td><span class="sev sev-high">Missing</span></td>
+      <td><span class="sev sev-high">High</span> — Event schema enables event rich results in Google Search and Google Events tab. Each event should have: <code>name</code>, <code>startDate</code>, <code>location</code>, <code>organizer</code>, <code>eventAttendanceMode</code> (virtual/in-person).</td>
+    </tr>
+    <tr>
+      <td><strong>ItemList</strong></td>
+      <td>/scholarships, /study-destinations, /find-a-course</td>
+      <td><span class="sev sev-medium">Missing</span></td>
+      <td><span class="sev sev-medium">Medium</span> — ItemList schema on listing pages helps Google understand page structure and may generate sitelink rich results.</td>
+    </tr>
+    <tr>
+      <td><strong>Person</strong></td>
+      <td>/about (team members), /blog/:slug (authors)</td>
+      <td><span class="sev sev-high">Missing</span></td>
+      <td><span class="sev sev-high">High</span> — Person schema for counsellors and blog authors is a direct E-E-A-T signal for a YMYL site. No team page = no Person schema opportunity currently. Fix team page first, then add schema.</td>
+    </tr>
+    <tr>
+      <td><strong>CourseInstance (or LearningResource)</strong></td>
+      <td>/find-a-course/:slug (each course detail)</td>
+      <td><span class="sev sev-medium">Missing</span></td>
+      <td><span class="sev sev-medium">Medium</span> — Course schema enables course-specific rich results. Use <code>@type: Course</code> with <code>provider</code>, <code>educationalLevel</code>, <code>courseMode</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>FAQPage on service pages</strong></td>
+      <td>/services/university-applications, /services/visa-immigration, /services/student-counselling</td>
+      <td><span class="sev sev-medium">Opportunity</span></td>
+      <td><span class="sev sev-medium">Medium</span> — Adding 3–5 FAQs to each service page with FAQPage schema generates FAQ rich results in SERPs, increases SERP real estate, and improves CTR. E.g. "How long does a UK student visa take?" on the visa page.</td>
+    </tr>
+    <tr>
+      <td><strong>LocalBusiness</strong></td>
+      <td>/contact or /about</td>
+      <td><span class="sev sev-low">Missing</span></td>
+      <td><span class="sev sev-low">Low</span> — With 6 physical offices, LocalBusiness schema with <code>address</code>, <code>telephone</code>, <code>openingHours</code> for each office would support local search in those cities.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 7: E-E-A-T
+════════════════════════════════ -->
+<div class="section"><h2>E-E-A-T Assessment (Experience, Expertise, Authoritativeness, Trustworthiness)</h2></div>
+
+<div class="callout callout-amber">
+  <h3>⚠ E-E-A-T is Critical for This Site Category</h3>
+  Study abroad consultancy falls under YMYL (Your Money or Your Life) — decisions that materially affect a person's finances, education, and life trajectory. Google applies stricter quality standards to YMYL pages. The current site has strong <em>trust</em> signals (AQF, legal pages, privacy policy) but weak <em>expertise</em> and <em>experience</em> signals (no named authors, no team, no case studies, no credentials displayed).
+</div>
+
+<table class="issue-table">
+  <thead>
+    <tr><th>E-E-A-T Signal</th><th>Status</th><th>Action</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Named counsellors with credentials</strong></td>
+      <td><span class="sev sev-critical">Missing</span></td>
+      <td>Add team page at <code>/about/team</code> or expand About page. Include name, photo, role, qualifications (AQF, professional certifications), and countries they specialise in. Link blog posts to author profiles.</td>
+    </tr>
+    <tr>
+      <td><strong>Blog author attribution</strong></td>
+      <td><span class="sev sev-high">Weak</span></td>
+      <td>All posts currently attributed to "Applyza Team" — a faceless entity. Replace with named counsellors. Add author bio boxes on blog posts. Google Quality Rater guidelines specifically call out anonymous/company-attributed content negatively.</td>
+    </tr>
+    <tr>
+      <td><strong>AQF certification</strong></td>
+      <td><span class="sev sev-good">Present ✓</span></td>
+      <td>Mentioned in About, Services, and FAQ. Good. Consider adding a visible AQF badge/logo in the footer and on service pages.</td>
+    </tr>
+    <tr>
+      <td><strong>Legal pages</strong></td>
+      <td><span class="sev sev-good">Strong ✓</span></td>
+      <td>Privacy Policy, Terms, Anti-Slavery Policy, Cookie Policy, Accessibility Statement all present. This is excellent for trust signals — very few competitors have this depth of compliance documentation.</td>
+    </tr>
+    <tr>
+      <td><strong>About page milestones contradict experience claim</strong></td>
+      <td><span class="sev sev-critical">Damaging</span></td>
+      <td>See Content Issues section. Fix immediately — a user comparing your About page to IDP's will notice the milestone inconsistency.</td>
+    </tr>
+    <tr>
+      <td><strong>Contact information</strong></td>
+      <td><span class="sev sev-medium">Partial</span></td>
+      <td>Email visible on consultation page. Phone absent. 6 offices listed but no physical addresses. For YMYL trust, physical addresses per office would strengthen E-E-A-T and support LocalBusiness schema.</td>
+    </tr>
+    <tr>
+      <td><strong>Student testimonials</strong></td>
+      <td><span class="sev sev-medium">Unverified</span></td>
+      <td>Testimonials component exists on homepage but implementation not read. Ensure testimonials include: full name, country of origin, university placed at, year. Named/verified testimonials outperform anonymous ones for E-E-A-T.</td>
+    </tr>
+    <tr>
+      <td><strong>Third-party mentions / press</strong></td>
+      <td><span class="sev sev-low">Missing</span></td>
+      <td>No press mentions, no "As seen in" logos, no industry awards referenced. Long-term goal: get mentioned in education publications, student forums (Nairaland, Reddit r/studyabroad). These build domain authority.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 8: MISSING PAGES (SEO GAPS)
+════════════════════════════════ -->
+<div class="section"><h2>Missing Pages — High-Priority SEO Opportunities</h2></div>
+
+<table class="issue-table">
+  <thead>
+    <tr><th>Missing Page</th><th>Target Keywords</th><th>Priority</th><th>Rationale</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Blog category pages</strong><br><code>/blog/category/visa-guide</code><br><code>/blog/category/application-guide</code> etc.</td>
+      <td>"UK visa guide for students", "university application guide"</td>
+      <td><span class="sev sev-critical">Critical</span></td>
+      <td>Blog has 6 defined categories in code with no URL. These are high-volume informational search terms. Without category pages, there's no pillar page for topical authority clustering.</td>
+    </tr>
+    <tr>
+      <td><strong>Country-specific landing pages</strong><br><code>/study-in-uk</code>, <code>/study-in-germany</code>, <code>/study-in-ireland</code></td>
+      <td>"study in UK from Nigeria", "how to study in Germany", "study in Ireland for international students"</td>
+      <td><span class="sev sev-critical">Critical</span></td>
+      <td>Extremely high search volume from all source markets. IDP, SI-UK, and AHZ all have these pages. Without them, Applyza is invisible for the highest-intent queries. Programmatic SEO opportunity: 16 destination pages × source market angle.</td>
+    </tr>
+    <tr>
+      <td><strong>Source-market landing pages</strong><br><code>/study-abroad-from-nigeria</code><br><code>/study-abroad-from-ghana</code> etc.</td>
+      <td>"study abroad consultants Nigeria", "how to study in UK from Ghana"</td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>Source market pages allow deep targeting of the exact audience. Each page can explain the specific visa process, popular destinations, and scholarships for students from that country. Massive long-tail SEO value.</td>
+    </tr>
+    <tr>
+      <td><strong>Scholarship detail pages</strong><br><code>/scholarships/british-chevening-scholarship</code></td>
+      <td>"Chevening scholarship eligibility", "scholarship for Nigerian students in UK"</td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>Individual scholarship pages rank for specific scholarship name searches — these have high intent (people actively researching funding options). Currently scholarships are only visible as cards on the listing page.</td>
+    </tr>
+    <tr>
+      <td><strong>Event detail pages</strong><br><code>/events/lagos-university-fair-2026</code></td>
+      <td>"university fair Lagos 2026", "study abroad event Nigeria"</td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>Individual event pages are indexable, shareable, and enable Event schema. Currently no event has its own URL — past events disappear from the listing entirely.</td>
+    </tr>
+    <tr>
+      <td><strong>Team / counsellor pages</strong><br><code>/about/team</code> or <code>/about#team</code></td>
+      <td>Branded searches for counsellor names, "AQF certified education counsellor"</td>
+      <td><span class="sev sev-high">High</span></td>
+      <td>E-E-A-T requirement for YMYL. Also enables Person schema. Google Quality Raters are instructed to look for author/expert information on YMYL sites.</td>
+    </tr>
+    <tr>
+      <td><strong>Competitor comparison pages</strong><br><code>/vs/idp-education</code>, <code>/vs/ahz</code>, <code>/vs/si-uk</code></td>
+      <td>"IDP Education alternative", "AHZ Associates vs Applyza", "best alternative to SI-UK"</td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>High-intent traffic from students actively comparing options. These pages convert well. Structure: "How Applyza compares to [competitor] — and why we're different." Focus on free vs paid, AQF certification, local offices.</td>
+    </tr>
+    <tr>
+      <td><strong>Resources / Guides hub</strong><br><code>/resources</code></td>
+      <td>"study abroad checklist", "university application guide PDF", "UK student visa checklist"</td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>A resources hub housing guides, checklists, visa templates, and country-specific PDFs builds topical authority, generates backlinks, and creates lead magnet opportunities (gated downloads).</td>
+    </tr>
+    <tr>
+      <td><strong>Subject / course category pages</strong><br><code>/courses/medicine</code>, <code>/courses/business</code></td>
+      <td>"study medicine abroad", "business degrees UK for international students"</td>
+      <td><span class="sev sev-medium">Medium</span></td>
+      <td>Subject-based SEO pages with programmatic content from the course database. Targets students who know their subject but haven't decided on a country/university yet.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════
+     SECTION 9: WHAT'S ALREADY STRONG
+════════════════════════════════ -->
+<div class="section"><h2>What's Already Strong</h2></div>
+
+<div class="callout callout-teal">
+  <h3>✅ These are genuine strengths — don't change them, build on them</h3>
+  <ul style="margin-top:8px; padding-left:20px; color:rgba(255,255,255,0.75); line-height:2">
+    <li><strong>SEO component structure</strong> — canonical, OG, Twitter cards, JSON-LD all present. Strong foundation.</li>
+    <li><strong>FAQPage schema on /faq</strong> — correctly implemented, rich result eligible.</li>
+    <li><strong>Organisation + WebSite + SearchAction schema on homepage</strong> — excellent baseline.</li>
+    <li><strong>Breadcrumb UI on all inner pages</strong> — just needs the JSON-LD schema added to activate rich results.</li>
+    <li><strong>Visa page "Common Reasons for Refusal" section</strong> — excellent user intent match, keeps bounce rate low.</li>
+    <li><strong>Legal compliance depth</strong> — Anti-slavery, accessibility, AQF mention, GDPR consent — YMYL trust signals most competitors skip.</li>
+    <li><strong>Services "Why Free?" explanation</strong> — addresses the most common objection head-on, in context.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════
+     SECTION 10: PRIORITY ACTION PLAN
+════════════════════════════════ -->
+<div class="section"><h2>Prioritised Action Plan</h2></div>
+
+<ul class="priority-list">
+
+  <li>
+    <div class="priority-num p1">1</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-quick">Immediate Fix</span> Replace WhatsApp placeholder number</h4>
+      <p>File: <code>BookConsultation.tsx</code> — replace <code>447000000000</code> with the real business WhatsApp number. Also check <code>WhatsAppButton.tsx</code>. This is live and harming trust and conversions right now.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p1">2</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Fix About page milestones — all say "2026"</h4>
+      <p>Update the 4 milestones in <code>About.tsx</code> to reflect real history (attributed to Applyza). The current state contradicts the "10+ Years of Experience" stat and will destroy credibility with any informed user.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p1">3</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Fix H1 tags on all service pages</h4>
+      <p>5 pages have H1s with zero target keywords: /services, /services/university-applications, /services/visa-immigration, /services/student-counselling, /services/accommodation, and /events. Update each H1 as recommended in the table above.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p1">4</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-schema">Schema</span> Add BreadcrumbList JSON-LD to all inner pages</h4>
+      <p>Breadcrumb UI is already rendered. Add the matching <code>BreadcrumbList</code> JSON-LD schema to <code>SEO.tsx</code> or as a prop per page. This is a 2-hour dev task that immediately qualifies 15+ pages for breadcrumb rich results.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p1">5</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Add "free" to the homepage hero subtitle</h4>
+      <p>The single biggest differentiator vs IDP/AHZ is invisible in the hero. Rewrite the subtitle to lead with the free service. Every competitor charges — this is the positioning wedge. Use it.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p2">6</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-eeat">E-E-A-T</span> Build a Team / Counsellors section</h4>
+      <p>Add named counsellors with photos, qualifications, and specialist markets to the About page or a new <code>/about/team</code> page. Add Person schema for each. Critical for YMYL E-E-A-T scoring and distinctly different from generic competitors.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p2">7</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Publish real blog posts — remove placeholder fallback</h4>
+      <p>Priority articles: "UK Student Visa Guide 2026", "How to Study in the UK from Nigeria", "Top Scholarships for African Students in UK 2026", "How to Write a Strong Personal Statement". Each should be 800–1,200 words, attributed to a named counsellor.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p2">8</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-schema">Schema</span> Add Event schema to /events page</h4>
+      <p>For each event rendered from Supabase, inject <code>Event</code> schema with <code>name</code>, <code>startDate</code>, <code>location</code>, <code>organizer</code>, <code>eventAttendanceMode</code>. Enables Event rich results and Google Events tab visibility.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p2">9</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-schema">Schema</span> Add Article/BlogPosting schema to blog post pages</h4>
+      <p>Add to the BlogPost page component: <code>Article</code> schema with <code>headline</code>, <code>author</code>, <code>datePublished</code>, <code>image</code>, <code>publisher</code>. Enables article rich results and proper author attribution.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p2">10</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Add SEO body copy to Study Destinations, Scholarships, Services pages</h4>
+      <p>These three pages are effectively keyword-empty beyond their H1. Add 150–200 words of copy per page targeting primary keywords. This is the fastest way to unlock organic ranking for these pages.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p3">11</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Update all title tags to recommended versions</h4>
+      <p>Revise titles for: /, /services, /about, /events, /for-partners, /faq, /study-destinations, /scholarships. See Title Tag Audit table for recommended copy. Estimated impact: +15-25% CTR on affected pages.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p3">12</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Fix FAQ source markets answer + update competitive differentiator answer</h4>
+      <p>Add Egypt, Morocco, Kuwait, UAE to the source markets FAQ answer. Expand the "How is Applyza different?" answer to name specific competitors and contrast directly (free vs paid, AQF vs unregulated, local offices vs remote-only).</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p3">13</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-tech">Technical</span> Add Blog to main navigation</h4>
+      <p>The blog is the primary SEO content asset and is invisible from the nav. Add "Blog" as item 7 in the header nav (between Events and About). This signals content authority to Google and dramatically improves internal link flow to blog content.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p3">14</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-tech">Technical</span> Add Services dropdown to navigation</h4>
+      <p>4 service sub-pages are hidden behind a single "Services" nav item with no dropdown. Users and Googlebot can't discover /services/visa-immigration etc. from the nav. Add a hover dropdown showing all 4 services.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p4">15</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-schema">Schema</span> Add Service schema to all service pages</h4>
+      <p>Add <code>Service</code> schema to each service page with <code>serviceType</code>, <code>provider</code> (Applyza), <code>areaServed</code> (countries), and <code>hasOfferCatalog</code>. Medium dev effort, medium SEO impact.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p4">16</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-copy">Copy</span> Build country-specific landing pages (Programmatic SEO)</h4>
+      <p>Create destination landing pages: /study-in-uk, /study-in-germany, /study-in-ireland, /study-in-france etc. Then source-market pages: /study-abroad-from-nigeria, /study-abroad-from-ghana etc. These target the highest-volume keywords in your market. Full strategy in the Content Strategy document.</p>
+    </div>
+  </li>
+
+  <li>
+    <div class="priority-num p5">17</div>
+    <div class="priority-content">
+      <h4><span class="tag tag-tech">Technical</span> Consider SSR or pre-rendering</h4>
+      <p>Long-term: migrate to Next.js or implement Vite SSR. Short-term: use Prerender.io or similar to serve pre-rendered HTML to crawlers. This is the structural SEO foundation that everything else builds on. Not urgent for launch, but necessary for competitive ranking within 6 months.</p>
+    </div>
+  </li>
+
+</ul>
+
+<div style="max-width:1100px; margin: 48px auto 0; text-align:center; font-size:11px; color: rgba(255,255,255,0.2); padding-bottom: 24px;">
+  Applyza SEO & Copy Audit · March 2026 · 17 Issues Identified · 28 Pages Reviewed
+</div>
+
+</div>
+</body>
+</html>
