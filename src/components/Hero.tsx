@@ -7,9 +7,10 @@ import ScrollRevealText from "@/components/homepage/ScrollRevealText";
 const filters = [
   { emoji: "\u{1F1EC}\u{1F1E7}", label: "UK", country: "United Kingdom" },
   { emoji: "\u{1F1E9}\u{1F1EA}", label: "Germany", country: "Germany" },
-  { emoji: "\u{1F1EB}\u{1F1F7}", label: "France", country: "France" },
+  { emoji: "\u{1F1F2}\u{1F1F9}", label: "Malta", country: "Malta" },
   { emoji: "\u{1F1EE}\u{1F1EA}", label: "Ireland", country: "Ireland" },
-  { emoji: "\u{1F30D}", label: "All", country: "" },
+  { emoji: "\u{1F1EA}\u{1F1F8}", label: "Spain", country: "Spain" },
+  { emoji: "\u{1F1EA}\u{1F1FA}", label: "Other EU", country: "EU" },
 ];
 
 const badges = [
